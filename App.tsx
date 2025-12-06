@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Globe, Plus, Crosshair, X, ChevronDown, Linkedin } from 'lucide-react';
@@ -255,10 +254,8 @@ const Footer = () => {
                 
                 {/* ODS Goals Section */}
                 <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 mb-24 text-sm md:text-base font-medium tracking-widest text-white/40">
-                    <span className="flex gap-4">
-                        <span>GOALS</span>
-                        <span>ODS 2</span>
-                    </span>
+                    <span>GOALS</span>
+                    <span>ODS 2</span>
                     <span>ODS 8</span>
                     <span>ODS 9</span>
                     <span>ODS 12</span>
