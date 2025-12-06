@@ -268,9 +268,14 @@ const Footer = () => {
                         <span className="text-white text-lg font-bold tracking-tighter">Negentropy AI</span>
                     </div>
                     
-                    <a href="mailto:hello@negentropylabs.com" className="text-white/80 hover:text-white transition-colors mb-4 md:mb-0">
-                        hello@negentropylabs.com
-                    </a>
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center mb-4 md:mb-0">
+                        <a href="https://www.negentropylabs.com" className="text-white/80 hover:text-white transition-colors">
+                            www.negentropylabs.com
+                        </a>
+                        <a href="mailto:hello@negentropylabs.com" className="text-white/80 hover:text-white transition-colors">
+                            hello@negentropylabs.com
+                        </a>
+                    </div>
 
                     <div className="flex items-center gap-6">
                         <span>&copy; 2025 La Floresta, Catalunya.</span>
