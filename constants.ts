@@ -20,7 +20,7 @@ export const CONTENT: Record<'en' | 'es' | 'ca' | 'de', SiteContent> = {
           title: "NegentropyLabs opens pilots for ODAS",
           description: "ODAS announced today that it has acquired NegentropyLabs to accelerate sustainable development.",
           category: "COMPANY",
-          image: "/o.png",
+          image: "https://images.unsplash.com/photo-1644575881028-9f170fd241ed?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           ctaLabel: "READ"
         }
       ]
@@ -44,7 +44,7 @@ export const CONTENT: Record<'en' | 'es' | 'ca' | 'de', SiteContent> = {
           title: "NegentropyLabs abre pilotos para ODAS",
           description: "ODAS estará disponible desde el mes de abril para todas las empresas que necesiten un piloto gratis y cumplan la ley 1/2025",
           category: "EMPRESA",
-          image: "/o.png",
+          image: "https://images.unsplash.com/photo-1644575881028-9f170fd241ed?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           ctaLabel: "LEER"
         }
       ]
@@ -68,7 +68,7 @@ export const CONTENT: Record<'en' | 'es' | 'ca' | 'de', SiteContent> = {
           title: "NegentropyLabs obre pilots per a ODAS",
           description: "ODAS ha anunciat avui l'adquisició de NegentropyLabs per accelerar el desenvolupament sostenible.",
           category: "EMPRESA",
-          image: "/o.png",
+          image: "https://images.unsplash.com/photo-1644575881028-9f170fd241ed?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           ctaLabel: "LLEGIR"
         }
       ]
@@ -92,7 +92,7 @@ export const CONTENT: Record<'en' | 'es' | 'ca' | 'de', SiteContent> = {
           title: "NegentropyLabs öffnet Piloten für ODAS",
           description: "ODAS gab heute bekannt, dass es NegentropyLabs erworben hat, um die nachhaltige Entwicklung zu beschleunigen.",
           category: "UNTERNEHMEN",
-          image: "/o.png",
+          image: "https://images.unsplash.com/photo-1644575881028-9f170fd241ed?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           ctaLabel: "LESEN"
         }
       ]
