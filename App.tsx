@@ -2,22 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Globe, Plus, Crosshair, X, ChevronDown, Linkedin } from 'lucide-react';
 import { CONTENT } from './constants';
-import { Language, InfoCard } from './types';
+import { Language } from './types';
+import { generateODASPDF } from './src/pdfUtils';
 
 // --- Shared Components ---
+
+const Logo = ({ scrolled = false, className = "" }: { scrolled?: boolean; className?: string }) => (
+  <div className={`flex items-center gap-2 ${className}`}>
+    <span className={`text-2xl font-display font-bold tracking-tight transition-colors ${scrolled ? 'text-white' : 'text-white'}`}>
+      Negentropy<span className="font-light italic">Labs</span>
+    </span>
+  </div>
+);
 
 const ParallaxBackground = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 1000], [0, 400]);
+  const y2 = useTransform(scrollY, [0, 1000], [0, -200]);
 
   return (
-    <div className="fixed inset-0 z-10 pointer-events-none overflow-hidden w-full text-black/10">
-        <motion.div style={{ y: y1, opacity: 0.05 }} className="absolute top-[10%] right-[5%]">
+    <div className="fixed inset-0 z-10 pointer-events-none overflow-hidden w-full text-white/5">
+        
+        <motion.div style={{ y: y1, opacity: 0.02 }} className="absolute top-[10%] right-[5%]">
             <Plus className="w-[400px] h-[400px]" strokeWidth={0.5} />
         </motion.div>
         
-        <motion.div style={{ y: y1 }} className="absolute bottom-[10%] left-[15%] opacity-20">
+        <motion.div style={{ y: y1 }} className="absolute bottom-[10%] left-[15%] opacity-5">
            <Crosshair className="w-12 h-12" />
+        </motion.div>
+
+        {/* Floating Coordinates */}
+        <motion.div style={{ y: y2 }} className="absolute top-[30%] left-[5%] font-mono text-[10px] tracking-widest opacity-10">
+            LAT: 41.4429° N <br />
+            LON: 2.0634° E
+        </motion.div>
+
+        <motion.div style={{ y: y1 }} className="absolute bottom-[30%] right-[10%] font-mono text-[10px] tracking-widest opacity-10">
+            ALT: 245m <br />
+            VEL: 0.0m/s
         </motion.div>
     </div>
   );
@@ -27,87 +49,21 @@ const ParallaxBackground = () => {
 
 const SplineBackground = () => {
   return (
-    <div className="fixed inset-0 z-0 bg-black overflow-hidden">
+    <div className="fixed inset-0 z-0 bg-black overflow-hidden" style={{ background: 'linear-gradient(135deg, #111827, #000000)' }}>
+      {/* Deep Indigo/Midnight Green Overlay */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-br from-indigo-950/40 via-transparent to-emerald-950/40 pointer-events-none" />
+      <div className="absolute inset-0 z-10 bg-black/20 pointer-events-none" />
+      
       {/* 
         Extending height to calc(100% + 120px) pushes the bottom "Built with Spline" badge 
         outside of the viewport, effectively hiding it. 
       */}
-      <div className="absolute top-0 left-0 w-full h-[calc(100%+120px)]">
+      <div className="absolute top-0 left-0 w-full h-[calc(100%+120px)] opacity-80">
         {/* @ts-ignore */}
         <spline-viewer 
           url="https://prod.spline.design/JM7ixbJx6pmDGkyo/scene.splinecode"
           events-target="global"
         ></spline-viewer>
-      </div>
-    </div>
-  );
-};
-
-// --- Grid Card Component ---
-
-interface GridCardProps {
-  card: InfoCard;
-  onOpenContact?: () => void;
-}
-
-const GridCardItem: React.FC<GridCardProps> = ({ card, onOpenContact }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div 
-        className={`relative flex flex-col bg-white transition-all duration-500 group min-h-[320px] p-8 md:p-10 cursor-pointer h-full ${isOpen ? 'bg-sky-50' : 'hover:bg-sky-50'}`}
-        onClick={() => setIsOpen(!isOpen)}
-    >
-      <div className="flex justify-between items-start mb-6">
-        <span className="font-mono text-xs text-[#0088FF]/50 group-hover:text-[#0088FF] transition-colors">
-          {card.id}
-        </span>
-        <button className={`text-[#0088FF]/50 group-hover:text-[#0088FF] transition-all duration-300 ${isOpen ? 'rotate-45' : ''}`}>
-          <Plus className="w-5 h-5" />
-        </button>
-      </div>
-
-      <div className="flex-1 flex flex-col justify-center">
-         <h3 className="text-2xl md:text-3xl font-medium tracking-tight text-black leading-tight mb-4 group-hover:translate-x-1 transition-transform duration-300">
-           {card.title}
-         </h3>
-         
-         <AnimatePresence>
-           {isOpen && (
-             <motion.div
-               initial={{ opacity: 0, height: 0, marginTop: 0 }}
-               animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
-               exit={{ opacity: 0, height: 0, marginTop: 0 }}
-               className="overflow-hidden"
-             >
-                {/* Optional internal separator if needed, but Grid gap handles the main lines */}
-                {card.description && (
-                  <div 
-                    className="text-sm md:text-base text-gray-600 leading-relaxed mb-6 font-normal"
-                    dangerouslySetInnerHTML={{ __html: card.description }}
-                  />
-                )}
-                {card.items && (
-                  <ul className="space-y-2 mb-6">
-                    {card.items.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs md:text-sm text-gray-700">
-                        <span className="mt-1.5 w-1 h-1 bg-[#0088FF] rounded-full shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {card.ctaAction && (
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); onOpenContact?.(); }}
-                    className="inline-flex items-center gap-3 bg-[#0088FF] text-white px-6 py-3 text-xs font-sans uppercase tracking-wider hover:bg-black hover:text-white transition-colors w-full md:w-auto justify-center font-bold"
-                  >
-                    {card.ctaLabel} <ArrowRight className="w-3 h-3" />
-                  </button>
-                )}
-             </motion.div>
-           )}
-         </AnimatePresence>
       </div>
     </div>
   );
@@ -265,7 +221,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-xs text-white/60">
                     <div className="flex items-center gap-2 mb-4 md:mb-0">
-                        <span className="text-white text-lg font-bold tracking-tighter">Negentropy AI</span>
+                        <Logo className="scale-90 origin-left" />
                     </div>
                     
                     <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center mb-4 md:mb-0">
@@ -289,6 +245,103 @@ const Footer = () => {
     );
 }
 
+// --- News Section Component ---
+
+const NewsSection = ({ content }: { content: any }) => {
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleDownload = async () => {
+    setIsGenerating(true);
+    try {
+      await generateODASPDF();
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  return (
+    <section className="relative z-20 bg-black text-white py-32 px-6 border-t border-white/10">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Row */}
+        <div className="flex justify-between items-center mb-12">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight">{content.news.title}</h2>
+          <button className="px-6 py-2 border border-white/20 rounded-full text-[10px] font-mono tracking-widest uppercase hover:bg-white hover:text-black transition-all">
+            {content.news.ctaExplore}
+          </button>
+        </div>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-white/10 mb-20" />
+
+        {/* News Items List */}
+        <div className="space-y-32">
+          {content.news.items.map((item: any) => (
+            <motion.div 
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="grid grid-cols-1 md:grid-cols-[160px_1fr_1.2fr] gap-12 md:gap-16 items-stretch"
+            >
+              {/* Date Column */}
+              <div className="text-[11px] font-mono tracking-widest text-white/40 uppercase pt-2">
+                {item.date}
+              </div>
+
+              {/* Content Column */}
+              <div className="flex flex-col justify-between py-1">
+                <div>
+                  <h3 className="text-2xl md:text-4xl font-bold mb-6 tracking-tight leading-tight">
+                    {item.title}
+                  </h3>
+                  <p className="text-base md:text-lg text-white/50 leading-relaxed max-w-md">
+                    {item.description}
+                  </p>
+                </div>
+                
+                <div className="mt-16 flex justify-between items-center">
+                  <span className="text-[10px] font-mono tracking-[0.2em] text-white/40 uppercase">
+                    {item.category}
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <a 
+                      href="https://odas-eu.com/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-6 py-2.5 border border-white/20 rounded-full text-[10px] font-mono tracking-widest uppercase hover:bg-white hover:text-black transition-all flex items-center gap-2"
+                    >
+                      Web
+                    </a>
+                    <button 
+                      onClick={handleDownload}
+                      disabled={isGenerating}
+                      className="px-8 py-2.5 border border-white/20 rounded-full text-[10px] font-mono tracking-widest uppercase hover:bg-white hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isGenerating ? '...' : item.ctaLabel}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Image Column */}
+              <div className="relative aspect-[16/10] md:aspect-auto overflow-hidden rounded-sm bg-neutral-900 group">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- Main App Component ---
 
 const App = () => {
@@ -304,34 +357,34 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const { scrollY } = useScroll();
+  const heroScale = useTransform(scrollY, [0, 500], [1, 1.5]);
+  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+
   return (
-    <div className="min-h-screen bg-white text-black selection:bg-sky-200 selection:text-sky-900 font-sans">
+    <div className="min-h-screen bg-black text-white selection:bg-sky-500 selection:text-white font-sans">
       <SplineBackground />
       <ParallaxBackground />
 
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md border-b border-black/5 py-4' : 'bg-transparent py-6'}`}>
+      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/40 backdrop-blur-lg border-b border-white/5 py-4' : 'bg-transparent py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <span className={`text-xl font-bold tracking-tighter transition-colors ${scrolled ? 'text-black' : 'text-white'}`}>
-              Negentropy Labs
-            </span>
-          </div>
+          <Logo scrolled={true} className="font-display" />
 
           <div className="flex items-center gap-6">
             <div className="relative group">
-                 <button className={`flex items-center gap-2 text-sm font-medium transition-colors ${scrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/80'}`}>
+                 <button className={`flex items-center gap-2 text-sm font-medium transition-colors ${scrolled ? 'text-white hover:text-white/70' : 'text-white hover:text-white/80'}`}>
                     <Globe className="w-4 h-4" />
                     <span className="uppercase">{lang}</span>
                     <ChevronDown className="w-3 h-3" />
                  </button>
                  {/* Language Dropdown */}
-                 <div className="absolute right-0 top-full mt-2 w-32 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right">
+                 <div className="absolute right-0 top-full mt-2 w-32 bg-black/90 backdrop-blur-md rounded-lg shadow-xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right">
                     {(['en', 'es', 'ca', 'de'] as Language[]).map((l) => (
                         <button 
                             key={l}
                             onClick={() => setLang(l)}
-                            className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${lang === l ? 'font-bold text-[#0088FF]' : 'text-gray-700'}`}
+                            className={`w-full text-left px-4 py-2 text-sm hover:bg-white/5 transition-colors ${lang === l ? 'font-bold text-[#D98E2B]' : 'text-white/70'}`}
                         >
                             {l === 'en' ? 'English' : l === 'es' ? 'Español' : l === 'ca' ? 'Català' : 'Deutsch'}
                         </button>
@@ -343,7 +396,7 @@ const App = () => {
               onClick={() => setIsContactOpen(true)}
               className={`px-5 py-2 text-sm font-sans font-bold uppercase tracking-wider border rounded-full transition-all ${
                   scrolled 
-                  ? 'border-black text-black hover:bg-black hover:text-white' 
+                  ? 'border-white text-white hover:bg-white hover:text-black' 
                   : 'border-white text-white hover:bg-white hover:text-black'
               }`}
             >
@@ -354,14 +407,17 @@ const App = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex flex-col justify-center px-6 pt-20 z-10">
-        <div className="max-w-7xl mx-auto w-full flex flex-col items-center text-center">
+      <section className="relative h-screen flex flex-col justify-center px-6 pt-20 z-10 pointer-events-none overflow-hidden">
+        <motion.div 
+          style={{ scale: heroScale, opacity: heroOpacity }}
+          className="max-w-7xl mx-auto w-full flex flex-col items-center text-center pointer-events-auto"
+        >
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-                <h1 className="text-5xl md:text-7xl leading-[0.9] font-bold tracking-tighter hollow-text mb-6">
+                <h1 className="text-6xl md:text-9xl leading-[0.85] font-display font-bold tracking-tighter mb-8 hollow-text glow-text">
                     {content.hero.title}
                 </h1>
             </motion.div>
@@ -372,41 +428,48 @@ const App = () => {
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="max-w-2xl"
             >
-                <p className="text-base md:text-lg font-sans font-medium text-white/90 leading-relaxed mb-8 drop-shadow-md">
+                <p className="text-lg md:text-xl font-sans font-medium text-white/80 leading-relaxed mb-12">
                     {content.hero.description}
                 </p>
-
-                <div className="flex flex-wrap gap-4 justify-center">
-                     <button 
-                        onClick={() => setIsContactOpen(true)}
-                        className="bg-white text-black px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors rounded-full"
-                     >
-                        {content.hero.ctaPrimary}
-                     </button>
-                </div>
             </motion.div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Info Grid - "Technical Layout" */}
-      <section className="relative z-20 bg-white">
-        {/* Grid Container with Gap for borders */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-[#0088FF] border border-[#0088FF]">
-            {content.infoCards.map((card, index) => (
-                <GridCardItem key={card.id} card={card} onOpenContact={() => setIsContactOpen(true)} />
-            ))}
-        </div>
-      </section>
+      <NewsSection content={content} />
 
       <Footer />
 
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} lang={lang} />
       
-      {/* CSS for Hollow Text */}
+      {/* CSS for Glow and Hollow Text */}
       <style>{`
+        .glow-text {
+            text-shadow: 0 0 20px rgba(217, 142, 43, 0.3);
+        }
         .hollow-text {
-            -webkit-text-stroke: 1px #ffffff;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.9);
             color: transparent;
+        }
+        
+        /* Ocultar logo/watermark de Spline */
+        spline-viewer .logo,
+        spline-viewer .watermark,
+        spline-viewer a[href*="spline.design"],
+        spline-viewer a[href*="spline.com"],
+        spline-viewer div[class*="logo"],
+        spline-viewer div[class*="watermark"],
+        spline-viewer div[class*="badge"],
+        spline-viewer > div:last-child,
+        spline-viewer > a:last-child {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
+        }
+        
+        /* Spline Shadow DOM parts */
+        spline-viewer::part(logo) {
+          display: none !important;
         }
       `}</style>
     </div>

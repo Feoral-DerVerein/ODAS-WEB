@@ -9,18 +9,23 @@ export interface ContentSection {
   ctaSecondary?: string;
 }
 
-export interface InfoCard {
+export interface NewsItem {
   id: string;
+  date: string;
   title: string;
-  description: string; // Can contain HTML/Line breaks
-  items?: string[]; // Optional bullet points
-  ctaAction?: boolean; // If true, renders a button
-  ctaLabel?: string;   // Label for the button
+  description: string;
+  category: string;
+  image: string;
+  ctaLabel: string;
 }
 
 export interface SiteContent {
   hero: ContentSection;
-  infoCards: InfoCard[]; // The 6 main informational points
+  news: {
+    title: string;
+    ctaExplore: string;
+    items: NewsItem[];
+  };
   finalCta?: {
     title: string;
     description: string;
