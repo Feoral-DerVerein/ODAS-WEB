@@ -20,7 +20,7 @@ export const CONTENT: Record<'en' | 'es' | 'ca' | 'de', SiteContent> = {
           title: "NegentropyLabs opens pilots for ODAS",
           description: "ODAS announced today that it has acquired NegentropyLabs to accelerate sustainable development.",
           category: "COMPANY",
-          image: "/ODAS.png",
+          image: "/o.png",
           ctaLabel: "READ"
         }
       ]
@@ -44,7 +44,7 @@ export const CONTENT: Record<'en' | 'es' | 'ca' | 'de', SiteContent> = {
           title: "NegentropyLabs abre pilotos para ODAS",
           description: "ODAS estará disponible desde el mes de abril para todas las empresas que necesiten un piloto gratis y cumplan la ley 1/2025",
           category: "EMPRESA",
-          image: "/ODAS.png",
+          image: "/o.png",
           ctaLabel: "LEER"
         }
       ]
@@ -68,7 +68,7 @@ export const CONTENT: Record<'en' | 'es' | 'ca' | 'de', SiteContent> = {
           title: "NegentropyLabs obre pilots per a ODAS",
           description: "ODAS ha anunciat avui l'adquisició de NegentropyLabs per accelerar el desenvolupament sostenible.",
           category: "EMPRESA",
-          image: "/ODAS.png",
+          image: "/o.png",
           ctaLabel: "LLEGIR"
         }
       ]
@@ -92,7 +92,7 @@ export const CONTENT: Record<'en' | 'es' | 'ca' | 'de', SiteContent> = {
           title: "NegentropyLabs öffnet Piloten für ODAS",
           description: "ODAS gab heute bekannt, dass es NegentropyLabs erworben hat, um die nachhaltige Entwicklung zu beschleunigen.",
           category: "UNTERNEHMEN",
-          image: "/ODAS.png",
+          image: "/o.png",
           ctaLabel: "LESEN"
         }
       ]
