@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@theme {
+  --font-sans: "Arvo", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Arvo", ui-serif, Georgia, serif;
+  
+  --color-odas-bg: #F5F0E8;
+  --color-odas-orange: #C49A1A;
+  --color-odas-ink: #1A1A18;
+}
+
+@layer utilities {
+  .perspective-600 {
+    perspective: 600px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes flip2 {
+  0%   { transform: rotateY(0deg); }
+  35%  { transform: rotateY(0deg); }
+  50%  { transform: rotateY(180deg); }
+  85%  { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+.animate-flip2 {
+  animation: flip2 4s ease-in-out infinite;
+}
+
+.pause-animation {
+  animation-play-state: paused;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-odas-bg text-odas-ink antialiased selection:bg-odas-orange/20 font-serif;
+}
+
+.section-container {
+  @apply max-w-7xl mx-auto px-6 py-24 md:py-32;
+}
+
+.heading-xl {
+  @apply font-serif text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter;
+}
+
+.heading-lg {
+  @apply font-serif text-4xl md:text-5xl font-bold leading-tight;
+}
+
+.text-body {
+  @apply font-serif text-lg md:text-xl text-odas-ink/70 leading-relaxed;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FDFBF7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E68A00;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A67C00;
+}
