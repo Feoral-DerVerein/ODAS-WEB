@@ -1,65 +1,1009 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+  ============================================================================
+  PLANTILLA WEB ESTILO "TECH" — TEMA CLARO (fondo blanco, letras negras)
+  ----------------------------------------------------------------------------
+  · Hecho con HTML + Tailwind CSS por CDN. NO necesita instalar nada.
+  · Para verla: haz doble clic en este archivo y se abre en el navegador.
+  · Todos los textos editables están marcados así:  [[EDITAR: ...]]
+    Busca "EDITAR" (Ctrl+F / Cmd+F) para encontrarlos rápido.
+  · Antes de cada sección hay un comentario en español que explica qué es.
+  · Lee el archivo INSTRUCCIONES.md para una guía paso a paso sin tecnicismos.
+  ============================================================================
+-->
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Negentropy AI</title>
-    <meta name="description" content="Operational AI for Perishables. Reduce waste and optimize inventory." />
-    <meta property="og:title" content="Negentropy AI" />
-    <meta property="og:description" content="Operational AI for Perishables. Reduce waste and optimize inventory." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.negentropylabs.com" />
-    <link rel="canonical" href="https://www.negentropylabs.com" />
-    
+
+    <!-- [[EDITAR: Título que aparece en la pestaña del navegador]] -->
+    <title>Negentropy · Plantilla</title>
+    <!-- [[EDITAR: Descripción corta para buscadores]] -->
+    <meta name="description" content="Plantilla de página estilo tech claro." />
+
+    <!-- Tailwind CSS por CDN (no tocar) -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ====== CONFIGURACIÓN DE COLORES Y TIPOGRAFÍA ======
+         Aquí defines los colores principales del sitio.
+         Cambia los valores hexadecimales (#......) por los que quieras. -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              display: ['Space Grotesk', 'sans-serif'],
-              sans: ['Inter', 'sans-serif'],
-              mono: ['JetBrains Mono', 'monospace'],
-            }
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              // [[EDITAR COLORES: cambia estos códigos para recolorear todo]]
+              fondo:    '#FFFFFF', // Fondo principal (blanco)
+              panel:    '#F7F7F7', // Fondo de tarjetas/secciones (gris muy claro)
+              borde:    '#E5E5E5', // Líneas y bordes sutiles (gris claro)
+              acento:   '#000000', // Color de botón principal (negro)
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Tipografía Inter desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos extra pequeños (no hace falta tocar) -->
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background-color: #fff; color: #000; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+      /* Animación suave para los menús desplegables */
+      @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .menu-card { animation: fadeInDown 0.15s ease-out; }
+
+      /* Animación de la tarjeta "Trazabilidad SHA-256": los nodos aparecen uno tras otro */
+      @keyframes trazaNodo { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes trazaLinea { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+      /* Estado de espera (antes de entrar en pantalla): ocultos */
+      #trazaChain.traza-prep .traza-nodo { opacity: 0; }
+      #trazaChain.traza-prep .traza-linea { transform: scaleY(0); }
+      /* Al entrar en pantalla: se animan en orden */
+      #trazaChain.animar .traza-linea { transform-origin: top; animation: trazaLinea 0.7s ease forwards; }
+      #trazaChain.animar .traza-nodo { animation: trazaNodo 0.5s ease both; }
+      #trazaChain.animar .traza-nodo:nth-of-type(1) { animation-delay: 0.05s; }
+      #trazaChain.animar .traza-nodo:nth-of-type(2) { animation-delay: 0.23s; }
+      #trazaChain.animar .traza-nodo:nth-of-type(3) { animation-delay: 0.41s; }
+      #trazaChain.animar .traza-nodo:nth-of-type(4) { animation-delay: 0.59s; }
+
+      /* Texto con degradado verde animado (para destacar una palabra/frase) */
+      .texto-degradado {
+        background: linear-gradient(90deg, #10b981, #22c55e, #14b8a6, #10b981);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: degradadoMovil 6s linear infinite;
+      }
+      @keyframes degradadoMovil { to { background-position: 300% 0; } }
+
+      /* Gráfico de predicción: las líneas se "dibujan" (revelado izq→der) al entrar en pantalla */
+      .reveal-rect { transform-box: view-box; transform-origin: 0px 0px; }
+      #chartCard.chart-prep .reveal-rect { transform: scaleX(0); }
+      #chartCard.animar .reveal-rect { animation: revealChart 1.5s ease-out forwards; }
+      @keyframes revealChart { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+      /* Efecto cascada: los mensajes de la tarjeta de predicción aparecen uno tras otro */
+      @keyframes cascadaItem { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      #prediBody.cascada > * { animation: cascadaItem 0.45s ease both; }
+      #prediBody.cascada > *:nth-child(1) { animation-delay: 0s; }
+      #prediBody.cascada > *:nth-child(2) { animation-delay: 0.13s; }
+      #prediBody.cascada > *:nth-child(3) { animation-delay: 0.26s; }
+      #prediBody.cascada > *:nth-child(4) { animation-delay: 0.39s; }
+
+      /* Efecto "pulse beams" en el botón: anillo de luz girando + resplandor pulsante */
+      @property --haz-ang { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+      @keyframes hazGirar { to { --haz-ang: 360deg; } }
+      @keyframes hazGlow {
+        0%, 100% { box-shadow: 0 0 16px 1px rgba(24,204,252,0.45); }
+        50%      { box-shadow: 0 0 30px 6px rgba(174,72,255,0.55); }
+      }
+      .boton-haz { position: relative; isolation: isolate; animation: hazGlow 2.6s ease-in-out infinite; }
+      .boton-haz::before {
+        content: ""; position: absolute; inset: -2.5px; border-radius: 9999px; z-index: -1;
+        background: conic-gradient(from var(--haz-ang), #18CCFC, #6344F5, #AE48FF, #18CCFC);
+        animation: hazGirar 3s linear infinite;
+      }
+
+      /* Botón estilo "cristal" (glassmorphism): translúcido, brillo arriba, sombra suave */
+      .glass-btn {
+        position: relative;
+        border-radius: 9999px;
+        color: #fff;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.24), rgba(255,255,255,0.05) 45%, rgba(255,255,255,0) 62%),
+          rgba(15,15,18,0.62);
+        -webkit-backdrop-filter: blur(10px) saturate(160%);
+        backdrop-filter: blur(10px) saturate(160%);
+        border: 1px solid rgba(255,255,255,0.22);
+        box-shadow: inset 0 1px 1px rgba(255,255,255,0.45), 0 10px 28px -8px rgba(0,0,0,0.45);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .glass-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: inset 0 1px 1px rgba(255,255,255,0.55), 0 16px 42px -10px rgba(0,0,0,0.55);
+      }
+
+      /* Resplandor amarillo suave detrás de la banda de cifras.
+         [[EDITAR]] cambia el color #FFF991 por otro tono, o la opacidad 0.6. */
+      .patron-cae { background-color: #ffffff; }
+      .patron-cae::before {
+        content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+        background-image: radial-gradient(circle at center, #FFF991 0%, transparent 70%);
+        opacity: 0.6;
+        mix-blend-mode: multiply;
+        transform-origin: center;
+        animation: solLento 16s ease-in-out infinite;
+        /* Desvanece el resplandor arriba y abajo para que no se note el corte */
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%);
+      }
+      /* Movimiento lento tipo "sol": respira y se desplaza muy suave */
+      @keyframes solLento {
+        0%   { transform: translate(-1.5%, 0)  scale(1);    opacity: 0.5; }
+        50%  { transform: translate(1.5%, 1%)  scale(1.1);  opacity: 0.7; }
+        100% { transform: translate(-1.5%, 0)  scale(1);    opacity: 0.5; }
+      }
+
+      /* Etiquetas de la banda: fundido suave al entrar en pantalla */
+      #bandaCifras.cifras-prep .cifra-label { opacity: 0; }
+      #bandaCifras.animar .cifra-label { animation: labelSuave 0.9s ease 0.35s both; }
+      @keyframes labelSuave { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+      /* [[EDITAR FONDO]] Degradado de colores detrás de la tarjeta del gráfico (estilo x.ai).
+         Para cambiarlo, edita los colores #...... de abajo. */
+      .fondo-gradiente {
+        background-color: #3bbfd6;
+        background-image:
+          radial-gradient(circle at 78% 6%,  #c43a2f 0%, rgba(196,58,47,0) 42%),
+          radial-gradient(circle at 100% 32%, #7d3fb0 0%, rgba(125,63,176,0) 40%),
+          radial-gradient(circle at 50% 52%,  #45d6e8 0%, rgba(69,214,232,0) 55%),
+          radial-gradient(circle at 10% 90%,  #d7a36c 0%, rgba(215,163,108,0) 46%),
+          radial-gradient(circle at 92% 96%,  #2fb4cf 0%, rgba(47,180,207,0) 48%),
+          radial-gradient(circle at 4% 42%,   #4666c2 0%, rgba(70,102,194,0) 46%);
+      }
+
+      /* Fondo interactivo "boxes" del footer (se ilumina al pasar el ratón) */
+      #footerBoxes { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+      #footerBoxes .fb-grid {
+        position: absolute; left: 50%; top: 50%; display: flex;
+        transform: translate(-50%, -50%) skewX(-48deg) skewY(14deg) scale(0.8);
+      }
+      #footerBoxes .fb-col { display: flex; flex-direction: column; }
+      #footerBoxes .fb-cell {
+        width: 56px; height: 28px;
+        border-right: 1px solid #e6e8ec; border-top: 1px solid #e6e8ec;
+        background-color: transparent;
+      }
+
+      /* Barra de scroll discreta */
+      ::-webkit-scrollbar { width: 10px; }
+      ::-webkit-scrollbar-track { background: #fff; }
+      ::-webkit-scrollbar-thumb { background: #cbcbcb; border-radius: 8px; }
+      ::-webkit-scrollbar-thumb:hover { background: #b0b0b0; }
+    </style>
+  </head>
+
+  <body class="bg-fondo text-black antialiased selection:bg-black selection:text-white">
+
+    <!-- ========================================================================
+         SECCIÓN 1 · BARRA DE NAVEGACIÓN (HEADER FIJO)
+         ------------------------------------------------------------------------
+         · Se queda pegada arriba al hacer scroll.
+         · Izquierda: logo.  Centro: menús desplegables.  Derecha: botón.
+         · Los menús se abren al pasar el ratón (en móvil con el botón ☰).
+         ======================================================================== -->
+    <header id="header" class="fixed top-0 left-0 w-full z-50 border-b border-borde bg-white/70 backdrop-blur-md transition-colors">
+      <nav class="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+
+        <!-- LOGO (izquierda) -->
+        <!-- [[EDITAR LOGO: cambia el archivo "logo-full.png" por tu imagen]] -->
+        <a href="#" class="flex items-center">
+          <img src="logo-full.png" alt="Negentropy Labs" class="h-9 w-auto" />
+        </a>
+
+        <!-- (Nombre centrado eliminado: ahora va junto al icono, a la izquierda) -->
+
+        <!-- BOTÓN DESTACADO (derecha) -->
+        <div class="flex items-center gap-3">
+          <!-- [[EDITAR: texto y enlace del botón principal del header]] -->
+          <a href="mailto:hello@negentropylabs.com?subject=Contacto%20ODAS" class="inline-block rounded-full bg-black px-5 py-2 text-sm font-semibold text-white transition hover:bg-gray-800">
+            Contacto
+          </a>
+        </div>
+      </nav>
+
+      <!-- (Menú de móvil eliminado a petición) -->
+    </header>
+
+
+    <!-- ========================================================================
+         SECCIÓN 2 · HERO (la primera pantalla grande)
+         ------------------------------------------------------------------------
+         · Etiqueta pequeña + titular gigante + subtítulo + dos botones.
+         ======================================================================== -->
+    <section class="mx-auto max-w-5xl px-5 pb-20 pt-52 text-center">
+
+      <!-- (Etiqueta/pill eliminada a petición) -->
+
+      <!-- Titular gigante (dos líneas) -->
+      <!-- Para cambiar el GROSOR de la letra usa: font-light (fina) · font-normal · font-medium · font-semibold · font-bold (gruesa) -->
+      <h1 class="text-balance text-2xl font-medium leading-tight tracking-tight text-black sm:text-3xl md:text-4xl">
+        <!-- [[EDITAR: titular principal]] -->
+        Usamos la investigación como brújula y la tecnología como el motor.
+      </h1>
+
+      <!-- Subtítulo en gris (dos líneas) -->
+      <p class="mx-auto mt-6 max-w-2xl text-balance text-lg text-gray-600 md:text-xl">
+        <!-- [[EDITAR: subtítulo del hero]] -->
+        Nuestra herramienta <span class="texto-degradado font-semibold">ODAS</span> es un software para el comercio alimentario español
+        que predice qué vas a vender, reduce el desperdicio y deja la Ley 1/2025
+        documentada sin esfuerzo.
+      </p>
+
+      <!-- Logo ODAS + botón principal (centrados) -->
+      <div class="mt-10 flex flex-col items-center gap-5">
+        <!-- [[EDITAR LOGO: icono ODAS encima del botón ("odas-icon.png")]] -->
+        <img src="odas-icon.png" alt="ODAS" class="h-16 w-16 rounded-2xl" />
+        <!-- [[EDITAR: botón principal (texto y enlace)]] -->
+        <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS" class="w-full rounded-full bg-black px-7 py-3 font-semibold text-white transition hover:bg-gray-800 sm:w-auto">
+          Solicita una Demo
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================
+         SECCIÓN 3 · FILA DE TARJETAS INTERACTIVAS (Chat, Build, Imagine, Voice)
+         ------------------------------------------------------------------------
+         · Cuatro tarjetas en fila; en móvil se apilan una debajo de otra.
+         ======================================================================== -->
+    <section class="mx-auto max-w-7xl px-5 pb-24">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+
+        <!-- TARJETA: Chat (simula una mini conversación) -->
+        <div class="group flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
+          <div id="prediCard" class="mb-4 flex-1 space-y-2 rounded-xl bg-white p-3 text-xs">
+            <!-- [[EDITAR: los mensajes de esta tarjeta ROTAN solos; para cambiarlos busca "escenarios" en el <script> de más abajo]] -->
+            <!-- Cabecera: icono + título + estado (fijo) -->
+            <div class="mb-1 flex items-center gap-2">
+              <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full border border-gray-300 text-gray-500">
+                <svg viewBox="0 0 16 16" class="h-2.5 w-2.5" fill="currentColor"><path d="M3 3 8 8 3 13Z"/><path d="M13 3 8 8 13 13Z"/></svg>
+              </span>
+              <span class="text-[10px] font-semibold uppercase tracking-wide text-gray-700">Análisis de predicción de demanda</span>
+              <span class="text-[10px] text-gray-400">guardado</span>
+            </div>
+            <!-- Cuerpo que rota entre consejos -->
+            <div id="prediBody" class="space-y-2 transition-opacity duration-500">
+              <div id="predMsg1" class="rounded-lg bg-[#ece8e1] px-3 py-2 leading-snug text-gray-800">El stock cubre 3 días, con riesgo de rotura el <strong class="font-semibold">sábado</strong>.</div>
+              <div id="predMsg2" class="rounded-lg bg-[#ece8e1] px-3 py-2 leading-snug text-gray-800">Sin acción, se perderán ventas el <strong class="font-semibold">sábado</strong> por <strong class="font-semibold">falta de stock</strong>.</div>
+              <p class="pt-1 text-[10px] font-semibold uppercase tracking-wide text-gray-400">Recomendación</p>
+              <div id="predRec" class="rounded-lg bg-[#22402c] px-3 py-2 font-medium leading-snug text-white">Pide <strong class="font-semibold">25 unidades</strong> antes del <strong class="font-semibold">viernes</strong> para evitar rotura.</div>
+            </div>
+          </div>
+          <h3 class="text-base font-semibold text-black">Previsión de demanda con IA</h3>        </div>
+
+        <!-- TARJETA: Build (simula líneas de terminal/código) -->
+        <div class="group flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
+          <div class="mb-4 flex flex-1 items-center justify-center overflow-hidden rounded-xl border border-gray-100 bg-white p-2">
+            <!-- [[EDITAR: contenido de la tarjeta — abanico de acciones (jerarquía Ley 1/2025)]] -->
+            <!-- Definiciones de iconos (no tocar) -->
+            <svg width="0" height="0" class="hidden" aria-hidden="true">
+              <defs>
+                <symbol id="ic-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><path d="M7 7h.01"/></symbol>
+                <symbol id="ic-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+                <symbol id="ic-recycle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.293 13.596 7.196 9.5 3.1 10.598"/><path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/><path d="m13.378 9.633 4.096 1.098 1.097-4.096"/></symbol>
+                <symbol id="ic-pig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7.5"/><path d="M7 7.5 9 10.5"/><path d="M17 7.5 15 10.5"/><ellipse cx="12" cy="14.5" rx="3.2" ry="2.2"/><path d="M11 14.5h.01"/><path d="M13 14.5h.01"/></symbol>
+                <symbol id="ic-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></symbol>
+                <symbol id="ic-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></symbol>
+              </defs>
+            </svg>
+
+            <!-- Diagrama tipo workflow: nodo central (marca ODAS) → 6 acciones de la jerarquía -->
+            <svg viewBox="0 0 300 220" class="h-auto w-full" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-label="Jerarquía de redistribución Ley 1/2025">
+              <defs>
+                <radialGradient id="abanicoGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ff3db8" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="#ff3db8" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+
+              <!-- Aristas curvas (el abanico) del nodo central a cada icono -->
+              <g stroke="#cdbdec" stroke-width="1" opacity="0.75">
+                <path id="edge1" d="M150 168 C150 120 40 112 40 50"/>
+                <path id="edge2" d="M150 168 C150 120 85 112 85 50"/>
+                <path id="edge3" d="M150 168 C150 124 130 112 130 50"/>
+                <path id="edge4" d="M150 168 C150 124 175 112 175 50"/>
+                <path id="edge5" d="M150 168 C150 120 220 112 220 50"/>
+                <path id="edge6" d="M150 168 C150 120 265 112 265 50"/>
+              </g>
+
+              <!-- "Paquetes" que viajan del Market a cada acción (efecto de envío, en bucle) -->
+              <g>
+                <circle r="3" fill="#3b6ea5"><animateMotion dur="2.4s" begin="0s"   repeatCount="indefinite"><mpath xlink:href="#edge1"/></animateMotion></circle>
+                <circle r="3" fill="#3f9d5a"><animateMotion dur="2.4s" begin="0.4s" repeatCount="indefinite"><mpath xlink:href="#edge2"/></animateMotion></circle>
+                <circle r="3" fill="#9a6a24"><animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite"><mpath xlink:href="#edge3"/></animateMotion></circle>
+                <circle r="3" fill="#c2603f"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath xlink:href="#edge4"/></animateMotion></circle>
+                <circle r="3" fill="#3f7d4f"><animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite"><mpath xlink:href="#edge5"/></animateMotion></circle>
+                <circle r="3" fill="#c0392b"><animateMotion dur="2.4s" begin="2s"   repeatCount="indefinite"><mpath xlink:href="#edge6"/></animateMotion></circle>
+              </g>
+
+              <!-- Resplandor donde convergen las aristas -->
+              <ellipse cx="150" cy="171" rx="46" ry="16" fill="url(#abanicoGlow)"/>
+
+              <!-- 6 nodos superiores (iconos de la jerarquía) -->
+              <rect x="25" y="20" width="30" height="30" rx="8" fill="#fff" stroke="#ececff"/>
+              <use href="#ic-tag" x="31" y="26" width="18" height="18" style="color:#3b6ea5"/>
+              <rect x="70" y="20" width="30" height="30" rx="8" fill="#fff" stroke="#ececff"/>
+              <use href="#ic-heart" x="76" y="26" width="18" height="18" style="color:#3f9d5a"/>
+              <rect x="115" y="20" width="30" height="30" rx="8" fill="#fff" stroke="#ececff"/>
+              <use href="#ic-recycle" x="121" y="26" width="18" height="18" style="color:#9a6a24"/>
+              <rect x="160" y="20" width="30" height="30" rx="8" fill="#fff" stroke="#ececff"/>
+              <use href="#ic-pig" x="166" y="26" width="18" height="18" style="color:#c2603f"/>
+              <rect x="205" y="20" width="30" height="30" rx="8" fill="#fff" stroke="#ececff"/>
+              <use href="#ic-leaf" x="211" y="26" width="18" height="18" style="color:#3f7d4f"/>
+              <rect x="250" y="20" width="30" height="30" rx="8" fill="#fff" stroke="#ececff"/>
+              <use href="#ic-trash" x="256" y="26" width="18" height="18" style="color:#c0392b"/>
+
+              <!-- Nodo central (marca ODAS) -->
+              <rect x="131" y="168" width="38" height="38" rx="10" fill="#fff" stroke="#e5e5e5"/>
+              <!-- Icono "Market" (tienda) en el nodo central -->
+              <svg x="140" y="177" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/>
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/>
+                <path d="M2 7h20"/>
+                <path d="M22 7v3a2 2 0 0 1-2 2 2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/>
+              </svg>
+            </svg>
+          </div>
+          <h3 class="text-base font-semibold text-black">Cumplimiento Ley 1/2025</h3>        </div>
+
+        <!-- TARJETA: Imagine (imagen de ejemplo) -->
+        <div class="group flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
+          <div class="mb-4 flex-1 overflow-hidden rounded-xl border border-gray-100 bg-white text-[10px]">
+            <!-- [[EDITAR: contenido de la tarjeta — producto del Mercado]] -->
+            <!-- Foto del producto -->
+            <div class="relative">
+              <!-- [[EDITAR IMAGEN: guarda tu foto del croissant como "croissant.jpg" en esta carpeta]] -->
+              <img src="croissant.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x180/e8c9a0/9c7b4f?text=Croissant'" alt="Croissants de mantequilla" class="h-20 w-full object-cover" />
+              <span class="absolute left-2 top-2 rounded-full bg-emerald-50 px-1.5 py-0.5 text-[8px] font-semibold text-emerald-700">-55,8%</span>
+              <span class="absolute right-2 top-2 rounded-full bg-rose-50 px-1.5 py-0.5 text-[8px] font-semibold text-rose-600">Hoy</span>
+            </div>
+            <!-- Datos del producto -->
+            <div class="space-y-1 p-2.5">
+              <p class="text-[11px] font-semibold leading-tight text-gray-900">Croissants de mantequilla (pack 6)</p>
+              <p class="text-[9px] text-gray-400">Lote L26061402 · Panadería y Pastelería</p>
+              <div class="flex items-center gap-1 text-[9px] text-gray-500">
+                <svg class="h-3 w-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
+                Temperatura ambiente
+              </div>
+              <p class="text-[9px] text-gray-500">18 uds disponibles</p>
+              <p><span class="text-[9px] text-gray-400 line-through">4,50 €</span> <span class="text-[12px] font-bold text-emerald-600">1,99 €/uds</span></p>
+              <div class="flex items-center gap-1 text-[9px] text-gray-500">
+                <svg class="h-3 w-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+                14/6/2026 18:00–22:00
+              </div>
+              <p class="text-[9px] text-gray-400">Panadería San Antonio · Sevilla</p>
+              <div class="mt-1.5 rounded-lg border border-blue-400 py-1 text-center text-[10px] font-semibold text-blue-600">Editar</div>
+            </div>
+          </div>
+          <h3 class="text-base font-semibold text-black">Marketplace B2B de excedentes</h3>        </div>
+
+        <!-- TARJETA: Voice (simula una onda de voz) -->
+        <div class="group flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
+          <div class="mb-4 flex-1 rounded-xl border border-gray-100 bg-white p-3 text-[10px]">
+            <!-- [[EDITAR: contenido de la tarjeta — cadena de trazabilidad SHA-256]] -->
+            <p class="mb-2 text-[8px] font-semibold uppercase tracking-wide text-slate-400">Cadena de trazabilidad · SHA-256</p>
+            <div id="trazaChain" class="relative space-y-2">
+              <!-- Línea vertical que enlaza los nodos (la "cadena") -->
+              <span class="traza-linea absolute left-3 top-3 bottom-3 w-px bg-gray-200"></span>
+
+              <!-- Nodo 1: Recepción -->
+              <div class="traza-nodo relative flex items-center gap-2">
+                <div class="relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-blue-50 text-blue-600">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+                </div>
+                <div class="min-w-0 flex-1 rounded-lg border border-gray-200 bg-white px-2 py-1">
+                  <p class="font-semibold text-gray-800">Recepción</p>
+                  <p class="truncate font-mono text-[8px] text-gray-400">c11c9d80…7d1247</p>
+                </div>
+              </div>
+
+              <!-- Nodo 2: Almacenaje -->
+              <div class="traza-nodo relative flex items-center gap-2">
+                <div class="relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-amber-50 text-amber-600">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                </div>
+                <div class="min-w-0 flex-1 rounded-lg border border-gray-200 bg-white px-2 py-1">
+                  <p class="font-semibold text-gray-800">Almacenaje</p>
+                  <p class="truncate font-mono text-[8px] text-gray-400">3343e325…d2c7a8</p>
+                </div>
+              </div>
+
+              <!-- Nodo 3: Venta / Donación -->
+              <div class="traza-nodo relative flex items-center gap-2">
+                <div class="relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-emerald-50 text-emerald-600">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><path d="M7 7h.01"/></svg>
+                </div>
+                <div class="min-w-0 flex-1 rounded-lg border border-gray-200 bg-white px-2 py-1">
+                  <p class="font-semibold text-gray-800">Venta / Donación</p>
+                  <p class="truncate font-mono text-[8px] text-gray-400">c23534d8…3c6fd8</p>
+                </div>
+              </div>
+
+              <!-- Nodo 4: Registro sellado -->
+              <div class="traza-nodo relative flex items-center gap-2">
+                <div class="relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-[#22402c]/10 text-[#22402c]">
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <div class="min-w-0 flex-1 rounded-lg border border-[#22402c]/30 bg-[#22402c]/5 px-2 py-1">
+                  <p class="font-semibold text-gray-800">Registro Ley 1/2025 · sellado</p>
+                  <p class="truncate font-mono text-[8px] text-gray-500">6152263e…0bd85d</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="text-base font-semibold text-black">Trazabilidad SHA-256</h3>        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================
+         SECCIÓN 4 · PARA DESARROLLADORES — "One API. Every modality."
+         ------------------------------------------------------------------------
+         · Titular + párrafo + 2 botones + 3 estadísticas + bloque de código
+           con pestañas (Python / TypeScript / cURL) y botón "Copy".
+         ======================================================================== -->
+    <section class="border-y border-borde bg-panel/60">
+      <div class="mx-auto grid max-w-7xl gap-12 px-5 py-24 lg:grid-cols-2 lg:items-center">
+
+        <!-- Columna izquierda: texto, botones y estadísticas -->
+        <div>
+          <p class="mb-3 text-sm font-medium uppercase tracking-wider text-gray-500">Para el retail y la distribución</p>
+          <h2 class="text-3xl font-medium tracking-tight text-black sm:text-4xl">
+            <!-- [[EDITAR: titular de la sección]] -->
+            Menos mermas. <span class="texto-degradado">Más margen.</span>
+          </h2>
+          <p class="mt-5 max-w-md text-lg text-gray-600">
+            <!-- [[EDITAR: párrafo descriptivo]] -->
+            ODAS te ayuda a predecir la demanda de tus productos y distribuir tus
+            excedentes para que puedas cumplir la Ley 1/2025 sin fricción operativa
+            y recuperar margen antes de que llegue a la basura.
+          </p>
+
+          <!-- Dos botones -->
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <!-- [[EDITAR: botón de la sección]] -->
+            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS" class="rounded-full border border-borde px-6 py-3 text-center font-semibold text-black transition hover:bg-black/5">Solicita una Demo</a>
+          </div>
+
+          <!-- Tres estadísticas en fila -->
+          <div class="mt-12 grid grid-cols-3 gap-4 border-t border-borde pt-8">
+            <!-- [[EDITAR: estadística 1]] -->
+            <div>
+              <p class="text-2xl font-bold text-black sm:text-3xl">1k+</p>
+              <p class="mt-1 text-sm text-gray-500">Predicciones por día</p>
+            </div>
+            <!-- [[EDITAR: estadística 2]] -->
+            <div>
+              <p class="text-2xl font-bold text-black sm:text-3xl">40%</p>
+              <p class="mt-1 text-sm text-gray-500">Menos de desperdicio</p>
+            </div>
+            <!-- [[EDITAR: estadística 3]] -->
+            <div>
+              <p class="text-2xl font-bold text-black sm:text-3xl">6</p>
+              <p class="mt-1 text-sm text-gray-500">Canales de distribución</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: gráfico sobre fondo degradado (estilo x.ai) -->
+        <!-- [[EDITAR: para cambiar los valores del gráfico, edita los números de "points" de cada línea y las métricas de abajo]] -->
+        <div class="fondo-gradiente rounded-3xl p-5 sm:p-8">
+          <div id="chartCard" class="overflow-hidden rounded-2xl border border-white/50 bg-white p-5 shadow-xl">
+          <p class="text-sm font-semibold text-gray-800">Predicción de demanda — próximos 7 días</p>
+
+          <svg viewBox="0 0 600 300" class="mt-3 w-full" xmlns="http://www.w3.org/2000/svg" aria-label="Gráfico de predicción de demanda">
+            <defs>
+              <clipPath id="chartReveal"><rect class="reveal-rect" x="0" y="0" width="600" height="300"/></clipPath>
+            </defs>
+
+            <!-- Rejilla horizontal (fija) -->
+            <g stroke="#ececec" stroke-dasharray="3 3">
+              <line x1="40" y1="20" x2="580" y2="20"/>
+              <line x1="40" y1="77.5" x2="580" y2="77.5"/>
+              <line x1="40" y1="135" x2="580" y2="135"/>
+              <line x1="40" y1="192.5" x2="580" y2="192.5"/>
+              <line x1="40" y1="250" x2="580" y2="250"/>
+            </g>
+            <!-- Etiquetas eje Y -->
+            <g fill="#94a3b8" font-size="11" font-family="Inter, sans-serif" text-anchor="end">
+              <text x="32" y="24">80</text>
+              <text x="32" y="81.5">60</text>
+              <text x="32" y="139">40</text>
+              <text x="32" y="196.5">20</text>
+              <text x="32" y="254">0</text>
+            </g>
+            <!-- Etiquetas eje X (fechas) -->
+            <g fill="#94a3b8" font-size="11" font-family="Inter, sans-serif" text-anchor="middle">
+              <text x="40" y="270">13 Jun</text>
+              <text x="130" y="270">14 Jun</text>
+              <text x="220" y="270">15 Jun</text>
+              <text x="310" y="270">16 Jun</text>
+              <text x="400" y="270">17 Jun</text>
+              <text x="490" y="270">18 Jun</text>
+              <text x="580" y="270">19 Jun</text>
+            </g>
+
+            <!-- Capa de datos (se revela con la animación) -->
+            <g clip-path="url(#chartReveal)">
+              <!-- Zona "sin stock" -->
+              <rect x="310" y="20" width="270" height="230" fill="#f7ede1" opacity="0.55"/>
+              <!-- Banda de intervalo de confianza -->
+              <polygon points="40,106.3 130,132.1 220,126.4 310,126.4 400,126.4 490,126.4 580,129.3 580,178.1 490,175.3 400,175.3 310,175.3 220,175.3 130,189.6 40,160.9" fill="#dbe4fb" opacity="0.7"/>
+              <!-- Stock restante (línea naranja discontinua) -->
+              <polyline points="40,20 130,103.4 220,204 310,247.1 400,250 490,250 580,250" fill="none" stroke="#d6451f" stroke-width="2.5" stroke-dasharray="6 5" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Previsión (línea azul) -->
+              <polyline points="40,135 130,163.8 220,152.3 310,152.3 400,152.3 490,152.3 580,155.1" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Puntos de la previsión -->
+              <g fill="#2563eb">
+                <circle cx="40" cy="135" r="3.5"/><circle cx="130" cy="163.8" r="3.5"/><circle cx="220" cy="152.3" r="3.5"/><circle cx="310" cy="152.3" r="3.5"/><circle cx="400" cy="152.3" r="3.5"/><circle cx="490" cy="152.3" r="3.5"/><circle cx="580" cy="155.1" r="3.5"/>
+              </g>
+              <!-- Marca vertical "Sin stock" -->
+              <line x1="355" y1="20" x2="355" y2="250" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <text x="362" y="33" fill="#dc2626" font-size="11" font-weight="600" font-family="Inter, sans-serif">Sin stock (3.5d)</text>
+            </g>
+          </svg>
+
+          <!-- Leyenda -->
+          <div class="mt-2 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500">
+            <span class="inline-flex items-center gap-1.5"><span class="inline-block h-0.5 w-4 rounded bg-[#2563eb]"></span> Previsión</span>
+            <span class="inline-flex items-center gap-1.5"><span class="inline-block w-4 border-t-2 border-dashed border-[#d6451f]"></span> Stock restante</span>
+            <span class="inline-flex items-center gap-1.5"><span class="inline-block h-2.5 w-4 rounded-sm bg-[#dbe4fb]"></span> Intervalo</span>
+          </div>
+
+          <!-- Métricas (cuentan al entrar en pantalla) -->
+          <div class="mt-4 grid grid-cols-2 gap-y-4 border-t border-borde pt-4 text-center sm:grid-cols-4">
+            <div>
+              <p class="text-xs text-gray-500">Total previsto</p>
+              <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="239.8" data-dec="1" data-sep=",">239,8</span></p>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500">Media diaria</p>
+              <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="34.3" data-dec="1" data-sep=",">34,3</span></p>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500">Stock actual</p>
+              <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="120" data-dec="0">120</span></p>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500">Error modelo</p>
+              <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="25" data-dec="1" data-sep="." data-suf="%">25.0%</span></p>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================
+         SECCIÓN 5 · BANDA DE ESTADÍSTICAS GRANDES
+         ------------------------------------------------------------------------
+         · Tres cifras grandes en fila.
+         ======================================================================== -->
+    <!-- [[EDITAR: fondo animado "lluvia"; los colores se editan en ".patron-cae" del <style> de arriba]] -->
+    <section id="bandaCifras" class="relative mx-auto my-12 max-w-7xl px-5 py-24">
+      <div class="relative z-10 grid grid-cols-1 gap-10 text-center sm:grid-cols-3">
+        <!-- [[EDITAR: cifra grande 1]] -->
+        <div>
+          <p class="cifra-cuenta text-5xl font-extrabold tracking-tight text-black md:text-6xl" data-final="500" data-pre="€" data-suf="K" data-dec="0">€500K</p>
+          <p class="cifra-label mt-3 text-gray-600">en ahorro en multas.</p>
+        </div>
+        <!-- [[EDITAR: cifra grande 2]] -->
+        <div>
+          <p class="cifra-cuenta text-5xl font-extrabold tracking-tight text-black md:text-6xl" data-final="10" data-suf=" min" data-dec="0">10 min</p>
+          <p class="cifra-label mt-3 text-gray-600">Creación del Plan de prevención gratis.</p>
+        </div>
+        <!-- [[EDITAR: cifra grande 3]] -->
+        <div>
+          <p class="cifra-cuenta text-5xl font-extrabold tracking-tight text-black md:text-6xl" data-final="99.9" data-suf="%" data-dec="1">99.9%</p>
+          <p class="cifra-label mt-3 text-gray-600">en la ejecución del plan.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================
+         SECCIÓN 6 · LATEST NEWS (últimas noticias)
+         ------------------------------------------------------------------------
+         · Titular a la izquierda + enlace "All posts" a la derecha.
+         · Cuatro tarjetas: imagen + fecha + titular.
+         ======================================================================== -->
+    <section class="mx-auto max-w-7xl px-5 py-24">
+      <div class="mb-10 flex items-end justify-between">
+        <!-- [[EDITAR: título de la sección de noticias]] -->
+        <h2 class="text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Proceso</h2>
+      </div>
+
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+        <!-- Tarjeta de noticia 1 -->
+        <a href="#" class="group block overflow-hidden rounded-2xl border border-borde bg-panel transition hover:-translate-y-1 hover:border-gray-400">
+          <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
+          <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGRuNWJncm4ybzZlZzE0M2FoaGR2cnpxZmphN2c2NjZpaGN6OG96bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbEuHLBUPQm55MyqJg/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/400x240/EFEFEF/999999?text=IMAGEN+1'" alt="[[EDITAR: alt noticia 1]]" class="aspect-[16/10] w-full object-cover" />
+          <div class="p-5">
+            <p class="text-xs text-gray-500">Paso 1</p>
+            <h3 class="mt-2 font-semibold leading-snug text-black transition group-hover:text-gray-600">Formación: Curso Ley 1/2025</h3>
+          </div>
+        </a>
+
+        <!-- Tarjeta de noticia 2 -->
+        <a href="#" class="group block overflow-hidden rounded-2xl border border-borde bg-panel transition hover:-translate-y-1 hover:border-gray-400">
+          <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
+          <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmhnbGV0bzJwNmF5bzZ3MWx5c2lxcmVmeG1qZDJjdndhZWNraWkwaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NNVWeKWyh2p026Or91/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/400x240/EFEFEF/999999?text=IMAGEN+2'" alt="[[EDITAR: alt noticia 2]]" class="aspect-[16/10] w-full object-cover" />
+          <div class="p-5">
+            <p class="text-xs text-gray-500">Paso 2</p>
+            <h3 class="mt-2 font-semibold leading-snug text-black transition group-hover:text-gray-600">Plan de prevención con IA</h3>
+          </div>
+        </a>
+
+        <!-- Tarjeta de noticia 3 -->
+        <a href="#" class="group block overflow-hidden rounded-2xl border border-borde bg-panel transition hover:-translate-y-1 hover:border-gray-400">
+          <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
+          <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmJsdmU5bHFyY3l2cHY3amkxNmo1MW9xeTAyemhiOHJxajh5cHgydyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ch2JlGY6dlb2yp7jU3/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/400x240/EFEFEF/999999?text=IMAGEN+3'" alt="[[EDITAR: alt noticia 3]]" class="aspect-[16/10] w-full object-cover" />
+          <div class="p-5">
+            <p class="text-xs text-gray-500">Paso 3</p>
+            <h3 class="mt-2 font-semibold leading-snug text-black transition group-hover:text-gray-600">ODAS ejecuta el “Plan”</h3>
+          </div>
+        </a>
+
+        <!-- Tarjeta de noticia 4 -->
+        <a href="#" class="group block overflow-hidden rounded-2xl border border-borde bg-panel transition hover:-translate-y-1 hover:border-gray-400">
+          <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
+          <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3UzanRqMGptOTcweDF3OWkzZzNkZjBoNXhkeXc2dXVpZnN2cnR6MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/55PkuDHvG7u36/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/400x240/EFEFEF/999999?text=IMAGEN+4'" alt="[[EDITAR: alt noticia 4]]" class="aspect-[16/10] w-full object-cover" />
+          <div class="p-5">
+            <p class="text-xs text-gray-500">Paso 4</p>
+            <h3 class="mt-2 font-semibold leading-snug text-black transition group-hover:text-gray-600">Ahorro y tranquilidad legal</h3>
+          </div>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================
+         SECCIÓN 7 · CHOOSE HOW TO GET STARTED (cómo empezar)
+         ------------------------------------------------------------------------
+         · Titular + dos tarjetas grandes con lista de viñetas y un botón.
+         ======================================================================== -->
+    <section class="mx-auto max-w-7xl px-5 py-24">
+      <!-- [[EDITAR: título de la sección]] -->
+      <h2 class="mb-12 text-center text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Elige el plan que se ajuste a tu negocio</h2>
+
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+        <!-- Tarjeta: Starter PYME -->
+        <div class="flex flex-col rounded-2xl border border-borde bg-panel p-8 transition hover:border-gray-400">
+          <h3 class="text-2xl font-bold text-black">Starter PYME</h3>
+          <p class="mt-2 text-gray-600">Comercios y cadenas pequeñas que necesitan cumplir y empezar a prevenir.</p>
+          <!-- [[EDITAR: lista de puntos (añade o quita <li> según necesites)]] -->
+          <ul class="mt-6 flex-1 space-y-3 text-gray-700">
+            <li class="flex items-start gap-3"><span class="mt-1 text-emerald-600">✓</span> Previsión IA</li>
+            <li class="flex items-start gap-3"><span class="mt-1 text-emerald-600">✓</span> Documentación Ley 1/2025</li>
+            <li class="flex items-start gap-3"><span class="mt-1 text-emerald-600">✓</span> Trazabilidad SHA-256</li>
+          </ul>
+          <!-- [[EDITAR: botón tarjeta uno]] -->
+          <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS%20(Starter%20PYME)" class="mt-8 inline-block rounded-full bg-black px-6 py-3 text-center font-semibold text-white transition hover:bg-gray-800">Solicita una Demo</a>
+        </div>
+
+        <!-- Tarjeta: Professional -->
+        <div class="flex flex-col rounded-2xl border border-borde bg-panel p-8 transition hover:border-gray-400">
+          <h3 class="text-2xl font-bold text-black">Profesional</h3>
+          <p class="mt-2 text-gray-600">Cadenas medianas multi-tienda que quieren optimización, cumplir la ley y vender en el marketplace.</p>
+          <!-- [[EDITAR: lista de puntos (añade o quita <li> según necesites)]] -->
+          <ul class="mt-6 flex-1 space-y-3 text-gray-700">
+            <li class="flex items-start gap-3"><span class="mt-1 text-sky-600">✓</span> Todo lo de Starter</li>
+            <li class="flex items-start gap-3"><span class="mt-1 text-sky-600">✓</span> Marketplace B2B + soporte</li>
+            <li class="flex items-start gap-3"><span class="mt-1 text-sky-600">✓</span> Previsión avanzada multi-tienda</li>
+          </ul>
+          <!-- [[EDITAR: botón tarjeta dos]] -->
+          <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS%20(Professional)" class="mt-8 inline-block rounded-full border border-borde px-6 py-3 text-center font-semibold text-black transition hover:bg-black/5">Solicita una Demo</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================
+         SECCIÓN 8 · PIE DE PÁGINA (FOOTER)
+         ------------------------------------------------------------------------
+         · Línea superior + columnas de enlaces + línea final.
+         ======================================================================== -->
+    <footer class="relative overflow-hidden border-t border-borde bg-panel/60">
+      <!-- Fondo interactivo tipo "boxes": se ilumina al pasar el ratón (lo genera el JS de abajo) -->
+      <div id="footerBoxes" aria-hidden="true"></div>
+      <div class="pointer-events-none relative z-10 mx-auto max-w-7xl px-5 py-16">
+
+        <!-- Línea superior -->
+        <div class="mb-12 flex flex-col gap-2 text-sm text-gray-500 sm:flex-row sm:items-center sm:justify-between">
+          <!-- [[EDITAR: empresa madre y copyright]] -->
+          <p>Una división de <span class="text-black">Negentropy Labs</span></p>
+          <p>© 2026 ODAS Corp.</p>
+        </div>
+
+
+        <!-- Línea final -->
+        <div class="mt-12 text-center">
+          <!-- [[EDITAR: logo del pie]] -->
+          <img src="logo-full.png" alt="Negentropy Labs" class="mx-auto h-8 w-auto" />
+          <!-- [[EDITAR: redes sociales — cambia el enlace href si hace falta]] -->
+          <a href="https://www.linkedin.com/company/negentropylabs/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Negentropy Labs" class="pointer-events-auto mt-5 inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition hover:bg-black/5 hover:text-[#0A66C2]">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- ========================================================================
+         JAVASCRIPT (menús, pestañas de código y botón copiar)
+         ------------------------------------------------------------------------
+         · No hace falta tocar nada de aquí abajo.
+         ======================================================================== -->
+    <script>
+      // --- Menú de móvil: abrir / cerrar ---
+      function toggleMobileMenu() {
+        document.getElementById('mobileMenu').classList.toggle('hidden');
+      }
+
+      // --- Pestañas del bloque de código (Python / TypeScript / cURL) ---
+      function showTab(tab, btn) {
+        // Mostrar solo el bloque de código de la pestaña elegida
+        document.querySelectorAll('.code-block').forEach(function (el) {
+          el.classList.toggle('hidden', el.getAttribute('data-tab') !== tab);
+        });
+        // Resaltar el botón de la pestaña activa
+        document.querySelectorAll('.tab-btn').forEach(function (b) {
+          var activo = b.getAttribute('data-tab') === tab;
+          b.classList.toggle('text-black', activo);
+          b.classList.toggle('text-gray-400', !activo);
+        });
+      }
+
+      // --- Botón "Copy": copia el código visible al portapapeles ---
+      function copyCode(btn) {
+        var visible = document.querySelector('.code-block:not(.hidden) code');
+        var texto = visible ? visible.innerText : '';
+        var etiqueta = btn.querySelector('.copy-label');
+
+        function exito() {
+          if (etiqueta) {
+            etiqueta.textContent = '¡Copiado!';
+            setTimeout(function () { etiqueta.textContent = 'Copy'; }, 1500);
           }
         }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(texto).then(exito).catch(function () { copiaManual(texto, exito); });
+        } else {
+          copiaManual(texto, exito);
+        }
       }
+      // Método alternativo por si el navegador bloquea el portapapeles
+      function copiaManual(texto, cb) {
+        var area = document.createElement('textarea');
+        area.value = texto;
+        area.style.position = 'fixed';
+        area.style.opacity = '0';
+        document.body.appendChild(area);
+        area.select();
+        try { document.execCommand('copy'); cb && cb(); } catch (e) {}
+        document.body.removeChild(area);
+      }
+
+      // --- Header: un poco más opaco al hacer scroll ---
+      window.addEventListener('scroll', function () {
+        var h = document.getElementById('header');
+        if (window.scrollY > 20) {
+          h.classList.add('bg-white/90');
+          h.classList.remove('bg-white/70');
+        } else {
+          h.classList.add('bg-white/70');
+          h.classList.remove('bg-white/90');
+        }
+      });
+
+      // --- Animación de la cadena de Trazabilidad SHA-256 (aparece al entrar en pantalla) ---
+      (function () {
+        var chain = document.getElementById('trazaChain');
+        if (!chain || !('IntersectionObserver' in window)) return; // si no hay soporte, se ve normal
+        chain.classList.add('traza-prep'); // ocultar hasta que entre en pantalla
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              chain.classList.add('animar');
+            } else {
+              chain.classList.remove('animar'); // permite repetir al volver a verla
+            }
+          });
+        }, { threshold: 0.4 });
+        io.observe(chain);
+      })();
+
+      // --- Gráfico de predicción: dibujar líneas + contar números al entrar en pantalla ---
+      (function () {
+        var card = document.getElementById('chartCard');
+        if (!card || !('IntersectionObserver' in window)) return;
+        var contadores = card.querySelectorAll('.contador');
+        function fmt(el, v) {
+          var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+          var sep = el.getAttribute('data-sep') || ',';
+          var suf = el.getAttribute('data-suf') || '';
+          var s = v.toFixed(dec);
+          if (sep === ',') s = s.replace('.', ',');
+          return s + suf;
+        }
+        function contar(el) {
+          var objetivo = parseFloat(el.getAttribute('data-final'));
+          var dur = 1200, ini = null;
+          function paso(ts) {
+            if (ini === null) ini = ts;
+            var p = Math.min((ts - ini) / dur, 1);
+            var e = 1 - Math.pow(1 - p, 3); // arranque rápido, frenada suave
+            el.textContent = fmt(el, objetivo * e);
+            if (p < 1) requestAnimationFrame(paso);
+            else el.textContent = fmt(el, objetivo);
+          }
+          requestAnimationFrame(paso);
+        }
+        function reset() { contadores.forEach(function (c) { c.textContent = fmt(c, 0); }); }
+        card.classList.add('chart-prep');
+        reset();
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { card.classList.add('animar'); contadores.forEach(contar); }
+            else { card.classList.remove('animar'); reset(); }
+          });
+        }, { threshold: 0.3 });
+        io.observe(card);
+      })();
+
+      // --- Tarjeta "Análisis de predicción": los consejos van rotando ---
+      (function () {
+        var card = document.getElementById('prediCard');
+        var body = document.getElementById('prediBody');
+        if (!card || !body) return;
+        // [[EDITAR]] Edita/añade consejos aquí. <strong class="font-semibold">resalta</strong> en negrita.
+        var escenarios = [
+          {
+            m1: 'El stock cubre 3 días, con riesgo de rotura el <strong class="font-semibold">sábado</strong>.',
+            m2: 'Sin acción, se perderán ventas el <strong class="font-semibold">sábado</strong> por <strong class="font-semibold">falta de stock</strong>.',
+            rec: 'Pide <strong class="font-semibold">25 unidades</strong> antes del <strong class="font-semibold">viernes</strong> para evitar rotura.'
+          },
+          {
+            m1: 'Tienes <strong class="font-semibold">40 yogures</strong> que caducan en <strong class="font-semibold">2 días</strong>.',
+            m2: 'Al ritmo actual, <strong class="font-semibold">18 uds</strong> acabarían en merma.',
+            rec: 'Publícalos en el <strong class="font-semibold">Mercado a −40%</strong> o <strong class="font-semibold">dónalos</strong> hoy.'
+          },
+          {
+            m1: 'Sobrestock: <strong class="font-semibold">12 días</strong> de tomates en almacén.',
+            m2: 'Hay riesgo de <strong class="font-semibold">merma</strong> antes de venderlo todo.',
+            rec: 'Aplica <strong class="font-semibold">−30%</strong> los <strong class="font-semibold">2 próximos días</strong> para acelerar la venta.'
+          },
+          {
+            m1: 'Quedan <strong class="font-semibold">15 barras</strong> de pan del día.',
+            m2: 'No se venderán antes del <strong class="font-semibold">cierre</strong>.',
+            rec: '<strong class="font-semibold">Transfórmalas</strong> (rallado/picatostes) o <strong class="font-semibold">dónalas</strong> antes de las 21:00.'
+          }
+        ];
+        var i = 0, timer = null;
+        function pintar(idx) {
+          document.getElementById('predMsg1').innerHTML = escenarios[idx].m1;
+          document.getElementById('predMsg2').innerHTML = escenarios[idx].m2;
+          document.getElementById('predRec').innerHTML = escenarios[idx].rec;
+        }
+        function cascada() {
+          body.classList.remove('cascada');
+          void body.offsetWidth; // fuerza el reinicio de la animación
+          body.classList.add('cascada');
+        }
+        function siguiente() {
+          i = (i + 1) % escenarios.length;
+          pintar(i);
+          cascada();
+        }
+        function arrancar() { cascada(); if (!timer) timer = setInterval(siguiente, 4000); }
+        function parar() { if (timer) { clearInterval(timer); timer = null; } }
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { if (e.isIntersecting) arrancar(); else parar(); });
+          }, { threshold: 0.3 });
+          io.observe(card);
+        } else { arrancar(); }
+      })();
+
+      // --- Banda de cifras: cuenta los números al entrar en pantalla ---
+      (function () {
+        var band = document.getElementById('bandaCifras');
+        if (!band || !('IntersectionObserver' in window)) return;
+        var cifras = band.querySelectorAll('.cifra-cuenta');
+        function fmt(el, v) {
+          var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+          return (el.getAttribute('data-pre') || '') + v.toFixed(dec) + (el.getAttribute('data-suf') || '');
+        }
+        function contar(el) {
+          var objetivo = parseFloat(el.getAttribute('data-final'));
+          var dur = 1500, ini = null;
+          function paso(ts) {
+            if (ini === null) ini = ts;
+            var p = Math.min((ts - ini) / dur, 1);
+            var e = 1 - Math.pow(1 - p, 3);
+            el.textContent = fmt(el, objetivo * e);
+            if (p < 1) requestAnimationFrame(paso);
+            else el.textContent = fmt(el, objetivo);
+          }
+          requestAnimationFrame(paso);
+        }
+        function reset() { cifras.forEach(function (c) { c.textContent = fmt(c, 0); }); }
+        band.classList.add('cifras-prep');
+        reset();
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { band.classList.add('animar'); cifras.forEach(contar); }
+            else { band.classList.remove('animar'); reset(); }
+          });
+        }, { threshold: 0.3 });
+        io.observe(band);
+      })();
+
+      // --- Fondo "boxes" del footer: rejilla que se ilumina al pasar el ratón ---
+      (function () {
+        var cont = document.getElementById('footerBoxes');
+        if (!cont) return;
+        var COLS = 40, ROWS = 16;
+        var grid = document.createElement('div');
+        grid.className = 'fb-grid';
+        for (var c = 0; c < COLS; c++) {
+          var col = document.createElement('div');
+          col.className = 'fb-col';
+          for (var r = 0; r < ROWS; r++) {
+            var cell = document.createElement('div');
+            cell.className = 'fb-cell';
+            col.appendChild(cell);
+          }
+          grid.appendChild(col);
+        }
+        cont.appendChild(grid);
+        var colores = ['rgb(125 211 252)','rgb(249 168 212)','rgb(134 239 172)','rgb(253 224 71)','rgb(252 165 165)','rgb(216 180 254)','rgb(147 197 253)','rgb(165 180 252)','rgb(196 181 253)'];
+        grid.addEventListener('mouseover', function (e) {
+          if (e.target.classList && e.target.classList.contains('fb-cell')) {
+            e.target.style.transition = 'none';
+            e.target.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+          }
+        });
+        grid.addEventListener('mouseout', function (e) {
+          if (e.target.classList && e.target.classList.contains('fb-cell')) {
+            e.target.style.transition = 'background-color 1.6s ease';
+            e.target.style.backgroundColor = 'transparent';
+          }
+        });
+      })();
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        background-color: #000000;
-        color: #ffffff;
-        overflow-x: hidden;
-      }
-      .font-display {
-        font-family: 'Space Grotesk', sans-serif;
-      }
-      .font-mono {
-        font-family: 'JetBrains Mono', monospace;
-      }
-      ::selection {
-        background: #bae6fd; /* sky-200 */
-        color: #0c4a6e; /* sky-900 */
-      }
-      
-      /* Hide Spline watermark via CSS if supported */
-      spline-viewer {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-      spline-viewer::part(logo) {
-        display: none !important;
-      }
-    </style>
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.48/build/spline-viewer.js"></script>
-    <script type="module" src="/index.tsx"></script>
-  </head>
-  <body>
-    <div id="root"></div>
   </body>
 </html>

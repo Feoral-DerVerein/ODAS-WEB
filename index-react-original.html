@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Negentropy AI</title>
+    <meta name="description" content="Operational AI for Perishables. Reduce waste and optimize inventory." />
+    <meta property="og:title" content="Negentropy AI" />
+    <meta property="og:description" content="Operational AI for Perishables. Reduce waste and optimize inventory." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.negentropylabs.com" />
+    <link rel="canonical" href="https://www.negentropylabs.com" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['Space Grotesk', 'sans-serif'],
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #000000;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+      .font-display {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+      ::selection {
+        background: #bae6fd; /* sky-200 */
+        color: #0c4a6e; /* sky-900 */
+      }
+      
+      /* Hide Spline watermark via CSS if supported */
+      spline-viewer {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      spline-viewer::part(logo) {
+        display: none !important;
+      }
+    </style>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.48/build/spline-viewer.js"></script>
+    <script type="module" src="/index.tsx"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
