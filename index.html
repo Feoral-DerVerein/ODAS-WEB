@@ -51,7 +51,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
@@ -92,6 +92,140 @@
         animation: degradadoMovil 6s linear infinite;
       }
       @keyframes degradadoMovil { to { background-position: 300% 0; } }
+
+      /* "ODAS": al pasar el ratón aparece su nombre completo como burbuja de CRISTAL
+         (glassmorphism). Es absoluta, así que NO mueve el texto de alrededor (no parpadea). */
+      .odas-acron { position: relative; cursor: default; }
+      .odas-tip {
+        position: absolute;
+        bottom: calc(100% + 10px);
+        left: 50%;
+        transform: translateX(-50%) translateY(6px) scale(0.96);
+        width: max-content;
+        max-width: min(88vw, 340px);
+        text-align: center;
+        /* --- Glassmorphism --- */
+        background: rgba(255, 255, 255, 0.15);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+          inset 0 0 20px 10px rgba(255, 255, 255, 1);
+        overflow: hidden;
+        /* texto oscuro para que se lea sobre el cristal claro */
+        color: #14532d;
+        -webkit-text-fill-color: #14532d;
+        font-size: 0.62em;
+        font-weight: 700;
+        line-height: 1.25;
+        padding: 0.5em 0.95em;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        z-index: 30;
+      }
+      /* línea de luz superior del cristal */
+      .odas-tip::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+      }
+      /* línea de luz lateral izquierda del cristal */
+      .odas-tip::after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3));
+      }
+      .odas-acron:hover .odas-tip { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+
+      /* Tarjeta emergente (popover) que aparece sobre cada tarjeta al pasar el ratón */
+      .card-pop {
+        position: absolute;
+        left: 50%;
+        bottom: calc(100% + 12px);
+        transform: translateX(-50%) translateY(10px);
+        width: 17rem;
+        max-width: 88vw;
+        background: #ffffff;
+        border: 1px solid #E5E5E5;
+        border-radius: 1rem;
+        box-shadow: 0 22px 44px -14px rgba(0, 0, 0, 0.28);
+        padding: 0.9rem 1.05rem;
+        font-size: 0.82rem;
+        line-height: 1.45;
+        color: #374151;
+        text-align: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        z-index: 40;
+      }
+      /* flecha que apunta hacia la tarjeta */
+      .card-pop::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 7px solid transparent;
+        border-top-color: #ffffff;
+        filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.06));
+      }
+      /* al pasar el ratón, la tarjeta (y su burbuja) suben por encima del resto (p.ej. el botón del hero) */
+      .group:hover { z-index: 50; }
+      .group:hover .card-pop { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+      /* Fuente "The Seasons" para el wordmark ODAS.
+         [[EDITAR FUENTE]] Guarda el archivo de la fuente como "the-seasons.woff2"
+         (o "the-seasons.ttf" / "the-seasons.otf") en esta MISMA carpeta. Mientras
+         no esté el archivo, se usa un serif elegante de respaldo (Cormorant Garamond). */
+      @font-face {
+        font-family: 'The Seasons';
+        src: url('the-seasons.woff2') format('woff2'),
+             url('the-seasons.ttf') format('truetype'),
+             url('the-seasons.otf') format('opentype');
+        font-weight: 100 900;
+        font-display: swap;
+      }
+      /* "ODAS" gigante (wordmark) */
+      .odas-word {
+        display: inline-block;
+        font-family: 'The Seasons', 'Cormorant Garamond', Georgia, serif;
+        font-size: clamp(3rem, 9vw, 5.5rem);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        color: #000;
+        cursor: default;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      /* Al pasar el ratón, cada inicial se "desarma" en su palabra (estilo capitular) */
+      .ow-grp { white-space: nowrap; }
+      .ow-tail {
+        display: inline-block;
+        max-width: 0;
+        opacity: 0;
+        overflow-x: clip;        /* recorta solo en horizontal (para el plegado) */
+        overflow-y: visible;     /* deja ver las colas de la "g", "j", "p"… */
+        vertical-align: baseline;
+        white-space: nowrap;
+        font-size: 0.44em;
+        font-weight: 500;
+        line-height: 1.15;
+        transition: max-width 0.55s ease, opacity 0.45s ease;
+      }
+      .odas-word:hover .ow-tail { max-width: 14ch; opacity: 1; }
 
       /* Gráfico de predicción: las líneas se "dibujan" (revelado izq→der) al entrar en pantalla */
       .reveal-rect { transform-box: view-box; transform-origin: 0px 0px; }
@@ -179,6 +313,16 @@
           radial-gradient(circle at 4% 42%,   #4666c2 0%, rgba(70,102,194,0) 46%);
       }
 
+      /* Mega-menú Productos: cascada de los items + cambio animado de la tarjeta de vista previa */
+      .group:hover .prod-item { animation: cascadaItem 0.4s ease both; }
+      .group:hover .prod-item:nth-of-type(1) { animation-delay: 0.04s; }
+      .group:hover .prod-item:nth-of-type(2) { animation-delay: 0.10s; }
+      .group:hover .prod-item:nth-of-type(3) { animation-delay: 0.16s; }
+      .group:hover .prod-item:nth-of-type(4) { animation-delay: 0.22s; }
+      .prod-item.prod-activo { background-color: rgba(0, 0, 0, 0.05); }
+      .prod-preview.anim { animation: prodPreviewIn 0.35s ease; }
+      @keyframes prodPreviewIn { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+
       /* Fondo interactivo "boxes" del footer (se ilumina al pasar el ratón) */
       #footerBoxes { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
       #footerBoxes .fb-grid {
@@ -212,18 +356,25 @@
     <header id="header" class="fixed top-0 left-0 w-full z-50 border-b border-borde bg-white/70 backdrop-blur-md transition-colors">
       <nav class="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
 
-        <!-- LOGO (izquierda) -->
-        <!-- [[EDITAR LOGO: cambia el archivo "logo-full.png" por tu imagen]] -->
-        <a href="#" class="flex items-center">
-          <img src="logo-full.png" alt="Negentropy Labs" class="h-9 w-auto" />
-        </a>
+        <!-- SELECTOR DE IDIOMA (izquierda) -->
+        <div class="flex items-center gap-0.5 text-sm" aria-label="Selector de idioma">
+          <button type="button" data-lang="es" class="lang-btn rounded-md px-1.5 py-1 font-medium text-gray-400 transition hover:text-black sm:px-2">ES</button>
+          <span class="text-gray-300">·</span>
+          <button type="button" data-lang="ca" class="lang-btn rounded-md px-1.5 py-1 font-medium text-gray-400 transition hover:text-black sm:px-2">CA</button>
+          <span class="text-gray-300">·</span>
+          <button type="button" data-lang="en" class="lang-btn rounded-md px-1.5 py-1 font-medium text-gray-400 transition hover:text-black sm:px-2">EN</button>
+        </div>
 
-        <!-- (Nombre centrado eliminado: ahora va junto al icono, a la izquierda) -->
+        <!-- Logo ODAS (centrado) -->
+        <!-- [[EDITAR LOGO: marca ODAS ("odas-logo.png")]] -->
+        <a href="#" class="absolute left-1/2 flex -translate-x-1/2 items-center">
+          <img src="odas-logo.png" alt="ODAS" class="h-6 w-auto" />
+        </a>
 
         <!-- BOTÓN DESTACADO (derecha) -->
         <div class="flex items-center gap-3">
           <!-- [[EDITAR: texto y enlace del botón principal del header]] -->
-          <a href="mailto:hello@negentropylabs.com?subject=Contacto%20ODAS" class="inline-block rounded-full bg-black px-5 py-2 text-sm font-semibold text-white transition hover:bg-gray-800">
+          <a href="mailto:hello@negentropylabs.com?subject=Contacto%20ODAS" data-i18n="nav.contact" class="inline-block rounded-full bg-black px-5 py-2 text-sm font-semibold text-white transition hover:bg-gray-800">
             Contacto
           </a>
         </div>
@@ -238,34 +389,40 @@
          ------------------------------------------------------------------------
          · Etiqueta pequeña + titular gigante + subtítulo + dos botones.
          ======================================================================== -->
-    <section class="mx-auto max-w-5xl px-5 pb-20 pt-52 text-center">
+    <section class="relative overflow-hidden pb-20 pt-44">
 
-      <!-- (Etiqueta/pill eliminada a petición) -->
+      <!-- Contenido del hero (centrado) -->
+      <div class="relative z-10 mx-auto max-w-5xl px-5 text-center">
+
+        <!-- "ODAS" gigante estilo x.ai (palabra + barra de degradado animada que cambia) -->
+        <div class="mb-6 flex justify-center">
+          <span class="odas-word" aria-label="ODAS · Organismo de Desarrollo Alimentario Sostenible"><span class="ow-grp">O<span class="ow-tail">rganismo&nbsp;de&nbsp;</span></span><wbr><span class="ow-grp">D<span class="ow-tail">esarrollo&nbsp;</span></span><wbr><span class="ow-grp">A<span class="ow-tail">limentario&nbsp;</span></span><wbr><span class="ow-grp">S<span class="ow-tail">ostenible</span></span></span>
+        </div>
 
       <!-- Titular gigante (dos líneas) -->
       <!-- Para cambiar el GROSOR de la letra usa: font-light (fina) · font-normal · font-medium · font-semibold · font-bold (gruesa) -->
-      <h1 class="text-balance text-2xl font-medium leading-tight tracking-tight text-black sm:text-3xl md:text-4xl">
+      <h1 data-i18n="hero.title" class="text-balance text-2xl font-medium leading-tight tracking-tight text-black sm:text-3xl md:text-4xl">
         <!-- [[EDITAR: titular principal]] -->
         Usamos la investigación como brújula y la tecnología como el motor.
       </h1>
 
       <!-- Subtítulo en gris (dos líneas) -->
-      <p class="mx-auto mt-6 max-w-2xl text-balance text-lg text-gray-600 md:text-xl">
+      <p data-i18n-html="hero.sub" class="mx-auto mt-6 max-w-2xl text-lg text-gray-600 md:text-xl">
         <!-- [[EDITAR: subtítulo del hero]] -->
-        Nuestra herramienta <span class="texto-degradado font-semibold">ODAS</span> es un software para el comercio alimentario español
+        Nuestra herramienta <span class="odas-acron font-semibold"><span class="texto-degradado">ODAS</span></span> es un software para el comercio alimentario español
         que predice qué vas a vender, reduce el desperdicio y deja la Ley 1/2025
         documentada sin esfuerzo.
       </p>
 
-      <!-- Logo ODAS + botón principal (centrados) -->
-      <div class="mt-10 flex flex-col items-center gap-5">
-        <!-- [[EDITAR LOGO: icono ODAS encima del botón ("odas-icon.png")]] -->
-        <img src="odas-icon.png" alt="ODAS" class="h-16 w-16 rounded-2xl" />
+      <!-- Botón principal (centrado) -->
+      <div class="mt-10 flex justify-center">
         <!-- [[EDITAR: botón principal (texto y enlace)]] -->
-        <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS" class="w-full rounded-full bg-black px-7 py-3 font-semibold text-white transition hover:bg-gray-800 sm:w-auto">
+        <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS" data-i18n="cta.demo" class="w-full rounded-full bg-black px-7 py-3 font-semibold text-white transition hover:bg-gray-800 sm:w-auto">
           Solicita una Demo
         </a>
-      </div>
+        </div>
+
+      </div><!-- /contenido del hero -->
     </section>
 
 
@@ -278,7 +435,7 @@
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
 
         <!-- TARJETA: Chat (simula una mini conversación) -->
-        <div class="group flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
+        <div class="group relative flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
           <div id="prediCard" class="mb-4 flex-1 space-y-2 rounded-xl bg-white p-3 text-xs">
             <!-- [[EDITAR: los mensajes de esta tarjeta ROTAN solos; para cambiarlos busca "escenarios" en el <script> de más abajo]] -->
             <!-- Cabecera: icono + título + estado (fijo) -->
@@ -286,21 +443,24 @@
               <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full border border-gray-300 text-gray-500">
                 <svg viewBox="0 0 16 16" class="h-2.5 w-2.5" fill="currentColor"><path d="M3 3 8 8 3 13Z"/><path d="M13 3 8 8 13 13Z"/></svg>
               </span>
-              <span class="text-[10px] font-semibold uppercase tracking-wide text-gray-700">Análisis de predicción de demanda</span>
-              <span class="text-[10px] text-gray-400">guardado</span>
+              <span data-i18n="card1.label" class="text-[10px] font-semibold uppercase tracking-wide text-gray-700">Análisis de predicción de demanda</span>
+              <span data-i18n="card1.saved" class="text-[10px] text-gray-400">guardado</span>
             </div>
             <!-- Cuerpo que rota entre consejos -->
             <div id="prediBody" class="space-y-2 transition-opacity duration-500">
               <div id="predMsg1" class="rounded-lg bg-[#ece8e1] px-3 py-2 leading-snug text-gray-800">El stock cubre 3 días, con riesgo de rotura el <strong class="font-semibold">sábado</strong>.</div>
               <div id="predMsg2" class="rounded-lg bg-[#ece8e1] px-3 py-2 leading-snug text-gray-800">Sin acción, se perderán ventas el <strong class="font-semibold">sábado</strong> por <strong class="font-semibold">falta de stock</strong>.</div>
-              <p class="pt-1 text-[10px] font-semibold uppercase tracking-wide text-gray-400">Recomendación</p>
+              <p data-i18n="card1.recLabel" class="pt-1 text-[10px] font-semibold uppercase tracking-wide text-gray-400">Recomendación</p>
               <div id="predRec" class="rounded-lg bg-[#22402c] px-3 py-2 font-medium leading-snug text-white">Pide <strong class="font-semibold">25 unidades</strong> antes del <strong class="font-semibold">viernes</strong> para evitar rotura.</div>
             </div>
           </div>
-          <h3 class="text-base font-semibold text-black">Previsión de demanda con IA</h3>        </div>
+          <h3 data-i18n="card1.title" class="text-base font-semibold text-black">Previsión de demanda con IA</h3>
+          <!-- Tarjeta emergente al pasar el ratón -->
+          <div class="card-pop" role="tooltip" data-i18n-html="card1.pop">Modelos de IA por SKU que anticipan las ventas y ajustan los pedidos para minimizar la merma.</div>
+        </div>
 
         <!-- TARJETA: Build (simula líneas de terminal/código) -->
-        <div class="group flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
+        <div class="group relative flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
           <div class="mb-4 flex flex-1 items-center justify-center overflow-hidden rounded-xl border border-gray-100 bg-white p-2">
             <!-- [[EDITAR: contenido de la tarjeta — abanico de acciones (jerarquía Ley 1/2025)]] -->
             <!-- Definiciones de iconos (no tocar) -->
@@ -373,10 +533,13 @@
               </svg>
             </svg>
           </div>
-          <h3 class="text-base font-semibold text-black">Cumplimiento Ley 1/2025</h3>        </div>
+          <h3 data-i18n="card2.title" class="text-base font-semibold text-black">Cumplimiento Ley 1/2025</h3>
+          <!-- Tarjeta emergente al pasar el ratón -->
+          <div class="card-pop" role="tooltip" data-i18n-html="card2.pop"><ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Plan de prevención</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Jerarquía de excedentes</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Formación bonificada</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Documentación auditable</li></ul></div>
+        </div>
 
         <!-- TARJETA: Imagine (imagen de ejemplo) -->
-        <div class="group flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
+        <div class="group relative flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
           <div class="mb-4 flex-1 overflow-hidden rounded-xl border border-gray-100 bg-white text-[10px]">
             <!-- [[EDITAR: contenido de la tarjeta — producto del Mercado]] -->
             <!-- Foto del producto -->
@@ -384,33 +547,36 @@
               <!-- [[EDITAR IMAGEN: guarda tu foto del croissant como "croissant.jpg" en esta carpeta]] -->
               <img src="croissant.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x180/e8c9a0/9c7b4f?text=Croissant'" alt="Croissants de mantequilla" class="h-20 w-full object-cover" />
               <span class="absolute left-2 top-2 rounded-full bg-emerald-50 px-1.5 py-0.5 text-[8px] font-semibold text-emerald-700">-55,8%</span>
-              <span class="absolute right-2 top-2 rounded-full bg-rose-50 px-1.5 py-0.5 text-[8px] font-semibold text-rose-600">Hoy</span>
+              <span data-i18n="card3.today" class="absolute right-2 top-2 rounded-full bg-rose-50 px-1.5 py-0.5 text-[8px] font-semibold text-rose-600">Hoy</span>
             </div>
             <!-- Datos del producto -->
             <div class="space-y-1 p-2.5">
-              <p class="text-[11px] font-semibold leading-tight text-gray-900">Croissants de mantequilla (pack 6)</p>
-              <p class="text-[9px] text-gray-400">Lote L26061402 · Panadería y Pastelería</p>
+              <p data-i18n="card3.product" class="text-[11px] font-semibold leading-tight text-gray-900">Croissants de mantequilla (pack 6)</p>
+              <p data-i18n="card3.lot" class="text-[9px] text-gray-400">Lote L26061402 · Panadería y Pastelería</p>
               <div class="flex items-center gap-1 text-[9px] text-gray-500">
                 <svg class="h-3 w-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
-                Temperatura ambiente
+                <span data-i18n="card3.temp">Temperatura ambiente</span>
               </div>
-              <p class="text-[9px] text-gray-500">18 uds disponibles</p>
-              <p><span class="text-[9px] text-gray-400 line-through">4,50 €</span> <span class="text-[12px] font-bold text-emerald-600">1,99 €/uds</span></p>
+              <p data-i18n="card3.stock" class="text-[9px] text-gray-500">18 uds disponibles</p>
+              <p><span class="text-[9px] text-gray-400 line-through">4,50 €</span> <span data-i18n="card3.priceUnit" class="text-[12px] font-bold text-emerald-600">1,99 €/uds</span></p>
               <div class="flex items-center gap-1 text-[9px] text-gray-500">
                 <svg class="h-3 w-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
                 14/6/2026 18:00–22:00
               </div>
               <p class="text-[9px] text-gray-400">Panadería San Antonio · Sevilla</p>
-              <div class="mt-1.5 rounded-lg border border-blue-400 py-1 text-center text-[10px] font-semibold text-blue-600">Editar</div>
+              <div data-i18n="card3.edit" class="mt-1.5 rounded-lg border border-blue-400 py-1 text-center text-[10px] font-semibold text-blue-600">Editar</div>
             </div>
           </div>
-          <h3 class="text-base font-semibold text-black">Marketplace B2B de excedentes</h3>        </div>
+          <h3 data-i18n="card3.title" class="text-base font-semibold text-black">Marketplace B2B de excedentes</h3>
+          <!-- Tarjeta emergente al pasar el ratón -->
+          <div class="card-pop" role="tooltip" data-i18n-html="card3.pop">Canal de redistribución de stock entre operadores.</div>
+        </div>
 
         <!-- TARJETA: Voice (simula una onda de voz) -->
-        <div class="group flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
+        <div class="group relative flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
           <div class="mb-4 flex-1 rounded-xl border border-gray-100 bg-white p-3 text-[10px]">
             <!-- [[EDITAR: contenido de la tarjeta — cadena de trazabilidad SHA-256]] -->
-            <p class="mb-2 text-[8px] font-semibold uppercase tracking-wide text-slate-400">Cadena de trazabilidad · SHA-256</p>
+            <p data-i18n="card4.chainLabel" class="mb-2 text-[8px] font-semibold uppercase tracking-wide text-slate-400">Cadena de trazabilidad · SHA-256</p>
             <div id="trazaChain" class="relative space-y-2">
               <!-- Línea vertical que enlaza los nodos (la "cadena") -->
               <span class="traza-linea absolute left-3 top-3 bottom-3 w-px bg-gray-200"></span>
@@ -421,7 +587,7 @@
                   <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
                 </div>
                 <div class="min-w-0 flex-1 rounded-lg border border-gray-200 bg-white px-2 py-1">
-                  <p class="font-semibold text-gray-800">Recepción</p>
+                  <p data-i18n="card4.step1" class="font-semibold text-gray-800">Recepción</p>
                   <p class="truncate font-mono text-[8px] text-gray-400">c11c9d80…7d1247</p>
                 </div>
               </div>
@@ -432,7 +598,7 @@
                   <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
                 </div>
                 <div class="min-w-0 flex-1 rounded-lg border border-gray-200 bg-white px-2 py-1">
-                  <p class="font-semibold text-gray-800">Almacenaje</p>
+                  <p data-i18n="card4.step2" class="font-semibold text-gray-800">Almacenaje</p>
                   <p class="truncate font-mono text-[8px] text-gray-400">3343e325…d2c7a8</p>
                 </div>
               </div>
@@ -443,7 +609,7 @@
                   <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><path d="M7 7h.01"/></svg>
                 </div>
                 <div class="min-w-0 flex-1 rounded-lg border border-gray-200 bg-white px-2 py-1">
-                  <p class="font-semibold text-gray-800">Venta / Donación</p>
+                  <p data-i18n="card4.step3" class="font-semibold text-gray-800">Venta / Donación</p>
                   <p class="truncate font-mono text-[8px] text-gray-400">c23534d8…3c6fd8</p>
                 </div>
               </div>
@@ -454,13 +620,16 @@
                   <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
                 </div>
                 <div class="min-w-0 flex-1 rounded-lg border border-[#22402c]/30 bg-[#22402c]/5 px-2 py-1">
-                  <p class="font-semibold text-gray-800">Registro Ley 1/2025 · sellado</p>
+                  <p data-i18n="card4.step4" class="font-semibold text-gray-800">Registro Ley 1/2025 · sellado</p>
                   <p class="truncate font-mono text-[8px] text-gray-500">6152263e…0bd85d</p>
                 </div>
               </div>
             </div>
           </div>
-          <h3 class="text-base font-semibold text-black">Trazabilidad SHA-256</h3>        </div>
+          <h3 data-i18n="card4.title" class="text-base font-semibold text-black">Trazabilidad SHA-256</h3>
+          <!-- Tarjeta emergente al pasar el ratón -->
+          <div class="card-pop" role="tooltip" data-i18n-html="card4.pop">Prueba verificable ante una inspección.</div>
+        </div>
       </div>
     </section>
 
@@ -476,12 +645,12 @@
 
         <!-- Columna izquierda: texto, botones y estadísticas -->
         <div>
-          <p class="mb-3 text-sm font-medium uppercase tracking-wider text-gray-500">Para el retail y la distribución</p>
-          <h2 class="text-3xl font-medium tracking-tight text-black sm:text-4xl">
+          <p data-i18n="dev.kicker" class="mb-3 text-sm font-medium uppercase tracking-wider text-gray-500">Para el retail y la distribución</p>
+          <h2 data-i18n-html="dev.title" class="text-3xl font-medium tracking-tight text-black sm:text-4xl">
             <!-- [[EDITAR: titular de la sección]] -->
             Menos mermas. <span class="texto-degradado">Más margen.</span>
           </h2>
-          <p class="mt-5 max-w-md text-lg text-gray-600">
+          <p data-i18n="dev.para" class="mt-5 max-w-md text-lg text-gray-600">
             <!-- [[EDITAR: párrafo descriptivo]] -->
             ODAS te ayuda a predecir la demanda de tus productos y distribuir tus
             excedentes para que puedas cumplir la Ley 1/2025 sin fricción operativa
@@ -491,7 +660,7 @@
           <!-- Dos botones -->
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <!-- [[EDITAR: botón de la sección]] -->
-            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS" class="rounded-full border border-borde px-6 py-3 text-center font-semibold text-black transition hover:bg-black/5">Solicita una Demo</a>
+            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS" data-i18n="cta.demo" class="rounded-full border border-borde px-6 py-3 text-center font-semibold text-black transition hover:bg-black/5">Solicita una Demo</a>
           </div>
 
           <!-- Tres estadísticas en fila -->
@@ -499,17 +668,17 @@
             <!-- [[EDITAR: estadística 1]] -->
             <div>
               <p class="text-2xl font-bold text-black sm:text-3xl">1k+</p>
-              <p class="mt-1 text-sm text-gray-500">Predicciones por día</p>
+              <p data-i18n="dev.stat1" class="mt-1 text-sm text-gray-500">Predicciones por día</p>
             </div>
             <!-- [[EDITAR: estadística 2]] -->
             <div>
               <p class="text-2xl font-bold text-black sm:text-3xl">40%</p>
-              <p class="mt-1 text-sm text-gray-500">Menos de desperdicio</p>
+              <p data-i18n="dev.stat2" class="mt-1 text-sm text-gray-500">Menos de desperdicio</p>
             </div>
             <!-- [[EDITAR: estadística 3]] -->
             <div>
               <p class="text-2xl font-bold text-black sm:text-3xl">6</p>
-              <p class="mt-1 text-sm text-gray-500">Canales de distribución</p>
+              <p data-i18n="dev.stat3" class="mt-1 text-sm text-gray-500">Canales de distribución</p>
             </div>
           </div>
         </div>
@@ -518,7 +687,7 @@
         <!-- [[EDITAR: para cambiar los valores del gráfico, edita los números de "points" de cada línea y las métricas de abajo]] -->
         <div class="fondo-gradiente rounded-3xl p-5 sm:p-8">
           <div id="chartCard" class="overflow-hidden rounded-2xl border border-white/50 bg-white p-5 shadow-xl">
-          <p class="text-sm font-semibold text-gray-800">Predicción de demanda — próximos 7 días</p>
+          <p data-i18n="chart.title" class="text-sm font-semibold text-gray-800">Predicción de demanda — próximos 7 días</p>
 
           <svg viewBox="0 0 600 300" class="mt-3 w-full" xmlns="http://www.w3.org/2000/svg" aria-label="Gráfico de predicción de demanda">
             <defs>
@@ -568,33 +737,33 @@
               </g>
               <!-- Marca vertical "Sin stock" -->
               <line x1="355" y1="20" x2="355" y2="250" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
-              <text x="362" y="33" fill="#dc2626" font-size="11" font-weight="600" font-family="Inter, sans-serif">Sin stock (3.5d)</text>
+              <text data-i18n="chart.outOfStock" x="362" y="33" fill="#dc2626" font-size="11" font-weight="600" font-family="Inter, sans-serif">Sin stock (3.5d)</text>
             </g>
           </svg>
 
           <!-- Leyenda -->
           <div class="mt-2 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500">
-            <span class="inline-flex items-center gap-1.5"><span class="inline-block h-0.5 w-4 rounded bg-[#2563eb]"></span> Previsión</span>
-            <span class="inline-flex items-center gap-1.5"><span class="inline-block w-4 border-t-2 border-dashed border-[#d6451f]"></span> Stock restante</span>
-            <span class="inline-flex items-center gap-1.5"><span class="inline-block h-2.5 w-4 rounded-sm bg-[#dbe4fb]"></span> Intervalo</span>
+            <span class="inline-flex items-center gap-1.5"><span class="inline-block h-0.5 w-4 rounded bg-[#2563eb]"></span> <span data-i18n="chart.legPrevision">Previsión</span></span>
+            <span class="inline-flex items-center gap-1.5"><span class="inline-block w-4 border-t-2 border-dashed border-[#d6451f]"></span> <span data-i18n="chart.legStock">Stock restante</span></span>
+            <span class="inline-flex items-center gap-1.5"><span class="inline-block h-2.5 w-4 rounded-sm bg-[#dbe4fb]"></span> <span data-i18n="chart.legInterval">Intervalo</span></span>
           </div>
 
           <!-- Métricas (cuentan al entrar en pantalla) -->
           <div class="mt-4 grid grid-cols-2 gap-y-4 border-t border-borde pt-4 text-center sm:grid-cols-4">
             <div>
-              <p class="text-xs text-gray-500">Total previsto</p>
+              <p data-i18n="chart.mTotal" class="text-xs text-gray-500">Total previsto</p>
               <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="239.8" data-dec="1" data-sep=",">239,8</span></p>
             </div>
             <div>
-              <p class="text-xs text-gray-500">Media diaria</p>
+              <p data-i18n="chart.mAvg" class="text-xs text-gray-500">Media diaria</p>
               <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="34.3" data-dec="1" data-sep=",">34,3</span></p>
             </div>
             <div>
-              <p class="text-xs text-gray-500">Stock actual</p>
+              <p data-i18n="chart.mStock" class="text-xs text-gray-500">Stock actual</p>
               <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="120" data-dec="0">120</span></p>
             </div>
             <div>
-              <p class="text-xs text-gray-500">Error modelo</p>
+              <p data-i18n="chart.mError" class="text-xs text-gray-500">Error modelo</p>
               <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="25" data-dec="1" data-sep="." data-suf="%">25.0%</span></p>
             </div>
           </div>
@@ -615,17 +784,17 @@
         <!-- [[EDITAR: cifra grande 1]] -->
         <div>
           <p class="cifra-cuenta text-5xl font-extrabold tracking-tight text-black md:text-6xl" data-final="500" data-pre="€" data-suf="K" data-dec="0">€500K</p>
-          <p class="cifra-label mt-3 text-gray-600">en ahorro en multas.</p>
+          <p data-i18n="banda.label1" class="cifra-label mt-3 text-gray-600">en ahorro en multas.</p>
         </div>
         <!-- [[EDITAR: cifra grande 2]] -->
         <div>
           <p class="cifra-cuenta text-5xl font-extrabold tracking-tight text-black md:text-6xl" data-final="10" data-suf=" min" data-dec="0">10 min</p>
-          <p class="cifra-label mt-3 text-gray-600">Creación del Plan de prevención gratis.</p>
+          <p data-i18n="banda.label2" class="cifra-label mt-3 text-gray-600">Creación del Plan de prevención gratis.</p>
         </div>
         <!-- [[EDITAR: cifra grande 3]] -->
         <div>
           <p class="cifra-cuenta text-5xl font-extrabold tracking-tight text-black md:text-6xl" data-final="99.9" data-suf="%" data-dec="1">99.9%</p>
-          <p class="cifra-label mt-3 text-gray-600">en la ejecución del plan.</p>
+          <p data-i18n="banda.label3" class="cifra-label mt-3 text-gray-600">en la ejecución del plan.</p>
         </div>
       </div>
     </section>
@@ -640,48 +809,68 @@
     <section class="mx-auto max-w-7xl px-5 py-24">
       <div class="mb-10 flex items-end justify-between">
         <!-- [[EDITAR: título de la sección de noticias]] -->
-        <h2 class="text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Proceso</h2>
+        <h2 data-i18n="proc.title" class="text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Proceso</h2>
       </div>
 
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
-        <!-- Tarjeta de noticia 1 -->
-        <a href="#" class="group block overflow-hidden rounded-2xl border border-borde bg-panel transition hover:-translate-y-1 hover:border-gray-400">
+        <!-- Tarjeta de Proceso 1 (estilo TravelCard: imagen de fondo + info al pasar el ratón) -->
+        <a href="#" class="group relative block h-80 w-full overflow-hidden rounded-xl border border-borde shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
           <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
-          <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGRuNWJncm4ybzZlZzE0M2FoaGR2cnpxZmphN2c2NjZpaGN6OG96bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbEuHLBUPQm55MyqJg/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/400x240/EFEFEF/999999?text=IMAGEN+1'" alt="[[EDITAR: alt noticia 1]]" class="aspect-[16/10] w-full object-cover" />
-          <div class="p-5">
-            <p class="text-xs text-gray-500">Paso 1</p>
-            <h3 class="mt-2 font-semibold leading-snug text-black transition group-hover:text-gray-600">Formación: Curso Ley 1/2025</h3>
+          <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGRuNWJncm4ybzZlZzE0M2FoaGR2cnpxZmphN2c2NjZpaGN6OG96bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbEuHLBUPQm55MyqJg/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+1'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"></div>
+          <div class="relative flex h-full flex-col justify-end gap-1.5 p-6 text-white">
+            <p data-i18n="proc.step1" class="text-xs font-semibold uppercase tracking-wide text-white/80">Paso 1</p>
+            <h3 data-i18n="proc.card1" class="text-xl font-bold leading-snug text-white">Formación: Curso Ley 1/2025</h3>
+            <!-- Descripción que se revela al pasar el ratón -->
+            <div class="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-in-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
+              <p data-i18n="proc.desc1" class="overflow-hidden text-sm leading-relaxed text-white/90">Entiende qué te obliga la nueva ley y evita sanciones. Curso que te pone al día en jerarquía de prioridades, donaciones y obligaciones de tu negocio.</p>
+            </div>
           </div>
         </a>
 
-        <!-- Tarjeta de noticia 2 -->
-        <a href="#" class="group block overflow-hidden rounded-2xl border border-borde bg-panel transition hover:-translate-y-1 hover:border-gray-400">
+        <!-- Tarjeta de Proceso 2 -->
+        <a href="#" class="group relative block h-80 w-full overflow-hidden rounded-xl border border-borde shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
           <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
-          <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmhnbGV0bzJwNmF5bzZ3MWx5c2lxcmVmeG1qZDJjdndhZWNraWkwaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NNVWeKWyh2p026Or91/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/400x240/EFEFEF/999999?text=IMAGEN+2'" alt="[[EDITAR: alt noticia 2]]" class="aspect-[16/10] w-full object-cover" />
-          <div class="p-5">
-            <p class="text-xs text-gray-500">Paso 2</p>
-            <h3 class="mt-2 font-semibold leading-snug text-black transition group-hover:text-gray-600">Plan de prevención con IA</h3>
+          <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmhnbGV0bzJwNmF5bzZ3MWx5c2lxcmVmeG1qZDJjdndhZWNraWkwaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NNVWeKWyh2p026Or91/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+2'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"></div>
+          <div class="relative flex h-full flex-col justify-end gap-1.5 p-6 text-white">
+            <p data-i18n="proc.step2" class="text-xs font-semibold uppercase tracking-wide text-white/80">Paso 2</p>
+            <h3 data-i18n="proc.card2" class="text-xl font-bold leading-snug text-white">Plan de prevención con IA</h3>
+            <!-- Descripción que se revela al pasar el ratón -->
+            <div class="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-in-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
+              <p data-i18n="proc.desc2" class="overflow-hidden text-sm leading-relaxed text-white/90">ODAS genera tu Plan de Prevención de Desperdicio a medida. La IA analiza tus ventas y predice la demanda por producto, para que sepas qué pasa antes de que pase.</p>
+            </div>
           </div>
         </a>
 
-        <!-- Tarjeta de noticia 3 -->
-        <a href="#" class="group block overflow-hidden rounded-2xl border border-borde bg-panel transition hover:-translate-y-1 hover:border-gray-400">
+        <!-- Tarjeta de Proceso 3 -->
+        <a href="#" class="group relative block h-80 w-full overflow-hidden rounded-xl border border-borde shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
           <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
-          <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmJsdmU5bHFyY3l2cHY3amkxNmo1MW9xeTAyemhiOHJxajh5cHgydyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ch2JlGY6dlb2yp7jU3/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/400x240/EFEFEF/999999?text=IMAGEN+3'" alt="[[EDITAR: alt noticia 3]]" class="aspect-[16/10] w-full object-cover" />
-          <div class="p-5">
-            <p class="text-xs text-gray-500">Paso 3</p>
-            <h3 class="mt-2 font-semibold leading-snug text-black transition group-hover:text-gray-600">ODAS ejecuta el “Plan”</h3>
+          <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmJsdmU5bHFyY3l2cHY3amkxNmo1MW9xeTAyemhiOHJxajh5cHgydyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ch2JlGY6dlb2yp7jU3/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+3'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"></div>
+          <div class="relative flex h-full flex-col justify-end gap-1.5 p-6 text-white">
+            <p data-i18n="proc.step3" class="text-xs font-semibold uppercase tracking-wide text-white/80">Paso 3</p>
+            <h3 data-i18n="proc.card3" class="text-xl font-bold leading-snug text-white">ODAS ejecuta el “Plan”</h3>
+            <!-- Descripción que se revela al pasar el ratón -->
+            <div class="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-in-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
+              <p data-i18n="proc.desc3" class="overflow-hidden text-sm leading-relaxed text-white/90">Cada día ODAS te dice qué hacer: COMPRAR, REDUCIR, NO COMPRAR o VIGILAR. Tú solo sigues las acciones; el sistema trabaja por ti y deja todo documentado.</p>
+            </div>
           </div>
         </a>
 
-        <!-- Tarjeta de noticia 4 -->
-        <a href="#" class="group block overflow-hidden rounded-2xl border border-borde bg-panel transition hover:-translate-y-1 hover:border-gray-400">
+        <!-- Tarjeta de Proceso 4 -->
+        <a href="#" class="group relative block h-80 w-full overflow-hidden rounded-xl border border-borde shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
           <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
-          <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3UzanRqMGptOTcweDF3OWkzZzNkZjBoNXhkeXc2dXVpZnN2cnR6MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/55PkuDHvG7u36/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/400x240/EFEFEF/999999?text=IMAGEN+4'" alt="[[EDITAR: alt noticia 4]]" class="aspect-[16/10] w-full object-cover" />
-          <div class="p-5">
-            <p class="text-xs text-gray-500">Paso 4</p>
-            <h3 class="mt-2 font-semibold leading-snug text-black transition group-hover:text-gray-600">Ahorro y tranquilidad legal</h3>
+          <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3UzanRqMGptOTcweDF3OWkzZzNkZjBoNXhkeXc2dXVpZnN2cnR6MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/55PkuDHvG7u36/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+4'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"></div>
+          <div class="relative flex h-full flex-col justify-end gap-1.5 p-6 text-white">
+            <p data-i18n="proc.step4" class="text-xs font-semibold uppercase tracking-wide text-white/80">Paso 4</p>
+            <h3 data-i18n="proc.card4" class="text-xl font-bold leading-snug text-white">Ahorro y tranquilidad legal</h3>
+            <!-- Descripción que se revela al pasar el ratón -->
+            <div class="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-in-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
+              <p data-i18n="proc.desc4" class="overflow-hidden text-sm leading-relaxed text-white/90">Menos producto a la basura, más margen. Y un registro inmutable (sellado con SHA-256) que demuestra tu cumplimiento ante cualquier inspección. Cumples sin papeleo.</p>
+            </div>
           </div>
         </a>
       </div>
@@ -695,36 +884,54 @@
          ======================================================================== -->
     <section class="mx-auto max-w-7xl px-5 py-24">
       <!-- [[EDITAR: título de la sección]] -->
-      <h2 class="mb-12 text-center text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Elige el plan que se ajuste a tu negocio</h2>
+      <h2 data-i18n="plans.title" class="mb-12 text-center text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Elige el plan que se ajuste a tu negocio</h2>
 
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
 
-        <!-- Tarjeta: Starter PYME -->
-        <div class="flex flex-col rounded-2xl border border-borde bg-panel p-8 transition hover:border-gray-400">
-          <h3 class="text-2xl font-bold text-black">Starter PYME</h3>
-          <p class="mt-2 text-gray-600">Comercios y cadenas pequeñas que necesitan cumplir y empezar a prevenir.</p>
-          <!-- [[EDITAR: lista de puntos (añade o quita <li> según necesites)]] -->
-          <ul class="mt-6 flex-1 space-y-3 text-gray-700">
-            <li class="flex items-start gap-3"><span class="mt-1 text-emerald-600">✓</span> Previsión IA</li>
-            <li class="flex items-start gap-3"><span class="mt-1 text-emerald-600">✓</span> Documentación Ley 1/2025</li>
-            <li class="flex items-start gap-3"><span class="mt-1 text-emerald-600">✓</span> Trazabilidad SHA-256</li>
-          </ul>
-          <!-- [[EDITAR: botón tarjeta uno]] -->
-          <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS%20(Starter%20PYME)" class="mt-8 inline-block rounded-full bg-black px-6 py-3 text-center font-semibold text-white transition hover:bg-gray-800">Solicita una Demo</a>
+        <!-- Tarjeta: Starter PYME (estilo shadcn Card) -->
+        <div class="flex flex-col gap-6 rounded-xl border border-borde bg-white py-6 text-black shadow-sm transition hover:shadow-md">
+          <!-- Cabecera (título + descripción) -->
+          <div class="flex flex-col gap-1.5 px-6">
+            <h3 data-i18n="plans.p1Name" class="text-2xl font-semibold leading-none tracking-tight">Starter PYME</h3>
+            <p data-i18n="plans.p1Desc" class="text-sm text-gray-500">Comercios y cadenas pequeñas de menos de 1.300 m² que necesitan cumplir y empezar a prevenir.</p>
+          </div>
+          <!-- Contenido (lista de puntos) -->
+          <div class="flex-1 px-6">
+            <!-- [[EDITAR: lista de puntos (añade o quita <li> según necesites)]] -->
+            <ul class="space-y-3 text-sm text-gray-700">
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p1f1">Previsión IA</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p1f2">Documentación Ley 1/2025</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p1f3">Trazabilidad SHA-256</span></li>
+            </ul>
+          </div>
+          <!-- Pie (botón) -->
+          <div class="px-6">
+            <!-- [[EDITAR: botón tarjeta uno]] -->
+            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS%20(Starter%20PYME)" data-i18n="cta.demo" class="inline-flex w-full items-center justify-center rounded-md bg-black px-4 py-2.5 text-sm font-semibold text-white shadow transition hover:bg-gray-800">Solicita una Demo</a>
+          </div>
         </div>
 
-        <!-- Tarjeta: Professional -->
-        <div class="flex flex-col rounded-2xl border border-borde bg-panel p-8 transition hover:border-gray-400">
-          <h3 class="text-2xl font-bold text-black">Profesional</h3>
-          <p class="mt-2 text-gray-600">Cadenas medianas multi-tienda que quieren optimización, cumplir la ley y vender en el marketplace.</p>
-          <!-- [[EDITAR: lista de puntos (añade o quita <li> según necesites)]] -->
-          <ul class="mt-6 flex-1 space-y-3 text-gray-700">
-            <li class="flex items-start gap-3"><span class="mt-1 text-sky-600">✓</span> Todo lo de Starter</li>
-            <li class="flex items-start gap-3"><span class="mt-1 text-sky-600">✓</span> Marketplace B2B + soporte</li>
-            <li class="flex items-start gap-3"><span class="mt-1 text-sky-600">✓</span> Previsión avanzada multi-tienda</li>
-          </ul>
-          <!-- [[EDITAR: botón tarjeta dos]] -->
-          <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS%20(Professional)" class="mt-8 inline-block rounded-full border border-borde px-6 py-3 text-center font-semibold text-black transition hover:bg-black/5">Solicita una Demo</a>
+        <!-- Tarjeta: Professional (estilo shadcn Card) -->
+        <div class="flex flex-col gap-6 rounded-xl border border-borde bg-white py-6 text-black shadow-sm transition hover:shadow-md">
+          <!-- Cabecera (título + descripción) -->
+          <div class="flex flex-col gap-1.5 px-6">
+            <h3 data-i18n="plans.p2Name" class="text-2xl font-semibold leading-none tracking-tight">Profesional</h3>
+            <p data-i18n="plans.p2Desc" class="text-sm text-gray-500">Cadenas medianas multi-tienda que quieren optimización, cumplir la ley y vender en el marketplace.</p>
+          </div>
+          <!-- Contenido (lista de puntos) -->
+          <div class="flex-1 px-6">
+            <!-- [[EDITAR: lista de puntos (añade o quita <li> según necesites)]] -->
+            <ul class="space-y-3 text-sm text-gray-700">
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-sky-600">✓</span> <span data-i18n="plans.p2f1">Todo lo de Starter</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-sky-600">✓</span> <span data-i18n="plans.p2f2">Marketplace B2B + soporte</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-sky-600">✓</span> <span data-i18n="plans.p2f3">Previsión avanzada multi-tienda</span></li>
+            </ul>
+          </div>
+          <!-- Pie (botón) -->
+          <div class="px-6">
+            <!-- [[EDITAR: botón tarjeta dos]] -->
+            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS%20(Professional)" data-i18n="cta.demo" class="inline-flex w-full items-center justify-center rounded-md border border-borde bg-white px-4 py-2.5 text-sm font-semibold text-black shadow-sm transition hover:bg-black/5">Solicita una Demo</a>
+          </div>
         </div>
       </div>
     </section>
@@ -740,25 +947,364 @@
       <div id="footerBoxes" aria-hidden="true"></div>
       <div class="pointer-events-none relative z-10 mx-auto max-w-7xl px-5 py-16">
 
-        <!-- Línea superior -->
-        <div class="mb-12 flex flex-col gap-2 text-sm text-gray-500 sm:flex-row sm:items-center sm:justify-between">
-          <!-- [[EDITAR: empresa madre y copyright]] -->
-          <p>Una división de <span class="text-black">Negentropy Labs</span></p>
-          <p>© 2026 ODAS Corp.</p>
+        <!-- Bloque ODS (Objetivos de Desarrollo Sostenible de la ONU) -->
+        <div class="mb-10 flex flex-col items-center gap-6 text-center">
+          <!-- [[EDITAR: texto de compromiso con los ODS]] -->
+          <p data-i18n-html="footer.ods" class="max-w-2xl text-sm leading-relaxed text-gray-500">
+            Nuestra tecnología contribuye a la reducción del desperdicio alimentario,
+            alineada con los <span class="text-black">Objetivos de Desarrollo Sostenible 2, 12 y 13</span> de la ONU.
+          </p>
+          <!-- [[EDITAR IMÁGENES: iconos oficiales de los ODS — ods-2.png, ods-12.png, ods-13.jpg]] -->
+          <div class="flex items-center justify-center gap-3 sm:gap-4">
+            <img src="ods-2.png"  data-i18n-alt="footer.ods2Alt"  alt="ODS 2: Hambre cero" class="h-12 w-12 rounded-md sm:h-14 sm:w-14" />
+            <img src="ods-12.png" data-i18n-alt="footer.ods12Alt" alt="ODS 12: Producción y consumo responsables" class="h-12 w-12 rounded-md sm:h-14 sm:w-14" />
+            <img src="ods-13.jpg" data-i18n-alt="footer.ods13Alt" alt="ODS 13: Acción por el clima" class="h-12 w-12 rounded-md sm:h-14 sm:w-14" />
+          </div>
         </div>
 
+        <!-- Separador sutil -->
+        <div class="mb-10 h-px w-full bg-borde"></div>
 
-        <!-- Línea final -->
-        <div class="mt-12 text-center">
-          <!-- [[EDITAR: logo del pie]] -->
-          <img src="logo-full.png" alt="Negentropy Labs" class="mx-auto h-8 w-auto" />
-          <!-- [[EDITAR: redes sociales — cambia el enlace href si hace falta]] -->
-          <a href="https://www.linkedin.com/company/negentropylabs/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Negentropy Labs" class="pointer-events-auto mt-5 inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition hover:bg-black/5 hover:text-[#0A66C2]">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
-          </a>
+        <!-- Todo en una sola línea horizontal: logo + textos -->
+        <div class="flex flex-col items-center gap-4 text-sm text-gray-500 sm:flex-row sm:justify-between">
+          <!-- [[EDITAR: logo del pie — marca ODAS + nombre]] -->
+          <div class="flex items-center gap-2">
+            <img src="odas-logo.png" alt="ODAS" class="h-6 w-auto" />
+            <span class="text-lg font-semibold tracking-tight text-black">ODAS</span>
+          </div>
+          <!-- [[EDITAR: empresa madre y copyright]] -->
+          <p data-i18n-html="footer.division">Una división de <span class="text-black">Negentropy Labs</span></p>
+          <p>© 2026 ODAS</p>
         </div>
       </div>
     </footer>
+
+
+    <!-- ========================================================================
+         IDIOMAS (i18n) · Español / Català / English
+         ------------------------------------------------------------------------
+         · Para editar un texto, cámbialo en los 3 idiomas (es / ca / en).
+         · Conserva las etiquetas HTML (<span ...>, <strong ...>) tal cual.
+         ======================================================================== -->
+    <script>
+      window.I18N = {
+        es: {
+          "meta.title": `ODAS · Software para el comercio alimentario`,
+          "meta.desc": `ODAS predice la demanda, reduce el desperdicio alimentario y documenta la Ley 1/2025 sin esfuerzo.`,
+          "nav.contact": `Contacto`,
+          "cta.demo": `Solicita una Demo`,
+          "hero.title": `Usamos la investigación como brújula y la tecnología como el motor.`,
+          "hero.sub": `Nuestra herramienta <span class="odas-acron font-semibold"><span class="texto-degradado">ODAS</span></span> es un software para el comercio alimentario español que predice qué vas a vender, reduce el desperdicio y deja la Ley 1/2025 documentada sin esfuerzo.`,
+          "card1.label": `Análisis de predicción de demanda`,
+          "card1.saved": `guardado`,
+          "card1.recLabel": `Recomendación`,
+          "card1.title": `Previsión de demanda con IA`,
+          "card2.title": `Cumplimiento Ley 1/2025`,
+          "card3.product": `Croissants de mantequilla (pack 6)`,
+          "card3.lot": `Lote L26061402 · Panadería y Pastelería`,
+          "card3.temp": `Temperatura ambiente`,
+          "card3.stock": `18 uds disponibles`,
+          "card3.priceUnit": `1,99 €/uds`,
+          "card3.today": `Hoy`,
+          "card3.edit": `Editar`,
+          "card3.title": `Marketplace B2B de excedentes`,
+          "card4.chainLabel": `Cadena de trazabilidad · SHA-256`,
+          "card4.step1": `Recepción`,
+          "card4.step2": `Almacenaje`,
+          "card4.step3": `Venta / Donación`,
+          "card4.step4": `Registro Ley 1/2025 · sellado`,
+          "card4.title": `Trazabilidad SHA-256`,
+          "card1.pop": `Modelos de IA por SKU que anticipan las ventas y ajustan los pedidos para minimizar la merma.`,
+          "card2.pop": `<ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Plan de prevención</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Jerarquía de excedentes</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Formación bonificada</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Documentación auditable</li></ul>`,
+          "card3.pop": `Canal de redistribución de stock entre operadores.`,
+          "card4.pop": `Prueba verificable ante una inspección.`,
+          "dev.kicker": `Para el retail y la distribución`,
+          "dev.title": `Menos mermas. <span class="texto-degradado">Más margen.</span>`,
+          "dev.para": `ODAS te ayuda a predecir la demanda de tus productos y distribuir tus excedentes para que puedas cumplir la Ley 1/2025 sin fricción operativa y recuperar margen antes de que llegue a la basura.`,
+          "dev.stat1": `Predicciones por día`,
+          "dev.stat2": `Menos de desperdicio`,
+          "dev.stat3": `Canales de distribución`,
+          "chart.title": `Predicción de demanda — próximos 7 días`,
+          "chart.outOfStock": `Sin stock (3.5d)`,
+          "chart.legPrevision": `Previsión`,
+          "chart.legStock": `Stock restante`,
+          "chart.legInterval": `Intervalo`,
+          "chart.mTotal": `Total previsto`,
+          "chart.mAvg": `Media diaria`,
+          "chart.mStock": `Stock actual`,
+          "chart.mError": `Error modelo`,
+          "banda.label1": `en ahorro en multas.`,
+          "banda.label2": `Creación del Plan de prevención gratis.`,
+          "banda.label3": `en la ejecución del plan.`,
+          "proc.title": `Proceso`,
+          "proc.step1": `Paso 1`,
+          "proc.step2": `Paso 2`,
+          "proc.step3": `Paso 3`,
+          "proc.step4": `Paso 4`,
+          "proc.card1": `Formación: Curso Ley 1/2025`,
+          "proc.card2": `Plan de prevención con IA`,
+          "proc.card3": `ODAS ejecuta el “Plan”`,
+          "proc.card4": `Ahorro y tranquilidad legal`,
+          "proc.desc1": `Entiende qué te obliga la nueva ley y evita sanciones. Curso que te pone al día en jerarquía de prioridades, donaciones y obligaciones de tu negocio.`,
+          "proc.desc2": `ODAS genera tu Plan de Prevención de Desperdicio a medida. La IA analiza tus ventas y predice la demanda por producto, para que sepas qué pasa antes de que pase.`,
+          "proc.desc3": `Cada día ODAS te dice qué hacer: COMPRAR, REDUCIR, NO COMPRAR o VIGILAR. Tú solo sigues las acciones; el sistema trabaja por ti y deja todo documentado.`,
+          "proc.desc4": `Menos producto a la basura, más margen. Y un registro inmutable (sellado con SHA-256) que demuestra tu cumplimiento ante cualquier inspección. Cumples sin papeleo.`,
+          "plans.title": `Elige el plan que se ajuste a tu negocio`,
+          "plans.p1Name": `Starter PYME`,
+          "plans.p1Desc": `Comercios y cadenas pequeñas de menos de 1.300 m² que necesitan cumplir y empezar a prevenir.`,
+          "plans.p1f1": `Previsión IA`,
+          "plans.p1f2": `Documentación Ley 1/2025`,
+          "plans.p1f3": `Trazabilidad SHA-256`,
+          "plans.p2Name": `Profesional`,
+          "plans.p2Desc": `Cadenas medianas multi-tienda que quieren optimización, cumplir la ley y vender en el marketplace.`,
+          "plans.p2f1": `Todo lo de Starter`,
+          "plans.p2f2": `Marketplace B2B + soporte`,
+          "plans.p2f3": `Previsión avanzada multi-tienda`,
+          "footer.ods": `Nuestra tecnología contribuye a la reducción del desperdicio alimentario, alineada con los <span class="text-black">Objetivos de Desarrollo Sostenible 2, 12 y 13</span> de la ONU.`,
+          "footer.division": `Una división de <span class="text-black">Negentropy Labs</span>`,
+          "footer.ods2Alt": `ODS 2: Hambre cero`,
+          "footer.ods12Alt": `ODS 12: Producción y consumo responsables`,
+          "footer.ods13Alt": `ODS 13: Acción por el clima`,
+          "sc1.m1": `El stock cubre 3 días, con riesgo de rotura el <strong class="font-semibold">sábado</strong>.`,
+          "sc1.m2": `Sin acción, se perderán ventas el <strong class="font-semibold">sábado</strong> por <strong class="font-semibold">falta de stock</strong>.`,
+          "sc1.rec": `Pide <strong class="font-semibold">25 unidades</strong> antes del <strong class="font-semibold">viernes</strong> para evitar rotura.`,
+          "sc2.m1": `Tienes <strong class="font-semibold">40 yogures</strong> que caducan en <strong class="font-semibold">2 días</strong>.`,
+          "sc2.m2": `Al ritmo actual, <strong class="font-semibold">18 uds</strong> acabarían en merma.`,
+          "sc2.rec": `Publícalos en el <strong class="font-semibold">Mercado a −40%</strong> o <strong class="font-semibold">dónalos</strong> hoy.`,
+          "sc3.m1": `Sobrestock: <strong class="font-semibold">12 días</strong> de tomates en almacén.`,
+          "sc3.m2": `Hay riesgo de <strong class="font-semibold">merma</strong> antes de venderlo todo.`,
+          "sc3.rec": `Aplica <strong class="font-semibold">−30%</strong> los <strong class="font-semibold">2 próximos días</strong> para acelerar la venta.`,
+          "sc4.m1": `Quedan <strong class="font-semibold">15 barras</strong> de pan del día.`,
+          "sc4.m2": `No se venderán antes del <strong class="font-semibold">cierre</strong>.`,
+          "sc4.rec": `<strong class="font-semibold">Transfórmalas</strong> (rallado/picatostes) o <strong class="font-semibold">dónalas</strong> antes de las 21:00.`
+        },
+        ca: {
+          "meta.title": `ODAS · Programari per al comerç alimentari`,
+          "meta.desc": `ODAS preveu la demanda, redueix el malbaratament alimentari i documenta la Llei 1/2025 sense esforç.`,
+          "nav.contact": `Contacte`,
+          "cta.demo": `Demana una Demo`,
+          "hero.title": `Fem servir la recerca com a brúixola i la tecnologia com a motor.`,
+          "hero.sub": `La nostra eina <span class="odas-acron font-semibold"><span class="texto-degradado">ODAS</span></span> és un programari per al comerç alimentari espanyol que preveu què vendràs, redueix el malbaratament i deixa la Llei 1/2025 documentada sense esforç.`,
+          "card1.label": `Anàlisi de predicció de demanda`,
+          "card1.saved": `desat`,
+          "card1.recLabel": `Recomanació`,
+          "card1.title": `Previsió de demanda amb IA`,
+          "card2.title": `Compliment de la Llei 1/2025`,
+          "card3.product": `Croissants de mantega (paquet de 6)`,
+          "card3.lot": `Lot L26061402 · Forn i Pastisseria`,
+          "card3.temp": `Temperatura ambient`,
+          "card3.stock": `18 u. disponibles`,
+          "card3.priceUnit": `1,99 €/u`,
+          "card3.today": `Avui`,
+          "card3.edit": `Edita`,
+          "card3.title": `Marketplace B2B d'excedents`,
+          "card4.chainLabel": `Cadena de traçabilitat · SHA-256`,
+          "card4.step1": `Recepció`,
+          "card4.step2": `Emmagatzematge`,
+          "card4.step3": `Venda / Donació`,
+          "card4.step4": `Registre Llei 1/2025 · segellat`,
+          "card4.title": `Traçabilitat SHA-256`,
+          "card1.pop": `Models d'IA per SKU que anticipen les vendes i ajusten les comandes per minimitzar les minves.`,
+          "card2.pop": `<ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Pla de prevenció</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Jerarquia d'excedents</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Formació bonificada</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Documentació auditable</li></ul>`,
+          "card3.pop": `Canal de redistribució d'estoc entre operadors.`,
+          "card4.pop": `Prova verificable davant d'una inspecció.`,
+          "dev.kicker": `Per al retail i la distribució`,
+          "dev.title": `Menys minves. <span class="texto-degradado">Més marge.</span>`,
+          "dev.para": `ODAS t'ajuda a preveure la demanda dels teus productes i a distribuir els teus excedents perquè puguis complir la Llei 1/2025 sense fricció operativa i recuperar marge abans que acabi a les escombraries.`,
+          "dev.stat1": `Prediccions al dia`,
+          "dev.stat2": `Menys malbaratament`,
+          "dev.stat3": `Canals de distribució`,
+          "chart.title": `Predicció de demanda — pròxims 7 dies`,
+          "chart.outOfStock": `Sense estoc (3.5d)`,
+          "chart.legPrevision": `Previsió`,
+          "chart.legStock": `Estoc restant`,
+          "chart.legInterval": `Interval`,
+          "chart.mTotal": `Total previst`,
+          "chart.mAvg": `Mitjana diària`,
+          "chart.mStock": `Estoc actual`,
+          "chart.mError": `Error del model`,
+          "banda.label1": `d'estalvi en multes.`,
+          "banda.label2": `Creació del Pla de prevenció gratis.`,
+          "banda.label3": `en l'execució del pla.`,
+          "proc.title": `Procés`,
+          "proc.step1": `Pas 1`,
+          "proc.step2": `Pas 2`,
+          "proc.step3": `Pas 3`,
+          "proc.step4": `Pas 4`,
+          "proc.card1": `Formació: Curs Llei 1/2025`,
+          "proc.card2": `Pla de prevenció amb IA`,
+          "proc.card3": `ODAS executa el «Pla»`,
+          "proc.card4": `Estalvi i tranquil·litat legal`,
+          "proc.desc1": `Entén què t'obliga la nova llei i evita sancions. Un curs que et posa al dia en jerarquia de prioritats, donacions i obligacions del teu negoci.`,
+          "proc.desc2": `ODAS genera el teu Pla de Prevenció de Malbaratament a mida. La IA analitza les teves vendes i preveu la demanda per producte, perquè sàpigues què passarà abans que passi.`,
+          "proc.desc3": `Cada dia ODAS et diu què fer: COMPRAR, REDUIR, NO COMPRAR o VIGILAR. Tu només segueixes les accions; el sistema treballa per tu i ho deixa tot documentat.`,
+          "proc.desc4": `Menys producte a les escombraries, més marge. I un registre immutable (segellat amb SHA-256) que demostra el teu compliment davant de qualsevol inspecció. Compleixes sense paperassa.`,
+          "plans.title": `Tria el pla que s'ajusti al teu negoci`,
+          "plans.p1Name": `Starter PIME`,
+          "plans.p1Desc": `Comerços i cadenes petites de menys de 1.300 m² que necessiten complir i començar a prevenir.`,
+          "plans.p1f1": `Previsió amb IA`,
+          "plans.p1f2": `Documentació Llei 1/2025`,
+          "plans.p1f3": `Traçabilitat SHA-256`,
+          "plans.p2Name": `Professional`,
+          "plans.p2Desc": `Cadenes mitjanes multibotiga que volen optimització, complir la llei i vendre al marketplace.`,
+          "plans.p2f1": `Tot el de Starter`,
+          "plans.p2f2": `Marketplace B2B + suport`,
+          "plans.p2f3": `Previsió avançada multibotiga`,
+          "footer.ods": `La nostra tecnologia contribueix a reduir el malbaratament alimentari, alineada amb els <span class="text-black">Objectius de Desenvolupament Sostenible 2, 12 i 13</span> de l'ONU.`,
+          "footer.division": `Una divisió de <span class="text-black">Negentropy Labs</span>`,
+          "footer.ods2Alt": `ODS 2: Fam zero`,
+          "footer.ods12Alt": `ODS 12: Producció i consum responsables`,
+          "footer.ods13Alt": `ODS 13: Acció climàtica`,
+          "sc1.m1": `L'estoc cobreix 3 dies, amb risc de trencament el <strong class="font-semibold">dissabte</strong>.`,
+          "sc1.m2": `Sense actuar, es perdran vendes el <strong class="font-semibold">dissabte</strong> per <strong class="font-semibold">manca d'estoc</strong>.`,
+          "sc1.rec": `Demana <strong class="font-semibold">25 unitats</strong> abans del <strong class="font-semibold">divendres</strong> per evitar el trencament.`,
+          "sc2.m1": `Tens <strong class="font-semibold">40 iogurts</strong> que caduquen d'aquí a <strong class="font-semibold">2 dies</strong>.`,
+          "sc2.m2": `Al ritme actual, <strong class="font-semibold">18 u.</strong> acabarien en minves.`,
+          "sc2.rec": `Publica'ls al <strong class="font-semibold">Mercat a −40%</strong> o <strong class="font-semibold">dóna'ls</strong> avui.`,
+          "sc3.m1": `Sobreestoc: <strong class="font-semibold">12 dies</strong> de tomàquets al magatzem.`,
+          "sc3.m2": `Hi ha risc de <strong class="font-semibold">minves</strong> abans de vendre-ho tot.`,
+          "sc3.rec": `Aplica <strong class="font-semibold">−30%</strong> els <strong class="font-semibold">2 pròxims dies</strong> per accelerar la venda.`,
+          "sc4.m1": `Queden <strong class="font-semibold">15 barres</strong> de pa del dia.`,
+          "sc4.m2": `No es vendran abans del <strong class="font-semibold">tancament</strong>.`,
+          "sc4.rec": `<strong class="font-semibold">Transforma-les</strong> (ratllat/crostons) o <strong class="font-semibold">dóna-les</strong> abans de les 21:00.`
+        },
+        en: {
+          "meta.title": `ODAS · Software for the food trade`,
+          "meta.desc": `ODAS forecasts demand, cuts food waste and documents Spain's Law 1/2025 effortlessly.`,
+          "nav.contact": `Contact`,
+          "cta.demo": `Request a Demo`,
+          "hero.title": `We use research as our compass and technology as our engine.`,
+          "hero.sub": `Our tool <span class="odas-acron font-semibold"><span class="texto-degradado">ODAS</span></span> is software for the Spanish food trade that forecasts what you'll sell, cuts waste and keeps Law 1/2025 documented effortlessly.`,
+          "card1.label": `Demand forecast analysis`,
+          "card1.saved": `saved`,
+          "card1.recLabel": `Recommendation`,
+          "card1.title": `AI demand forecasting`,
+          "card2.title": `Law 1/2025 compliance`,
+          "card3.product": `Butter croissants (pack of 6)`,
+          "card3.lot": `Batch L26061402 · Bakery & Pastry`,
+          "card3.temp": `Room temperature`,
+          "card3.stock": `18 units available`,
+          "card3.priceUnit": `€1.99/unit`,
+          "card3.today": `Today`,
+          "card3.edit": `Edit`,
+          "card3.title": `B2B surplus marketplace`,
+          "card4.chainLabel": `Traceability chain · SHA-256`,
+          "card4.step1": `Receiving`,
+          "card4.step2": `Storage`,
+          "card4.step3": `Sale / Donation`,
+          "card4.step4": `Law 1/2025 record · sealed`,
+          "card4.title": `SHA-256 traceability`,
+          "card1.pop": `Per-SKU AI models that anticipate sales and adjust orders to minimise waste.`,
+          "card2.pop": `<ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Prevention plan</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Surplus hierarchy</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Subsidised training</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Auditable documentation</li></ul>`,
+          "card3.pop": `A channel to redistribute stock between operators.`,
+          "card4.pop": `Verifiable proof for inspections.`,
+          "dev.kicker": `For retail and distribution`,
+          "dev.title": `Less waste. <span class="texto-degradado">More margin.</span>`,
+          "dev.para": `ODAS helps you forecast demand for your products and redistribute your surplus so you can comply with Law 1/2025 with no operational friction and recover margin before it ends up in the bin.`,
+          "dev.stat1": `Predictions per day`,
+          "dev.stat2": `Less waste`,
+          "dev.stat3": `Distribution channels`,
+          "chart.title": `Demand forecast — next 7 days`,
+          "chart.outOfStock": `Out of stock (3.5d)`,
+          "chart.legPrevision": `Forecast`,
+          "chart.legStock": `Remaining stock`,
+          "chart.legInterval": `Interval`,
+          "chart.mTotal": `Total forecast`,
+          "chart.mAvg": `Daily average`,
+          "chart.mStock": `Current stock`,
+          "chart.mError": `Model error`,
+          "banda.label1": `saved in fines.`,
+          "banda.label2": `to create your prevention Plan, free.`,
+          "banda.label3": `in plan execution.`,
+          "proc.title": `Process`,
+          "proc.step1": `Step 1`,
+          "proc.step2": `Step 2`,
+          "proc.step3": `Step 3`,
+          "proc.step4": `Step 4`,
+          "proc.card1": `Training: Law 1/2025 course`,
+          "proc.card2": `AI prevention plan`,
+          "proc.card3": `ODAS runs the “Plan”`,
+          "proc.card4": `Savings and legal peace of mind`,
+          "proc.desc1": `Understand what the new law requires and avoid penalties. A course that brings you up to speed on the priority hierarchy, donations and your business's obligations.`,
+          "proc.desc2": `ODAS builds your tailored Food Waste Prevention Plan. The AI analyses your sales and forecasts demand per product, so you know what's coming before it happens.`,
+          "proc.desc3": `Every day ODAS tells you what to do: BUY, REDUCE, DON'T BUY or MONITOR. You just follow the actions; the system works for you and keeps everything documented.`,
+          "proc.desc4": `Less product in the bin, more margin. Plus an immutable record (sealed with SHA-256) that proves your compliance to any inspection. Compliance with no paperwork.`,
+          "plans.title": `Choose the plan that fits your business`,
+          "plans.p1Name": `Starter SME`,
+          "plans.p1Desc": `Shops and small chains under 1,300 m² that need to comply and start preventing.`,
+          "plans.p1f1": `AI forecasting`,
+          "plans.p1f2": `Law 1/2025 documentation`,
+          "plans.p1f3": `SHA-256 traceability`,
+          "plans.p2Name": `Professional`,
+          "plans.p2Desc": `Mid-sized multi-store chains that want optimisation, legal compliance and to sell on the marketplace.`,
+          "plans.p2f1": `Everything in Starter`,
+          "plans.p2f2": `B2B marketplace + support`,
+          "plans.p2f3": `Advanced multi-store forecasting`,
+          "footer.ods": `Our technology helps reduce food waste, aligned with the United Nations <span class="text-black">Sustainable Development Goals 2, 12 and 13</span>.`,
+          "footer.division": `A division of <span class="text-black">Negentropy Labs</span>`,
+          "footer.ods2Alt": `SDG 2: Zero hunger`,
+          "footer.ods12Alt": `SDG 12: Responsible consumption and production`,
+          "footer.ods13Alt": `SDG 13: Climate action`,
+          "sc1.m1": `Stock covers 3 days, with a risk of running out on <strong class="font-semibold">Saturday</strong>.`,
+          "sc1.m2": `Without action, you'll lose sales on <strong class="font-semibold">Saturday</strong> due to <strong class="font-semibold">stockouts</strong>.`,
+          "sc1.rec": `Order <strong class="font-semibold">25 units</strong> before <strong class="font-semibold">Friday</strong> to avoid running out.`,
+          "sc2.m1": `You have <strong class="font-semibold">40 yoghurts</strong> expiring in <strong class="font-semibold">2 days</strong>.`,
+          "sc2.m2": `At the current pace, <strong class="font-semibold">18 units</strong> would end up as waste.`,
+          "sc2.rec": `List them on the <strong class="font-semibold">Marketplace at −40%</strong> or <strong class="font-semibold">donate them</strong> today.`,
+          "sc3.m1": `Overstock: <strong class="font-semibold">12 days</strong> of tomatoes in the warehouse.`,
+          "sc3.m2": `There's a risk of <strong class="font-semibold">waste</strong> before selling it all.`,
+          "sc3.rec": `Apply <strong class="font-semibold">−30%</strong> for the <strong class="font-semibold">next 2 days</strong> to speed up sales.`,
+          "sc4.m1": `There are <strong class="font-semibold">15 loaves</strong> of today's bread left.`,
+          "sc4.m2": `They won't sell before <strong class="font-semibold">closing</strong>.`,
+          "sc4.rec": `<strong class="font-semibold">Repurpose them</strong> (breadcrumbs/croutons) or <strong class="font-semibold">donate them</strong> before 9 p.m.`
+        }
+      };
+
+      (function () {
+        var STORE = 'odas_lang';
+        var SUPPORTED = ['es', 'ca', 'en'];
+        function detect() {
+          try { var s = localStorage.getItem(STORE); if (s && SUPPORTED.indexOf(s) >= 0) return s; } catch (e) {}
+          var n = (navigator.language || 'es').slice(0, 2).toLowerCase();
+          return SUPPORTED.indexOf(n) >= 0 ? n : 'es';
+        }
+        window.LANG = detect();
+        window.t = function (key) {
+          var d = window.I18N[window.LANG] || window.I18N.es;
+          if (d && d[key] != null) return d[key];
+          return window.I18N.es[key] != null ? window.I18N.es[key] : '';
+        };
+        window.applyLang = function (lang) {
+          if (SUPPORTED.indexOf(lang) < 0) lang = 'es';
+          window.LANG = lang;
+          try { localStorage.setItem(STORE, lang); } catch (e) {}
+          document.documentElement.setAttribute('lang', lang);
+          document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var v = window.t(el.getAttribute('data-i18n')); if (v) el.textContent = v;
+          });
+          document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+            var v = window.t(el.getAttribute('data-i18n-html')); if (v) el.innerHTML = v;
+          });
+          document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+            var v = window.t(el.getAttribute('data-i18n-alt')); if (v) el.setAttribute('alt', v);
+          });
+          var mt = window.t('meta.title'); if (mt) document.title = mt;
+          var md = window.t('meta.desc'); var mde = document.querySelector('meta[name="description"]'); if (md && mde) mde.setAttribute('content', md);
+          document.querySelectorAll('.lang-btn').forEach(function (b) {
+            var on = b.getAttribute('data-lang') === lang;
+            b.classList.toggle('text-black', on);
+            b.classList.toggle('font-semibold', on);
+            b.classList.toggle('text-gray-400', !on);
+          });
+          document.dispatchEvent(new CustomEvent('odas:langchange'));
+        };
+        document.addEventListener('click', function (e) {
+          var b = e.target.closest && e.target.closest('.lang-btn');
+          if (b) { e.preventDefault(); window.applyLang(b.getAttribute('data-lang')); }
+        });
+        window.applyLang(window.LANG);
+      })();
+    </script>
 
 
     <!-- ========================================================================
@@ -889,35 +1435,30 @@
         var card = document.getElementById('prediCard');
         var body = document.getElementById('prediBody');
         if (!card || !body) return;
-        // [[EDITAR]] Edita/añade consejos aquí. <strong class="font-semibold">resalta</strong> en negrita.
-        var escenarios = [
-          {
-            m1: 'El stock cubre 3 días, con riesgo de rotura el <strong class="font-semibold">sábado</strong>.',
-            m2: 'Sin acción, se perderán ventas el <strong class="font-semibold">sábado</strong> por <strong class="font-semibold">falta de stock</strong>.',
-            rec: 'Pide <strong class="font-semibold">25 unidades</strong> antes del <strong class="font-semibold">viernes</strong> para evitar rotura.'
-          },
-          {
-            m1: 'Tienes <strong class="font-semibold">40 yogures</strong> que caducan en <strong class="font-semibold">2 días</strong>.',
-            m2: 'Al ritmo actual, <strong class="font-semibold">18 uds</strong> acabarían en merma.',
-            rec: 'Publícalos en el <strong class="font-semibold">Mercado a −40%</strong> o <strong class="font-semibold">dónalos</strong> hoy.'
-          },
-          {
-            m1: 'Sobrestock: <strong class="font-semibold">12 días</strong> de tomates en almacén.',
-            m2: 'Hay riesgo de <strong class="font-semibold">merma</strong> antes de venderlo todo.',
-            rec: 'Aplica <strong class="font-semibold">−30%</strong> los <strong class="font-semibold">2 próximos días</strong> para acelerar la venta.'
-          },
-          {
-            m1: 'Quedan <strong class="font-semibold">15 barras</strong> de pan del día.',
-            m2: 'No se venderán antes del <strong class="font-semibold">cierre</strong>.',
-            rec: '<strong class="font-semibold">Transfórmalas</strong> (rallado/picatostes) o <strong class="font-semibold">dónalas</strong> antes de las 21:00.'
-          }
-        ];
+        // Los consejos salen de las traducciones (claves sc1..sc4). Para editarlos, ve al bloque I18N de arriba.
+        function tt(k) { return (typeof window.t === 'function') ? window.t(k) : ''; }
+        function construirEscenarios() {
+          return [
+            { m1: tt('sc1.m1'), m2: tt('sc1.m2'), rec: tt('sc1.rec') },
+            { m1: tt('sc2.m1'), m2: tt('sc2.m2'), rec: tt('sc2.rec') },
+            { m1: tt('sc3.m1'), m2: tt('sc3.m2'), rec: tt('sc3.rec') },
+            { m1: tt('sc4.m1'), m2: tt('sc4.m2'), rec: tt('sc4.rec') }
+          ];
+        }
+        var escenarios = construirEscenarios();
         var i = 0, timer = null;
         function pintar(idx) {
           document.getElementById('predMsg1').innerHTML = escenarios[idx].m1;
           document.getElementById('predMsg2').innerHTML = escenarios[idx].m2;
           document.getElementById('predRec').innerHTML = escenarios[idx].rec;
         }
+        if (typeof window.t === 'function') pintar(i); // pinta ya en el idioma actual
+        // al cambiar de idioma: reconstruye los consejos y repinta
+        document.addEventListener('odas:langchange', function () {
+          escenarios = construirEscenarios();
+          pintar(i);
+          cascada();
+        });
         function cascada() {
           body.classList.remove('cascada');
           void body.offsetWidth; // fuerza el reinicio de la animación
@@ -970,6 +1511,27 @@
           });
         }, { threshold: 0.3 });
         io.observe(band);
+      })();
+
+      // --- Mega-menú Productos: cambia la tarjeta de la derecha al pasar el ratón sobre cada producto ---
+      (function () {
+        var menu = document.getElementById('prodMenu');
+        if (!menu) return;
+        var items = menu.querySelectorAll('.prod-item');
+        var previews = menu.querySelectorAll('.prod-preview');
+        function activar(idx) {
+          previews.forEach(function (p) {
+            var on = p.getAttribute('data-prev') === idx;
+            p.classList.toggle('hidden', !on);
+            if (on) { p.classList.remove('anim'); void p.offsetWidth; p.classList.add('anim'); }
+          });
+          items.forEach(function (it) {
+            it.classList.toggle('prod-activo', it.getAttribute('data-prev') === idx);
+          });
+        }
+        items.forEach(function (it) {
+          it.addEventListener('mouseenter', function () { activar(it.getAttribute('data-prev')); });
+        });
       })();
 
       // --- Fondo "boxes" del footer: rejilla que se ilumina al pasar el ratón ---
