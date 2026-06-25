@@ -328,6 +328,10 @@
       .prod-preview.anim { animation: prodPreviewIn 0.35s ease; }
       @keyframes prodPreviewIn { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
 
+      /* Mercado: al cambiar de producto, la ficha entra con un fundido suave */
+      @keyframes mercadoIn { from { opacity: 0; transform: translateY(6px) scale(0.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+      #mercadoPreview.mercado-anim { animation: mercadoIn 0.5s ease; }
+
       /* Fondo interactivo "boxes" del footer (se ilumina al pasar el ratón) */
       #footerBoxes { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
       #footerBoxes .fb-grid {
@@ -603,9 +607,10 @@
           <div class="card-pop" role="tooltip" data-i18n-html="card2.pop"><ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Plan de prevención</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Jerarquía de excedentes</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Formación bonificada</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Documentación auditable</li></ul></div>
         </div>
 
-        <!-- TARJETA: Imagine (imagen de ejemplo) -->
-        <div class="group relative flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
-          <div class="mb-4 flex-1 overflow-hidden rounded-xl border border-gray-100 bg-white text-[10px]">
+        <!-- TARJETA: Mercado — ROTA entre varios productos (ver script "Mercado" al final).
+             Para añadir/editar productos o sus imágenes: array PRODUCTOS_MERCADO en ese script. -->
+        <div id="mercadoCard" class="group relative flex flex-col rounded-2xl border border-borde bg-panel p-5 transition hover:-translate-y-1 hover:border-gray-400">
+          <div id="mercadoPreview" class="mb-4 flex-1 overflow-hidden rounded-xl border border-gray-100 bg-white text-[10px]">
             <!-- [[EDITAR: contenido de la tarjeta — producto del Mercado]] -->
             <!-- Foto del producto -->
             <div class="relative">
@@ -1594,6 +1599,97 @@
           function () { band.classList.add('animar'); cifras.forEach(contar); },
           function () { band.classList.remove('animar'); reset(); }
         );
+      })();
+
+      // --- Mercado: la tarjeta rota entre varios productos (ficha + imagen cambian) ---
+      (function () {
+        var card = document.getElementById('mercadoCard');
+        var box = document.getElementById('mercadoPreview');
+        if (!card || !box) return;
+
+        // [[EDITAR PRODUCTOS DEL MERCADO]]
+        // Añade o quita objetos de esta lista para mostrar más/menos productos.
+        // Para usar tu propia FOTO: pon en "img" el nombre de un archivo guardado en
+        // esta misma carpeta (p.ej. 'yogur.jpg'). Si no existe, se usa "fallback".
+        var PRODUCTOS_MERCADO = [
+          { img:'croissant.jpg', fallback:'https://placehold.co/400x180/e8c9a0/9c7b4f?text=Croissant',
+            nombre:'Croissants de mantequilla (pack 6)', cat:'Panadería y Pastelería', lote:'L26061402',
+            frio:false, cond:'Temperatura ambiente', stock:'18 uds disponibles',
+            precioAnt:'4,50 €', precio:'1,99 €/uds', dto:'-55,8%', badge:'Hoy', badgeAmbar:false,
+            recogida:'25/6/2026 18:00–22:00', lugar:'Panadería San Antonio · Sevilla' },
+          { img:'https://placehold.co/400x180/dbe9f4/3b6ea5?text=Yogur+natural', fallback:'https://placehold.co/400x180/dbe9f4/3b6ea5?text=Yogur',
+            nombre:'Yogur natural (pack 4)', cat:'Lácteos', lote:'L26060812',
+            frio:true, cond:'Refrigerado', stock:'24 uds disponibles',
+            precioAnt:'2,80 €', precio:'1,40 €/ud', dto:'-50%', badge:'Hoy', badgeAmbar:false,
+            recogida:'25/6/2026 19:00–21:00', lugar:'Lácteos del Sur · Sevilla' },
+          { img:'https://placehold.co/400x180/f5e6a8/9c7b1f?text=Pl%C3%A1tano', fallback:'https://placehold.co/400x180/f5e6a8/9c7b1f?text=Platano',
+            nombre:'Plátano de Canarias (1 kg)', cat:'Frutas y Verduras', lote:'L26060933',
+            frio:false, cond:'Temperatura ambiente', stock:'32 kg disponibles',
+            precioAnt:'1,95 €', precio:'0,89 €/kg', dto:'-54%', badge:'2 días', badgeAmbar:true,
+            recogida:'27/6/2026 10:00–14:00', lugar:'Frutería La Huerta · Sevilla' },
+          { img:'https://placehold.co/400x180/f4ccc4/b5482f?text=Salm%C3%B3n', fallback:'https://placehold.co/400x180/f4ccc4/b5482f?text=Salmon',
+            nombre:'Salmón fresco (filete 300 g)', cat:'Pescadería', lote:'L26061099',
+            frio:true, cond:'Refrigerado', stock:'9 uds disponibles',
+            precioAnt:'6,90 €', precio:'3,45 €/ud', dto:'-50%', badge:'Hoy', badgeAmbar:false,
+            recogida:'25/6/2026 18:30–20:30', lugar:'Pescados Atlántico · Cádiz' },
+          { img:'https://placehold.co/400x180/eef2f7/5b6b7a?text=Leche', fallback:'https://placehold.co/400x180/eef2f7/5b6b7a?text=Leche',
+            nombre:'Leche entera (brick 1 L · pack 6)', cat:'Lácteos', lote:'L26060727',
+            frio:false, cond:'Temperatura ambiente', stock:'40 uds disponibles',
+            precioAnt:'5,40 €', precio:'3,49 €/pack', dto:'-35%', badge:'3 días', badgeAmbar:true,
+            recogida:'28/6/2026 09:00–13:00', lugar:'Distribuciones Vega · Sevilla' },
+          { img:'https://placehold.co/400x180/d7ead0/3f7d4f?text=Espinacas', fallback:'https://placehold.co/400x180/d7ead0/3f7d4f?text=Espinacas',
+            nombre:'Espinacas baby (bolsa 200 g)', cat:'Frutas y Verduras', lote:'L26061187',
+            frio:true, cond:'Refrigerado', stock:'15 uds disponibles',
+            precioAnt:'2,20 €', precio:'0,99 €/bolsa', dto:'-55%', badge:'Hoy', badgeAmbar:false,
+            recogida:'25/6/2026 17:00–20:00', lugar:'Frutería La Huerta · Sevilla' }
+        ];
+
+        function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+        // Icono según conservación: copo de nieve (frío) o termómetro (ambiente)
+        function icono(frio) {
+          return frio
+            ? '<svg class="h-3 w-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="22"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg>'
+            : '<svg class="h-3 w-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>';
+        }
+        var ICONO_CAMION = '<svg class="h-3 w-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>';
+
+        function plantilla(p) {
+          var badge = p.badge
+            ? '<span class="absolute right-2 top-2 rounded-full ' + (p.badgeAmbar ? 'bg-amber-50 text-amber-700' : 'bg-rose-50 text-rose-600') + ' px-1.5 py-0.5 text-[8px] font-semibold">' + esc(p.badge) + '</span>'
+            : '';
+          return '' +
+            '<div class="relative">' +
+              '<img src="' + esc(p.img) + '" onerror="this.onerror=null;this.src=\'' + esc(p.fallback) + '\'" alt="' + esc(p.nombre) + '" class="h-20 w-full object-cover" />' +
+              '<span class="absolute left-2 top-2 rounded-full bg-emerald-50 px-1.5 py-0.5 text-[8px] font-semibold text-emerald-700">' + esc(p.dto) + '</span>' +
+              badge +
+            '</div>' +
+            '<div class="space-y-1 p-2.5">' +
+              '<p class="text-[11px] font-semibold leading-tight text-gray-900">' + esc(p.nombre) + '</p>' +
+              '<p class="text-[9px] text-gray-400">Lote ' + esc(p.lote) + ' · ' + esc(p.cat) + '</p>' +
+              '<div class="flex items-center gap-1 text-[9px] text-gray-500">' + icono(p.frio) + '<span>' + esc(p.cond) + '</span></div>' +
+              '<p class="text-[9px] text-gray-500">' + esc(p.stock) + '</p>' +
+              '<p><span class="text-[9px] text-gray-400 line-through">' + esc(p.precioAnt) + '</span> <span class="text-[12px] font-bold text-emerald-600">' + esc(p.precio) + '</span></p>' +
+              '<div class="flex items-center gap-1 text-[9px] text-gray-500">' + ICONO_CAMION + '<span>' + esc(p.recogida) + '</span></div>' +
+              '<p class="text-[9px] text-gray-400">' + esc(p.lugar) + '</p>' +
+              '<div class="mt-1.5 rounded-lg border border-blue-400 py-1 text-center text-[10px] font-semibold text-blue-600">Editar</div>' +
+            '</div>';
+        }
+
+        var i = 0, timer = null;
+        function pintar(idx) {
+          box.innerHTML = plantilla(PRODUCTOS_MERCADO[idx]);
+          box.classList.remove('mercado-anim'); void box.offsetWidth; box.classList.add('mercado-anim');
+        }
+        function siguiente() { i = (i + 1) % PRODUCTOS_MERCADO.length; pintar(i); }
+        function arrancar() { if (!timer) timer = setInterval(siguiente, 3200); }
+        function parar() { if (timer) { clearInterval(timer); timer = null; } }
+
+        pintar(0); // pinta el primer producto ya
+        // Pausa al pasar el ratón para poder leer; reanuda al salir.
+        card.addEventListener('mouseenter', parar);
+        card.addEventListener('mouseleave', arrancar);
+        // Solo rota mientras está en pantalla.
+        alEntrarEnPantalla(card, arrancar, parar);
       })();
 
       // --- Mega-menú Productos: cambia la tarjeta de la derecha al pasar el ratón sobre cada producto ---
