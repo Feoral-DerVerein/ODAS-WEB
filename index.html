@@ -332,12 +332,78 @@
       @keyframes mercadoIn { from { opacity: 0; transform: translateY(6px) scale(0.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
       #mercadoPreview.mercado-anim { animation: mercadoIn 0.5s ease; }
 
-      /* Fondo "falling pattern" de la banda de cifras: se desvanece arriba y abajo
-         para fundirse con la página (igual idea que el resplandor "patron-cae"). */
-      #bandaPattern {
-        z-index: 0;
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
-        mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
+      /* ===== "Falling Pattern" — componente de 21st.dev (sshahaider/efferd),
+         portado de React + Framer Motion a CSS puro. Partículas que "caen"
+         (gradientes desplazando su background-position en bucle) + una capa de
+         desenfoque con rejilla de puntos. Editable con las variables de abajo. ===== */
+      .falling-pattern {
+        position: absolute; inset: 0; z-index: 0;
+        overflow: hidden; pointer-events: none;
+        --fp-color: #10b981;   /* color de las partículas (emerald, a tono con la marca) */
+        --fp-bg: #ffffff;      /* color de fondo (blanco de la página) */
+        opacity: 0; animation: fpFade 0.6s ease forwards;
+        /* desvanece arriba y abajo para fundirse con la página */
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+      }
+      @keyframes fpFade { to { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { .fp-layer { animation: none !important; } }
+
+      .fp-layer {
+        position: absolute; inset: 0;
+        background-color: var(--fp-bg);
+        background-image:
+          radial-gradient(4px 100px at 0px 235px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 235px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 117.5px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 252px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 252px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 126px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 150px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 150px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 75px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 253px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 253px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 126.5px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 204px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 204px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 102px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 134px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 134px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 67px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 179px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 179px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 89.5px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 299px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 299px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 149.5px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 215px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 215px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 107.5px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 281px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 281px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 140.5px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 158px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 158px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 79px, var(--fp-color) 100%, transparent 150%),
+          radial-gradient(4px 100px at 0px 210px, var(--fp-color), transparent),
+          radial-gradient(4px 100px at 300px 210px, var(--fp-color), transparent),
+          radial-gradient(1.5px 1.5px at 150px 105px, var(--fp-color) 100%, transparent 150%);
+        background-size: 300px 235px, 300px 235px, 300px 235px, 300px 252px, 300px 252px, 300px 252px, 300px 150px, 300px 150px, 300px 150px, 300px 253px, 300px 253px, 300px 253px, 300px 204px, 300px 204px, 300px 204px, 300px 134px, 300px 134px, 300px 134px, 300px 179px, 300px 179px, 300px 179px, 300px 299px, 300px 299px, 300px 299px, 300px 215px, 300px 215px, 300px 215px, 300px 281px, 300px 281px, 300px 281px, 300px 158px, 300px 158px, 300px 158px, 300px 210px, 300px 210px;
+        background-position: 0px 220px, 3px 220px, 151.5px 337.5px, 25px 24px, 28px 24px, 176.5px 150px, 50px 16px, 53px 16px, 201.5px 91px, 75px 224px, 78px 224px, 226.5px 230.5px, 100px 19px, 103px 19px, 251.5px 121px, 125px 120px, 128px 120px, 276.5px 187px, 150px 31px, 153px 31px, 301.5px 120.5px, 175px 235px, 178px 235px, 326.5px 384.5px, 200px 121px, 203px 121px, 351.5px 228.5px, 225px 224px, 228px 224px, 376.5px 364.5px, 250px 26px, 253px 26px, 401.5px 105px, 275px 75px, 278px 75px, 426.5px 180px;
+        animation: fpFall 150s linear infinite;
+        will-change: background-position;
+      }
+      @keyframes fpFall {
+        from { background-position: 0px 220px, 3px 220px, 151.5px 337.5px, 25px 24px, 28px 24px, 176.5px 150px, 50px 16px, 53px 16px, 201.5px 91px, 75px 224px, 78px 224px, 226.5px 230.5px, 100px 19px, 103px 19px, 251.5px 121px, 125px 120px, 128px 120px, 276.5px 187px, 150px 31px, 153px 31px, 301.5px 120.5px, 175px 235px, 178px 235px, 326.5px 384.5px, 200px 121px, 203px 121px, 351.5px 228.5px, 225px 224px, 228px 224px, 376.5px 364.5px, 250px 26px, 253px 26px, 401.5px 105px, 275px 75px, 278px 75px, 426.5px 180px; }
+        to   { background-position: 0px 6800px, 3px 6800px, 151.5px 6917.5px, 25px 13632px, 28px 13632px, 176.5px 13758px, 50px 5416px, 53px 5416px, 201.5px 5491px, 75px 17175px, 78px 17175px, 226.5px 17301.5px, 100px 5119px, 103px 5119px, 251.5px 5221px, 125px 8428px, 128px 8428px, 276.5px 8495px, 150px 9876px, 153px 9876px, 301.5px 9965.5px, 175px 13391px, 178px 13391px, 326.5px 13540.5px, 200px 14741px, 203px 14741px, 351.5px 14848.5px, 225px 18770px, 228px 18770px, 376.5px 18910.5px, 250px 5082px, 253px 5082px, 401.5px 5161px, 275px 6375px, 278px 6375px, 426.5px 6480px; }
+      }
+
+      .fp-blur {
+        position: absolute; inset: 0; font-size: 16px; /* fija 1em = 16px para el desenfoque */
+        -webkit-backdrop-filter: blur(1em); backdrop-filter: blur(1em);
+        background-image: radial-gradient(circle at 50% 50%, transparent 0, transparent 2px, var(--fp-bg) 2px);
+        background-size: 8px 8px;
       }
 
       /* Fondo interactivo "boxes" del footer (se ilumina al pasar el ratón) */
@@ -858,8 +924,12 @@
          ======================================================================== -->
     <!-- [[EDITAR: fondo animado "lluvia"; los colores se editan en ".patron-cae" del <style> de arriba]] -->
     <section id="bandaCifras" class="relative mx-auto my-12 max-w-7xl overflow-hidden px-5 py-24">
-      <!-- Fondo "falling pattern": símbolos (€ % ✓ +) que caen suavemente (ver script al final) -->
-      <canvas id="bandaPattern" class="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+      <!-- Fondo "Falling Pattern" — componente de 21st.dev (sshahaider/efferd),
+           portado de React+Framer Motion a CSS puro. Estilos en .falling-pattern -->
+      <div class="falling-pattern" aria-hidden="true">
+        <div class="fp-layer"></div>
+        <div class="fp-blur"></div>
+      </div>
       <div class="relative z-10 grid grid-cols-1 gap-10 text-center sm:grid-cols-3">
         <!-- [[EDITAR: cifra grande 1]] -->
         <div>
@@ -1751,78 +1821,6 @@
         document.addEventListener('odas:langchange', function () { pintar(i, false); });
         // solo rota mientras el titular está en pantalla
         alEntrarEnPantalla(h2, arrancar, parar);
-      })();
-
-      // --- Fondo "falling pattern": símbolos que caen en la banda de cifras ---
-      (function () {
-        var cv = document.getElementById('bandaPattern');
-        var band = document.getElementById('bandaCifras');
-        if (!cv || !band || !cv.getContext) return;
-        var ctx = cv.getContext('2d');
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var SIMBOLOS = ['€', '%', '✓', '+', '€', '%']; // pesa más € y % (la banda habla de ahorro)
-        var dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
-        var W = 0, H = 0, raf = null, activo = false, ultimo = null, gotas = [];
-
-        function dim() {
-          var r = band.getBoundingClientRect();
-          W = Math.max(1, Math.floor(r.width));
-          H = Math.max(1, Math.floor(r.height));
-          cv.width = Math.floor(W * dpr); cv.height = Math.floor(H * dpr);
-          cv.style.width = W + 'px'; cv.style.height = H + 'px';
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-        function nueva(y) {
-          return {
-            x: Math.random() * W,
-            y: (y != null) ? y : -20 - Math.random() * H * 0.5,
-            v: 16 + Math.random() * 40,          // velocidad de caída (px/s)
-            s: 11 + Math.random() * 16,          // tamaño
-            a: 0.04 + Math.random() * 0.10,      // opacidad (sutil sobre fondo claro)
-            rot: (Math.random() - 0.5) * 0.5,
-            sim: SIMBOLOS[(Math.random() * SIMBOLOS.length) | 0]
-          };
-        }
-        function init() {
-          dim();
-          var n = Math.round(Math.min(70, Math.max(22, W / 22))); // densidad según ancho
-          gotas = [];
-          for (var k = 0; k < n; k++) gotas.push(nueva(Math.random() * H));
-        }
-        function dibujar() {
-          ctx.clearRect(0, 0, W, H);
-          ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#111827';
-          for (var k = 0; k < gotas.length; k++) {
-            var p = gotas[k];
-            ctx.save();
-            ctx.globalAlpha = p.a;
-            ctx.font = '600 ' + p.s.toFixed(1) + 'px Inter, system-ui, sans-serif';
-            ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-            ctx.fillText(p.sim, 0, 0);
-            ctx.restore();
-          }
-        }
-        function frame(ts) {
-          if (!activo) return;
-          if (ultimo == null) ultimo = ts;
-          var dt = Math.min(0.05, (ts - ultimo) / 1000); ultimo = ts;
-          for (var k = 0; k < gotas.length; k++) {
-            var p = gotas[k];
-            p.y += p.v * dt;
-            if (p.y - p.s > H) gotas[k] = nueva(-10);
-          }
-          dibujar();
-          raf = requestAnimationFrame(frame);
-        }
-        function arrancar() { if (reduce || activo) return; activo = true; ultimo = null; raf = requestAnimationFrame(frame); }
-        function parar() { activo = false; if (raf) cancelAnimationFrame(raf); raf = null; }
-
-        init();
-        dibujar(); // pinta el primer fotograma ya (visible aunque aún no arranque la animación)
-        var tr = null;
-        window.addEventListener('resize', function () { clearTimeout(tr); tr = setTimeout(function () { init(); dibujar(); }, 150); });
-        // solo anima mientras la banda está en pantalla (ahorra CPU/batería)
-        alEntrarEnPantalla(band, arrancar, parar);
       })();
 
       // --- Mega-menú Productos: cambia la tarjeta de la derecha al pasar el ratón sobre cada producto ---
