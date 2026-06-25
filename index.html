@@ -331,9 +331,9 @@
       .prod-preview.anim { animation: prodPreviewIn 0.35s ease; }
       @keyframes prodPreviewIn { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
 
-      /* Mercado: al cambiar de producto, la ficha entra con un fundido suave */
-      @keyframes mercadoIn { from { opacity: 0; transform: translateY(6px) scale(0.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
-      #mercadoPreview.mercado-anim { animation: mercadoIn 0.5s ease; }
+      /* Mercado: al cambiar de producto, la ficha "sube" (efecto scroll hacia arriba) */
+      @keyframes mercadoIn { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: translateY(0); } }
+      #mercadoPreview.mercado-anim { animation: mercadoIn 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
 
       /* ===== "Falling Pattern" — componente de 21st.dev (sshahaider/efferd),
          portado de React + Framer Motion a CSS puro. Partículas que "caen"
