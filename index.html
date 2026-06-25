@@ -72,6 +72,9 @@
       }
       .menu-card { animation: fadeInDown 0.15s ease-out; }
 
+      /* Selector de idioma: gira la flecha cuando el menú está abierto */
+      #langTrigger[aria-expanded="true"] .lang-chevron { transform: rotate(180deg); }
+
       /* Animación de la tarjeta "Trazabilidad SHA-256": los nodos aparecen uno tras otro */
       @keyframes trazaNodo { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes trazaLinea { from { transform: scaleY(0); } to { transform: scaleY(1); } }
@@ -499,13 +502,17 @@
     <header id="header" class="fixed top-0 left-0 w-full z-50 border-b border-borde bg-white/70 backdrop-blur-md transition-colors">
       <nav class="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
 
-        <!-- SELECTOR DE IDIOMA (izquierda) -->
-        <div class="flex items-center gap-0.5 text-sm" aria-label="Selector de idioma">
-          <button type="button" data-lang="es" class="lang-btn rounded-md px-1.5 py-1 font-medium text-gray-400 transition hover:text-black sm:px-2">ES</button>
-          <span class="text-gray-300">·</span>
-          <button type="button" data-lang="ca" class="lang-btn rounded-md px-1.5 py-1 font-medium text-gray-400 transition hover:text-black sm:px-2">CA</button>
-          <span class="text-gray-300">·</span>
-          <button type="button" data-lang="en" class="lang-btn rounded-md px-1.5 py-1 font-medium text-gray-400 transition hover:text-black sm:px-2">EN</button>
+        <!-- SELECTOR DE IDIOMA (izquierda): muestra el idioma actual; al hacer clic despliega el resto -->
+        <div id="langSelect" class="relative text-sm">
+          <button type="button" id="langTrigger" class="flex items-center gap-1 rounded-md px-2 py-1 font-semibold text-black transition hover:bg-black/5" aria-haspopup="listbox" aria-expanded="false" aria-label="Selector de idioma">
+            <span id="langActual">ES</span>
+            <svg class="lang-chevron h-3.5 w-3.5 text-gray-400 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div id="langMenu" class="menu-card absolute left-0 top-full z-50 mt-1.5 hidden min-w-[8.5rem] overflow-hidden rounded-xl border border-borde bg-white py-1 shadow-xl" role="listbox" aria-label="Idiomas">
+            <button type="button" role="option" data-lang="es" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>Español</span><span class="text-[11px] text-gray-400">ES</span></button>
+            <button type="button" role="option" data-lang="ca" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>Català</span><span class="text-[11px] text-gray-400">CA</span></button>
+            <button type="button" role="option" data-lang="en" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>English</span><span class="text-[11px] text-gray-400">EN</span></button>
+          </div>
         </div>
 
         <!-- Logo ODAS (centrado) -->
@@ -1446,11 +1453,30 @@
             b.classList.toggle('font-semibold', on);
             b.classList.toggle('text-gray-400', !on);
           });
+          // Botón del selector: muestra el idioma actual (ES / CA / EN)
+          var act = document.getElementById('langActual');
+          if (act) act.textContent = lang.toUpperCase();
           document.dispatchEvent(new CustomEvent('odas:langchange'));
         };
+
+        // --- Desplegable del selector de idioma ---
+        var langTrigger = document.getElementById('langTrigger');
+        var langMenu = document.getElementById('langMenu');
+        function cerrarLang() { if (langMenu) { langMenu.classList.add('hidden'); langTrigger.setAttribute('aria-expanded', 'false'); } }
+        function abrirLang() { if (langMenu) { langMenu.classList.remove('hidden'); langTrigger.setAttribute('aria-expanded', 'true'); } }
+        if (langTrigger && langMenu) {
+          langTrigger.addEventListener('click', function (e) {
+            e.preventDefault(); e.stopPropagation();
+            langMenu.classList.contains('hidden') ? abrirLang() : cerrarLang();
+          });
+          document.addEventListener('click', function (e) {
+            if (!langMenu.contains(e.target) && !langTrigger.contains(e.target)) cerrarLang();
+          });
+          document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarLang(); });
+        }
         document.addEventListener('click', function (e) {
           var b = e.target.closest && e.target.closest('.lang-btn');
-          if (b) { e.preventDefault(); window.applyLang(b.getAttribute('data-lang')); }
+          if (b) { e.preventDefault(); window.applyLang(b.getAttribute('data-lang')); cerrarLang(); }
         });
         window.applyLang(window.LANG);
       })();
