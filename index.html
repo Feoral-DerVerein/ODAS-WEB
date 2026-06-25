@@ -716,8 +716,8 @@
         <!-- Columna izquierda: texto, botones y estadísticas -->
         <div>
           <p data-i18n="dev.kicker" class="mb-3 text-sm font-medium uppercase tracking-wider text-gray-500">Para el retail y la distribución</p>
-          <h2 data-i18n-html="dev.title" class="text-3xl font-medium tracking-tight text-black sm:text-4xl">
-            <!-- [[EDITAR: titular de la sección]] -->
+          <h2 id="devTitle" data-i18n-html="dev.title" class="text-3xl font-medium tracking-tight text-black sm:text-4xl">
+            <!-- [[EDITAR: titular de la sección]] · la frase con degradado ROTA (ver script "frase rotatoria") -->
             Menos mermas. <span class="texto-degradado">Más margen.</span>
           </h2>
           <p data-i18n="dev.para" class="mt-5 max-w-md text-lg text-gray-600">
@@ -1690,6 +1690,57 @@
         card.addEventListener('mouseleave', arrancar);
         // Solo rota mientras está en pantalla.
         alEntrarEnPantalla(card, arrancar, parar);
+      })();
+
+      // --- Frase rotatoria del titular "Menos mermas. <degradado>" ---
+      // La parte con degradado va cambiando de frase y de color cada 3 s.
+      (function () {
+        var h2 = document.getElementById('devTitle');
+        if (!h2) return;
+
+        // [[EDITAR FRASES ROTATORIAS]] una entrada por idioma (mismo orden que los colores)
+        var FRASES = {
+          es: ['Más margen.', 'Más tranquilidad.', 'Menos fricción.'],
+          ca: ['Més marge.', 'Més tranquil·litat.', 'Menys fricció.'],
+          en: ['More margin.', 'More peace of mind.', 'Less friction.']
+        };
+        // Un degradado por frase (mismo índice)
+        var COLORES = [
+          'linear-gradient(90deg, #10b981, #22c55e, #14b8a6, #10b981)',  // verde
+          'linear-gradient(90deg, #2563eb, #06b6d4, #6366f1, #2563eb)',  // azul · cian
+          'linear-gradient(90deg, #8b5cf6, #ec4899, #d946ef, #8b5cf6)'   // violeta · rosa
+        ];
+
+        function span() { return h2.querySelector('.texto-degradado'); }
+        function idioma() { return (window.LANG && FRASES[window.LANG]) ? window.LANG : 'es'; }
+        var i = 0, timer = null;
+
+        function pintar(idx, conFundido) {
+          var s = span(); if (!s) return;
+          var frases = FRASES[idioma()];
+          s.style.backgroundImage = COLORES[idx % COLORES.length];
+          if (conFundido) {
+            s.style.transition = 'opacity 0.3s ease';
+            s.style.opacity = '0';
+            setTimeout(function () {
+              var s2 = span(); if (!s2) return;
+              s2.style.backgroundImage = COLORES[idx % COLORES.length];
+              s2.textContent = frases[idx % frases.length];
+              s2.style.opacity = '1';
+            }, 300);
+          } else {
+            s.textContent = frases[idx % frases.length];
+          }
+        }
+        function siguiente() { i = (i + 1) % COLORES.length; pintar(i, true); }
+        function arrancar() { if (!timer) timer = setInterval(siguiente, 3000); }
+        function parar() { if (timer) { clearInterval(timer); timer = null; } }
+
+        pintar(0, false); // estado inicial con su color
+        // al cambiar de idioma, vuelve a pintar el índice actual en el nuevo idioma
+        document.addEventListener('odas:langchange', function () { pintar(i, false); });
+        // solo rota mientras el titular está en pantalla
+        alEntrarEnPantalla(h2, arrancar, parar);
       })();
 
       // --- Mega-menú Productos: cambia la tarjeta de la derecha al pasar el ratón sobre cada producto ---
