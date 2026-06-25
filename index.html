@@ -346,7 +346,67 @@
       ::-webkit-scrollbar-track { background: #fff; }
       ::-webkit-scrollbar-thumb { background: #cbcbcb; border-radius: 8px; }
       ::-webkit-scrollbar-thumb:hover { background: #b0b0b0; }
+
+      /* ============================================================
+         MÓVIL / TÁCTIL: en pantallas sin ratón NO existe el ":hover",
+         así que aquí recuperamos todos los efectos que en escritorio
+         aparecen al pasar el ratón, para que la web funcione igual.
+         La clase ".es-tactil" la añade un pequeño script al <html> cuando
+         detecta un dispositivo táctil (móvil, tablet, portátil táctil). El
+         @media es una red de seguridad por si el script no llega a ejecutarse.
+         ============================================================ */
+
+      /* Tarjetas de "Proceso" (los GIFs): mostrar SIEMPRE la descripción
+         (en escritorio se revela al pasar el ratón; en táctil no hay ratón). */
+      html.es-tactil a.group [class*="group-hover:grid-rows-[1fr]"] {
+        grid-template-rows: 1fr !important;
+        opacity: 1 !important;
+      }
+      /* GIF de los pasos: un leve zoom permanente para que se note vivo. */
+      html.es-tactil a.group img.group-hover\:scale-110 { transform: scale(1.04); }
+
+      /* Tarjetas de producto: el popover de detalle se revela al TOCAR. */
+      html.es-tactil .group.is-tap { z-index: 50; }
+      html.es-tactil .group.is-tap .card-pop {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+      }
+      /* Acrónimo "ODAS" del texto: tooltip de cristal al TOCAR. */
+      html.es-tactil .odas-acron.is-tap .odas-tip {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+      /* Wordmark gigante "ODAS": despliega su significado al TOCAR. */
+      html.es-tactil .odas-word.is-tap .ow-tail { max-width: 14ch; opacity: 1; }
+
+      /* Red de seguridad pura-CSS (mismos efectos) por si el script no corre. */
+      @media (hover: none), (pointer: coarse) {
+        a.group [class*="group-hover:grid-rows-[1fr]"] {
+          grid-template-rows: 1fr !important;
+          opacity: 1 !important;
+        }
+        a.group img.group-hover\:scale-110 { transform: scale(1.04); }
+        .group.is-tap { z-index: 50; }
+        .group.is-tap .card-pop { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+        .odas-acron.is-tap .odas-tip { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+        .odas-word.is-tap .ow-tail { max-width: 14ch; opacity: 1; }
+      }
     </style>
+
+    <!-- Detección de dispositivo táctil: marca <html class="es-tactil"> cuanto antes
+         (antes de pintar el body) para activar los efectos "tap" sin parpadeo. -->
+    <script>
+      (function () {
+        try {
+          var tactil =
+            (window.matchMedia && window.matchMedia('(hover: none)').matches) ||
+            ('ontouchstart' in window) ||
+            (navigator.maxTouchPoints || 0) > 0;
+          if (tactil) document.documentElement.classList.add('es-tactil');
+        } catch (e) {}
+      })();
+    </script>
   </head>
 
   <body class="bg-fondo text-black antialiased selection:bg-black selection:text-white">
@@ -1380,27 +1440,56 @@
         }
       });
 
+      // --- Revelado al entrar en pantalla (ROBUSTO) ---
+      // Dispara "alEntrar" cuando el elemento entra en la pantalla y "alSalir"
+      // cuando se va. Usa IntersectionObserver y, ADEMÁS, una red de seguridad por
+      // scroll/resize (en algunos móviles el IntersectionObserver no llega a dispararse,
+      // y entonces los contadores/animaciones se quedaban congelados).
+      function alEntrarEnPantalla(el, alEntrar, alSalir) {
+        if (!el) return;
+        var margen = 0.12;            // dispara cuando el elemento entra un 12% por la parte de abajo
+        var dentro = false;
+        function visible() {
+          var r = el.getBoundingClientRect();
+          var vh = window.innerHeight || document.documentElement.clientHeight;
+          return r.top < vh * (1 - margen) && r.bottom > 0;
+        }
+        function comprobar() {
+          var v = visible();
+          if (v && !dentro) { dentro = true; alEntrar(); }
+          else if (!v && dentro) { dentro = false; if (alSalir) alSalir(); }
+        }
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting && !dentro) { dentro = true; alEntrar(); }
+              else if (!e.isIntersecting && dentro) { dentro = false; if (alSalir) alSalir(); }
+            });
+          }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+          io.observe(el);
+        }
+        // Red de seguridad (cubre móviles donde el observer no dispara):
+        window.addEventListener('scroll', comprobar, { passive: true });
+        window.addEventListener('resize', comprobar);
+        window.addEventListener('load', comprobar);
+        comprobar(); // estado inicial (por si ya está en pantalla al cargar)
+      }
+
       // --- Animación de la cadena de Trazabilidad SHA-256 (aparece al entrar en pantalla) ---
       (function () {
         var chain = document.getElementById('trazaChain');
-        if (!chain || !('IntersectionObserver' in window)) return; // si no hay soporte, se ve normal
+        if (!chain) return;
         chain.classList.add('traza-prep'); // ocultar hasta que entre en pantalla
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) {
-              chain.classList.add('animar');
-            } else {
-              chain.classList.remove('animar'); // permite repetir al volver a verla
-            }
-          });
-        }, { threshold: 0.4 });
-        io.observe(chain);
+        alEntrarEnPantalla(chain,
+          function () { chain.classList.add('animar'); },
+          function () { chain.classList.remove('animar'); } // permite repetir al volver a verla
+        );
       })();
 
       // --- Gráfico de predicción: dibujar líneas + contar números al entrar en pantalla ---
       (function () {
         var card = document.getElementById('chartCard');
-        if (!card || !('IntersectionObserver' in window)) return;
+        if (!card) return;
         var contadores = card.querySelectorAll('.contador');
         function fmt(el, v) {
           var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
@@ -1426,13 +1515,10 @@
         function reset() { contadores.forEach(function (c) { c.textContent = fmt(c, 0); }); }
         card.classList.add('chart-prep');
         reset();
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) { card.classList.add('animar'); contadores.forEach(contar); }
-            else { card.classList.remove('animar'); reset(); }
-          });
-        }, { threshold: 0.3 });
-        io.observe(card);
+        alEntrarEnPantalla(card,
+          function () { card.classList.add('animar'); contadores.forEach(contar); },
+          function () { card.classList.remove('animar'); reset(); }
+        );
       })();
 
       // --- Tarjeta "Análisis de predicción": los consejos van rotando ---
@@ -1476,18 +1562,13 @@
         }
         function arrancar() { cascada(); if (!timer) timer = setInterval(siguiente, 4000); }
         function parar() { if (timer) { clearInterval(timer); timer = null; } }
-        if ('IntersectionObserver' in window) {
-          var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) { if (e.isIntersecting) arrancar(); else parar(); });
-          }, { threshold: 0.3 });
-          io.observe(card);
-        } else { arrancar(); }
+        alEntrarEnPantalla(card, arrancar, parar);
       })();
 
       // --- Banda de cifras: cuenta los números al entrar en pantalla ---
       (function () {
         var band = document.getElementById('bandaCifras');
-        if (!band || !('IntersectionObserver' in window)) return;
+        if (!band) return;
         var cifras = band.querySelectorAll('.cifra-cuenta');
         function fmt(el, v) {
           var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
@@ -1509,13 +1590,10 @@
         function reset() { cifras.forEach(function (c) { c.textContent = fmt(c, 0); }); }
         band.classList.add('cifras-prep');
         reset();
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) { band.classList.add('animar'); cifras.forEach(contar); }
-            else { band.classList.remove('animar'); reset(); }
-          });
-        }, { threshold: 0.3 });
-        io.observe(band);
+        alEntrarEnPantalla(band,
+          function () { band.classList.add('animar'); cifras.forEach(contar); },
+          function () { band.classList.remove('animar'); reset(); }
+        );
       })();
 
       // --- Mega-menú Productos: cambia la tarjeta de la derecha al pasar el ratón sobre cada producto ---
@@ -1569,6 +1647,26 @@
             e.target.style.transition = 'background-color 1.6s ease';
             e.target.style.backgroundColor = 'transparent';
           }
+        });
+      })();
+
+      // --- TÁCTIL: "tocar para revelar" lo que en escritorio sale al pasar el ratón ---
+      // (popover de las tarjetas de producto, tooltip del acrónimo ODAS y wordmark grande).
+      (function () {
+        document.addEventListener('click', function (e) {
+          if (!document.documentElement.classList.contains('es-tactil')) return; // solo en táctil
+          // ¿se ha tocado algo con efecto-hover?
+          var pop = e.target.closest && e.target.closest('.card-pop');
+          var card = !pop && e.target.closest ? e.target.closest('.group') : null; // tarjeta de producto (tiene card-pop)
+          if (card && !card.querySelector('.card-pop')) card = null;
+          var acron = e.target.closest && e.target.closest('.odas-acron');
+          var word = e.target.closest && e.target.closest('.odas-word');
+          var objetivo = card || acron || word;
+          // cerrar los que estén abiertos (menos el nuevo objetivo)
+          document.querySelectorAll('.is-tap').forEach(function (el) {
+            if (el !== objetivo) el.classList.remove('is-tap');
+          });
+          if (objetivo) { e.preventDefault(); objetivo.classList.toggle('is-tap'); }
         });
       })();
     </script>
