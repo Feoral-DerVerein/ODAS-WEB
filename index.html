@@ -443,8 +443,10 @@
         grid-template-rows: 1fr !important;
         opacity: 1 !important;
       }
-      /* GIF de los pasos: un leve zoom permanente para que se note vivo. */
-      html.es-tactil a.group img.group-hover\:scale-110 { transform: scale(1.04); }
+      /* GIF de los pasos en TÁCTIL: SIN transform. iOS Safari CONGELA los GIF que
+         tienen un transform CSS aplicado (los pinta solo en el 1er frame). Sin
+         transform ni transition, el gif se anima solo — que es lo realmente "vivo". */
+      html.es-tactil a.group img.group-hover\:scale-110 { transform: none !important; transition: none !important; }
 
       /* Tarjetas de producto: el popover de detalle se revela al TOCAR. */
       html.es-tactil .group.is-tap { z-index: 50; }
@@ -467,7 +469,7 @@
           grid-template-rows: 1fr !important;
           opacity: 1 !important;
         }
-        a.group img.group-hover\:scale-110 { transform: scale(1.04); }
+        a.group img.group-hover\:scale-110 { transform: none !important; transition: none !important; }
         .group.is-tap { z-index: 50; }
         .group.is-tap .card-pop { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
         .odas-acron.is-tap .odas-tip { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
