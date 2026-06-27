@@ -644,14 +644,16 @@
                 <path id="edge6" d="M150 168 C150 120 265 112 265 50"/>
               </g>
 
-              <!-- "Paquetes" que viajan del Market a cada acción (efecto de envío, en bucle) -->
-              <g>
-                <circle r="3" fill="#3b6ea5"><animateMotion dur="2.4s" begin="0s"   repeatCount="indefinite"><mpath xlink:href="#edge1"/></animateMotion></circle>
-                <circle r="3" fill="#3f9d5a"><animateMotion dur="2.4s" begin="0.4s" repeatCount="indefinite"><mpath xlink:href="#edge2"/></animateMotion></circle>
-                <circle r="3" fill="#9a6a24"><animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite"><mpath xlink:href="#edge3"/></animateMotion></circle>
-                <circle r="3" fill="#c2603f"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath xlink:href="#edge4"/></animateMotion></circle>
-                <circle r="3" fill="#3f7d4f"><animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite"><mpath xlink:href="#edge5"/></animateMotion></circle>
-                <circle r="3" fill="#c0392b"><animateMotion dur="2.4s" begin="2s"   repeatCount="indefinite"><mpath xlink:href="#edge6"/></animateMotion></circle>
+              <!-- "Paquetes" que viajan del Market a cada acción (efecto de envío, en bucle).
+                   Animados por JS (requestAnimationFrame + getPointAtLength), NO con SMIL
+                   <animateMotion>/<mpath>: ese patrón no se anima en iOS Safari (móvil). -->
+              <g id="paquetes">
+                <circle class="paquete" data-edge="edge1" data-begin="0"   r="3" cx="150" cy="168" fill="#3b6ea5"/>
+                <circle class="paquete" data-edge="edge2" data-begin="0.4" r="3" cx="150" cy="168" fill="#3f9d5a"/>
+                <circle class="paquete" data-edge="edge3" data-begin="0.8" r="3" cx="150" cy="168" fill="#9a6a24"/>
+                <circle class="paquete" data-edge="edge4" data-begin="1.2" r="3" cx="150" cy="168" fill="#c2603f"/>
+                <circle class="paquete" data-edge="edge5" data-begin="1.6" r="3" cx="150" cy="168" fill="#3f7d4f"/>
+                <circle class="paquete" data-edge="edge6" data-begin="2"   r="3" cx="150" cy="168" fill="#c0392b"/>
               </g>
 
               <!-- Halo lila DEBAJO del icono de la tienda -->
@@ -974,7 +976,7 @@
         <!-- Tarjeta de Proceso 1 (estilo TravelCard: imagen de fondo + info al pasar el ratón) -->
         <a href="#" class="group relative block h-80 w-full overflow-hidden rounded-xl border border-borde shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
           <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
-          <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGRuNWJncm4ybzZlZzE0M2FoaGR2cnpxZmphN2c2NjZpaGN6OG96bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbEuHLBUPQm55MyqJg/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+1'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
+          <img src="paso1.gif" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+1'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"></div>
           <div class="relative flex h-full flex-col justify-end gap-1.5 p-6 text-white">
             <p data-i18n="proc.step1" class="text-xs font-semibold uppercase tracking-wide text-white/80">Paso 1</p>
@@ -989,7 +991,7 @@
         <!-- Tarjeta de Proceso 2 -->
         <a href="#" class="group relative block h-80 w-full overflow-hidden rounded-xl border border-borde shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
           <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
-          <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmhnbGV0bzJwNmF5bzZ3MWx5c2lxcmVmeG1qZDJjdndhZWNraWkwaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NNVWeKWyh2p026Or91/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+2'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
+          <img src="paso2.gif" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+2'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"></div>
           <div class="relative flex h-full flex-col justify-end gap-1.5 p-6 text-white">
             <p data-i18n="proc.step2" class="text-xs font-semibold uppercase tracking-wide text-white/80">Paso 2</p>
@@ -1004,7 +1006,7 @@
         <!-- Tarjeta de Proceso 3 -->
         <a href="#" class="group relative block h-80 w-full overflow-hidden rounded-xl border border-borde shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
           <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
-          <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmJsdmU5bHFyY3l2cHY3amkxNmo1MW9xeTAyemhiOHJxajh5cHgydyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ch2JlGY6dlb2yp7jU3/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+3'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
+          <img src="paso3.gif" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+3'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"></div>
           <div class="relative flex h-full flex-col justify-end gap-1.5 p-6 text-white">
             <p data-i18n="proc.step3" class="text-xs font-semibold uppercase tracking-wide text-white/80">Paso 3</p>
@@ -1019,7 +1021,7 @@
         <!-- Tarjeta de Proceso 4 -->
         <a href="#" class="group relative block h-80 w-full overflow-hidden rounded-xl border border-borde shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
           <!-- [[EDITAR IMAGEN/GIF: cambia la URL de src por tu GIF; si falla, se muestra el respaldo]] -->
-          <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3UzanRqMGptOTcweDF3OWkzZzNkZjBoNXhkeXc2dXVpZnN2cnR6MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/55PkuDHvG7u36/giphy.gif" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+4'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
+          <img src="paso4.gif" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x480/111827/EFEFEF?text=Paso+4'" alt="" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"></div>
           <div class="relative flex h-full flex-col justify-end gap-1.5 p-6 text-white">
             <p data-i18n="proc.step4" class="text-xs font-semibold uppercase tracking-wide text-white/80">Paso 4</p>
@@ -1595,6 +1597,38 @@
           function () { chain.classList.add('animar'); },
           function () { chain.classList.remove('animar'); } // permite repetir al volver a verla
         );
+      })();
+
+      // --- Paquetes de "redistribución" (SVG card2): animación por JS en vez de
+      //     SMIL. <animateMotion>/<mpath> no se anima en iOS Safari → en móvil los
+      //     paquetes se quedaban quietos. getPointAtLength + rAF funciona en todos. ---
+      (function () {
+        var grupo = document.getElementById('paquetes');
+        if (!grupo) return;
+        var paquetes = [].slice.call(grupo.querySelectorAll('.paquete')).map(function (c) {
+          return {
+            el: c,
+            path: document.getElementById(c.getAttribute('data-edge')),
+            begin: parseFloat(c.getAttribute('data-begin')) * 1000
+          };
+        }).filter(function (p) { return p.path && p.path.getTotalLength; });
+        if (!paquetes.length) return;
+        var DUR = 2400, activo = false, raf = null;
+        function frame(ts) {
+          paquetes.forEach(function (p) {
+            var len = p.path.getTotalLength();
+            var t = (((ts - p.begin) % DUR) + DUR) % DUR / DUR;
+            var pt = p.path.getPointAtLength(t * len);
+            p.el.setAttribute('cx', pt.x.toFixed(2));
+            p.el.setAttribute('cy', pt.y.toFixed(2));
+          });
+          if (activo) raf = requestAnimationFrame(frame);
+        }
+        function arrancar() { if (!activo) { activo = true; raf = requestAnimationFrame(frame); } }
+        function parar() { activo = false; if (raf) cancelAnimationFrame(raf); }
+        var svg = grupo.parentNode; // el <svg> contenedor del abanico
+        if (typeof alEntrarEnPantalla === 'function' && svg) alEntrarEnPantalla(svg, arrancar, parar);
+        else arrancar();
       })();
 
       // --- Gráfico de predicción: dibujar líneas + contar números al entrar en pantalla ---
