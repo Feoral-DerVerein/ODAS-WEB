@@ -308,17 +308,14 @@
       #bandaCifras.animar .cifra-label { animation: labelSuave 0.9s ease 0.35s both; }
       @keyframes labelSuave { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-      /* [[EDITAR FONDO]] Degradado de colores detrás de la tarjeta del gráfico (estilo x.ai).
-         Para cambiarlo, edita los colores #...... de abajo. */
+      /* [[EDITAR FONDO]] Imagen de fondo abstracta detrás de la tarjeta del gráfico.
+         Para cambiarla, sustituye el archivo "fondo-grafico.jpg" de esta carpeta. */
       .fondo-gradiente {
-        background-color: #3bbfd6;
-        background-image:
-          radial-gradient(circle at 78% 6%,  #c43a2f 0%, rgba(196,58,47,0) 42%),
-          radial-gradient(circle at 100% 32%, #7d3fb0 0%, rgba(125,63,176,0) 40%),
-          radial-gradient(circle at 50% 52%,  #45d6e8 0%, rgba(69,214,232,0) 55%),
-          radial-gradient(circle at 10% 90%,  #d7a36c 0%, rgba(215,163,108,0) 46%),
-          radial-gradient(circle at 92% 96%,  #2fb4cf 0%, rgba(47,180,207,0) 48%),
-          radial-gradient(circle at 4% 42%,   #4666c2 0%, rgba(70,102,194,0) 46%);
+        background-color: #1a2138; /* color de respaldo mientras carga la imagen */
+        background-image: url('fondo-grafico.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
       }
 
       /* Mega-menú Productos: cascada de los items + cambio animado de la tarjeta de vista previa */
