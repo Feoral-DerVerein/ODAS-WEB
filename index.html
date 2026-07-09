@@ -711,7 +711,7 @@
                 14/6/2026 18:00–22:00
               </div>
               <p class="text-[9px] text-gray-400">Panadería San Antonio · Sevilla</p>
-              <div data-i18n="card3.edit" class="mt-1.5 rounded-lg border border-blue-400 py-1 text-center text-[10px] font-semibold text-blue-600">Editar</div>
+              <div data-i18n="card3.edit" class="mt-1.5 rounded-lg border border-blue-400 py-1 text-center text-[10px] font-semibold text-blue-600">Comprar</div>
             </div>
           </div>
           <div class="flex items-end justify-between gap-2">
@@ -1169,7 +1169,7 @@
           "card3.stock": `18 uds disponibles`,
           "card3.priceUnit": `1,99 €/uds`,
           "card3.today": `Hoy`,
-          "card3.edit": `Editar`,
+          "card3.edit": `Comprar`,
           "card3.title": `Marketplace B2B de excedentes`,
           "card4.chainLabel": `Cadena de trazabilidad · SHA-256`,
           "card4.step1": `Recepción`,
@@ -1260,7 +1260,7 @@
           "card3.stock": `18 u. disponibles`,
           "card3.priceUnit": `1,99 €/u`,
           "card3.today": `Avui`,
-          "card3.edit": `Edita`,
+          "card3.edit": `Compra`,
           "card3.title": `Marketplace B2B d'excedents`,
           "card4.chainLabel": `Cadena de traçabilitat · SHA-256`,
           "card4.step1": `Recepció`,
@@ -1351,7 +1351,7 @@
           "card3.stock": `18 units available`,
           "card3.priceUnit": `€1.99/unit`,
           "card3.today": `Today`,
-          "card3.edit": `Edit`,
+          "card3.edit": `Buy`,
           "card3.title": `B2B surplus marketplace`,
           "card4.chainLabel": `Traceability chain · SHA-256`,
           "card4.step1": `Receiving`,
@@ -1818,7 +1818,7 @@
               '<p><span class="text-[9px] text-gray-400 line-through">' + esc(p.precioAnt) + '</span> <span class="text-[12px] font-bold text-emerald-600">' + esc(p.precio) + '</span></p>' +
               '<div class="flex items-center gap-1 text-[9px] text-gray-500">' + ICONO_CAMION + '<span>' + esc(p.recogida) + '</span></div>' +
               '<p class="text-[9px] text-gray-400">' + esc(p.lugar) + '</p>' +
-              '<div class="mt-1.5 rounded-lg border border-blue-400 py-1 text-center text-[10px] font-semibold text-blue-600">Editar</div>' +
+              '<div class="mt-1.5 rounded-lg border border-blue-400 py-1 text-center text-[10px] font-semibold text-blue-600">' + esc((window.t && window.t('card3.edit')) || 'Comprar') + '</div>' +
             '</div>';
         }
 
