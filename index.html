@@ -89,6 +89,24 @@
       #trazaChain.animar .traza-nodo:nth-of-type(3) { animation-delay: 0.41s; }
       #trazaChain.animar .traza-nodo:nth-of-type(4) { animation-delay: 0.59s; }
 
+      /* Efecto "recibido": tras aparecer, el icono de cada nodo se ILUMINA
+         (halo verde) y se apaga en secuencia, en bucle — como un acuse de
+         recibo recorriendo la cadena. */
+      @keyframes trazaRecibido {
+        0%       { box-shadow: 0 0 0 0 rgba(16,185,129,0);      transform: scale(1); }
+        12%      { box-shadow: 0 0 0 5px rgba(16,185,129,0.35); transform: scale(1.08); }
+        45%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0);      transform: scale(1); }
+      }
+      #trazaChain.animar .traza-nodo > div:first-child {
+        animation: trazaRecibido 2.6s ease-in-out infinite;
+      }
+      /* Secuencia: primero el nodo 1, luego el 2 (acuse "en cadena") */
+      #trazaChain.animar .traza-nodo:nth-of-type(1) > div:first-child { animation-delay: 0.5s; }
+      #trazaChain.animar .traza-nodo:nth-of-type(2) > div:first-child { animation-delay: 1.1s; }
+      @media (prefers-reduced-motion: reduce) {
+        #trazaChain.animar .traza-nodo > div:first-child { animation: none; }
+      }
+
       /* Texto con degradado verde animado (para destacar una palabra/frase) */
       .texto-degradado {
         background: linear-gradient(90deg, #10b981, #22c55e, #14b8a6, #10b981);
