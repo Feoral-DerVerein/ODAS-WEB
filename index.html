@@ -1650,28 +1650,32 @@
         function yAt(v, maxY) { return YBASE - (v / maxY) * (YBASE - YTOP); }
 
         // [[EDITAR MEDICIONES DEL GRÁFICO]] cada objeto = un gráfico que se muestra por turnos
+        var COLOR = '#2563eb';
+        // Textos por idioma (el {p} se sustituye por el producto)
+        var T = {
+          es: { tit:'Predicción de demanda — {p} (7 días)', serie:'Previsión (uds/día)',
+                stats:['Total previsto','Media diaria','Stock actual','Error modelo'] },
+          ca: { tit:'Predicció de demanda — {p} (7 dies)', serie:'Previsió (u/dia)',
+                stats:['Total previst','Mitjana diària','Estoc actual','Error model'] },
+          en: { tit:'Demand forecast — {p} (7 days)', serie:'Forecast (units/day)',
+                stats:['Forecast total','Daily average','Current stock','Model error'] }
+        };
         var GRAFICOS = [
-          { titulo:'Predicción de demanda — Pan (7 días)', color:'#2563eb', maxY:80,
-            serie:'Previsión (uds/día)', datos:[40,30,34,34,35,34,33],
-            stats:[{l:'Total previsto',v:239.8,dec:1,sep:','},{l:'Media diaria',v:34.3,dec:1,sep:','},
-                   {l:'Stock actual',v:120,dec:0},{l:'Error modelo',v:25,dec:1,sep:'.',suf:'%'}] },
-          { titulo:'Predicción de demanda — Leche (7 días)', color:'#2563eb', maxY:80,
-            serie:'Previsión (uds/día)', datos:[55,52,58,60,57,59,61],
-            stats:[{l:'Total previsto',v:402,dec:0},{l:'Media diaria',v:57.4,dec:1,sep:','},
-                   {l:'Stock actual',v:180,dec:0},{l:'Error modelo',v:18,dec:1,sep:'.',suf:'%'}] },
-          { titulo:'Predicción de demanda — Fruta (7 días)', color:'#2563eb', maxY:80,
-            serie:'Previsión (uds/día)', datos:[28,35,42,38,45,50,47],
-            stats:[{l:'Total previsto',v:285,dec:0},{l:'Media diaria',v:40.7,dec:1,sep:','},
-                   {l:'Stock actual',v:95,dec:0},{l:'Error modelo',v:22,dec:1,sep:'.',suf:'%'}] },
-          { titulo:'Predicción de demanda — Verdura (7 días)', color:'#2563eb', maxY:80,
-            serie:'Previsión (uds/día)', datos:[33,30,28,32,36,34,31],
-            stats:[{l:'Total previsto',v:224,dec:0},{l:'Media diaria',v:32,dec:1,sep:','},
-                   {l:'Stock actual',v:110,dec:0},{l:'Error modelo',v:20,dec:1,sep:'.',suf:'%'}] }
+          { p:{es:'Pan',ca:'Pa',en:'Bread'}, maxY:80, datos:[40,30,34,34,35,34,33],
+            stats:[{v:239.8,dec:1},{v:34.3,dec:1},{v:120,dec:0},{v:25,dec:1,suf:'%'}] },
+          { p:{es:'Leche',ca:'Llet',en:'Milk'}, maxY:80, datos:[55,52,58,60,57,59,61],
+            stats:[{v:402,dec:0},{v:57.4,dec:1},{v:180,dec:0},{v:18,dec:1,suf:'%'}] },
+          { p:{es:'Fruta',ca:'Fruita',en:'Fruit'}, maxY:80, datos:[28,35,42,38,45,50,47],
+            stats:[{v:285,dec:0},{v:40.7,dec:1},{v:95,dec:0},{v:22,dec:1,suf:'%'}] },
+          { p:{es:'Verdura',ca:'Verdura',en:'Vegetables'}, maxY:80, datos:[33,30,28,32,36,34,31],
+            stats:[{v:224,dec:0},{v:32,dec:1},{v:110,dec:0},{v:20,dec:1,suf:'%'}] }
         ];
+        var langActual = 'es';
+        function langChart() { return (window.LANG && T[window.LANG]) ? window.LANG : 'es'; }
 
         function fmtNum(v, s) {
-          var dec = s.dec || 0, sep = s.sep || ',', out = v.toFixed(dec);
-          if (sep === ',') out = out.replace('.', ',');
+          var dec = s.dec || 0, out = v.toFixed(dec);
+          if (langActual !== 'en') out = out.replace('.', ','); // decimal con coma en ES/CA
           return (s.pre || '') + out + (s.suf || '');
         }
         function etiquetaY(v) {
@@ -1695,7 +1699,9 @@
 
         function pintar(idx) {
           var g = GRAFICOS[idx];
-          elTitle.textContent = g.titulo;
+          langActual = langChart();
+          var t = T[langActual];
+          elTitle.textContent = t.tit.replace('{p}', (g.p[langActual] || g.p.es));
           elY.innerHTML = yRows.map(function (r) {
             return '<text x="32" y="' + r.y + '">' + etiquetaY(g.maxY * r.f) + '</text>';
           }).join('');
@@ -1703,12 +1709,12 @@
           var area = linea + ' ' + X1 + ',' + YBASE + ' ' + X0 + ',' + YBASE;
           var puntos = g.datos.map(function (v, i) { return '<circle cx="' + xAt(i).toFixed(1) + '" cy="' + yAt(v, g.maxY).toFixed(1) + '" r="3.5"/>'; }).join('');
           elData.innerHTML =
-            '<polygon points="' + area + '" fill="' + g.color + '" opacity="0.12"/>' +
-            '<polyline points="' + linea + '" fill="none" stroke="' + g.color + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
-            '<g fill="' + g.color + '">' + puntos + '</g>';
-          elLeg.innerHTML = '<span class="inline-flex items-center gap-1.5"><span class="inline-block h-0.5 w-4 rounded" style="background:' + g.color + '"></span> ' + g.serie + '</span>';
-          elStats.innerHTML = g.stats.map(function (s) {
-            return '<div><p class="text-xs text-gray-500">' + s.l + '</p>' +
+            '<polygon points="' + area + '" fill="' + COLOR + '" opacity="0.12"/>' +
+            '<polyline points="' + linea + '" fill="none" stroke="' + COLOR + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+            '<g fill="' + COLOR + '">' + puntos + '</g>';
+          elLeg.innerHTML = '<span class="inline-flex items-center gap-1.5"><span class="inline-block h-0.5 w-4 rounded" style="background:' + COLOR + '"></span> ' + t.serie + '</span>';
+          elStats.innerHTML = g.stats.map(function (s, k) {
+            return '<div><p class="text-xs text-gray-500">' + t.stats[k] + '</p>' +
                    '<p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador">' + fmtNum(0, s) + '</span></p></div>';
           }).join('');
           // re-disparar el revelado del gráfico (dibujo de izquierda a derecha)
@@ -1726,6 +1732,8 @@
         card.classList.add('chart-prep');
         card.addEventListener('mouseenter', parar);       // pausa al pasar el ratón
         card.addEventListener('mouseleave', arrancar);
+        // al cambiar de idioma, repinta el gráfico traducido
+        document.addEventListener('odas:langchange', function () { pintar(i); });
         // solo rota (y redibuja) mientras el gráfico está en pantalla
         alEntrarEnPantalla(card, function () { pintar(i); arrancar(); }, parar);
       })();
