@@ -1651,22 +1651,22 @@
 
         // [[EDITAR MEDICIONES DEL GRÁFICO]] cada objeto = un gráfico que se muestra por turnos
         var GRAFICOS = [
-          { titulo:'Predicción de demanda — próximos 7 días', color:'#2563eb', maxY:80,
+          { titulo:'Predicción de demanda — Pan (7 días)', color:'#2563eb', maxY:80,
             serie:'Previsión (uds/día)', datos:[40,30,34,34,35,34,33],
             stats:[{l:'Total previsto',v:239.8,dec:1,sep:','},{l:'Media diaria',v:34.3,dec:1,sep:','},
                    {l:'Stock actual',v:120,dec:0},{l:'Error modelo',v:25,dec:1,sep:'.',suf:'%'}] },
-          { titulo:'Desperdicio evitado — últimos 7 días', color:'#10b981', maxY:60,
-            serie:'Evitado (kg)', datos:[12,18,24,30,38,46,53],
-            stats:[{l:'Total evitado',v:221,dec:0,suf:' kg'},{l:'Media diaria',v:31.6,dec:1,sep:','},
-                   {l:'Mejor día',v:53,dec:0,suf:' kg'},{l:'Reducción',v:42,dec:0,suf:'%'}] },
-          { titulo:'Ahorro acumulado — próximos 7 días', color:'#f59e0b', maxY:2000,
-            serie:'Ahorro (€)', datos:[180,430,720,1010,1330,1660,1980],
-            stats:[{l:'Ahorro total',v:1980,dec:0,pre:'€'},{l:'Media diaria',v:283,dec:0,pre:'€'},
-                   {l:'Mejor día',v:330,dec:0,pre:'€'},{l:'vs. mes ant.',v:18,dec:0,pre:'+',suf:'%'}] },
-          { titulo:'Cobertura de stock — próximos 7 días', color:'#8b5cf6', maxY:10,
-            serie:'Cobertura (días)', datos:[8,7,6.5,5.5,4.5,3.5,3],
-            stats:[{l:'Cobertura media',v:5.4,dec:1,sep:',',suf:' d'},{l:'Mínima',v:3,dec:0,suf:' d'},
-                   {l:'Roturas evitadas',v:6,dec:0},{l:'Precisión',v:92,dec:0,suf:'%'}] }
+          { titulo:'Predicción de demanda — Leche (7 días)', color:'#2563eb', maxY:80,
+            serie:'Previsión (uds/día)', datos:[55,52,58,60,57,59,61],
+            stats:[{l:'Total previsto',v:402,dec:0},{l:'Media diaria',v:57.4,dec:1,sep:','},
+                   {l:'Stock actual',v:180,dec:0},{l:'Error modelo',v:18,dec:1,sep:'.',suf:'%'}] },
+          { titulo:'Predicción de demanda — Fruta (7 días)', color:'#2563eb', maxY:80,
+            serie:'Previsión (uds/día)', datos:[28,35,42,38,45,50,47],
+            stats:[{l:'Total previsto',v:285,dec:0},{l:'Media diaria',v:40.7,dec:1,sep:','},
+                   {l:'Stock actual',v:95,dec:0},{l:'Error modelo',v:22,dec:1,sep:'.',suf:'%'}] },
+          { titulo:'Predicción de demanda — Verdura (7 días)', color:'#2563eb', maxY:80,
+            serie:'Previsión (uds/día)', datos:[33,30,28,32,36,34,31],
+            stats:[{l:'Total previsto',v:224,dec:0},{l:'Media diaria',v:32,dec:1,sep:','},
+                   {l:'Stock actual',v:110,dec:0},{l:'Error modelo',v:20,dec:1,sep:'.',suf:'%'}] }
         ];
 
         function fmtNum(v, s) {
