@@ -208,10 +208,12 @@
       .odas-word {
         display: inline-block;
         font-family: 'Poppins', system-ui, sans-serif;
-        font-size: clamp(3rem, 9vw, 5.5rem);
+        font-size: clamp(1.75rem, 5vw, 3rem);
         font-weight: 700;
         letter-spacing: 0.02em;
         line-height: 1;
+        white-space: nowrap;        /* el acrónimo se despliega en la MISMA línea */
+        max-width: 100%;
         color: #000;
         cursor: default;
         -webkit-font-smoothing: antialiased;
