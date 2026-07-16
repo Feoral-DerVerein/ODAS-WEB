@@ -832,7 +832,7 @@
         <!-- [[EDITAR: para cambiar los valores del gráfico, edita los números de "points" de cada línea y las métricas de abajo]] -->
         <div class="fondo-gradiente rounded-none p-5 sm:p-8">
           <div id="chartCard" class="overflow-hidden rounded-2xl border border-white/50 bg-white p-5 shadow-xl">
-          <p data-i18n="chart.title" class="text-sm font-semibold text-gray-800">Predicción de demanda — próximos 7 días</p>
+          <p id="chartTitle" class="text-sm font-semibold text-gray-800">Predicción de demanda — próximos 7 días</p>
 
           <svg viewBox="0 0 600 300" class="mt-3 w-full" xmlns="http://www.w3.org/2000/svg" aria-label="Gráfico de predicción de demanda">
             <defs>
@@ -847,8 +847,8 @@
               <line x1="40" y1="192.5" x2="580" y2="192.5"/>
               <line x1="40" y1="250" x2="580" y2="250"/>
             </g>
-            <!-- Etiquetas eje Y -->
-            <g fill="#94a3b8" font-size="11" font-family="Inter, sans-serif" text-anchor="end">
+            <!-- Etiquetas eje Y (las rellena el script según la medición) -->
+            <g id="chartYAxis" fill="#94a3b8" font-size="11" font-family="Inter, sans-serif" text-anchor="end">
               <text x="32" y="24">80</text>
               <text x="32" y="81.5">60</text>
               <text x="32" y="139">40</text>
@@ -866,8 +866,8 @@
               <text x="580" y="270">19 Jun</text>
             </g>
 
-            <!-- Capa de datos (se revela con la animación) -->
-            <g clip-path="url(#chartReveal)">
+            <!-- Capa de datos (la rellena el script; se revela con la animación) -->
+            <g id="chartData" clip-path="url(#chartReveal)">
               <!-- Zona "sin stock" -->
               <rect x="310" y="20" width="270" height="230" fill="#f7ede1" opacity="0.55"/>
               <!-- Banda de intervalo de confianza -->
@@ -886,15 +886,15 @@
             </g>
           </svg>
 
-          <!-- Leyenda -->
-          <div class="mt-2 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500">
+          <!-- Leyenda (la rellena el script) -->
+          <div id="chartLegend" class="mt-2 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500">
             <span class="inline-flex items-center gap-1.5"><span class="inline-block h-0.5 w-4 rounded bg-[#2563eb]"></span> <span data-i18n="chart.legPrevision">Previsión</span></span>
             <span class="inline-flex items-center gap-1.5"><span class="inline-block w-4 border-t-2 border-dashed border-[#d6451f]"></span> <span data-i18n="chart.legStock">Stock restante</span></span>
             <span class="inline-flex items-center gap-1.5"><span class="inline-block h-2.5 w-4 rounded-sm bg-[#dbe4fb]"></span> <span data-i18n="chart.legInterval">Intervalo</span></span>
           </div>
 
-          <!-- Métricas (cuentan al entrar en pantalla) -->
-          <div class="mt-4 grid grid-cols-2 gap-y-4 border-t border-borde pt-4 text-center sm:grid-cols-4">
+          <!-- Métricas (las rellena el script; cuentan al entrar en pantalla) -->
+          <div id="chartStats" class="mt-4 grid grid-cols-2 gap-y-4 border-t border-borde pt-4 text-center sm:grid-cols-4">
             <div>
               <p data-i18n="chart.mTotal" class="text-xs text-gray-500">Total previsto</p>
               <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="239.8" data-dec="1" data-sep=",">239,8</span></p>
@@ -1634,39 +1634,100 @@
         else arrancar();
       })();
 
-      // --- Gráfico de predicción: dibujar líneas + contar números al entrar en pantalla ---
+      // --- Gráfico del hero: ROTA entre varias mediciones (se redibuja y anima) ---
       (function () {
         var card = document.getElementById('chartCard');
-        if (!card) return;
-        var contadores = card.querySelectorAll('.contador');
-        function fmt(el, v) {
-          var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
-          var sep = el.getAttribute('data-sep') || ',';
-          var suf = el.getAttribute('data-suf') || '';
-          var s = v.toFixed(dec);
-          if (sep === ',') s = s.replace('.', ',');
-          return s + suf;
+        var elTitle = document.getElementById('chartTitle');
+        var elY = document.getElementById('chartYAxis');
+        var elData = document.getElementById('chartData');
+        var elLeg = document.getElementById('chartLegend');
+        var elStats = document.getElementById('chartStats');
+        if (!card || !elTitle || !elY || !elData || !elLeg || !elStats) return;
+
+        // Zona de dibujo del SVG (viewBox 0 0 600 300): X de 40 a 580; Y=250 es el 0, Y=20 el máximo.
+        var X0 = 40, X1 = 580, YTOP = 20, YBASE = 250, N = 7;
+        function xAt(i) { return X0 + i * ((X1 - X0) / (N - 1)); }
+        function yAt(v, maxY) { return YBASE - (v / maxY) * (YBASE - YTOP); }
+
+        // [[EDITAR MEDICIONES DEL GRÁFICO]] cada objeto = un gráfico que se muestra por turnos
+        var GRAFICOS = [
+          { titulo:'Predicción de demanda — próximos 7 días', color:'#2563eb', maxY:80,
+            serie:'Previsión (uds/día)', datos:[40,30,34,34,35,34,33],
+            stats:[{l:'Total previsto',v:239.8,dec:1,sep:','},{l:'Media diaria',v:34.3,dec:1,sep:','},
+                   {l:'Stock actual',v:120,dec:0},{l:'Error modelo',v:25,dec:1,sep:'.',suf:'%'}] },
+          { titulo:'Desperdicio evitado — últimos 7 días', color:'#10b981', maxY:60,
+            serie:'Evitado (kg)', datos:[12,18,24,30,38,46,53],
+            stats:[{l:'Total evitado',v:221,dec:0,suf:' kg'},{l:'Media diaria',v:31.6,dec:1,sep:','},
+                   {l:'Mejor día',v:53,dec:0,suf:' kg'},{l:'Reducción',v:42,dec:0,suf:'%'}] },
+          { titulo:'Ahorro acumulado — próximos 7 días', color:'#f59e0b', maxY:2000,
+            serie:'Ahorro (€)', datos:[180,430,720,1010,1330,1660,1980],
+            stats:[{l:'Ahorro total',v:1980,dec:0,pre:'€'},{l:'Media diaria',v:283,dec:0,pre:'€'},
+                   {l:'Mejor día',v:330,dec:0,pre:'€'},{l:'vs. mes ant.',v:18,dec:0,pre:'+',suf:'%'}] },
+          { titulo:'Cobertura de stock — próximos 7 días', color:'#8b5cf6', maxY:10,
+            serie:'Cobertura (días)', datos:[8,7,6.5,5.5,4.5,3.5,3],
+            stats:[{l:'Cobertura media',v:5.4,dec:1,sep:',',suf:' d'},{l:'Mínima',v:3,dec:0,suf:' d'},
+                   {l:'Roturas evitadas',v:6,dec:0},{l:'Precisión',v:92,dec:0,suf:'%'}] }
+        ];
+
+        function fmtNum(v, s) {
+          var dec = s.dec || 0, sep = s.sep || ',', out = v.toFixed(dec);
+          if (sep === ',') out = out.replace('.', ',');
+          return (s.pre || '') + out + (s.suf || '');
         }
-        function contar(el) {
-          var objetivo = parseFloat(el.getAttribute('data-final'));
-          var dur = 1200, ini = null;
+        function etiquetaY(v) {
+          if (v >= 1000) { var k = v / 1000; return (k % 1 === 0 ? k.toFixed(0) : k.toFixed(1)) + 'k'; }
+          return (v % 1 === 0) ? v.toFixed(0) : v.toFixed(1);
+        }
+        var yRows = [ {y:24,f:1}, {y:81.5,f:0.75}, {y:139,f:0.5}, {y:196.5,f:0.25}, {y:254,f:0} ];
+
+        function contar(el, s) {
+          var objetivo = s.v, dur = 1100, ini = null;
           function paso(ts) {
             if (ini === null) ini = ts;
             var p = Math.min((ts - ini) / dur, 1);
-            var e = 1 - Math.pow(1 - p, 3); // arranque rápido, frenada suave
-            el.textContent = fmt(el, objetivo * e);
+            var e = 1 - Math.pow(1 - p, 3);
+            el.textContent = fmtNum(objetivo * e, s);
             if (p < 1) requestAnimationFrame(paso);
-            else el.textContent = fmt(el, objetivo);
+            else el.textContent = fmtNum(objetivo, s);
           }
           requestAnimationFrame(paso);
         }
-        function reset() { contadores.forEach(function (c) { c.textContent = fmt(c, 0); }); }
+
+        function pintar(idx) {
+          var g = GRAFICOS[idx];
+          elTitle.textContent = g.titulo;
+          elY.innerHTML = yRows.map(function (r) {
+            return '<text x="32" y="' + r.y + '">' + etiquetaY(g.maxY * r.f) + '</text>';
+          }).join('');
+          var linea = g.datos.map(function (v, i) { return xAt(i).toFixed(1) + ',' + yAt(v, g.maxY).toFixed(1); }).join(' ');
+          var area = linea + ' ' + X1 + ',' + YBASE + ' ' + X0 + ',' + YBASE;
+          var puntos = g.datos.map(function (v, i) { return '<circle cx="' + xAt(i).toFixed(1) + '" cy="' + yAt(v, g.maxY).toFixed(1) + '" r="3.5"/>'; }).join('');
+          elData.innerHTML =
+            '<polygon points="' + area + '" fill="' + g.color + '" opacity="0.12"/>' +
+            '<polyline points="' + linea + '" fill="none" stroke="' + g.color + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+            '<g fill="' + g.color + '">' + puntos + '</g>';
+          elLeg.innerHTML = '<span class="inline-flex items-center gap-1.5"><span class="inline-block h-0.5 w-4 rounded" style="background:' + g.color + '"></span> ' + g.serie + '</span>';
+          elStats.innerHTML = g.stats.map(function (s) {
+            return '<div><p class="text-xs text-gray-500">' + s.l + '</p>' +
+                   '<p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador">' + fmtNum(0, s) + '</span></p></div>';
+          }).join('');
+          // re-disparar el revelado del gráfico (dibujo de izquierda a derecha)
+          card.classList.remove('animar'); void card.offsetWidth; card.classList.add('animar');
+          // contar los números
+          var spans = elStats.querySelectorAll('.contador');
+          spans.forEach(function (sp, k) { contar(sp, g.stats[k]); });
+        }
+
+        var i = 0, timer = null;
+        function siguiente() { i = (i + 1) % GRAFICOS.length; pintar(i); }
+        function arrancar() { if (!timer) timer = setInterval(siguiente, 5500); }
+        function parar() { if (timer) { clearInterval(timer); timer = null; } }
+
         card.classList.add('chart-prep');
-        reset();
-        alEntrarEnPantalla(card,
-          function () { card.classList.add('animar'); contadores.forEach(contar); },
-          function () { card.classList.remove('animar'); reset(); }
-        );
+        card.addEventListener('mouseenter', parar);       // pausa al pasar el ratón
+        card.addEventListener('mouseleave', arrancar);
+        // solo rota (y redibuja) mientras el gráfico está en pantalla
+        alEntrarEnPantalla(card, function () { pintar(i); arrancar(); }, parar);
       })();
 
       // --- Tarjeta "Análisis de predicción": los consejos van rotando ---
