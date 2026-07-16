@@ -328,8 +328,8 @@
       .prod-preview.anim { animation: prodPreviewIn 0.35s ease; }
       @keyframes prodPreviewIn { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
 
-      /* Mercado: al cambiar de producto, la ficha "sube" (efecto scroll hacia arriba) */
-      @keyframes mercadoIn { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: translateY(0); } }
+      /* Mercado: al cambiar de producto, la ficha entra deslizándose LATERALMENTE (scroll hacia los lados) */
+      @keyframes mercadoIn { from { opacity: 0; transform: translateX(48px); } to { opacity: 1; transform: translateX(0); } }
       #mercadoPreview.mercado-anim { animation: mercadoIn 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
 
       /* ===== "Falling Pattern" — componente de 21st.dev (sshahaider/efferd),
@@ -1759,36 +1759,36 @@
         // Para usar tu propia FOTO: pon en "img" el nombre de un archivo guardado en
         // esta misma carpeta (p.ej. 'yogur.jpg'). Si no existe, se usa "fallback".
         var PRODUCTOS_MERCADO = [
-          { img:'croissant.jpg', fallback:'https://placehold.co/400x180/e8c9a0/9c7b4f?text=Croissant',
-            nombre:'Croissants de mantequilla (pack 6)', cat:'Panadería y Pastelería', lote:'L26061402',
-            frio:false, cond:'Temperatura ambiente', stock:'18 uds disponibles',
-            precioAnt:'4,50 €', precio:'1,99 €/uds', dto:'-55,8%', badge:'Hoy', badgeAmbar:false,
-            recogida:'25/6/2026 18:00–22:00', lugar:'Panadería San Antonio · Sevilla' },
-          { img:'productos/yogur.jpg', fallback:'https://placehold.co/400x180/dbe9f4/3b6ea5?text=Yogur',
-            nombre:'Yogur natural (pack 4)', cat:'Lácteos', lote:'L26060812',
+          { img:'productos/tomates.jpg', fallback:'https://placehold.co/400x180/ffffff/c0392b?text=Tomate',
+            nombre:'Tomate en rama (1 kg)', cat:'Frutas y Verduras', lote:'L26061402',
+            frio:false, cond:'Temperatura ambiente', stock:'30 kg disponibles',
+            precioAnt:'2,20 €', precio:'0,99 €/kg', dto:'-55%', badge:'Hoy', badgeAmbar:false,
+            recogida:'25/6/2026 18:00–22:00', lugar:'Frutería La Huerta · Sevilla' },
+          { img:'productos/manzanas.jpg', fallback:'https://placehold.co/400x180/ffffff/c0392b?text=Manzana',
+            nombre:'Manzana Royal Gala (1 kg)', cat:'Frutas y Verduras', lote:'L26060812',
+            frio:false, cond:'Temperatura ambiente', stock:'45 kg disponibles',
+            precioAnt:'1,90 €', precio:'0,95 €/kg', dto:'-50%', badge:'2 días', badgeAmbar:true,
+            recogida:'27/6/2026 10:00–14:00', lugar:'Mercado Central · Sevilla' },
+          { img:'productos/zanahorias.jpg', fallback:'https://placehold.co/400x180/ffffff/9c7b1f?text=Zanahoria',
+            nombre:'Zanahoria (manojo)', cat:'Frutas y Verduras', lote:'L26060933',
+            frio:true, cond:'Refrigerado', stock:'20 uds disponibles',
+            precioAnt:'1,20 €', precio:'0,59 €/ud', dto:'-51%', badge:'Hoy', badgeAmbar:false,
+            recogida:'25/6/2026 19:00–21:00', lugar:'Huerta del Segura · Murcia' },
+          { img:'productos/naranjas.jpg', fallback:'https://placehold.co/400x180/ffffff/e67e22?text=Naranja',
+            nombre:'Naranja de mesa (malla 2 kg)', cat:'Frutas y Verduras', lote:'L26061099',
+            frio:false, cond:'Temperatura ambiente', stock:'60 kg disponibles',
+            precioAnt:'3,40 €', precio:'1,79 €/malla', dto:'-47%', badge:'3 días', badgeAmbar:true,
+            recogida:'28/6/2026 09:00–13:00', lugar:'Cítricos del Sur · Valencia' },
+          { img:'productos/pimientos.jpg', fallback:'https://placehold.co/400x180/ffffff/c0392b?text=Pimiento',
+            nombre:'Pimiento rojo (500 g)', cat:'Frutas y Verduras', lote:'L26061187',
+            frio:true, cond:'Refrigerado', stock:'18 uds disponibles',
+            precioAnt:'1,75 €', precio:'0,89 €/ud', dto:'-49%', badge:'Hoy', badgeAmbar:false,
+            recogida:'25/6/2026 17:00–20:00', lugar:'Frutería La Huerta · Sevilla' },
+          { img:'productos/fresas.jpg', fallback:'https://placehold.co/400x180/ffffff/c0392b?text=Fresas',
+            nombre:'Fresas (bandeja 250 g)', cat:'Frutas y Verduras', lote:'L26061566',
             frio:true, cond:'Refrigerado', stock:'24 uds disponibles',
-            precioAnt:'2,80 €', precio:'1,40 €/ud', dto:'-50%', badge:'Hoy', badgeAmbar:false,
-            recogida:'25/6/2026 19:00–21:00', lugar:'Lácteos del Sur · Sevilla' },
-          { img:'productos/platano.jpg', fallback:'https://placehold.co/400x180/f5e6a8/9c7b1f?text=Platano',
-            nombre:'Plátano de Canarias (1 kg)', cat:'Frutas y Verduras', lote:'L26060933',
-            frio:false, cond:'Temperatura ambiente', stock:'32 kg disponibles',
-            precioAnt:'1,95 €', precio:'0,89 €/kg', dto:'-54%', badge:'2 días', badgeAmbar:true,
-            recogida:'27/6/2026 10:00–14:00', lugar:'Frutería La Huerta · Sevilla' },
-          { img:'productos/salmon.jpg', fallback:'https://placehold.co/400x180/f4ccc4/b5482f?text=Salmon',
-            nombre:'Salmón fresco (filete 300 g)', cat:'Pescadería', lote:'L26061099',
-            frio:true, cond:'Refrigerado', stock:'9 uds disponibles',
-            precioAnt:'6,90 €', precio:'3,45 €/ud', dto:'-50%', badge:'Hoy', badgeAmbar:false,
-            recogida:'25/6/2026 18:30–20:30', lugar:'Pescados Atlántico · Cádiz' },
-          { img:'productos/leche.jpg', fallback:'https://placehold.co/400x180/eef2f7/5b6b7a?text=Leche',
-            nombre:'Leche entera (brick 1 L · pack 6)', cat:'Lácteos', lote:'L26060727',
-            frio:false, cond:'Temperatura ambiente', stock:'40 uds disponibles',
-            precioAnt:'5,40 €', precio:'3,49 €/pack', dto:'-35%', badge:'3 días', badgeAmbar:true,
-            recogida:'28/6/2026 09:00–13:00', lugar:'Distribuciones Vega · Sevilla' },
-          { img:'productos/espinacas.jpg', fallback:'https://placehold.co/400x180/d7ead0/3f7d4f?text=Espinacas',
-            nombre:'Espinacas baby (bolsa 200 g)', cat:'Frutas y Verduras', lote:'L26061187',
-            frio:true, cond:'Refrigerado', stock:'15 uds disponibles',
-            precioAnt:'2,20 €', precio:'0,99 €/bolsa', dto:'-55%', badge:'Hoy', badgeAmbar:false,
-            recogida:'25/6/2026 17:00–20:00', lugar:'Frutería La Huerta · Sevilla' }
+            precioAnt:'2,50 €', precio:'1,25 €/bandeja', dto:'-50%', badge:'Hoy', badgeAmbar:false,
+            recogida:'25/6/2026 18:30–20:30', lugar:'Mercado Central · Sevilla' }
         ];
 
         function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
