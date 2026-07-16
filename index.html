@@ -56,7 +56,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -207,9 +207,9 @@
       /* "ODAS" gigante (wordmark) */
       .odas-word {
         display: inline-block;
-        font-family: 'The Seasons', 'Cormorant Garamond', Georgia, serif;
+        font-family: 'Poppins', system-ui, sans-serif;
         font-size: clamp(3rem, 9vw, 5.5rem);
-        font-weight: 600;
+        font-weight: 700;
         letter-spacing: 0.02em;
         line-height: 1;
         color: #000;
@@ -729,29 +729,7 @@
               <!-- Línea vertical que enlaza los nodos (la "cadena") -->
               <span class="traza-linea absolute left-3 top-3 bottom-3 w-px bg-gray-200"></span>
 
-              <!-- Nodo 1: Recepción -->
-              <div class="traza-nodo relative flex items-center gap-2">
-                <div class="relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-blue-50 text-blue-600">
-                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
-                </div>
-                <div class="min-w-0 flex-1 rounded-lg border border-gray-200 bg-white px-2 py-1">
-                  <p data-i18n="card4.step1" class="font-semibold text-gray-800">Recepción</p>
-                  <p class="truncate font-mono text-[8px] text-gray-400">c11c9d80…7d1247</p>
-                </div>
-              </div>
-
-              <!-- Nodo 2: Almacenaje -->
-              <div class="traza-nodo relative flex items-center gap-2">
-                <div class="relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-amber-50 text-amber-600">
-                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
-                </div>
-                <div class="min-w-0 flex-1 rounded-lg border border-gray-200 bg-white px-2 py-1">
-                  <p data-i18n="card4.step2" class="font-semibold text-gray-800">Almacenaje</p>
-                  <p class="truncate font-mono text-[8px] text-gray-400">3343e325…d2c7a8</p>
-                </div>
-              </div>
-
-              <!-- Nodo 3: Venta / Donación -->
+              <!-- Nodo: Venta / Donación -->
               <div class="traza-nodo relative flex items-center gap-2">
                 <div class="relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-emerald-50 text-emerald-600">
                   <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><path d="M7 7h.01"/></svg>
