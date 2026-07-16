@@ -1037,51 +1037,28 @@
       <!-- [[EDITAR: título de la sección]] -->
       <h2 data-i18n="plans.title" class="mb-12 text-center text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Elige el plan que se ajuste a tu negocio</h2>
 
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-
-        <!-- Tarjeta: Starter PYME (estilo shadcn Card) -->
+      <div class="mx-auto max-w-lg">
+        <!-- Tarjeta única: para pymes y grandes empresas (todos los beneficios) -->
         <div class="flex flex-col gap-6 rounded-xl border border-borde bg-white py-6 text-black shadow-sm transition hover:shadow-md">
           <!-- Cabecera (título + descripción) -->
           <div class="flex flex-col gap-1.5 px-6">
-            <h3 data-i18n="plans.p1Name" class="text-2xl font-semibold leading-none tracking-tight">Starter PYME</h3>
-            <p data-i18n="plans.p1Desc" class="text-sm text-gray-500">Comercios y cadenas pequeñas de menos de 1.300 m² que necesitan cumplir y empezar a prevenir.</p>
+            <h3 data-i18n="plans.oneName" class="text-2xl font-semibold leading-none tracking-tight">Pymes y grandes empresas</h3>
+            <p data-i18n="plans.oneDesc" class="text-sm text-gray-500">Desde comercios pequeños hasta cadenas multi-tienda: cumple la Ley 1/2025, previene el desperdicio y vende tus excedentes.</p>
           </div>
-          <!-- Contenido (lista de puntos) -->
+          <!-- Contenido (todos los beneficios) -->
           <div class="flex-1 px-6">
-            <!-- [[EDITAR: lista de puntos (añade o quita <li> según necesites)]] -->
+            <!-- [[EDITAR: lista de beneficios (añade o quita <li> según necesites)]] -->
             <ul class="space-y-3 text-sm text-gray-700">
               <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p1f1">Previsión IA</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p2f3">Previsión avanzada multi-tienda</span></li>
               <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p1f2">Documentación Ley 1/2025</span></li>
               <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p1f3">Trazabilidad SHA-256</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p2f2">Marketplace B2B + soporte</span></li>
             </ul>
           </div>
           <!-- Pie (botón) -->
           <div class="px-6">
-            <!-- [[EDITAR: botón tarjeta uno]] -->
-            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS%20(Starter%20PYME)" data-i18n="cta.demo" class="inline-flex w-full items-center justify-center rounded-md bg-black px-4 py-2.5 text-sm font-semibold text-white shadow transition hover:bg-gray-800">Solicita una Demo</a>
-          </div>
-        </div>
-
-        <!-- Tarjeta: Professional (estilo shadcn Card) -->
-        <div class="flex flex-col gap-6 rounded-xl border border-borde bg-white py-6 text-black shadow-sm transition hover:shadow-md">
-          <!-- Cabecera (título + descripción) -->
-          <div class="flex flex-col gap-1.5 px-6">
-            <h3 data-i18n="plans.p2Name" class="text-2xl font-semibold leading-none tracking-tight">Profesional</h3>
-            <p data-i18n="plans.p2Desc" class="text-sm text-gray-500">Cadenas medianas multi-tienda que quieren optimización, cumplir la ley y vender en el marketplace.</p>
-          </div>
-          <!-- Contenido (lista de puntos) -->
-          <div class="flex-1 px-6">
-            <!-- [[EDITAR: lista de puntos (añade o quita <li> según necesites)]] -->
-            <ul class="space-y-3 text-sm text-gray-700">
-              <li class="flex items-start gap-3"><span class="mt-0.5 text-sky-600">✓</span> <span data-i18n="plans.p2f1">Todo lo de Starter</span></li>
-              <li class="flex items-start gap-3"><span class="mt-0.5 text-sky-600">✓</span> <span data-i18n="plans.p2f2">Marketplace B2B + soporte</span></li>
-              <li class="flex items-start gap-3"><span class="mt-0.5 text-sky-600">✓</span> <span data-i18n="plans.p2f3">Previsión avanzada multi-tienda</span></li>
-            </ul>
-          </div>
-          <!-- Pie (botón) -->
-          <div class="px-6">
-            <!-- [[EDITAR: botón tarjeta dos]] -->
-            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS%20(Professional)" data-i18n="cta.demo" class="inline-flex w-full items-center justify-center rounded-md border border-borde bg-white px-4 py-2.5 text-sm font-semibold text-black shadow-sm transition hover:bg-black/5">Solicita una Demo</a>
+            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS" data-i18n="cta.demo" class="inline-flex w-full items-center justify-center rounded-md bg-black px-4 py-2.5 text-sm font-semibold text-white shadow transition hover:bg-gray-800">Solicita una Demo</a>
           </div>
         </div>
       </div>
@@ -1208,7 +1185,9 @@
           "proc.desc2": `ODAS genera tu Plan de Prevención de Desperdicio a medida. La IA analiza tus ventas y predice la demanda por producto, para que sepas qué pasa antes de que pase.`,
           "proc.desc3": `Cada día ODAS te dice qué hacer: COMPRAR, REDUCIR, NO COMPRAR o VIGILAR. Tú solo sigues las acciones; el sistema trabaja por ti y deja todo documentado.`,
           "proc.desc4": `Menos producto a la basura, más margen. Y un registro inmutable (sellado con SHA-256) que demuestra tu cumplimiento ante cualquier inspección. Cumples sin papeleo.`,
-          "plans.title": `Elige el plan que se ajuste a tu negocio`,
+          "plans.title": `Un plan para pymes y grandes empresas`,
+          "plans.oneName": `Pymes y grandes empresas`,
+          "plans.oneDesc": `Desde comercios pequeños hasta cadenas multi-tienda: cumple la Ley 1/2025, previene el desperdicio y vende tus excedentes.`,
           "plans.p1Name": `Starter PYME`,
           "plans.p1Desc": `Comercios y cadenas pequeñas de menos de 1.300 m² que necesitan cumplir y empezar a prevenir.`,
           "plans.p1f1": `Previsión IA`,
@@ -1299,7 +1278,9 @@
           "proc.desc2": `ODAS genera el teu Pla de Prevenció de Malbaratament a mida. La IA analitza les teves vendes i preveu la demanda per producte, perquè sàpigues què passarà abans que passi.`,
           "proc.desc3": `Cada dia ODAS et diu què fer: COMPRAR, REDUIR, NO COMPRAR o VIGILAR. Tu només segueixes les accions; el sistema treballa per tu i ho deixa tot documentat.`,
           "proc.desc4": `Menys producte a les escombraries, més marge. I un registre immutable (segellat amb SHA-256) que demostra el teu compliment davant de qualsevol inspecció. Compleixes sense paperassa.`,
-          "plans.title": `Tria el pla que s'ajusti al teu negoci`,
+          "plans.title": `Un pla per a pimes i grans empreses`,
+          "plans.oneName": `Pimes i grans empreses`,
+          "plans.oneDesc": `Des de petits comerços fins a cadenes multi-botiga: compleix la Llei 1/2025, prevé el malbaratament i ven els teus excedents.`,
           "plans.p1Name": `Starter PIME`,
           "plans.p1Desc": `Comerços i cadenes petites de menys de 1.300 m² que necessiten complir i començar a prevenir.`,
           "plans.p1f1": `Previsió amb IA`,
@@ -1390,7 +1371,9 @@
           "proc.desc2": `ODAS builds your tailored Food Waste Prevention Plan. The AI analyses your sales and forecasts demand per product, so you know what's coming before it happens.`,
           "proc.desc3": `Every day ODAS tells you what to do: BUY, REDUCE, DON'T BUY or MONITOR. You just follow the actions; the system works for you and keeps everything documented.`,
           "proc.desc4": `Less product in the bin, more margin. Plus an immutable record (sealed with SHA-256) that proves your compliance to any inspection. Compliance with no paperwork.`,
-          "plans.title": `Choose the plan that fits your business`,
+          "plans.title": `One plan for SMEs and large companies`,
+          "plans.oneName": `SMEs & large companies`,
+          "plans.oneDesc": `From small shops to multi-store chains: comply with Law 1/2025, prevent waste and sell your surplus.`,
           "plans.p1Name": `Starter SME`,
           "plans.p1Desc": `Shops and small chains under 1,300 m² that need to comply and start preventing.`,
           "plans.p1f1": `AI forecasting`,
