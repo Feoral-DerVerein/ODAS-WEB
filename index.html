@@ -349,19 +349,6 @@
         background-repeat: no-repeat;
       }
 
-      /* Fondo de la sección de precios: ilustración mecánica de ODAS, MUY difuminada y sutil */
-      #pricingBg {
-        position: absolute; inset: -40px; z-index: 0; pointer-events: none;
-        background-image: url('fondo-pricing.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        filter: none;               /* imagen nítida */
-        opacity: 0.55;
-        -webkit-mask-image: radial-gradient(ellipse at center, #000 45%, transparent 92%);
-        mask-image: radial-gradient(ellipse at center, #000 45%, transparent 92%);
-      }
-
       /* Mega-menú Productos: cascada de los items + cambio animado de la tarjeta de vista previa */
       .group:hover .prod-item { animation: cascadaItem 0.4s ease both; }
       .group:hover .prod-item:nth-of-type(1) { animation-delay: 0.04s; }
@@ -1056,15 +1043,13 @@
          ------------------------------------------------------------------------
          · Titular + dos tarjetas grandes con lista de viñetas y un botón.
          ======================================================================== -->
-    <section class="relative mx-auto max-w-7xl overflow-hidden px-5 py-24">
-      <!-- Fondo: ilustración mecánica de ODAS, muy difuminada, detrás de la tarjeta -->
-      <div id="pricingBg" aria-hidden="true"></div>
+    <section class="mx-auto max-w-7xl px-5 py-24">
       <!-- [[EDITAR: título de la sección]] -->
-      <h2 data-i18n="plans.title" class="relative z-10 mb-12 text-center text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Elige el plan que se ajuste a tu negocio</h2>
+      <h2 data-i18n="plans.title" class="mb-12 text-center text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Elige el plan que se ajuste a tu negocio</h2>
 
-      <div class="relative z-10 mx-auto max-w-lg">
+      <div class="mx-auto max-w-lg">
         <!-- Tarjeta única: para pymes y grandes empresas (todos los beneficios) -->
-        <div class="flex flex-col gap-6 rounded-2xl border border-white/50 bg-white/55 py-6 text-black shadow-2xl backdrop-blur-xl backdrop-saturate-150 transition hover:bg-white/65">
+        <div class="flex flex-col gap-6 rounded-xl border border-borde bg-white py-6 text-black shadow-sm transition hover:shadow-md">
           <!-- Cabecera (título + descripción) -->
           <div class="flex flex-col gap-1.5 px-6">
             <h3 data-i18n="plans.oneName" class="text-2xl font-semibold leading-none tracking-tight">Pymes y grandes empresas</h3>
