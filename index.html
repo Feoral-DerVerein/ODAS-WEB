@@ -356,10 +356,10 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        filter: blur(2px);
-        opacity: 0.45;
-        -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 90%);
-        mask-image: radial-gradient(ellipse at center, #000 40%, transparent 90%);
+        filter: none;               /* imagen nítida */
+        opacity: 0.55;
+        -webkit-mask-image: radial-gradient(ellipse at center, #000 45%, transparent 92%);
+        mask-image: radial-gradient(ellipse at center, #000 45%, transparent 92%);
       }
 
       /* Mega-menú Productos: cascada de los items + cambio animado de la tarjeta de vista previa */
@@ -1064,7 +1064,7 @@
 
       <div class="relative z-10 mx-auto max-w-lg">
         <!-- Tarjeta única: para pymes y grandes empresas (todos los beneficios) -->
-        <div class="flex flex-col gap-6 rounded-xl border border-borde bg-white py-6 text-black shadow-sm transition hover:shadow-md">
+        <div class="flex flex-col gap-6 rounded-2xl border border-white/50 bg-white/55 py-6 text-black shadow-2xl backdrop-blur-xl backdrop-saturate-150 transition hover:bg-white/65">
           <!-- Cabecera (título + descripción) -->
           <div class="flex flex-col gap-1.5 px-6">
             <h3 data-i18n="plans.oneName" class="text-2xl font-semibold leading-none tracking-tight">Pymes y grandes empresas</h3>
