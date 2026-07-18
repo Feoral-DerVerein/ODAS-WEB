@@ -87,6 +87,10 @@
         background-image: url('intro-comida.png');
         background-repeat: no-repeat; background-position: center 58%; background-size: cover;
         -webkit-background-clip: text; background-clip: text;
+        /* Contorno blanco para que las cifras siempre se distingan del fondo negro */
+        -webkit-text-stroke: 0.045em #ffffff;
+        paint-order: stroke fill; /* el borde va DETRÁS del relleno de comida, no lo tapa */
+        filter: drop-shadow(0 0 0.06em rgba(255,255,255,0.55));
         -webkit-mask-image: linear-gradient(to top, #000 var(--introF), transparent var(--introF));
         mask-image: linear-gradient(to top, #000 var(--introF), transparent var(--introF));
         animation: introRise 1.6s cubic-bezier(0.22, 0.9, 0.28, 1) forwards;
