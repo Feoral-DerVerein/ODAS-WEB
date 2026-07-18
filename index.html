@@ -244,11 +244,19 @@
         width: 0.98em; height: 0.98em;
         vertical-align: -0.16em;
         color: inherit;
-        animation: odasGiro 7s linear infinite;
+        /* gira + va cambiando de color, como si estuviera funcionando */
+        animation: odasGiro 7s linear infinite, odasColor 6s linear infinite;
         transform-origin: 50% 50%;
       }
       @keyframes odasGiro { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      @media (prefers-reduced-motion: reduce) { .odas-gear { animation: none; } }
+      @keyframes odasColor {
+        0%, 100% { color: #2563eb; } /* azul */
+        20%      { color: #06b6d4; } /* cian */
+        40%      { color: #10b981; } /* verde */
+        60%      { color: #f59e0b; } /* ámbar */
+        80%      { color: #ec4899; } /* rosa */
+      }
+      @media (prefers-reduced-motion: reduce) { .odas-gear { animation: none; color: #111827; } }
       /* Al pasar el ratón, cada inicial se "desarma" en su palabra (estilo capitular) */
       .ow-grp { white-space: nowrap; }
       .ow-tail {
