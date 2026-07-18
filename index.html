@@ -71,7 +71,7 @@
         position: fixed; inset: 0; z-index: 200;
         display: flex; flex-direction: column; align-items: center; justify-content: center;
         gap: 0.5rem; padding: 1.5rem; text-align: center;
-        background: #000000; color: #fff;
+        background: #ffffff; color: #000;
         transition: opacity 0.7s ease, visibility 0.7s ease;
         animation: introFailsafe 0.5s ease 8s forwards; /* red de seguridad si el JS no corre */
       }
@@ -87,10 +87,9 @@
         background-image: url('intro-comida.png');
         background-repeat: no-repeat; background-position: center 58%; background-size: cover;
         -webkit-background-clip: text; background-clip: text;
-        /* Contorno blanco para que las cifras siempre se distingan del fondo negro */
-        -webkit-text-stroke: 0.045em #ffffff;
+        /* Contorno negro fino para que las cifras se distingan del fondo blanco */
+        -webkit-text-stroke: 0.018em #000000;
         paint-order: stroke fill; /* el borde va DETRÁS del relleno de comida, no lo tapa */
-        filter: drop-shadow(0 0 0.06em rgba(255,255,255,0.55));
         -webkit-mask-image: linear-gradient(to top, #000 var(--introF), transparent var(--introF));
         mask-image: linear-gradient(to top, #000 var(--introF), transparent var(--introF));
         /* Entrada: todo el bloque SUBE al aparecer */
@@ -101,14 +100,14 @@
       #introUnit {
         font-family: 'Poppins', system-ui, sans-serif;
         font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase;
-        font-size: clamp(1rem, 4.5vw, 1.75rem); color: #34d399;
+        font-size: clamp(1rem, 4.5vw, 1.75rem); color: #059669;
         opacity: 0; animation: introUp 0.75s cubic-bezier(0.22, 0.9, 0.28, 1) 0.18s both;
       }
       #introCap {
         max-width: 32rem;
         font-family: 'Poppins', system-ui, sans-serif;
         font-size: clamp(0.95rem, 4vw, 1.4rem);
-        font-weight: 700; color: #f3f4f6;
+        font-weight: 700; color: #374151;
         opacity: 0; animation: introUp 0.75s cubic-bezier(0.22, 0.9, 0.28, 1) 0.34s both;
       }
       @media (prefers-reduced-motion: reduce) { #introUnit, #introCap { animation: none; opacity: 1; transform: none; } }
