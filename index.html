@@ -73,7 +73,7 @@
         gap: 0.5rem; padding: 1.5rem; text-align: center;
         background: #ffffff; color: #000;
         transition: opacity 0.7s ease, visibility 0.7s ease;
-        animation: introFailsafe 0.5s ease 6s forwards; /* red de seguridad si el JS no corre */
+        animation: introFailsafe 0.5s ease 8s forwards; /* red de seguridad si el JS no corre */
       }
       #intro.oculto { opacity: 0; visibility: hidden; pointer-events: none; }
       @keyframes introFailsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
@@ -561,17 +561,17 @@
   <body class="bg-fondo text-black antialiased selection:bg-black selection:text-white">
 
     <!-- ===== INTRO: dato de choque al cargar (se desvanece y muestra la web) ===== -->
-    <div id="intro" role="status" aria-label="33 toneladas de comida se han tirado en los últimos 4 minutos">
+    <div id="intro" role="status" aria-label="100 kilos de comida se han tirado en el último minuto">
       <div id="introNum" aria-hidden="true">0</div>
-      <div id="introUnit" data-i18n="intro.unit" aria-hidden="true">toneladas</div>
-      <p id="introCap" data-i18n="intro.caption">de comida se han tirado en los últimos 4 minutos</p>
+      <div id="introUnit" data-i18n="intro.unit" aria-hidden="true">kilos</div>
+      <p id="introCap" data-i18n="intro.caption">de comida se han tirado en el último minuto</p>
     </div>
     <script>
       (function () {
         var intro = document.getElementById('intro');
         if (!intro) return;
         var numEl = document.getElementById('introNum');
-        var TARGET = 33;
+        var TARGET = 100;
         document.documentElement.classList.add('intro-lock');
         var cerrado = false;
         function cerrar() {
@@ -588,12 +588,12 @@
           var e = 1 - Math.pow(1 - p, 3);
           numEl.textContent = Math.round(TARGET * e);
           if (p < 1) requestAnimationFrame(paso);
-          else { numEl.textContent = TARGET; setTimeout(cerrar, 1400); }
+          else { numEl.textContent = TARGET; setTimeout(cerrar, 3400); } // +2 s de espera
         }
         requestAnimationFrame(paso);
         intro.addEventListener('click', cerrar);                       // tocar/clic para saltar
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.key === 'Enter') cerrar(); });
-        setTimeout(cerrar, 4200);                                      // red de seguridad
+        setTimeout(cerrar, 6200);                                      // red de seguridad
       })();
     </script>
 
@@ -1218,8 +1218,8 @@
       window.I18N = {
         es: {
           "meta.title": `ODAS · Software para el comercio alimentario`,
-          "intro.unit": `toneladas`,
-          "intro.caption": `de comida se han tirado en los últimos 4 minutos`,
+          "intro.unit": `kilos`,
+          "intro.caption": `de comida se han tirado en el último minuto`,
           "meta.desc": `ODAS predice la demanda, reduce el desperdicio alimentario y documenta la Ley 1/2025 sin esfuerzo.`,
           "nav.contact": `Contacto`,
           "cta.demo": `Solicita una Demo`,
@@ -1315,8 +1315,8 @@
         },
         ca: {
           "meta.title": `ODAS · Programari per al comerç alimentari`,
-          "intro.unit": `tones`,
-          "intro.caption": `de menjar s'han llençat en els últims 4 minuts`,
+          "intro.unit": `quilos`,
+          "intro.caption": `de menjar s'han llençat en l'últim minut`,
           "meta.desc": `ODAS preveu la demanda, redueix el malbaratament alimentari i documenta la Llei 1/2025 sense esforç.`,
           "nav.contact": `Contacte`,
           "cta.demo": `Demana una Demo`,
@@ -1412,8 +1412,8 @@
         },
         en: {
           "meta.title": `ODAS · Software for the food trade`,
-          "intro.unit": `tonnes`,
-          "intro.caption": `of food thrown away in the last 4 minutes`,
+          "intro.unit": `kilos`,
+          "intro.caption": `of food thrown away in the last minute`,
           "meta.desc": `ODAS forecasts demand, cuts food waste and documents Spain's Law 1/2025 effortlessly.`,
           "nav.contact": `Contact`,
           "cta.demo": `Request a Demo`,
