@@ -65,6 +65,36 @@
       html { scroll-behavior: smooth; }
       body { background-color: #fff; color: #000; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
+      /* ===== INTRO: número impactante al cargar, luego se desvanece y muestra la web ===== */
+      html.intro-lock, html.intro-lock body { overflow: hidden; }
+      #intro {
+        position: fixed; inset: 0; z-index: 200;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        gap: 0.5rem; padding: 1.5rem; text-align: center;
+        background: #ffffff; color: #000;
+        transition: opacity 0.7s ease, visibility 0.7s ease;
+        animation: introFailsafe 0.5s ease 6s forwards; /* red de seguridad si el JS no corre */
+      }
+      #intro.oculto { opacity: 0; visibility: hidden; pointer-events: none; }
+      @keyframes introFailsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+      #introNum {
+        font-family: 'Poppins', system-ui, sans-serif;
+        font-weight: 800; line-height: 0.86; letter-spacing: -0.03em;
+        font-size: clamp(6rem, 34vw, 18rem);
+      }
+      #introUnit {
+        font-family: 'Poppins', system-ui, sans-serif;
+        font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase;
+        font-size: clamp(1rem, 4.5vw, 1.75rem); color: #10b981;
+      }
+      #introCap {
+        max-width: 32rem;
+        font-size: clamp(0.95rem, 4vw, 1.4rem);
+        font-weight: 500; color: #4b5563;
+        opacity: 0; animation: introFade 0.6s ease 0.55s forwards;
+      }
+      @keyframes introFade { to { opacity: 1; } }
+
       /* Animación suave para los menús desplegables */
       @keyframes fadeInDown {
         from { opacity: 0; transform: translateY(-6px); }
@@ -529,6 +559,44 @@
   </head>
 
   <body class="bg-fondo text-black antialiased selection:bg-black selection:text-white">
+
+    <!-- ===== INTRO: dato de choque al cargar (se desvanece y muestra la web) ===== -->
+    <div id="intro" role="status" aria-label="33 toneladas de comida se han tirado en los últimos 4 minutos">
+      <div id="introNum" aria-hidden="true">0</div>
+      <div id="introUnit" data-i18n="intro.unit" aria-hidden="true">toneladas</div>
+      <p id="introCap" data-i18n="intro.caption">de comida se han tirado en los últimos 4 minutos</p>
+    </div>
+    <script>
+      (function () {
+        var intro = document.getElementById('intro');
+        if (!intro) return;
+        var numEl = document.getElementById('introNum');
+        var TARGET = 33;
+        document.documentElement.classList.add('intro-lock');
+        var cerrado = false;
+        function cerrar() {
+          if (cerrado) return; cerrado = true;
+          intro.classList.add('oculto');
+          document.documentElement.classList.remove('intro-lock');
+          setTimeout(function () { if (intro && intro.parentNode) intro.parentNode.removeChild(intro); }, 800);
+        }
+        // Cuenta 0 → 33 rápido; al terminar, muestra el total y espera antes de cerrar.
+        var dur = 1100, ini = null;
+        function paso(ts) {
+          if (ini === null) ini = ts;
+          var p = Math.min((ts - ini) / dur, 1);
+          var e = 1 - Math.pow(1 - p, 3);
+          numEl.textContent = Math.round(TARGET * e);
+          if (p < 1) requestAnimationFrame(paso);
+          else { numEl.textContent = TARGET; setTimeout(cerrar, 1400); }
+        }
+        requestAnimationFrame(paso);
+        intro.addEventListener('click', cerrar);                       // tocar/clic para saltar
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.key === 'Enter') cerrar(); });
+        setTimeout(cerrar, 4200);                                      // red de seguridad
+      })();
+    </script>
+
 
     <!-- ========================================================================
          SECCIÓN 1 · BARRA DE NAVEGACIÓN (HEADER FIJO)
@@ -1150,6 +1218,8 @@
       window.I18N = {
         es: {
           "meta.title": `ODAS · Software para el comercio alimentario`,
+          "intro.unit": `toneladas`,
+          "intro.caption": `de comida se han tirado en los últimos 4 minutos`,
           "meta.desc": `ODAS predice la demanda, reduce el desperdicio alimentario y documenta la Ley 1/2025 sin esfuerzo.`,
           "nav.contact": `Contacto`,
           "cta.demo": `Solicita una Demo`,
@@ -1245,6 +1315,8 @@
         },
         ca: {
           "meta.title": `ODAS · Programari per al comerç alimentari`,
+          "intro.unit": `tones`,
+          "intro.caption": `de menjar s'han llençat en els últims 4 minuts`,
           "meta.desc": `ODAS preveu la demanda, redueix el malbaratament alimentari i documenta la Llei 1/2025 sense esforç.`,
           "nav.contact": `Contacte`,
           "cta.demo": `Demana una Demo`,
@@ -1340,6 +1412,8 @@
         },
         en: {
           "meta.title": `ODAS · Software for the food trade`,
+          "intro.unit": `tonnes`,
+          "intro.caption": `of food thrown away in the last 4 minutes`,
           "meta.desc": `ODAS forecasts demand, cuts food waste and documents Spain's Law 1/2025 effortlessly.`,
           "nav.contact": `Contact`,
           "cta.demo": `Request a Demo`,
