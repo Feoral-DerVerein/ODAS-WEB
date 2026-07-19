@@ -1062,7 +1062,7 @@
       <!-- [[EDITAR: título de la sección]] -->
       <h2 data-i18n="plans.title" class="mb-12 text-center text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Elige el plan que se ajuste a tu negocio</h2>
 
-      <div class="mx-auto max-w-lg">
+      <div class="mx-auto max-w-2xl">
         <!-- Tarjeta única: para pymes y grandes empresas (todos los beneficios) -->
         <div class="flex flex-col gap-6 rounded-xl border border-borde bg-white py-6 text-black shadow-sm transition hover:shadow-md">
           <!-- Cabecera (título + descripción) -->
@@ -1073,12 +1073,19 @@
           <!-- Contenido (todos los beneficios) -->
           <div class="flex-1 px-6">
             <!-- [[EDITAR: lista de beneficios (añade o quita <li> según necesites)]] -->
-            <ul class="space-y-3 text-sm text-gray-700">
-              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p1f1">Previsión IA</span></li>
-              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p2f3">Previsión avanzada multi-tienda</span></li>
-              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p1f2">Documentación Ley 1/2025</span></li>
-              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p1f3">Trazabilidad SHA-256</span></li>
-              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.p2f2">Marketplace B2B + soporte</span></li>
+            <ul class="grid grid-cols-1 gap-x-6 gap-y-3 text-sm text-gray-700 sm:grid-cols-2">
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b1">Predicción de demanda con IA, producto a producto</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b2">Predicción adaptada a tu sector: comercio y hostelería (por ocupación)</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b3">Plan de Prevención de Desperdicio a medida (Ley 1/2025)</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b4">Decisiones diarias: qué comprar, reducir, vigilar o no comprar</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b5">Alertas tempranas de riesgo de merma y de caducidad</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b6">Recomendación de compra: qué pedir y cuándo</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b7">Marketplace para excedentes: véndelos con descuento o dónalos</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b8">Jerarquía legal de aprovechamiento (venta → donación → transformación)</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b9">Trazabilidad inmutable y verificable ante inspecciones</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b10">Documentación de cumplimiento lista y auditable</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b11">Formación en la Ley 1/2025 incluida</span></li>
+              <li class="flex items-start gap-3"><span class="mt-0.5 text-emerald-600">✓</span> <span data-i18n="plans.b12">Conecta con tu TPV · disponible en ES/CA/EN · con soporte</span></li>
             </ul>
           </div>
           <!-- Pie (botón) -->
@@ -1346,6 +1353,18 @@
           "plans.p2Desc": `Cadenas medianas multi-tienda que quieren optimización, cumplir la ley y vender en el marketplace.`,
           "plans.p2f1": `Todo lo de Starter`,
           "plans.p2f2": `Marketplace B2B + soporte`,
+          "plans.b1": `Predicción de demanda con IA, producto a producto`,
+          "plans.b2": `Predicción adaptada a tu sector: comercio y hostelería (por ocupación)`,
+          "plans.b3": `Plan de Prevención de Desperdicio a medida (Ley 1/2025)`,
+          "plans.b4": `Decisiones diarias: qué comprar, reducir, vigilar o no comprar`,
+          "plans.b5": `Alertas tempranas de riesgo de merma y de caducidad`,
+          "plans.b6": `Recomendación de compra: qué pedir y cuándo`,
+          "plans.b7": `Marketplace para excedentes: véndelos con descuento o dónalos`,
+          "plans.b8": `Jerarquía legal de aprovechamiento (venta → donación → transformación)`,
+          "plans.b9": `Trazabilidad inmutable y verificable ante inspecciones`,
+          "plans.b10": `Documentación de cumplimiento lista y auditable`,
+          "plans.b11": `Formación en la Ley 1/2025 incluida`,
+          "plans.b12": `Conecta con tu TPV · disponible en ES/CA/EN · con soporte`,
           "plans.p2f3": `Previsión avanzada multi-tienda`,
           "footer.ods": `Nuestra tecnología contribuye a la reducción del desperdicio alimentario, alineada con los <span class="text-black">Objetivos de Desarrollo Sostenible 2, 12, 13 y 17</span> de la ONU.`,
           "footer.division": `Una división de <span class="text-black">Negentropy Labs</span>`,
@@ -1444,6 +1463,18 @@
           "plans.p2Desc": `Cadenes mitjanes multibotiga que volen optimització, complir la llei i vendre al marketplace.`,
           "plans.p2f1": `Tot el de Starter`,
           "plans.p2f2": `Marketplace B2B + suport`,
+          "plans.b1": `Predicció de demanda amb IA, producte a producte`,
+          "plans.b2": `Predicció adaptada al teu sector: comerç i hostaleria (per ocupació)`,
+          "plans.b3": `Pla de Prevenció de Malbaratament a mesura (Llei 1/2025)`,
+          "plans.b4": `Decisions diàries: què comprar, reduir, vigilar o no comprar`,
+          "plans.b5": `Alertes primerenques de risc de minva i de caducitat`,
+          "plans.b6": `Recomanació de compra: què demanar i quan`,
+          "plans.b7": `Marketplace per a excedents: ven-los amb descompte o dona'ls`,
+          "plans.b8": `Jerarquia legal d'aprofitament (venda → donació → transformació)`,
+          "plans.b9": `Traçabilitat immutable i verificable davant d'inspeccions`,
+          "plans.b10": `Documentació de compliment llesta i auditable`,
+          "plans.b11": `Formació en la Llei 1/2025 inclosa`,
+          "plans.b12": `Connecta amb el teu TPV · disponible en ES/CA/EN · amb suport`,
           "plans.p2f3": `Previsió avançada multibotiga`,
           "footer.ods": `La nostra tecnologia contribueix a reduir el malbaratament alimentari, alineada amb els <span class="text-black">Objectius de Desenvolupament Sostenible 2, 12, 13 i 17</span> de l'ONU.`,
           "footer.division": `Una divisió de <span class="text-black">Negentropy Labs</span>`,
@@ -1542,6 +1573,18 @@
           "plans.p2Desc": `Mid-sized multi-store chains that want optimisation, legal compliance and to sell on the marketplace.`,
           "plans.p2f1": `Everything in Starter`,
           "plans.p2f2": `B2B marketplace + support`,
+          "plans.b1": `AI demand forecasting, product by product`,
+          "plans.b2": `Forecasting tailored to your sector: retail and hospitality (by occupancy)`,
+          "plans.b3": `Custom Waste Prevention Plan (Law 1/2025)`,
+          "plans.b4": `Daily decisions: what to buy, reduce, watch or not buy`,
+          "plans.b5": `Early alerts for spoilage and expiry risk`,
+          "plans.b6": `Purchase recommendations: what to order and when`,
+          "plans.b7": `Surplus marketplace: sell at a discount or donate`,
+          "plans.b8": `Legal recovery hierarchy (sale → donation → transformation)`,
+          "plans.b9": `Immutable, verifiable traceability for inspections`,
+          "plans.b10": `Compliance documentation, ready and auditable`,
+          "plans.b11": `Law 1/2025 training included`,
+          "plans.b12": `Connects to your POS · available in ES/CA/EN · with support`,
           "plans.p2f3": `Advanced multi-store forecasting`,
           "footer.ods": `Our technology helps reduce food waste, aligned with the United Nations <span class="text-black">Sustainable Development Goals 2, 12, 13 and 17</span>.`,
           "footer.division": `A division of <span class="text-black">Negentropy Labs</span>`,
