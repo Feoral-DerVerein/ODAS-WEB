@@ -1053,11 +1053,12 @@
 
 
     <!-- ========================================================================
-         SECCIÓN 7 · CHOOSE HOW TO GET STARTED (cómo empezar)
-         ------------------------------------------------------------------------
-         · Titular + dos tarjetas grandes con lista de viñetas y un botón.
+         SECCIÓN 7 · CHOOSE HOW TO GET STARTED — con fondo animado "Cloudscape" (WebGL)
          ======================================================================== -->
-    <section class="mx-auto max-w-7xl px-5 py-24">
+    <div class="relative overflow-hidden">
+      <!-- Fondo animado tipo nubes (WebGL); se inicializa en el <script> "Cloudscape" de más abajo -->
+      <canvas id="cloudscape" aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full"></canvas>
+      <section class="relative z-10 mx-auto max-w-7xl px-5 py-24">
       <!-- [[EDITAR: título de la sección]] -->
       <h2 data-i18n="plans.title" class="mb-12 text-center text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Elige el plan que se ajuste a tu negocio</h2>
 
@@ -1087,6 +1088,120 @@
         </div>
       </div>
     </section>
+    </div>
+
+    <!-- Cloudscape: fondo animado WebGL detrás del plan (port del componente React) -->
+    <script>
+      (function () {
+        var canvas = document.getElementById('cloudscape');
+        if (!canvas) return;
+        var host = canvas.parentElement;
+        var gl = canvas.getContext('webgl', { antialias: true, alpha: true });
+        if (!gl) { console.warn('WebGL no soportado; se omite el fondo Cloudscape'); return; }
+
+        var vsSource = 'attribute vec2 position; void main(){ gl_Position = vec4(position, 0.0, 1.0); }';
+        var fsSource = [
+          'precision highp float;',
+          'uniform vec2 u_resolution;',
+          'uniform float u_time;',
+          'uniform vec3 u_colorBottom;',
+          'uniform vec3 u_colorMid;',
+          'uniform vec3 u_colorTop;',
+          'uniform float u_speed;',
+          'float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }',
+          'float noise(vec2 p){',
+          '  vec2 i = floor(p); vec2 f = fract(p);',
+          '  float a = hash(i); float b = hash(i + vec2(1.0,0.0));',
+          '  float c = hash(i + vec2(0.0,1.0)); float d = hash(i + vec2(1.0,1.0));',
+          '  vec2 u = f * f * (3.0 - 2.0 * f);',
+          '  return mix(a,b,u.x) + (c-a)*u.y*(1.0-u.x) + (d-b)*u.x*u.y;',
+          '}',
+          'float fbm(vec2 p, float t){',
+          '  float v = 0.0; float a = 0.5; float fi = 0.0;',
+          '  mat2 rot = mat2(0.86, 0.51, -0.51, 0.86);',
+          '  for (int i = 0; i < 6; i++){',
+          '    vec2 morph = vec2(sin(t*0.5+fi), cos(t*0.3-fi)) * 0.05;',
+          '    v += a * noise(p + morph);',
+          '    p = rot * p * 2.0; a *= 0.5; fi += 1.0;',
+          '  }',
+          '  return v;',
+          '}',
+          'void main(){',
+          '  vec2 uv = gl_FragCoord.xy / u_resolution;',
+          '  float t = u_time * u_speed;',
+          '  vec2 aspect = vec2(u_resolution.x / max(u_resolution.y, 1.0), 1.0);',
+          '  vec2 p = (uv - 0.5) * aspect;',
+          '  vec2 wind = vec2(t*0.1, t*0.02);',
+          '  float pattern = fbm(p * 2.2 - wind, t);',
+          '  float bandLow = smoothstep(0.3, 0.65, pattern);',
+          '  float bandHigh = smoothstep(0.7, 0.95, pattern);',
+          '  vec3 color = mix(u_colorBottom, u_colorMid, bandLow);',
+          '  color = mix(color, u_colorTop, bandHigh);',
+          '  gl_FragColor = vec4(color, 1.0);',
+          '}'
+        ].join('\n');
+
+        function compile(type, src){
+          var s = gl.createShader(type);
+          gl.shaderSource(s, src); gl.compileShader(s);
+          if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.error('Cloudscape shader:', gl.getShaderInfoLog(s)); gl.deleteShader(s); return null; }
+          return s;
+        }
+        var vs = compile(gl.VERTEX_SHADER, vsSource);
+        var fs = compile(gl.FRAGMENT_SHADER, fsSource);
+        if (!vs || !fs) return;
+        var prog = gl.createProgram();
+        gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+        if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { console.error('Cloudscape link:', gl.getProgramInfoLog(prog)); return; }
+        gl.useProgram(prog);
+
+        var posLoc = gl.getAttribLocation(prog, 'position');
+        var buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+        gl.enableVertexAttribArray(posLoc);
+        gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+        var uRes = gl.getUniformLocation(prog, 'u_resolution');
+        var uTime = gl.getUniformLocation(prog, 'u_time');
+        var uCB = gl.getUniformLocation(prog, 'u_colorBottom');
+        var uCM = gl.getUniformLocation(prog, 'u_colorMid');
+        var uCT = gl.getUniformLocation(prog, 'u_colorTop');
+        var uSpeed = gl.getUniformLocation(prog, 'u_speed');
+
+        // Colores (cielo con nubes) — cambia estos valores para otra paleta
+        var colorBottom = [0.529, 0.808, 0.922]; // #87ceeb
+        var colorMid    = [0.973, 0.973, 0.973]; // #f8f8f8
+        var colorTop    = [1.000, 1.000, 1.000]; // #ffffff
+        var speed = 1.0;
+
+        function resize(){
+          var dpr = Math.min(window.devicePixelRatio || 1, 2);
+          var r = host.getBoundingClientRect();
+          canvas.width = Math.max(1, Math.floor(r.width * dpr));
+          canvas.height = Math.max(1, Math.floor(r.height * dpr));
+          gl.viewport(0, 0, canvas.width, canvas.height);
+          gl.uniform2f(uRes, canvas.width, canvas.height);
+        }
+        resize();
+        if (window.ResizeObserver) { new ResizeObserver(resize).observe(host); }
+        else { window.addEventListener('resize', resize); }
+
+        var start = performance.now();
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        function render(now){
+          gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
+          gl.uniform1f(uTime, (now - start) / 1000);
+          gl.uniform3f(uCB, colorBottom[0], colorBottom[1], colorBottom[2]);
+          gl.uniform3f(uCM, colorMid[0], colorMid[1], colorMid[2]);
+          gl.uniform3f(uCT, colorTop[0], colorTop[1], colorTop[2]);
+          gl.uniform1f(uSpeed, speed);
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+          if (!reduce) requestAnimationFrame(render);
+        }
+        requestAnimationFrame(render);
+      })();
+    </script>
 
 
     <!-- ========================================================================
