@@ -547,20 +547,7 @@
          · Los menús se abren al pasar el ratón (en móvil con el botón ☰).
          ======================================================================== -->
     <header id="header" class="fixed top-0 left-0 w-full z-50 border-b border-borde bg-white/70 backdrop-blur-md transition-colors">
-      <nav class="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-
-        <!-- SELECTOR DE IDIOMA (izquierda): muestra el idioma actual; al hacer clic despliega el resto -->
-        <div id="langSelect" class="relative text-sm">
-          <button type="button" id="langTrigger" class="flex items-center gap-1 rounded-md px-2 py-1 font-semibold text-black transition hover:bg-black/5" aria-haspopup="listbox" aria-expanded="false" aria-label="Selector de idioma">
-            <span id="langActual">ES</span>
-            <svg class="lang-chevron h-3.5 w-3.5 text-gray-400 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div id="langMenu" class="menu-card absolute left-0 top-full z-50 mt-1.5 hidden min-w-[8.5rem] overflow-hidden rounded-xl border border-borde bg-white py-1 shadow-xl" role="listbox" aria-label="Idiomas">
-            <button type="button" role="option" data-lang="es" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>Español</span><span class="text-[11px] text-gray-400">ES</span></button>
-            <button type="button" role="option" data-lang="ca" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>Català</span><span class="text-[11px] text-gray-400">CA</span></button>
-            <button type="button" role="option" data-lang="en" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>English</span><span class="text-[11px] text-gray-400">EN</span></button>
-          </div>
-        </div>
+      <nav class="relative mx-auto flex max-w-7xl items-center justify-end px-5 py-4">
 
         <!-- Logo ODAS (símbolo). Se oculta en móvil para dejar sitio a los botones -->
         <a href="#" class="absolute left-1/2 hidden -translate-x-1/2 items-center text-black sm:flex" aria-label="ODAS">
@@ -580,6 +567,19 @@
           <a href="mailto:hello@negentropylabs.com?subject=Contacto%20ODAS" data-i18n="nav.contact" class="inline-block rounded-full bg-black px-5 py-2 text-sm font-semibold text-white transition hover:bg-gray-800">
             Contacto
           </a>
+
+          <!-- SELECTOR DE IDIOMA (junto a Contacto): al hacer clic despliega el resto -->
+          <div id="langSelect" class="relative text-sm">
+            <button type="button" id="langTrigger" class="flex items-center gap-1 rounded-md px-2 py-1 font-semibold text-black transition hover:bg-black/5" aria-haspopup="listbox" aria-expanded="false" aria-label="Selector de idioma">
+              <span id="langActual">ES</span>
+              <svg class="lang-chevron h-3.5 w-3.5 text-gray-400 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div id="langMenu" class="menu-card absolute right-0 top-full z-50 mt-1.5 hidden min-w-[8.5rem] overflow-hidden rounded-xl border border-borde bg-white py-1 shadow-xl" role="listbox" aria-label="Idiomas">
+              <button type="button" role="option" data-lang="es" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>Español</span><span class="text-[11px] text-gray-400">ES</span></button>
+              <button type="button" role="option" data-lang="ca" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>Català</span><span class="text-[11px] text-gray-400">CA</span></button>
+              <button type="button" role="option" data-lang="en" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>English</span><span class="text-[11px] text-gray-400">EN</span></button>
+            </div>
+          </div>
         </div>
       </nav>
 
