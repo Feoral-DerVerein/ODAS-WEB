@@ -283,6 +283,20 @@
         color: #000; white-space: nowrap;
       }
 
+      /* Diagrama de haces animados (AnimatedBeam): nodos + pulso que viaja por las curvas */
+      .beam-node {
+        display: grid; place-items: center;
+        width: 3rem; height: 3rem; border-radius: 9999px;
+        background: #fff; border: 2px solid #eef2ff;
+        box-shadow: 0 0 20px -12px rgba(0,0,0,0.8);
+      }
+      .beam-node-lg { width: 4rem; height: 4rem; }
+      .beam-node svg { width: 58%; height: 58%; }
+      .beam-label { margin-top: 0.45rem; max-width: 5.5rem; text-align: center; font-size: 0.7rem; font-weight: 600; line-height: 1.15; color: #374151; }
+      @keyframes beamMove { from { stroke-dashoffset: 0; } to { stroke-dashoffset: calc(-1 * var(--beam-len, 100px)); } }
+      .beam-flow { animation: beamMove var(--beam-dur, 3.5s) linear var(--beam-delay, 0s) infinite; }
+      @media (prefers-reduced-motion: reduce) { .beam-flow { animation: none; opacity: 0; } }
+
       /* Gráfico de predicción: las líneas se "dibujan" (revelado izq→der) al entrar en pantalla */
       .reveal-rect { transform-box: view-box; transform-origin: 0px 0px; }
       #chartCard.chart-prep .reveal-rect { transform: scaleX(0); }
@@ -609,6 +623,45 @@
           Solicita una Demo
         </a>
         </div>
+
+      <!-- Diagrama de haces animados: Documentos → ODAS → (Predicciones · Cumplimiento · Reducir mermas). Los haces los dibuja el <script> del final -->
+      <div id="beams-wrap" class="relative mx-auto mt-14 grid h-64 w-full max-w-xl grid-cols-3 items-center">
+        <!-- Entrada (izquierda) -->
+        <div class="flex flex-col items-center">
+          <div id="bn-docs" class="beam-node" style="color:#475569">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/><path d="M8 13h8"/><path d="M8 17h8"/><path d="M8 9h2"/></svg>
+          </div>
+          <span data-i18n="beams.docs" class="beam-label">Documentos</span>
+        </div>
+        <!-- Centro: ODAS -->
+        <div class="flex flex-col items-center">
+          <div id="bn-odas" class="beam-node beam-node-lg">
+            <svg class="odas-gear" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g><rect x="45" y="3" width="10" height="18" rx="2"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(30 50 50)"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(60 50 50)"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(90 50 50)"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(120 50 50)"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(150 50 50)"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(180 50 50)"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(210 50 50)"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(240 50 50)"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(270 50 50)"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(300 50 50)"/><rect x="45" y="3" width="10" height="18" rx="2" transform="rotate(330 50 50)"/></g><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="16"/></svg>
+          </div>
+          <span class="beam-label font-bold text-black">ODAS</span>
+        </div>
+        <!-- Salidas (derecha) -->
+        <div class="flex h-full flex-col items-center justify-between py-3">
+          <div class="flex flex-col items-center">
+            <div id="bn-pred" class="beam-node" style="color:#2563eb">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <span data-i18n="beams.pred" class="beam-label">Predicciones</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div id="bn-ley" class="beam-node" style="color:#059669">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <span data-i18n="beams.ley" class="beam-label">Cumplimiento de ley</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div id="bn-merma" class="beam-node" style="color:#d97706">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+            </div>
+            <span data-i18n="beams.merma" class="beam-label">Reducir mermas</span>
+          </div>
+        </div>
+      </div>
 
       </div><!-- /contenido del hero -->
     </section>
@@ -1087,6 +1140,10 @@
           "nav.login": `Iniciar sesión`,
           "nav.contact": `Contacto`,
           "cta.demo": `Solicita una Demo`,
+          "beams.docs": `Documentos`,
+          "beams.pred": `Predicciones`,
+          "beams.ley": `Cumplimiento de ley`,
+          "beams.merma": `Reducir mermas`,
           "hero.sub": `ODAS es la <span class="texto-degradado">memoria operativa</span> de la cadena alimentaria.`,
           "hero.sub2": `La plataforma que predice, reduce y te pone al día con la Ley 1/2025, sin fricción operativa.`,
           "card.explore": `Explora`,
@@ -1189,6 +1246,10 @@
           "nav.login": `Iniciar sessió`,
           "nav.contact": `Contacte`,
           "cta.demo": `Demana una Demo`,
+          "beams.docs": `Documents`,
+          "beams.pred": `Prediccions`,
+          "beams.ley": `Compliment de la llei`,
+          "beams.merma": `Reduir minves`,
           "hero.sub": `ODAS és la <span class="texto-degradado">memòria operativa</span> de la cadena alimentària.`,
           "hero.sub2": `La plataforma que preveu, redueix i et posa al dia amb la Llei 1/2025, sense fricció operativa.`,
           "card.explore": `Explora`,
@@ -1291,6 +1352,10 @@
           "nav.login": `Log in`,
           "nav.contact": `Contact`,
           "cta.demo": `Request a Demo`,
+          "beams.docs": `Documents`,
+          "beams.pred": `Predictions`,
+          "beams.ley": `Legal compliance`,
+          "beams.merma": `Reduce waste`,
           "hero.sub": `ODAS is the <span class="texto-degradado">operational memory</span> of the food chain.`,
           "hero.sub2": `The platform that forecasts, reduces and keeps you up to date with Law 1/2025, without operational friction.`,
           "card.explore": `Explore`,
@@ -1825,6 +1890,60 @@
           });
           if (objetivo) { e.preventDefault(); objetivo.classList.toggle('is-tap'); }
         });
+      })();
+    </script>
+
+    <!-- AnimatedBeam: dibuja las curvas entre los nodos y anima un pulso que viaja por ellas -->
+    <script>
+      (function () {
+        var wrap = document.getElementById('beams-wrap');
+        if (!wrap) return;
+        var NS = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('class', 'pointer-events-none absolute left-0 top-0 h-full w-full');
+        svg.style.zIndex = '0';
+        wrap.insertBefore(svg, wrap.firstChild);   // detrás de los nodos (que tienen z-10)
+
+        // Haces: start → end (el pulso viaja en ese sentido). Documentos ENTRA a ODAS; ODAS SALE a cada resultado.
+        var defs = [
+          { from: 'bn-docs', to: 'bn-odas', curv: 0,   delay: 0.0 },
+          { from: 'bn-odas', to: 'bn-pred', curv: 40,  delay: 0.5 },
+          { from: 'bn-odas', to: 'bn-ley',  curv: 0,   delay: 1.0 },
+          { from: 'bn-odas', to: 'bn-merma',curv: -40, delay: 1.5 }
+        ];
+        defs.forEach(function (b) {
+          b.base = document.createElementNS(NS, 'path');
+          b.base.setAttribute('stroke', 'rgba(148,163,184,0.35)');
+          b.base.setAttribute('stroke-width', '2'); b.base.setAttribute('stroke-linecap', 'round'); b.base.setAttribute('fill', 'none');
+          b.flow = document.createElementNS(NS, 'path');
+          b.flow.setAttribute('stroke', '#10b981');
+          b.flow.setAttribute('stroke-width', '2.5'); b.flow.setAttribute('stroke-linecap', 'round'); b.flow.setAttribute('fill', 'none');
+          b.flow.setAttribute('class', 'beam-flow');
+          svg.appendChild(b.base); svg.appendChild(b.flow);
+        });
+
+        function layout() {
+          var cr = wrap.getBoundingClientRect();
+          svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + cr.height);
+          defs.forEach(function (b) {
+            var a = document.getElementById(b.from).getBoundingClientRect();
+            var c = document.getElementById(b.to).getBoundingClientRect();
+            var sx = a.left - cr.left + a.width / 2, sy = a.top - cr.top + a.height / 2;
+            var ex = c.left - cr.left + c.width / 2, ey = c.top - cr.top + c.height / 2;
+            var d = 'M ' + sx + ',' + sy + ' Q ' + ((sx + ex) / 2) + ',' + (sy - b.curv) + ' ' + ex + ',' + ey;
+            b.base.setAttribute('d', d); b.flow.setAttribute('d', d);
+            var len = b.flow.getTotalLength() || 100;
+            var dash = Math.min(26, len * 0.28);
+            b.flow.style.strokeDasharray = dash + ' ' + len;
+            b.flow.style.setProperty('--beam-len', (len + dash) + 'px');
+            b.flow.style.setProperty('--beam-dur', '3.5s');
+            b.flow.style.setProperty('--beam-delay', b.delay + 's');
+          });
+        }
+        layout();
+        if (window.ResizeObserver) new ResizeObserver(layout).observe(wrap); else window.addEventListener('resize', layout);
+        window.addEventListener('load', layout);   // recalcula cuando cargan fuentes/imágenes
       })();
     </script>
 
