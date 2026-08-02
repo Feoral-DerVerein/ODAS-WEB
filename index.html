@@ -553,7 +553,7 @@
          · Izquierda: logo.  Centro: menús desplegables.  Derecha: botón.
          · Los menús se abren al pasar el ratón (en móvil con el botón ☰).
          ======================================================================== -->
-    <header id="header" class="fixed top-0 left-0 w-full z-50 border-b border-borde bg-white/70 backdrop-blur-md transition-colors">
+    <header id="header" class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md transition-colors">
       <nav class="relative mx-auto flex max-w-7xl items-center justify-end px-5 py-4 sm:justify-between">
 
         <!-- Logo ODAS (símbolo oficial). Se oculta en móvil para dejar sitio a los botones -->
@@ -629,7 +629,7 @@
          · Titular + párrafo + 2 botones + 3 estadísticas + bloque de código
            con pestañas (Python / TypeScript / cURL) y botón "Copy".
          ======================================================================== -->
-    <section class="border-y border-borde bg-panel/60">
+    <section class="bg-white">
       <div class="mx-auto grid max-w-7xl gap-12 px-5 py-24 lg:grid-cols-2 lg:items-center">
 
         <!-- Columna izquierda: texto, botones y estadísticas -->
@@ -653,7 +653,7 @@
           </div>
 
           <!-- Tres estadísticas en fila -->
-          <div class="mt-12 grid grid-cols-3 gap-4 border-t border-borde pt-8">
+          <div class="mt-12 grid grid-cols-3 gap-4 pt-8">
             <!-- [[EDITAR: estadística 1]] -->
             <div>
               <p class="text-2xl font-bold text-black sm:text-3xl">1k+</p>
@@ -738,7 +738,7 @@
           </div>
 
           <!-- Métricas (las rellena el script; cuentan al entrar en pantalla) -->
-          <div id="chartStats" class="mt-4 grid grid-cols-2 gap-y-4 border-t border-borde pt-4 text-center sm:grid-cols-4">
+          <div id="chartStats" class="mt-4 grid grid-cols-2 gap-y-4 pt-4 text-center sm:grid-cols-4">
             <div>
               <p data-i18n="chart.mTotal" class="text-xs text-gray-500">Total previsto</p>
               <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="239.8" data-dec="1" data-sep=",">239,8</span></p>
@@ -1028,7 +1028,7 @@
          ------------------------------------------------------------------------
          · Línea superior + columnas de enlaces + línea final.
          ======================================================================== -->
-    <footer class="relative overflow-hidden border-t border-borde bg-panel/60">
+    <footer class="relative overflow-hidden bg-white">
       <!-- Fondo interactivo tipo "boxes": se ilumina al pasar el ratón (lo genera el JS de abajo) -->
       <div id="footerBoxes" aria-hidden="true"></div>
       <div class="pointer-events-none relative z-10 mx-auto max-w-7xl px-5 py-16">
