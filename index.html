@@ -589,8 +589,6 @@
          · Etiqueta pequeña + titular gigante + subtítulo + dos botones.
          ======================================================================== -->
     <section class="relative overflow-hidden bg-white pb-20 pt-44">
-      <!-- Fondo interactivo "kinetic grid" (canvas 2D); se deforma con el cursor y hace ondas al clicar. Se inicializa en el <script> del final -->
-      <canvas id="kinetic-grid" aria-hidden="true" class="pointer-events-none absolute inset-0 z-0 h-full w-full"></canvas>
 
       <!-- Contenido del hero (centrado) -->
       <div class="relative z-10 mx-auto max-w-5xl px-5 text-center">
@@ -1830,102 +1828,5 @@
       })();
     </script>
 
-    <!-- Kinetic grid: fondo interactivo del hero (canvas 2D; port vanilla del componente React) -->
-    <script>
-      (function () {
-        var canvas = document.getElementById('kinetic-grid');
-        if (!canvas) return;
-        var host = canvas.parentElement;           // la <section> del hero
-        var ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        // Parámetros (del componente)
-        var CELL_SIZE = 55, INFLUENCE_RADIUS = 260, MAX_WARP = 24, DOT_SPACING = 28, LERP_SPEED = 0.08;
-        var LINE_BASE = { r: 125, g: 211, b: 252, a: 0.40 };   // línea en reposo: celeste claro (sky-300)
-        var NODE_BASE_R = 1.8, NODE_ACTIVE_R = 3.2;
-        // Tema: fondo BLANCO + red CELESTE (cambia estos valores para otra paleta)
-        var THEME = { bg: '#ffffff', lineActive: { r: 14, g: 165, b: 233, a: 0.95 }, nodeActive: { r: 14, g: 165, b: 233, a: 1.0 }, glow: '56,189,248', ripple: '56,189,248' };
-
-        var mouse = { x: -9999, y: -9999 }, target = { x: -9999, y: -9999 };
-        var ripples = [];
-        var W = 0, H = 0, dpr = 1, raf = 0;
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        function lerpN(a, b, t) { return a + (b - a) * t; }
-        function lerpColor(base, active, t) {
-          var r = Math.round(lerpN(base.r, active.r, t)), g = Math.round(lerpN(base.g, active.g, t)), b = Math.round(lerpN(base.b, active.b, t)), a = lerpN(base.a, active.a, t);
-          return 'rgba(' + r + ',' + g + ',' + b + ',' + a.toFixed(3) + ')';
-        }
-        function getWarped(gx, gy, col, row, cols, rows) {
-          var edge = 1.5;
-          var colPin = Math.min(col / edge, (cols - 1 - col) / edge, 1);
-          var rowPin = Math.min(row / edge, (rows - 1 - row) / edge, 1);
-          var pin = colPin * colPin * rowPin * rowPin;
-          var dx = gx - mouse.x, dy = gy - mouse.y, dist = Math.sqrt(dx * dx + dy * dy);
-          var proximity = Math.max(0, 1 - dist / INFLUENCE_RADIUS) * pin;
-          var rx = 0, ry = 0;
-          for (var i = 0; i < ripples.length; i++) {
-            var rp = ripples[i], rdx = gx - rp.x, rdy = gy - rp.y, rdist = Math.sqrt(rdx * rdx + rdy * rdy);
-            var ww = 55, diff = rdist - rp.radius;
-            if (Math.abs(diff) < ww) {
-              var strength = (1 - Math.abs(diff) / ww) * rp.opacity * 18 * pin;
-              var ang = Math.atan2(rdy, rdx), sign = diff < 0 ? -1 : 1;
-              rx += Math.cos(ang) * strength * sign * -1;
-              ry += Math.sin(ang) * strength * sign * -1;
-            }
-          }
-          if (dist < INFLUENCE_RADIUS && dist > 0 && pin > 0) {
-            var t = dist / INFLUENCE_RADIUS;
-            var eased = t < 0.01 ? 0 : (1 - t) * (1 - t) * Math.min(1, dist / 60);
-            var warp = eased * MAX_WARP * pin, a2 = Math.atan2(dy, dx);
-            return { x: gx - Math.cos(a2) * warp + rx, y: gy - Math.sin(a2) * warp + ry, p: proximity };
-          }
-          return { x: gx + rx, y: gy + ry, p: proximity };
-        }
-        function draw(now) {
-          ctx.clearRect(0, 0, W, H);
-          ctx.fillStyle = THEME.bg; ctx.fillRect(0, 0, W, H);
-          ctx.fillStyle = 'rgba(56,189,248,0.22)';
-          for (var x = DOT_SPACING / 2; x < W; x += DOT_SPACING) for (var y = DOT_SPACING / 2; y < H; y += DOT_SPACING) { ctx.beginPath(); ctx.arc(x, y, 0.7, 0, Math.PI * 2); ctx.fill(); }
-          for (var i = ripples.length - 1; i >= 0; i--) { var rp = ripples[i]; var age = (now - rp.born) / 1000; rp.radius = Math.max(0, age * 400); rp.opacity = Math.max(0, 1 - age * 1.2); if (rp.opacity <= 0) ripples.splice(i, 1); }
-          var cols = Math.max(2, Math.ceil(W / CELL_SIZE)) + 1, rows = Math.max(2, Math.ceil(H / CELL_SIZE)) + 1;
-          var cellW = W / (cols - 1), cellH = H / (rows - 1);
-          var pts = [], prox = [];
-          for (var row = 0; row < rows; row++) { pts[row] = []; prox[row] = []; for (var col = 0; col < cols; col++) { var wp = getWarped(col * cellW, row * cellH, col, row, cols, rows); pts[row][col] = { x: wp.x, y: wp.y }; prox[row][col] = wp.p; } }
-          function seg(p1, p2, pr1, pr2) { var avg = (pr1 + pr2) / 2, t = avg * avg * (3 - 2 * avg); ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.strokeStyle = lerpColor(LINE_BASE, THEME.lineActive, t); ctx.lineWidth = lerpN(0.8, 1.5, t); ctx.stroke(); }
-          ctx.lineCap = 'butt';
-          for (var row = 0; row < rows; row++) for (var col = 0; col < cols - 1; col++) seg(pts[row][col], pts[row][col + 1], prox[row][col], prox[row][col + 1]);
-          for (var col = 0; col < cols; col++) for (var row = 0; row < rows - 1; row++) seg(pts[row][col], pts[row + 1][col], prox[row][col], prox[row + 1][col]);
-          for (var row = 0; row < rows; row++) for (var col = 0; col < cols; col++) {
-            var p = pts[row][col], pr = prox[row][col], t = pr * pr * (3 - 2 * pr), rr = lerpN(NODE_BASE_R, NODE_ACTIVE_R, t);
-            if (t > 0.3) { var glowR = rr + lerpN(0, 6, (t - 0.3) / 0.7); var grd = ctx.createRadialGradient(p.x, p.y, rr * 0.5, p.x, p.y, glowR); grd.addColorStop(0, 'rgba(' + THEME.glow + ',' + (t * 0.3).toFixed(3) + ')'); grd.addColorStop(1, 'rgba(' + THEME.glow + ',0)'); ctx.beginPath(); ctx.arc(p.x, p.y, glowR, 0, Math.PI * 2); ctx.fillStyle = grd; ctx.fill(); }
-            ctx.beginPath(); ctx.arc(p.x, p.y, rr, 0, Math.PI * 2); ctx.fillStyle = lerpColor({ r: 125, g: 211, b: 252, a: 0.55 }, THEME.nodeActive, t); ctx.fill();
-          }
-          for (var i = 0; i < ripples.length; i++) { var r = ripples[i], sr = Math.max(0, r.radius); ctx.beginPath(); ctx.arc(r.x, r.y, sr, 0, Math.PI * 2); ctx.strokeStyle = 'rgba(' + THEME.ripple + ',' + (r.opacity * 0.28).toFixed(3) + ')'; ctx.lineWidth = 1.5; ctx.stroke(); }
-        }
-        function animate(now) { mouse.x = lerpN(mouse.x, target.x, LERP_SPEED); mouse.y = lerpN(mouse.y, target.y, LERP_SPEED); draw(now); raf = requestAnimationFrame(animate); }
-        function nowMs() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
-        function start() { if (reduce) { draw(nowMs()); return; } if (!raf) raf = requestAnimationFrame(animate); }
-        function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
-
-        function setSize() {
-          dpr = Math.min(window.devicePixelRatio || 1, 2);
-          var rect = host.getBoundingClientRect();
-          W = Math.max(1, Math.round(rect.width)); H = Math.max(1, Math.round(rect.height));
-          canvas.width = Math.floor(W * dpr); canvas.height = Math.floor(H * dpr);
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          if (reduce) draw(nowMs());
-        }
-        setSize();
-        if (window.ResizeObserver) new ResizeObserver(setSize).observe(host); else window.addEventListener('resize', setSize);
-
-        window.addEventListener('mousemove', function (e) { var rect = canvas.getBoundingClientRect(); target.x = e.clientX - rect.left; target.y = e.clientY - rect.top; });
-        host.addEventListener('click', function (e) { var rect = canvas.getBoundingClientRect(); ripples.push({ x: e.clientX - rect.left, y: e.clientY - rect.top, radius: 0, opacity: 1, born: nowMs() }); });
-
-        // Arranca solo cuando el hero está en pantalla (ahorra CPU al hacer scroll)
-        if (typeof alEntrarEnPantalla === 'function') alEntrarEnPantalla(host, start, stop);
-        else start();
-      })();
-    </script>
   </body>
 </html>
