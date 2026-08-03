@@ -729,76 +729,76 @@
 
       <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-14 lg:grid-cols-6">
 
-        <!-- Predicción -->
+        <!-- Modelo H · Horeca (con animación) -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-gray-950 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:ring-white/25 lg:col-span-3">
           <div class="relative h-64 overflow-hidden bg-black">
             <video src="demanda-red.mp4" poster="demanda-red-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" class="mx-auto h-full w-auto max-w-full object-contain"></video>
             <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-950 to-transparent"></div>
           </div>
           <div class="relative p-6">
-            <p data-i18n="bento.c1e" class="text-xs font-semibold uppercase tracking-wide text-emerald-400">Predicción</p>
-            <h3 data-i18n="bento.c1t" class="mt-1 text-xl font-semibold text-white">Anticípate a la demanda</h3>
-            <p data-i18n="bento.c1d" class="mt-2 max-w-[42ch] text-sm text-gray-400">ODAS predice cuánto venderás de cada producto para que compres justo lo necesario, ni de más ni de menos.</p>
+            <p data-i18n="bento.c1e" class="text-xs font-semibold uppercase tracking-wide text-emerald-400">Modelo H</p>
+            <h3 data-i18n="bento.c1t" class="mt-1 text-xl font-semibold text-white">Modelo Horeca</h3>
+            <p data-i18n="bento.c1d" class="mt-2 max-w-[42ch] text-sm text-gray-400">Para restaurantes y hoteles: predice la demanda por plato y por ocupación, controla caducidades y elimina la merma en cocina.</p>
           </div>
         </div>
 
-        <!-- Cumplimiento -->
+        <!-- Modelo M · Mercado -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-gray-950 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:ring-white/25 lg:col-span-3">
           <div class="relative h-64 overflow-hidden">
             <div class="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-sky-500/25 blur-3xl"></div>
             <div class="relative flex h-full items-center justify-center">
-              <svg class="h-14 w-14 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg>
+              <svg class="h-14 w-14 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/></svg>
             </div>
           </div>
           <div class="relative p-6">
-            <p data-i18n="bento.c2e" class="text-xs font-semibold uppercase tracking-wide text-sky-400">Cumplimiento</p>
-            <h3 data-i18n="bento.c2t" class="mt-1 text-xl font-semibold text-white">Cumple la Ley 1/2025 sin esfuerzo</h3>
-            <p data-i18n="bento.c2d" class="mt-2 max-w-[42ch] text-sm text-gray-400">Plan de prevención, documentación y trazabilidad, listos para presentar ante cualquier inspección.</p>
+            <p data-i18n="bento.c2e" class="text-xs font-semibold uppercase tracking-wide text-sky-400">Modelo M</p>
+            <h3 data-i18n="bento.c2t" class="mt-1 text-xl font-semibold text-white">Modelo de Mercado</h3>
+            <p data-i18n="bento.c2d" class="mt-2 max-w-[42ch] text-sm text-gray-400">Para comercio y distribución: predice ventas por producto, ajusta las compras y saca partido a tus excedentes.</p>
           </div>
         </div>
 
-        <!-- Rentabilidad -->
+        <!-- Predicción + margen -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-gray-950 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:ring-white/25 lg:col-span-2">
           <div class="relative h-64 overflow-hidden">
             <div class="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-amber-500/25 blur-3xl"></div>
             <div class="relative flex h-full items-center justify-center">
-              <svg class="h-14 w-14 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+              <svg class="h-14 w-14 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
             </div>
           </div>
           <div class="relative p-6">
-            <p data-i18n="bento.c3e" class="text-xs font-semibold uppercase tracking-wide text-amber-400">Rentabilidad</p>
-            <h3 data-i18n="bento.c3t" class="mt-1 text-xl font-semibold text-white">Recupera margen</h3>
-            <p data-i18n="bento.c3d" class="mt-2 text-sm text-gray-400">Menos merma, más beneficio: deja de tirar a la basura el dinero que ya habías comprado.</p>
+            <p data-i18n="bento.c3e" class="text-xs font-semibold uppercase tracking-wide text-amber-400">Predicción</p>
+            <h3 data-i18n="bento.c3t" class="mt-1 text-xl font-semibold text-white">Anticípate y recupera margen</h3>
+            <p data-i18n="bento.c3d" class="mt-2 text-sm text-gray-400">ODAS predice cuánto venderás para que compres justo lo necesario y dejes de tirar dinero a la basura.</p>
+          </div>
+        </div>
+
+        <!-- Cumplimiento + trazabilidad -->
+        <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-gray-950 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:ring-white/25 lg:col-span-2">
+          <div class="relative h-64 overflow-hidden">
+            <div class="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-violet-500/25 blur-3xl"></div>
+            <div class="relative flex h-full items-center justify-center">
+              <svg class="h-14 w-14 text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+          </div>
+          <div class="relative p-6">
+            <p data-i18n="bento.c4e" class="text-xs font-semibold uppercase tracking-wide text-violet-400">Cumplimiento</p>
+            <h3 data-i18n="bento.c4t" class="mt-1 text-xl font-semibold text-white">Cumple la Ley 1/2025</h3>
+            <p data-i18n="bento.c4d" class="mt-2 text-sm text-gray-400">Plan de prevención, documentación y trazabilidad sellada e inmutable, lista para cualquier inspección.</p>
           </div>
         </div>
 
         <!-- Marketplace -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-gray-950 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:ring-white/25 lg:col-span-2">
           <div class="relative h-64 overflow-hidden">
-            <div class="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-violet-500/25 blur-3xl"></div>
-            <div class="relative flex h-full items-center justify-center">
-              <svg class="h-14 w-14 text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/></svg>
-            </div>
-          </div>
-          <div class="relative p-6">
-            <p data-i18n="bento.c4e" class="text-xs font-semibold uppercase tracking-wide text-violet-400">Marketplace</p>
-            <h3 data-i18n="bento.c4t" class="mt-1 text-xl font-semibold text-white">Da salida a tus excedentes</h3>
-            <p data-i18n="bento.c4d" class="mt-2 text-sm text-gray-400">Vende con descuento o dona lo que te sobra antes de que caduque, en un clic.</p>
-          </div>
-        </div>
-
-        <!-- Trazabilidad -->
-        <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-gray-950 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:ring-white/25 lg:col-span-2">
-          <div class="relative h-64 overflow-hidden">
             <div class="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-teal-500/25 blur-3xl"></div>
             <div class="relative flex h-full items-center justify-center">
-              <svg class="h-14 w-14 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/><path d="m9 15 2 2 4-4"/></svg>
+              <svg class="h-14 w-14 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><path d="M7 7h.01"/></svg>
             </div>
           </div>
           <div class="relative p-6">
-            <p data-i18n="bento.c5e" class="text-xs font-semibold uppercase tracking-wide text-teal-400">Trazabilidad</p>
-            <h3 data-i18n="bento.c5t" class="mt-1 text-xl font-semibold text-white">Registro a prueba de inspecciones</h3>
-            <p data-i18n="bento.c5d" class="mt-2 text-sm text-gray-400">Cada acción queda sellada e inmutable, y verificable ante la Administración.</p>
+            <p data-i18n="bento.c5e" class="text-xs font-semibold uppercase tracking-wide text-teal-400">Marketplace</p>
+            <h3 data-i18n="bento.c5t" class="mt-1 text-xl font-semibold text-white">Da salida a tus excedentes</h3>
+            <p data-i18n="bento.c5d" class="mt-2 text-sm text-gray-400">Vende con descuento o dona lo que te sobra antes de que caduque, en un clic.</p>
           </div>
         </div>
 
@@ -1143,21 +1143,21 @@
           "bento.kicker": `Una sola plataforma`,
           "bento.h": `Del dato a la decisión.`,
           "bento.sub": `ODAS conecta todo tu negocio y convierte la información en acciones concretas, cada día.`,
-          "bento.c1e": `Predicción`,
-          "bento.c1t": `Anticípate a la demanda`,
-          "bento.c1d": `ODAS predice cuánto venderás de cada producto para que compres justo lo necesario, ni de más ni de menos.`,
-          "bento.c2e": `Cumplimiento`,
-          "bento.c2t": `Cumple la Ley 1/2025 sin esfuerzo`,
-          "bento.c2d": `Plan de prevención, documentación y trazabilidad, listos para presentar ante cualquier inspección.`,
-          "bento.c3e": `Rentabilidad`,
-          "bento.c3t": `Recupera margen`,
-          "bento.c3d": `Menos merma, más beneficio: deja de tirar a la basura el dinero que ya habías comprado.`,
-          "bento.c4e": `Marketplace`,
-          "bento.c4t": `Da salida a tus excedentes`,
-          "bento.c4d": `Vende con descuento o dona lo que te sobra antes de que caduque, en un clic.`,
-          "bento.c5e": `Trazabilidad`,
-          "bento.c5t": `Registro a prueba de inspecciones`,
-          "bento.c5d": `Cada acción queda sellada e inmutable, y verificable ante la Administración.`,
+          "bento.c1e": `Modelo H`,
+          "bento.c1t": `Modelo Horeca`,
+          "bento.c1d": `Para restaurantes y hoteles: predice la demanda por plato y por ocupación, controla caducidades y elimina la merma en cocina.`,
+          "bento.c2e": `Modelo M`,
+          "bento.c2t": `Modelo de Mercado`,
+          "bento.c2d": `Para comercio y distribución: predice ventas por producto, ajusta las compras y saca partido a tus excedentes.`,
+          "bento.c3e": `Predicción`,
+          "bento.c3t": `Anticípate y recupera margen`,
+          "bento.c3d": `ODAS predice cuánto venderás para que compres justo lo necesario y dejes de tirar dinero a la basura.`,
+          "bento.c4e": `Cumplimiento`,
+          "bento.c4t": `Cumple la Ley 1/2025`,
+          "bento.c4d": `Plan de prevención, documentación y trazabilidad sellada e inmutable, lista para cualquier inspección.`,
+          "bento.c5e": `Marketplace`,
+          "bento.c5t": `Da salida a tus excedentes`,
+          "bento.c5d": `Vende con descuento o dona lo que te sobra antes de que caduque, en un clic.`,
           "hero.sub": `La <span class="texto-degradado">memoria operativa</span> de tu organización.`,
           "hero.sub2": `ODAS conecta datos, aprende de cada operación y convierte la información en decisiones que reducen desperdicio, aumentan la rentabilidad y garantizan el cumplimiento de la Ley 1/2025.`,
           "card.explore": `Explora`,
@@ -1257,21 +1257,21 @@
           "bento.kicker": `Una sola plataforma`,
           "bento.h": `De la dada a la decisió.`,
           "bento.sub": `ODAS connecta tot el teu negoci i converteix la informació en accions concretes, cada dia.`,
-          "bento.c1e": `Predicció`,
-          "bento.c1t": `Anticipa't a la demanda`,
-          "bento.c1d": `ODAS preveu quant vendràs de cada producte perquè compris just el necessari, ni de més ni de menys.`,
-          "bento.c2e": `Compliment`,
-          "bento.c2t": `Compleix la Llei 1/2025 sense esforç`,
-          "bento.c2d": `Pla de prevenció, documentació i traçabilitat, a punt per presentar davant de qualsevol inspecció.`,
-          "bento.c3e": `Rendibilitat`,
-          "bento.c3t": `Recupera marge`,
-          "bento.c3d": `Menys minva, més benefici: deixa de llençar els diners que ja havies comprat.`,
-          "bento.c4e": `Marketplace`,
-          "bento.c4t": `Dona sortida als excedents`,
-          "bento.c4d": `Ven amb descompte o dona el que et sobra abans que caduqui, en un clic.`,
-          "bento.c5e": `Traçabilitat`,
-          "bento.c5t": `Registre a prova d'inspeccions`,
-          "bento.c5d": `Cada acció queda segellada i immutable, i verificable davant de l'Administració.`,
+          "bento.c1e": `Model H`,
+          "bento.c1t": `Model Horeca`,
+          "bento.c1d": `Per a restaurants i hotels: preveu la demanda per plat i per ocupació, controla les caducitats i elimina la minva a la cuina.`,
+          "bento.c2e": `Model M`,
+          "bento.c2t": `Model de Mercat`,
+          "bento.c2d": `Per a comerç i distribució: preveu vendes per producte, ajusta les compres i treu partit dels teus excedents.`,
+          "bento.c3e": `Predicció`,
+          "bento.c3t": `Anticipa't i recupera marge`,
+          "bento.c3d": `ODAS preveu quant vendràs perquè compris just el necessari i deixis de llençar diners a les escombraries.`,
+          "bento.c4e": `Compliment`,
+          "bento.c4t": `Compleix la Llei 1/2025`,
+          "bento.c4d": `Pla de prevenció, documentació i traçabilitat segellada i immutable, a punt per a qualsevol inspecció.`,
+          "bento.c5e": `Marketplace`,
+          "bento.c5t": `Dona sortida als excedents`,
+          "bento.c5d": `Ven amb descompte o dona el que et sobra abans que caduqui, en un clic.`,
           "hero.sub": `La <span class="texto-degradado">memòria operativa</span> de la teva organització.`,
           "hero.sub2": `ODAS connecta dades, aprèn de cada operació i converteix la informació en decisions que redueixen el malbaratament, augmenten la rendibilitat i garanteixen el compliment de la Llei 1/2025.`,
           "card.explore": `Explora`,
@@ -1371,21 +1371,21 @@
           "bento.kicker": `One platform`,
           "bento.h": `From data to decision.`,
           "bento.sub": `ODAS connects your whole business and turns information into concrete actions, every day.`,
-          "bento.c1e": `Forecasting`,
-          "bento.c1t": `Stay ahead of demand`,
-          "bento.c1d": `ODAS predicts how much you'll sell of each product so you buy exactly what you need — no more, no less.`,
-          "bento.c2e": `Compliance`,
-          "bento.c2t": `Meet Law 1/2025 effortlessly`,
-          "bento.c2d": `Prevention plan, documentation and traceability, ready for any inspection.`,
-          "bento.c3e": `Profitability`,
-          "bento.c3t": `Recover margin`,
-          "bento.c3d": `Less waste, more profit: stop binning the money you already spent.`,
-          "bento.c4e": `Marketplace`,
-          "bento.c4t": `Move your surplus`,
-          "bento.c4d": `Sell at a discount or donate what's left before it expires, in one click.`,
-          "bento.c5e": `Traceability`,
-          "bento.c5t": `Inspection-proof record`,
-          "bento.c5d": `Every action is sealed, immutable and verifiable for the authorities.`,
+          "bento.c1e": `Model H`,
+          "bento.c1t": `Horeca Model`,
+          "bento.c1d": `For restaurants and hotels: forecast demand per dish and per occupancy, track expiry dates and cut kitchen waste.`,
+          "bento.c2e": `Model M`,
+          "bento.c2t": `Market Model`,
+          "bento.c2d": `For retail and distribution: forecast sales per product, fine-tune purchasing and make the most of your surplus.`,
+          "bento.c3e": `Forecasting`,
+          "bento.c3t": `Stay ahead and recover margin`,
+          "bento.c3d": `ODAS predicts how much you'll sell so you buy exactly what you need and stop binning money.`,
+          "bento.c4e": `Compliance`,
+          "bento.c4t": `Meet Law 1/2025`,
+          "bento.c4d": `Prevention plan, documentation and sealed, immutable traceability, ready for any inspection.`,
+          "bento.c5e": `Marketplace`,
+          "bento.c5t": `Move your surplus`,
+          "bento.c5d": `Sell at a discount or donate what's left before it expires, in one click.`,
           "hero.sub": `The <span class="texto-degradado">operational memory</span> of your organisation.`,
           "hero.sub2": `ODAS connects data, learns from every operation and turns information into decisions that reduce waste, boost profitability and ensure compliance with Law 1/2025.`,
           "card.explore": `Explore`,
