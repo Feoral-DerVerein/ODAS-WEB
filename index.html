@@ -805,16 +805,16 @@
           </div>
         </div>
 
-        <!-- Marketplace -->
+        <!-- Avisos accionables -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-gray-950 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:ring-white/25 lg:col-span-2">
           <div class="relative h-64 overflow-hidden bg-black">
-            <canvas data-anim="interconnecting-waves" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+            <canvas data-anim="sonar-sweep" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
             <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-950 to-transparent"></div>
           </div>
           <div class="relative p-6">
-            <p data-i18n="bento.c5e" class="text-xs font-semibold uppercase tracking-wide text-teal-400">Marketplace</p>
-            <h3 data-i18n="bento.c5t" class="mt-1 text-xl font-semibold text-white">Da salida a tus excedentes</h3>
-            <p data-i18n="bento.c5d" class="mt-2 text-sm text-gray-400">Vende con descuento o dona lo que te sobra antes de que caduque, en un clic.</p>
+            <p data-i18n="bento.c5e" class="text-xs font-semibold uppercase tracking-wide text-rose-400">Avisos</p>
+            <h3 data-i18n="bento.c5t" class="mt-1 text-xl font-semibold text-white">Actúa antes de que caduque</h3>
+            <p data-i18n="bento.c5d" class="mt-2 text-sm text-gray-400">ODAS te avisa cada día por WhatsApp de lo que está a punto de caducar, con la acción recomendada en un solo toque.</p>
           </div>
         </div>
 
@@ -826,7 +826,7 @@
          Port a vanilla JS de "set-of-animations-4" (React) — solo las 3 usadas:
            · sphere-scan            → Predicción ("Anticípate y recupera margen")
            · phased-array           → Cumplimiento ("Cumple la Ley 1/2025")
-           · interconnecting-waves  → Marketplace ("Da salida a tus excedentes")
+           · sonar-sweep            → Avisos ("Actúa antes de que caduque")
          Se dibujan en blanco sobre negro; un único bucle rAF, gateado por
          IntersectionObserver (solo animan cuando están en pantalla) y respetando
          prefers-reduced-motion (fotograma estático).
@@ -905,44 +905,33 @@
           }
         }
 
-        // --- Interconnecting Waves ---
-        function initWaves() {
-          return { rings: [{ radius: 20, count: 12 }, { radius: 45, count: 24 }, { radius: 70, count: 36 }], time: 0, last: 0 };
+        // --- Sonar Sweep ---
+        function initSonar() {
+          var rings = [], fadeTime = 2500;
+          for (var r = 20; r <= 80; r += 15) for (var i = 0; i < r / 2; i++) rings.push({ r: r, angle: (i / (r / 2)) * Math.PI * 2, lastSeen: -fadeTime });
+          return { rings: rings, fadeTime: fadeTime };
         }
-        function drawWaves(ctx, st, ts) {
-          if (!st.last) st.last = ts;
-          st.time += (ts - st.last) * 0.001 * SPEED; st.last = ts;
-          var t = st.time, rings = st.rings;
-          for (var ri = 0; ri < rings.length; ri++) {
-            if (ri >= rings.length - 1) continue;
-            var ring = rings[ri], next = rings[ri + 1];
-            for (var i = 0; i < ring.count; i++) {
-              var a1 = (i / ring.count) * Math.PI * 2, rp1 = Math.sin(t * 2 - ri * 0.4) * 3;
-              var x1 = C + Math.cos(a1) * (ring.radius + rp1), y1 = C + Math.sin(a1) * (ring.radius + rp1);
-              var ratio = next.count / ring.count;
-              for (var j = 0; j < ratio; j++) {
-                var a2 = ((i * ratio + j) / next.count) * Math.PI * 2, rp2 = Math.sin(t * 2 - (ri + 1) * 0.4) * 3;
-                var x2 = C + Math.cos(a2) * (next.radius + rp2), y2 = C + Math.sin(a2) * (next.radius + rp2);
-                ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.lineWidth = 0.75;
-                ctx.strokeStyle = stroke(0.1 + ((Math.sin(t * 3 - ri * 0.5 + i * 0.3) + 1) / 2) * 0.4); ctx.stroke();
-              }
-            }
-          }
-          for (var r2 = 0; r2 < rings.length; r2++) {
-            var rg = rings[r2];
-            for (var ii = 0; ii < rg.count; ii++) {
-              var ang = (ii / rg.count) * Math.PI * 2, rp = Math.sin(t * 2 - r2 * 0.4) * 3;
-              var x = C + Math.cos(ang) * (rg.radius + rp), y = C + Math.sin(ang) * (rg.radius + rp);
-              ctx.beginPath(); ctx.arc(x, y, 1.5, 0, Math.PI * 2);
-              ctx.fillStyle = fill(0.4 + Math.sin(t * 2 - r2 * 0.4 + ii * 0.2) * 0.6); ctx.fill();
-            }
+        function drawSonar(ctx, st, ts) {
+          var scanAngle = (ts * 0.001 * (Math.PI / 2) * SPEED) % (Math.PI * 2);
+          // haz de barrido desde el centro
+          ctx.beginPath(); ctx.moveTo(C, C); ctx.lineTo(C + 85 * Math.cos(scanAngle), C + 85 * Math.sin(scanAngle));
+          ctx.strokeStyle = stroke(0.5); ctx.lineWidth = 1; ctx.stroke();
+          for (var k = 0; k < st.rings.length; k++) {
+            var dot = st.rings[k];
+            var diff = Math.abs(dot.angle - scanAngle); if (diff > Math.PI) diff = Math.PI * 2 - diff;
+            if (diff < 0.05) dot.lastSeen = ts;
+            var since = ts - dot.lastSeen;
+            var x = C + dot.r * Math.cos(dot.angle), y = C + dot.r * Math.sin(dot.angle);
+            var op = 0.14, size = 1; // rejilla de radar siempre visible (buena para el fotograma estático)
+            if (since < st.fadeTime) { var sweep = 1 - ease(since / st.fadeTime); op = Math.max(op, sweep); size = 1 + sweep * 1.5; }
+            ctx.beginPath(); ctx.arc(x, y, size, 0, Math.PI * 2); ctx.fillStyle = fill(op); ctx.fill();
           }
         }
 
         var REGISTRY = {
           'sphere-scan': { init: initSphere, draw: drawSphere },
           'phased-array': { init: initPhased, draw: drawPhased },
-          'interconnecting-waves': { init: initWaves, draw: drawWaves }
+          'sonar-sweep': { init: initSonar, draw: drawSonar }
         };
 
         var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1291,9 +1280,9 @@
           "bento.c4e": `Cumplimiento`,
           "bento.c4t": `Cumple la Ley 1/2025`,
           "bento.c4d": `Plan de prevención, documentación y trazabilidad sellada e inmutable, lista para cualquier inspección.`,
-          "bento.c5e": `Marketplace`,
-          "bento.c5t": `Da salida a tus excedentes`,
-          "bento.c5d": `Vende con descuento o dona lo que te sobra antes de que caduque, en un clic.`,
+          "bento.c5e": `Avisos`,
+          "bento.c5t": `Actúa antes de que caduque`,
+          "bento.c5d": `ODAS te avisa cada día por WhatsApp de lo que está a punto de caducar, con la acción recomendada en un solo toque.`,
           "hero.sub": `La <span class="texto-degradado">memoria operativa</span> de tu organización.`,
           "hero.sub2": `ODAS conecta datos, aprende de cada operación y convierte la información en decisiones que reducen desperdicio, aumentan la rentabilidad y garantizan el cumplimiento de la Ley 1/2025.`,
           "card.explore": `Explora`,
@@ -1392,9 +1381,9 @@
           "bento.c4e": `Compliment`,
           "bento.c4t": `Compleix la Llei 1/2025`,
           "bento.c4d": `Pla de prevenció, documentació i traçabilitat segellada i immutable, a punt per a qualsevol inspecció.`,
-          "bento.c5e": `Marketplace`,
-          "bento.c5t": `Dona sortida als excedents`,
-          "bento.c5d": `Ven amb descompte o dona el que et sobra abans que caduqui, en un clic.`,
+          "bento.c5e": `Avisos`,
+          "bento.c5t": `Actua abans que caduqui`,
+          "bento.c5d": `ODAS t'avisa cada dia per WhatsApp del que està a punt de caducar, amb l'acció recomanada en un sol toc.`,
           "hero.sub": `La <span class="texto-degradado">memòria operativa</span> de la teva organització.`,
           "hero.sub2": `ODAS connecta dades, aprèn de cada operació i converteix la informació en decisions que redueixen el malbaratament, augmenten la rendibilitat i garanteixen el compliment de la Llei 1/2025.`,
           "card.explore": `Explora`,
@@ -1493,9 +1482,9 @@
           "bento.c4e": `Compliance`,
           "bento.c4t": `Meet Law 1/2025`,
           "bento.c4d": `Prevention plan, documentation and sealed, immutable traceability, ready for any inspection.`,
-          "bento.c5e": `Marketplace`,
-          "bento.c5t": `Move your surplus`,
-          "bento.c5d": `Sell at a discount or donate what's left before it expires, in one click.`,
+          "bento.c5e": `Alerts`,
+          "bento.c5t": `Act before it expires`,
+          "bento.c5d": `ODAS alerts you every day on WhatsApp about what's about to expire, with the recommended action in a single tap.`,
           "hero.sub": `The <span class="texto-degradado">operational memory</span> of your organisation.`,
           "hero.sub2": `ODAS connects data, learns from every operation and turns information into decisions that reduce waste, boost profitability and ensure compliance with Law 1/2025.`,
           "card.explore": `Explore`,
