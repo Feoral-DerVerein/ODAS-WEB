@@ -1009,36 +1009,188 @@
 
 
     <!-- ========================================================================
-         SECCIÓN 5 · BANDA DE ESTADÍSTICAS GRANDES
-         ------------------------------------------------------------------------
-         · Tres cifras grandes en fila.
+         SECCIÓN · INTEGRACIONES — AnimatedBeam (port vanilla de magicui/framer-motion)
+         · Los datos de las herramientas convergen en el núcleo ODAS.
+         · Iconos exteriores = provisionales (se irán sustituyendo).
          ======================================================================== -->
-    <!-- [[EDITAR: fondo animado "lluvia"; los colores se editan en ".patron-cae" del <style> de arriba]] -->
-    <section id="bandaCifras" class="relative mx-auto my-12 max-w-6xl overflow-hidden px-5 py-24">
-      <!-- Fondo "Falling Pattern" — componente de 21st.dev (sshahaider/efferd),
-           portado de React+Framer Motion a CSS puro. Estilos en .falling-pattern -->
-      <div class="falling-pattern" aria-hidden="true">
-        <div class="fp-layer"></div>
-        <div class="fp-blur"></div>
-      </div>
-      <div class="relative z-10 grid grid-cols-1 gap-10 text-center sm:grid-cols-3">
-        <!-- [[EDITAR: cifra grande 1]] -->
-        <div>
-          <p class="cifra-cuenta text-5xl font-extrabold tracking-tight text-black md:text-6xl" data-final="500" data-pre="€" data-suf="K" data-dec="0">€500K</p>
-          <p data-i18n="banda.label1" class="cifra-label mt-3 text-gray-600">en ahorro en multas.</p>
-        </div>
-        <!-- [[EDITAR: cifra grande 2]] -->
-        <div>
-          <p class="cifra-cuenta text-5xl font-extrabold tracking-tight text-black md:text-6xl" data-final="10" data-suf=" min" data-dec="0">10 min</p>
-          <p data-i18n="banda.label2" class="cifra-label mt-3 text-gray-600">Creación del Plan de prevención gratis.</p>
-        </div>
-        <!-- [[EDITAR: cifra grande 3]] -->
-        <div>
-          <p class="cifra-cuenta text-5xl font-extrabold tracking-tight text-black md:text-6xl" data-final="99.9" data-suf="%" data-dec="1">99.9%</p>
-          <p data-i18n="banda.label3" class="cifra-label mt-3 text-gray-600">en la ejecución del plan.</p>
+    <section class="mx-auto max-w-6xl px-5 py-20 sm:py-24">
+      <p data-i18n="beam.kicker" class="text-center text-sm font-semibold uppercase tracking-wider text-emerald-600">Conectado</p>
+      <h2 data-i18n="beam.h" class="mx-auto mt-2 max-w-2xl text-center text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Todos tus datos, conectados a ODAS</h2>
+      <p data-i18n="beam.sub" class="mx-auto mt-3 max-w-xl text-center text-lg text-gray-500">ODAS reúne la información dispersa de tus herramientas y la convierte en memoria operativa.</p>
+
+      <div id="beamContainer" class="relative mx-auto mt-14 flex h-[380px] w-full max-w-xl items-center justify-center overflow-hidden">
+        <svg id="beamSvg" class="pointer-events-none absolute inset-0 z-0 h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+        <div class="relative z-10 flex size-full max-h-[240px] max-w-md flex-col items-stretch justify-between">
+          <!-- fila superior -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn1" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg" class="size-7">
+                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+              </svg>
+            </div>
+            <div id="bn5" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg viewBox="0 0 47 65" xmlns="http://www.w3.org/2000/svg" class="size-6">
+                <path d="M29.375 0 4.40625 0C1.98 0 0 1.994 0 4.43v56.14C0 63.006 1.98 65 4.40625 65H42.59C45.017 65 47 63.006 47 60.568V17.727L29.375 0Z" fill="#4285F4"/>
+                <path d="M11.75 47.27h23.5v-2.955h-23.5v2.955Zm0 5.91h17.625v-2.955H11.75v2.955Zm0-20.68v2.955h23.5V32.5H11.75Zm0 8.864h23.5v-2.955H11.75v2.955Z" fill="#F1F1F1"/>
+                <path d="M29.375 0v13.295c0 2.45 1.972 4.432 4.406 4.432H47L29.375 0Z" fill="#A1C2FA"/>
+              </svg>
+            </div>
+          </div>
+          <!-- fila media -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn2" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="size-7">
+                <path d="M6.017 4.313l55.333 -4.087c6.797 -0.583 8.543 -0.19 12.817 2.917l17.663 12.443c2.913 2.14 3.883 2.723 3.883 5.053v68.243c0 4.277 -1.553 6.807 -6.99 7.193L24.467 99.967c-4.08 0.193 -6.023 -0.39 -8.16 -3.113L3.3 79.94c-2.333 -3.113 -3.3 -5.443 -3.3 -8.167V11.113c0 -3.497 1.553 -6.413 6.017 -6.8z" fill="#ffffff"/>
+                <path d="M61.35 0.227l-55.333 4.087C1.553 4.7 0 7.617 0 11.113v60.66c0 2.723 0.967 5.053 3.3 8.167l13.007 16.913c2.137 2.723 4.08 3.307 8.16 3.113l64.257 -3.89c5.433 -0.387 6.99 -2.917 6.99 -7.193V20.64c0 -2.21 -0.873 -2.847 -3.443 -4.733L74.167 3.143c-4.273 -3.107 -6.02 -3.5 -12.817 -2.917zM25.92 19.523c-5.247 0.353 -6.437 0.433 -9.417 -1.99L8.927 11.507c-0.77 -0.78 -0.383 -1.753 1.557 -1.947l53.193 -3.887c4.467 -0.39 6.793 1.167 8.54 2.527l9.123 6.61c0.39 0.197 1.36 1.36 0.193 1.36l-54.933 3.307 -0.68 0.047zM19.803 88.3V30.367c0 -2.53 0.777 -3.697 3.103 -3.893L86 22.78c2.14 -0.193 3.107 1.167 3.107 3.693v57.547c0 2.53 -0.39 4.67 -3.883 4.863l-60.377 3.5c-3.493 0.193 -5.043 -0.97 -5.043 -4.083zm59.6 -54.827c0.387 1.75 0 3.5 -1.75 3.7l-2.91 0.577v42.773c-2.527 1.36 -4.853 2.137 -6.797 2.137 -3.107 0 -3.883 -0.973 -6.21 -3.887l-19.03 -29.94v28.967l6.02 1.363s0 3.5 -4.857 3.5l-13.39 0.777c-0.39 -0.78 0 -2.723 1.357 -3.11l3.497 -0.97v-38.3L30.48 40.667c-0.39 -1.75 0.58 -4.277 3.3 -4.473l14.367 -0.967 19.8 30.327v-26.83l-5.047 -0.58c-0.39 -2.143 1.163 -3.7 3.103 -3.89l13.4 -0.78z" fill="#000000" fill-rule="evenodd" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div id="bn4" class="beam-hub relative z-10 flex size-20 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_34px_-10px_rgba(0,0,0,0.4)]">
+              <img src="odas-simbolo.png" alt="ODAS" class="size-12 object-contain" />
+            </div>
+            <div id="bn6" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg viewBox="0 0 244 66" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-10">
+                <path d="M57.1877 45.2253L57.1534 45.1166L78.809 25.2914V15.7391H44.0663V25.2914H64.8181L64.8524 25.3829L43.4084 45.2253V54.7775H79.1579V45.2253H57.1877Z" fill="#201515"/>
+                <path d="M100.487 14.8297C96.4797 14.8297 93.2136 15.434 90.6892 16.6429C88.3376 17.6963 86.3568 19.4321 85.0036 21.6249C83.7091 23.8321 82.8962 26.2883 82.6184 28.832L93.1602 30.3135C93.5415 28.0674 94.3042 26.4754 95.4482 25.5373C96.7486 24.5562 98.3511 24.0605 99.9783 24.136C102.118 24.136 103.67 24.7079 104.634 25.8519C105.59 26.9959 106.076 28.5803 106.076 30.6681V31.7091H95.9401C90.7807 31.7091 87.0742 32.8531 84.8206 35.1411C82.5669 37.429 81.442 40.4492 81.4458 44.2014C81.4458 48.0452 82.5707 50.9052 84.8206 52.7813C87.0704 54.6574 89.8999 55.5897 93.3089 55.5783C97.5379 55.5783 100.791 54.1235 103.067 51.214C104.412 49.426 105.372 47.3793 105.887 45.2024H106.27L107.723 54.7546H117.275V30.5651C117.275 25.5659 115.958 21.6936 113.323 18.948C110.688 16.2024 106.409 14.8297 100.487 14.8297ZM103.828 44.6475C102.312 45.9116 100.327 46.5408 97.8562 46.5408C95.8199 46.5408 94.4052 46.1843 93.6121 45.4712C93.2256 45.1338 92.9182 44.7155 92.7116 44.246C92.505 43.7764 92.4043 43.2671 92.4166 42.7543C92.3941 42.2706 92.4702 41.7874 92.6403 41.3341C92.8104 40.8808 93.071 40.4668 93.4062 40.1174C93.7687 39.7774 94.1964 39.5145 94.6633 39.3444C95.1303 39.1743 95.6269 39.1006 96.1231 39.1278H106.093V39.7856C106.113 40.7154 105.919 41.6374 105.527 42.4804C105.134 43.3234 104.553 44.0649 103.828 44.6475Z" fill="#201515"/>
+                <path d="M175.035 15.7391H163.75V54.7833H175.035V15.7391Z" fill="#201515"/>
+                <path d="M241.666 15.7391C238.478 15.7391 235.965 16.864 234.127 19.1139C232.808 20.7307 231.805 23.1197 231.119 26.2809H230.787L229.311 15.7391H219.673V54.7775H230.959V34.7578C230.959 32.2335 231.55 30.2982 232.732 28.9521C233.914 27.606 236.095 26.933 239.275 26.933H243.559V15.7391H241.666Z" fill="#201515"/>
+                <path d="M208.473 17.0147C205.839 15.4474 202.515 14.6657 198.504 14.6695C192.189 14.6695 187.247 16.4675 183.678 20.0634C180.108 23.6593 178.324 28.6166 178.324 34.9352C178.233 38.7553 179.067 42.5407 180.755 45.9689C182.3 49.0238 184.706 51.5592 187.676 53.2618C190.665 54.9892 194.221 55.8548 198.344 55.8586C201.909 55.8586 204.887 55.3095 207.278 54.2113C209.526 53.225 211.483 51.6791 212.964 49.7211C214.373 47.7991 215.42 45.6359 216.052 43.3377L206.329 40.615C205.919 42.1094 205.131 43.4728 204.041 44.5732C202.942 45.6714 201.102 46.2206 198.521 46.2206C195.451 46.2206 193.163 45.3416 191.657 43.5837C190.564 42.3139 189.878 40.5006 189.575 38.1498H216.201C216.31 37.0515 216.367 36.1306 216.367 35.387V32.9561C216.431 29.6903 215.757 26.4522 214.394 23.4839C213.118 20.7799 211.054 18.5248 208.473 17.0147ZM198.178 23.9758C202.754 23.9758 205.348 26.2275 205.962 30.731H189.775C190.032 29.2284 190.655 27.8121 191.588 26.607C193.072 24.8491 195.268 23.972 198.178 23.9758Z" fill="#201515"/>
+                <path d="M169.515 0.00366253C168.666 -0.0252113 167.82 0.116874 167.027 0.421484C166.234 0.726094 165.511 1.187 164.899 1.77682C164.297 2.3723 163.824 3.08658 163.512 3.87431C163.2 4.66204 163.055 5.50601 163.086 6.35275C163.056 7.20497 163.201 8.05433 163.514 8.84781C163.826 9.64129 164.299 10.3619 164.902 10.9646C165.505 11.5673 166.226 12.0392 167.02 12.3509C167.814 12.6626 168.663 12.8074 169.515 12.7762C170.362 12.8082 171.206 12.6635 171.994 12.3514C172.782 12.0392 173.496 11.5664 174.091 10.963C174.682 10.3534 175.142 9.63077 175.446 8.83849C175.75 8.04621 175.89 7.20067 175.859 6.35275C175.898 5.50985 175.761 4.66806 175.456 3.88115C175.151 3.09424 174.686 2.37951 174.09 1.78258C173.493 1.18565 172.779 0.719644 171.992 0.414327C171.206 0.109011 170.364 -0.0288946 169.521 0.00938803L169.515 0.00366253Z" fill="#201515"/>
+                <path d="M146.201 14.6695C142.357 14.6695 139.268 15.8764 136.935 18.2902C135.207 20.0786 133.939 22.7479 133.131 26.2981H132.771L131.295 15.7563H121.657V66H132.942V45.3054H133.354C133.698 46.6852 134.181 48.0267 134.795 49.3093C135.75 51.3986 137.316 53.1496 139.286 54.3314C141.328 55.446 143.629 56.0005 145.955 55.9387C150.68 55.9387 154.277 54.0988 156.748 50.419C159.219 46.7392 160.455 41.6046 160.455 35.0153C160.455 28.6509 159.259 23.6689 156.869 20.0691C154.478 16.4694 150.922 14.6695 146.201 14.6695ZM147.345 42.9602C146.029 44.8668 143.97 45.8201 141.167 45.8201C140.012 45.8735 138.86 45.6507 137.808 45.1703C136.755 44.6898 135.832 43.9656 135.116 43.0574C133.655 41.2233 132.927 38.7122 132.931 35.5243V34.7807C132.931 31.5432 133.659 29.0646 135.116 27.3448C136.572 25.625 138.59 24.7747 141.167 24.7937C144.02 24.7937 146.092 25.6994 147.385 27.5107C148.678 29.322 149.324 31.8483 149.324 35.0896C149.332 38.4414 148.676 41.065 147.356 42.9602H147.345Z" fill="#201515"/>
+                <path d="M39.0441 45.2253H0V54.789H39.0441V45.2253Z" fill="#FF4F00"/>
+              </svg>
+            </div>
+          </div>
+          <!-- fila inferior -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn3" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg viewBox="0 0 175.216 175.552" xmlns="http://www.w3.org/2000/svg" class="size-7">
+                <defs>
+                  <linearGradient id="wa-b" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#57d163"/>
+                    <stop offset="1" stop-color="#23b33a"/>
+                  </linearGradient>
+                </defs>
+                <path d="m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z" fill="#ffffff"/>
+                <path d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.517 31.126 8.523h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.928z" fill="url(#wa-b)"/>
+                <path d="M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647" fill="#ffffff" fill-rule="evenodd"/>
+              </svg>
+            </div>
+            <div id="bn7" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="size-7">
+                <radialGradient id="msgr" cx="11.087" cy="7.022" r="47.612" gradientTransform="matrix(1 0 0 -1 0 50)" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#1292ff"/>
+                  <stop offset=".079" stop-color="#2982ff"/>
+                  <stop offset=".23" stop-color="#4e69ff"/>
+                  <stop offset=".351" stop-color="#6559ff"/>
+                  <stop offset=".428" stop-color="#6d53ff"/>
+                  <stop offset=".754" stop-color="#df47aa"/>
+                  <stop offset=".946" stop-color="#ff6257"/>
+                </radialGradient>
+                <path fill="url(#msgr)" d="M44,23.5C44,34.27,35.05,43,24,43c-1.651,0-3.25-0.194-4.784-0.564c-0.465-0.112-0.951-0.069-1.379,0.145L13.46,44.77C12.33,45.335,11,44.513,11,43.249v-4.025c0-0.575-0.257-1.111-0.681-1.499C6.425,34.165,4,29.11,4,23.5C4,12.73,12.95,4,24,4S44,12.73,44,23.5z"/>
+                <path fill="#ffffff" d="M34.394,18.501l-5.7,4.22c-0.61,0.46-1.44,0.46-2.04,0.01L22.68,19.74c-1.68-1.25-4.06-0.82-5.19,0.94l-1.21,1.89l-4.11,6.68c-0.6,0.94,0.55,2.01,1.44,1.34l5.7-4.22c0.61-0.46,1.44-0.46,2.04-0.01l3.974,2.991c1.68,1.25,4.06,0.82,5.19-0.94l1.21-1.89l4.11-6.68C36.434,18.901,35.284,17.831,34.394,18.501z"/>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Script del AnimatedBeam: calcula las curvas entre nodos y anima el "haz" con SMIL -->
+    <script>
+      (function () {
+        var container = document.getElementById('beamContainer');
+        if (!container) return;
+        var svg = document.getElementById('beamSvg');
+        if (!svg) return;
+        var NS = 'http://www.w3.org/2000/svg';
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // from → hub(bn4). Lado izquierdo: normal; derecho: reverse (el haz siempre entra al núcleo).
+        var beams = [
+          { from: 'bn1', curvature: -75, endYOffset: -10, reverse: false, dur: 4.6, begin: 0.0 },
+          { from: 'bn2', curvature: 0, endYOffset: 0, reverse: false, dur: 5.2, begin: 0.6 },
+          { from: 'bn3', curvature: 75, endYOffset: 10, reverse: false, dur: 4.9, begin: 1.1 },
+          { from: 'bn5', curvature: -75, endYOffset: -10, reverse: true, dur: 5.0, begin: 0.3 },
+          { from: 'bn6', curvature: 0, endYOffset: 0, reverse: true, dur: 4.7, begin: 0.9 },
+          { from: 'bn7', curvature: 75, endYOffset: 10, reverse: true, dur: 5.3, begin: 1.4 }
+        ];
+        var toEl = document.getElementById('bn4');
+
+        // Construye las capas del SVG una sola vez; el path 'd' se recalcula en resize.
+        var defs = document.createElementNS(NS, 'defs');
+        svg.appendChild(defs);
+        var built = [];
+        beams.forEach(function (b, i) {
+          var gid = 'beamGrad' + i;
+          var grad = document.createElementNS(NS, 'linearGradient');
+          grad.setAttribute('id', gid);
+          grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+          grad.setAttribute('x1', '0%'); grad.setAttribute('x2', '0%');
+          grad.setAttribute('y1', '0%'); grad.setAttribute('y2', '0%');
+          grad.innerHTML =
+            '<stop stop-color="#10b981" stop-opacity="0"></stop>' +
+            '<stop stop-color="#10b981"></stop>' +
+            '<stop offset="32.5%" stop-color="#0ea5e9"></stop>' +
+            '<stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"></stop>';
+          if (!reduce) {
+            var x1v = b.reverse ? '90%;-10%' : '10%;110%';
+            var x2v = b.reverse ? '100%;0%' : '0%;100%';
+            grad.innerHTML +=
+              '<animate attributeName="x1" values="' + x1v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>' +
+              '<animate attributeName="x2" values="' + x2v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>';
+          }
+          defs.appendChild(grad);
+
+          var base = document.createElementNS(NS, 'path');
+          base.setAttribute('stroke', '#c7ccd4');
+          base.setAttribute('stroke-width', '2');
+          base.setAttribute('stroke-opacity', '0.35');
+          base.setAttribute('stroke-linecap', 'round');
+          base.setAttribute('fill', 'none');
+          svg.appendChild(base);
+
+          var glow = document.createElementNS(NS, 'path');
+          glow.setAttribute('stroke', 'url(#' + gid + ')');
+          glow.setAttribute('stroke-width', '2');
+          glow.setAttribute('stroke-linecap', 'round');
+          glow.setAttribute('fill', 'none');
+          svg.appendChild(glow);
+
+          built.push({ cfg: b, base: base, glow: glow });
+        });
+
+        function update() {
+          var cr = container.getBoundingClientRect();
+          if (!cr.width || !cr.height) return;
+          svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + cr.height);
+          var rb = toEl.getBoundingClientRect();
+          built.forEach(function (o) {
+            var fromEl = document.getElementById(o.cfg.from);
+            if (!fromEl) return;
+            var ra = fromEl.getBoundingClientRect();
+            var sx = ra.left - cr.left + ra.width / 2;
+            var sy = ra.top - cr.top + ra.height / 2;
+            var ex = rb.left - cr.left + rb.width / 2;
+            var ey = rb.top - cr.top + rb.height / 2 + o.cfg.endYOffset;
+            var cyc = sy - o.cfg.curvature;
+            var d = 'M ' + sx + ',' + sy + ' Q ' + ((sx + ex) / 2) + ',' + cyc + ' ' + ex + ',' + ey;
+            o.base.setAttribute('d', d);
+            o.glow.setAttribute('d', d);
+          });
+        }
+
+        if (window.ResizeObserver) { new ResizeObserver(update).observe(container); }
+        window.addEventListener('resize', update);
+        // Recalcula tras cargar imágenes/fuentes (los nodos cambian de posición).
+        window.addEventListener('load', update);
+        update();
+      })();
+    </script>
 
 
     <!-- ========================================================================
@@ -1283,6 +1435,9 @@
           "bento.c5e": `Avisos`,
           "bento.c5t": `Actúa antes de que caduque`,
           "bento.c5d": `ODAS te avisa cada día por WhatsApp de lo que está a punto de caducar, con la acción recomendada en un solo toque.`,
+          "beam.kicker": `Conectado`,
+          "beam.h": `Todos tus datos, conectados a ODAS`,
+          "beam.sub": `ODAS reúne la información dispersa de tus herramientas y la convierte en memoria operativa.`,
           "hero.sub": `La <span class="texto-degradado">memoria operativa</span> de tu organización.`,
           "hero.sub2": `ODAS conecta datos, aprende de cada operación y convierte la información en decisiones que reducen desperdicio, aumentan la rentabilidad y garantizan el cumplimiento de la Ley 1/2025.`,
           "card.explore": `Explora`,
@@ -1384,6 +1539,9 @@
           "bento.c5e": `Avisos`,
           "bento.c5t": `Actua abans que caduqui`,
           "bento.c5d": `ODAS t'avisa cada dia per WhatsApp del que està a punt de caducar, amb l'acció recomanada en un sol toc.`,
+          "beam.kicker": `Connectat`,
+          "beam.h": `Totes les teves dades, connectades a ODAS`,
+          "beam.sub": `ODAS reuneix la informació dispersa de les teves eines i la converteix en memòria operativa.`,
           "hero.sub": `La <span class="texto-degradado">memòria operativa</span> de la teva organització.`,
           "hero.sub2": `ODAS connecta dades, aprèn de cada operació i converteix la informació en decisions que redueixen el malbaratament, augmenten la rendibilitat i garanteixen el compliment de la Llei 1/2025.`,
           "card.explore": `Explora`,
@@ -1485,6 +1643,9 @@
           "bento.c5e": `Alerts`,
           "bento.c5t": `Act before it expires`,
           "bento.c5d": `ODAS alerts you every day on WhatsApp about what's about to expire, with the recommended action in a single tap.`,
+          "beam.kicker": `Connected`,
+          "beam.h": `All your data, connected to ODAS`,
+          "beam.sub": `ODAS brings together the scattered information from your tools and turns it into operational memory.`,
           "hero.sub": `The <span class="texto-degradado">operational memory</span> of your organisation.`,
           "hero.sub2": `ODAS connects data, learns from every operation and turns information into decisions that reduce waste, boost profitability and ensure compliance with Law 1/2025.`,
           "card.explore": `Explore`,
@@ -1739,37 +1900,6 @@
         alEntrarEnPantalla(chain,
           function () { chain.classList.add('animar'); },
           function () { chain.classList.remove('animar'); } // permite repetir al volver a verla
-        );
-      })();
-
-      // --- Banda de cifras: cuenta los números al entrar en pantalla ---
-      (function () {
-        var band = document.getElementById('bandaCifras');
-        if (!band) return;
-        var cifras = band.querySelectorAll('.cifra-cuenta');
-        function fmt(el, v) {
-          var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
-          return (el.getAttribute('data-pre') || '') + v.toFixed(dec) + (el.getAttribute('data-suf') || '');
-        }
-        function contar(el) {
-          var objetivo = parseFloat(el.getAttribute('data-final'));
-          var dur = 1500, ini = null;
-          function paso(ts) {
-            if (ini === null) ini = ts;
-            var p = Math.min((ts - ini) / dur, 1);
-            var e = 1 - Math.pow(1 - p, 3);
-            el.textContent = fmt(el, objetivo * e);
-            if (p < 1) requestAnimationFrame(paso);
-            else el.textContent = fmt(el, objetivo);
-          }
-          requestAnimationFrame(paso);
-        }
-        function reset() { cifras.forEach(function (c) { c.textContent = fmt(c, 0); }); }
-        band.classList.add('cifras-prep');
-        reset();
-        alEntrarEnPantalla(band,
-          function () { band.classList.add('animar'); cifras.forEach(contar); },
-          function () { band.classList.remove('animar'); reset(); }
         );
       })();
 
