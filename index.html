@@ -291,10 +291,6 @@
       }
 
       /* Gráfico de predicción: las líneas se "dibujan" (revelado izq→der) al entrar en pantalla */
-      .reveal-rect { transform-box: view-box; transform-origin: 0px 0px; }
-      #chartCard.chart-prep .reveal-rect { transform: scaleX(0); }
-      #chartCard.animar .reveal-rect { animation: revealChart 1.5s ease-out forwards; }
-      @keyframes revealChart { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
       /* Efecto cascada: los mensajes de la tarjeta de predicción aparecen uno tras otro */
       @keyframes cascadaItem { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -724,145 +720,6 @@
 
 
     <!-- ========================================================================
-         SECCIÓN 4 · PARA DESARROLLADORES — "One API. Every modality."
-         ------------------------------------------------------------------------
-         · Titular + párrafo + 2 botones + 3 estadísticas + bloque de código
-           con pestañas (Python / TypeScript / cURL) y botón "Copy".
-         ======================================================================== -->
-    <section class="bg-white">
-      <div class="mx-auto grid max-w-6xl gap-12 px-5 py-24 lg:grid-cols-2 lg:items-center">
-
-        <!-- Columna izquierda: texto, botones y estadísticas -->
-        <div>
-          <p data-i18n="dev.kicker" class="mb-3 text-sm font-medium uppercase tracking-wider text-gray-500">Para el retail y la distribución</p>
-          <h2 id="devTitle" data-i18n-html="dev.title" class="text-3xl font-medium tracking-tight text-black sm:text-4xl">
-            <!-- [[EDITAR: titular de la sección]] · la frase con degradado ROTA (ver script "frase rotatoria") -->
-            Menos mermas. <span class="texto-degradado">Más margen.</span>
-          </h2>
-          <p data-i18n="dev.para" class="mt-5 max-w-md text-lg text-gray-600">
-            <!-- [[EDITAR: párrafo descriptivo]] -->
-            ODAS te ayuda a predecir la demanda de tus productos y distribuir tus
-            excedentes para que puedas cumplir la Ley 1/2025 sin fricción operativa
-            y recuperar margen antes de que llegue a la basura.
-          </p>
-
-          <!-- Dos botones -->
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <!-- [[EDITAR: botón de la sección]] -->
-            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS" data-i18n="cta.demo" class="rounded-full border border-borde px-6 py-3 text-center font-semibold text-black transition hover:bg-black/5">Solicita una Demo</a>
-          </div>
-
-          <!-- Tres estadísticas en fila -->
-          <div class="mt-12 grid grid-cols-3 gap-4 pt-8">
-            <!-- [[EDITAR: estadística 1]] -->
-            <div>
-              <p class="text-2xl font-bold text-black sm:text-3xl">1k+</p>
-              <p data-i18n="dev.stat1" class="mt-1 text-sm text-gray-500">Predicciones por día</p>
-            </div>
-            <!-- [[EDITAR: estadística 2]] -->
-            <div>
-              <p class="text-2xl font-bold text-black sm:text-3xl">40%</p>
-              <p data-i18n="dev.stat2" class="mt-1 text-sm text-gray-500">Menos de desperdicio</p>
-            </div>
-            <!-- [[EDITAR: estadística 3]] -->
-            <div>
-              <p class="text-2xl font-bold text-black sm:text-3xl">6</p>
-              <p data-i18n="dev.stat3" class="mt-1 text-sm text-gray-500">Canales de distribución</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Columna derecha: gráfico sobre fondo degradado (estilo x.ai) -->
-        <!-- [[EDITAR: para cambiar los valores del gráfico, edita los números de "points" de cada línea y las métricas de abajo]] -->
-        <div class="fondo-gradiente rounded-none p-5 sm:p-8">
-          <div id="chartCard" class="overflow-hidden rounded-2xl border border-white/50 bg-white p-5 shadow-xl">
-          <p id="chartTitle" class="text-sm font-semibold text-gray-800">Predicción de demanda — próximos 7 días</p>
-
-          <svg viewBox="0 0 600 300" class="mt-3 w-full" xmlns="http://www.w3.org/2000/svg" aria-label="Gráfico de predicción de demanda">
-            <defs>
-              <clipPath id="chartReveal"><rect class="reveal-rect" x="0" y="0" width="600" height="300"/></clipPath>
-            </defs>
-
-            <!-- Rejilla horizontal (fija) -->
-            <g stroke="#ececec" stroke-dasharray="3 3">
-              <line x1="40" y1="20" x2="580" y2="20"/>
-              <line x1="40" y1="77.5" x2="580" y2="77.5"/>
-              <line x1="40" y1="135" x2="580" y2="135"/>
-              <line x1="40" y1="192.5" x2="580" y2="192.5"/>
-              <line x1="40" y1="250" x2="580" y2="250"/>
-            </g>
-            <!-- Etiquetas eje Y (las rellena el script según la medición) -->
-            <g id="chartYAxis" fill="#94a3b8" font-size="11" font-family="Inter, sans-serif" text-anchor="end">
-              <text x="32" y="24">80</text>
-              <text x="32" y="81.5">60</text>
-              <text x="32" y="139">40</text>
-              <text x="32" y="196.5">20</text>
-              <text x="32" y="254">0</text>
-            </g>
-            <!-- Etiquetas eje X (fechas) -->
-            <g fill="#94a3b8" font-size="11" font-family="Inter, sans-serif" text-anchor="middle">
-              <text x="40" y="270">13 Jun</text>
-              <text x="130" y="270">14 Jun</text>
-              <text x="220" y="270">15 Jun</text>
-              <text x="310" y="270">16 Jun</text>
-              <text x="400" y="270">17 Jun</text>
-              <text x="490" y="270">18 Jun</text>
-              <text x="580" y="270">19 Jun</text>
-            </g>
-
-            <!-- Capa de datos (la rellena el script; se revela con la animación) -->
-            <g id="chartData" clip-path="url(#chartReveal)">
-              <!-- Zona "sin stock" -->
-              <rect x="310" y="20" width="270" height="230" fill="#f7ede1" opacity="0.55"/>
-              <!-- Banda de intervalo de confianza -->
-              <polygon points="40,106.3 130,132.1 220,126.4 310,126.4 400,126.4 490,126.4 580,129.3 580,178.1 490,175.3 400,175.3 310,175.3 220,175.3 130,189.6 40,160.9" fill="#dbe4fb" opacity="0.7"/>
-              <!-- Stock restante (línea naranja discontinua) -->
-              <polyline points="40,20 130,103.4 220,204 310,247.1 400,250 490,250 580,250" fill="none" stroke="#d6451f" stroke-width="2.5" stroke-dasharray="6 5" stroke-linecap="round" stroke-linejoin="round"/>
-              <!-- Previsión (línea azul) -->
-              <polyline points="40,135 130,163.8 220,152.3 310,152.3 400,152.3 490,152.3 580,155.1" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              <!-- Puntos de la previsión -->
-              <g fill="#2563eb">
-                <circle cx="40" cy="135" r="3.5"/><circle cx="130" cy="163.8" r="3.5"/><circle cx="220" cy="152.3" r="3.5"/><circle cx="310" cy="152.3" r="3.5"/><circle cx="400" cy="152.3" r="3.5"/><circle cx="490" cy="152.3" r="3.5"/><circle cx="580" cy="155.1" r="3.5"/>
-              </g>
-              <!-- Marca vertical "Sin stock" -->
-              <line x1="355" y1="20" x2="355" y2="250" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4"/>
-              <text data-i18n="chart.outOfStock" x="362" y="33" fill="#dc2626" font-size="11" font-weight="600" font-family="Inter, sans-serif">Sin stock (3.5d)</text>
-            </g>
-          </svg>
-
-          <!-- Leyenda (la rellena el script) -->
-          <div id="chartLegend" class="mt-2 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500">
-            <span class="inline-flex items-center gap-1.5"><span class="inline-block h-0.5 w-4 rounded bg-[#2563eb]"></span> <span data-i18n="chart.legPrevision">Previsión</span></span>
-            <span class="inline-flex items-center gap-1.5"><span class="inline-block w-4 border-t-2 border-dashed border-[#d6451f]"></span> <span data-i18n="chart.legStock">Stock restante</span></span>
-            <span class="inline-flex items-center gap-1.5"><span class="inline-block h-2.5 w-4 rounded-sm bg-[#dbe4fb]"></span> <span data-i18n="chart.legInterval">Intervalo</span></span>
-          </div>
-
-          <!-- Métricas (las rellena el script; cuentan al entrar en pantalla) -->
-          <div id="chartStats" class="mt-4 grid grid-cols-2 gap-y-4 pt-4 text-center sm:grid-cols-4">
-            <div>
-              <p data-i18n="chart.mTotal" class="text-xs text-gray-500">Total previsto</p>
-              <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="239.8" data-dec="1" data-sep=",">239,8</span></p>
-            </div>
-            <div>
-              <p data-i18n="chart.mAvg" class="text-xs text-gray-500">Media diaria</p>
-              <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="34.3" data-dec="1" data-sep=",">34,3</span></p>
-            </div>
-            <div>
-              <p data-i18n="chart.mStock" class="text-xs text-gray-500">Stock actual</p>
-              <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="120" data-dec="0">120</span></p>
-            </div>
-            <div>
-              <p data-i18n="chart.mError" class="text-xs text-gray-500">Error modelo</p>
-              <p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador" data-final="25" data-dec="1" data-sep="." data-suf="%">25.0%</span></p>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========================================================================
          SECCIÓN 5 · BANDA DE ESTADÍSTICAS GRANDES
          ------------------------------------------------------------------------
          · Tres cifras grandes en fila.
@@ -1222,12 +1079,6 @@
           "card2.pop": `<ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Plan de prevención</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Jerarquía de excedentes</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Formación bonificada</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Documentación auditable</li></ul>`,
           "card3.pop": `Canal de redistribución de stock entre operadores.`,
           "card4.pop": `Prueba verificable ante una inspección.`,
-          "dev.kicker": `Para el retail y la distribución`,
-          "dev.title": `Menos mermas. <span class="texto-degradado">Más margen.</span>`,
-          "dev.para": `ODAS te ayuda a predecir la demanda de tus productos y distribuir tus excedentes para que puedas cumplir la Ley 1/2025 sin fricción operativa y recuperar margen antes de que llegue a la basura.`,
-          "dev.stat1": `Predicciones por día`,
-          "dev.stat2": `Menos de desperdicio`,
-          "dev.stat3": `Canales de distribución`,
           "chart.title": `Predicción de demanda — próximos 7 días`,
           "chart.outOfStock": `Sin stock (3.5d)`,
           "chart.legPrevision": `Previsión`,
@@ -1324,12 +1175,6 @@
           "card2.pop": `<ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Pla de prevenció</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Jerarquia d'excedents</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Formació bonificada</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Documentació auditable</li></ul>`,
           "card3.pop": `Canal de redistribució d'estoc entre operadors.`,
           "card4.pop": `Prova verificable davant d'una inspecció.`,
-          "dev.kicker": `Per al retail i la distribució`,
-          "dev.title": `Menys minves. <span class="texto-degradado">Més marge.</span>`,
-          "dev.para": `ODAS t'ajuda a preveure la demanda dels teus productes i a distribuir els teus excedents perquè puguis complir la Llei 1/2025 sense fricció operativa i recuperar marge abans que acabi a les escombraries.`,
-          "dev.stat1": `Prediccions al dia`,
-          "dev.stat2": `Menys malbaratament`,
-          "dev.stat3": `Canals de distribució`,
           "chart.title": `Predicció de demanda — pròxims 7 dies`,
           "chart.outOfStock": `Sense estoc (3.5d)`,
           "chart.legPrevision": `Previsió`,
@@ -1426,12 +1271,6 @@
           "card2.pop": `<ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Prevention plan</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Surplus hierarchy</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Subsidised training</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Auditable documentation</li></ul>`,
           "card3.pop": `A channel to redistribute stock between operators.`,
           "card4.pop": `Verifiable proof for inspections.`,
-          "dev.kicker": `For retail and distribution`,
-          "dev.title": `Less waste. <span class="texto-degradado">More margin.</span>`,
-          "dev.para": `ODAS helps you forecast demand for your products and redistribute your surplus so you can comply with Law 1/2025 with no operational friction and recover margin before it ends up in the bin.`,
-          "dev.stat1": `Predictions per day`,
-          "dev.stat2": `Less waste`,
-          "dev.stat3": `Distribution channels`,
           "chart.title": `Demand forecast — next 7 days`,
           "chart.outOfStock": `Out of stock (3.5d)`,
           "chart.legPrevision": `Forecast`,
@@ -1676,110 +1515,6 @@
         );
       })();
 
-      // --- Gráfico del hero: ROTA entre varias mediciones (se redibuja y anima) ---
-      (function () {
-        var card = document.getElementById('chartCard');
-        var elTitle = document.getElementById('chartTitle');
-        var elY = document.getElementById('chartYAxis');
-        var elData = document.getElementById('chartData');
-        var elLeg = document.getElementById('chartLegend');
-        var elStats = document.getElementById('chartStats');
-        if (!card || !elTitle || !elY || !elData || !elLeg || !elStats) return;
-
-        // Zona de dibujo del SVG (viewBox 0 0 600 300): X de 40 a 580; Y=250 es el 0, Y=20 el máximo.
-        var X0 = 40, X1 = 580, YTOP = 20, YBASE = 250, N = 7;
-        function xAt(i) { return X0 + i * ((X1 - X0) / (N - 1)); }
-        function yAt(v, maxY) { return YBASE - (v / maxY) * (YBASE - YTOP); }
-
-        // [[EDITAR MEDICIONES DEL GRÁFICO]] cada objeto = un gráfico que se muestra por turnos
-        var COLOR = '#2563eb';
-        // Textos por idioma (el {p} se sustituye por el producto)
-        var T = {
-          es: { tit:'Predicción de demanda — {p} (7 días)', serie:'Previsión (uds/día)',
-                stats:['Total previsto','Media diaria','Stock actual','Error modelo'] },
-          ca: { tit:'Predicció de demanda — {p} (7 dies)', serie:'Previsió (u/dia)',
-                stats:['Total previst','Mitjana diària','Estoc actual','Error model'] },
-          en: { tit:'Demand forecast — {p} (7 days)', serie:'Forecast (units/day)',
-                stats:['Forecast total','Daily average','Current stock','Model error'] }
-        };
-        var GRAFICOS = [
-          { p:{es:'Pan',ca:'Pa',en:'Bread'}, maxY:80, datos:[40,30,34,34,35,34,33],
-            stats:[{v:239.8,dec:1},{v:34.3,dec:1},{v:120,dec:0},{v:25,dec:1,suf:'%'}] },
-          { p:{es:'Leche',ca:'Llet',en:'Milk'}, maxY:80, datos:[55,52,58,60,57,59,61],
-            stats:[{v:402,dec:0},{v:57.4,dec:1},{v:180,dec:0},{v:18,dec:1,suf:'%'}] },
-          { p:{es:'Fruta',ca:'Fruita',en:'Fruit'}, maxY:80, datos:[28,35,42,38,45,50,47],
-            stats:[{v:285,dec:0},{v:40.7,dec:1},{v:95,dec:0},{v:22,dec:1,suf:'%'}] },
-          { p:{es:'Verdura',ca:'Verdura',en:'Vegetables'}, maxY:80, datos:[33,30,28,32,36,34,31],
-            stats:[{v:224,dec:0},{v:32,dec:1},{v:110,dec:0},{v:20,dec:1,suf:'%'}] }
-        ];
-        var langActual = 'es';
-        function langChart() { return (window.LANG && T[window.LANG]) ? window.LANG : 'es'; }
-
-        function fmtNum(v, s) {
-          var dec = s.dec || 0, out = v.toFixed(dec);
-          if (langActual !== 'en') out = out.replace('.', ','); // decimal con coma en ES/CA
-          return (s.pre || '') + out + (s.suf || '');
-        }
-        function etiquetaY(v) {
-          if (v >= 1000) { var k = v / 1000; return (k % 1 === 0 ? k.toFixed(0) : k.toFixed(1)) + 'k'; }
-          return (v % 1 === 0) ? v.toFixed(0) : v.toFixed(1);
-        }
-        var yRows = [ {y:24,f:1}, {y:81.5,f:0.75}, {y:139,f:0.5}, {y:196.5,f:0.25}, {y:254,f:0} ];
-
-        function contar(el, s) {
-          var objetivo = s.v, dur = 1100, ini = null;
-          function paso(ts) {
-            if (ini === null) ini = ts;
-            var p = Math.min((ts - ini) / dur, 1);
-            var e = 1 - Math.pow(1 - p, 3);
-            el.textContent = fmtNum(objetivo * e, s);
-            if (p < 1) requestAnimationFrame(paso);
-            else el.textContent = fmtNum(objetivo, s);
-          }
-          requestAnimationFrame(paso);
-        }
-
-        function pintar(idx) {
-          var g = GRAFICOS[idx];
-          langActual = langChart();
-          var t = T[langActual];
-          elTitle.textContent = t.tit.replace('{p}', (g.p[langActual] || g.p.es));
-          elY.innerHTML = yRows.map(function (r) {
-            return '<text x="32" y="' + r.y + '">' + etiquetaY(g.maxY * r.f) + '</text>';
-          }).join('');
-          var linea = g.datos.map(function (v, i) { return xAt(i).toFixed(1) + ',' + yAt(v, g.maxY).toFixed(1); }).join(' ');
-          var area = linea + ' ' + X1 + ',' + YBASE + ' ' + X0 + ',' + YBASE;
-          var puntos = g.datos.map(function (v, i) { return '<circle cx="' + xAt(i).toFixed(1) + '" cy="' + yAt(v, g.maxY).toFixed(1) + '" r="3.5"/>'; }).join('');
-          elData.innerHTML =
-            '<polygon points="' + area + '" fill="' + COLOR + '" opacity="0.12"/>' +
-            '<polyline points="' + linea + '" fill="none" stroke="' + COLOR + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
-            '<g fill="' + COLOR + '">' + puntos + '</g>';
-          elLeg.innerHTML = '<span class="inline-flex items-center gap-1.5"><span class="inline-block h-0.5 w-4 rounded" style="background:' + COLOR + '"></span> ' + t.serie + '</span>';
-          elStats.innerHTML = g.stats.map(function (s, k) {
-            return '<div><p class="text-xs text-gray-500">' + t.stats[k] + '</p>' +
-                   '<p class="mt-0.5 text-lg font-bold text-gray-900"><span class="contador">' + fmtNum(0, s) + '</span></p></div>';
-          }).join('');
-          // re-disparar el revelado del gráfico (dibujo de izquierda a derecha)
-          card.classList.remove('animar'); void card.offsetWidth; card.classList.add('animar');
-          // contar los números
-          var spans = elStats.querySelectorAll('.contador');
-          spans.forEach(function (sp, k) { contar(sp, g.stats[k]); });
-        }
-
-        var i = 0, timer = null;
-        function siguiente() { i = (i + 1) % GRAFICOS.length; pintar(i); }
-        function arrancar() { if (!timer) timer = setInterval(siguiente, 5500); }
-        function parar() { if (timer) { clearInterval(timer); timer = null; } }
-
-        card.classList.add('chart-prep');
-        card.addEventListener('mouseenter', parar);       // pausa al pasar el ratón
-        card.addEventListener('mouseleave', arrancar);
-        // al cambiar de idioma, repinta el gráfico traducido
-        document.addEventListener('odas:langchange', function () { pintar(i); });
-        // solo rota (y redibuja) mientras el gráfico está en pantalla
-        alEntrarEnPantalla(card, function () { pintar(i); arrancar(); }, parar);
-      })();
-
       // --- Banda de cifras: cuenta los números al entrar en pantalla ---
       (function () {
         var band = document.getElementById('bandaCifras');
@@ -1809,57 +1544,6 @@
           function () { band.classList.add('animar'); cifras.forEach(contar); },
           function () { band.classList.remove('animar'); reset(); }
         );
-      })();
-
-      // --- Frase rotatoria del titular "Menos mermas. <degradado>" ---
-      // La parte con degradado va cambiando de frase y de color cada 3 s.
-      (function () {
-        var h2 = document.getElementById('devTitle');
-        if (!h2) return;
-
-        // [[EDITAR FRASES ROTATORIAS]] una entrada por idioma (mismo orden que los colores)
-        var FRASES = {
-          es: ['Más margen.', 'Más tranquilidad.', 'Menos fricción.'],
-          ca: ['Més marge.', 'Més tranquil·litat.', 'Menys fricció.'],
-          en: ['More margin.', 'More peace of mind.', 'Less friction.']
-        };
-        // Un degradado por frase (mismo índice)
-        var COLORES = [
-          'linear-gradient(90deg, #10b981, #22c55e, #14b8a6, #10b981)',  // verde
-          'linear-gradient(90deg, #2563eb, #06b6d4, #6366f1, #2563eb)',  // azul · cian
-          'linear-gradient(90deg, #8b5cf6, #ec4899, #d946ef, #8b5cf6)'   // violeta · rosa
-        ];
-
-        function span() { return h2.querySelector('.texto-degradado'); }
-        function idioma() { return (window.LANG && FRASES[window.LANG]) ? window.LANG : 'es'; }
-        var i = 0, timer = null;
-
-        function pintar(idx, conFundido) {
-          var s = span(); if (!s) return;
-          var frases = FRASES[idioma()];
-          s.style.backgroundImage = COLORES[idx % COLORES.length];
-          if (conFundido) {
-            s.style.transition = 'opacity 0.3s ease';
-            s.style.opacity = '0';
-            setTimeout(function () {
-              var s2 = span(); if (!s2) return;
-              s2.style.backgroundImage = COLORES[idx % COLORES.length];
-              s2.textContent = frases[idx % frases.length];
-              s2.style.opacity = '1';
-            }, 300);
-          } else {
-            s.textContent = frases[idx % frases.length];
-          }
-        }
-        function siguiente() { i = (i + 1) % COLORES.length; pintar(i, true); }
-        function arrancar() { if (!timer) timer = setInterval(siguiente, 3000); }
-        function parar() { if (timer) { clearInterval(timer); timer = null; } }
-
-        pintar(0, false); // estado inicial con su color
-        // al cambiar de idioma, vuelve a pintar el índice actual en el nuevo idioma
-        document.addEventListener('odas:langchange', function () { pintar(i, false); });
-        // solo rota mientras el titular está en pantalla
-        alEntrarEnPantalla(h2, arrancar, parar);
       })();
 
       // --- Mega-menú Productos: cambia la tarjeta de la derecha al pasar el ratón sobre cada producto ---
