@@ -781,18 +781,9 @@
 
         <!-- Predicción + margen -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-gray-950 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:ring-white/25 lg:col-span-2">
-          <div class="relative h-64 overflow-hidden bg-white">
-            <svg class="h-full w-full" viewBox="0 0 240 130" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-              <line x1="16" y1="108" x2="224" y2="108" stroke="#eceef1" stroke-width="1"/>
-              <line x1="130" y1="28" x2="130" y2="108" stroke="#e2e5ea" stroke-width="1" stroke-dasharray="2 5"/>
-              <path d="M 130 78 C 158 70 182 46 216 32" stroke="#ccd2da" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1.5 7"/>
-              <path class="pred-flow" d="M 130 78 C 158 70 182 46 216 32" stroke="#111827" stroke-width="1.75" stroke-linecap="round" stroke-dasharray="12 400"/>
-              <path class="pred-past" d="M 16 90 C 42 80 58 98 80 86 C 102 74 114 92 130 78" stroke="#111827" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="80" cy="86" r="1.9" fill="#111827"/>
-              <circle cx="130" cy="78" r="1.9" fill="#111827"/>
-              <circle class="pred-ring" cx="216" cy="32" r="3" fill="none" stroke="#111827" stroke-width="1.25"/>
-              <circle class="pred-dot" cx="216" cy="32" r="3" fill="#111827"/>
-            </svg>
+          <div class="relative h-64 overflow-hidden bg-black">
+            <canvas data-anim="sphere-scan" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-950 to-transparent"></div>
           </div>
           <div class="relative p-6">
             <p data-i18n="bento.c3e" class="text-xs font-semibold uppercase tracking-wide text-amber-400">Predicción</p>
@@ -803,20 +794,9 @@
 
         <!-- Cumplimiento + trazabilidad -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-gray-950 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:ring-white/25 lg:col-span-2">
-          <div class="relative h-64 overflow-hidden bg-white">
-            <svg class="h-full w-full" viewBox="0 0 240 130" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-              <!-- documento -->
-              <path d="M 92 30 H 134 L 150 46 V 92 Q 150 100 142 100 H 92 Q 84 100 84 92 V 38 Q 84 30 92 30 Z" stroke="#111827" stroke-width="1.5" stroke-linejoin="round"/>
-              <path d="M 134 30 V 46 H 150" stroke="#111827" stroke-width="1.5" stroke-linejoin="round"/>
-              <!-- líneas de texto que se dibujan -->
-              <path class="gfx-draw" style="--dash:42" d="M 96 54 H 138" stroke="#c7cdd6" stroke-width="1.75" stroke-linecap="round"/>
-              <path class="gfx-draw" style="--dash:42; animation-delay:.15s" d="M 96 66 H 138" stroke="#c7cdd6" stroke-width="1.75" stroke-linecap="round"/>
-              <path class="gfx-draw" style="--dash:28; animation-delay:.3s" d="M 96 78 H 122" stroke="#c7cdd6" stroke-width="1.75" stroke-linecap="round"/>
-              <!-- sello verificado (anillo que late + check que se dibuja) -->
-              <circle class="seal-ring" cx="150" cy="90" r="12" fill="none" stroke="#111827" stroke-width="1.25"/>
-              <circle cx="150" cy="90" r="12" fill="#ffffff" stroke="#111827" stroke-width="1.5"/>
-              <path class="gfx-draw" style="--dash:22; animation-delay:.6s" d="M 144 90 l 4 5 l 8 -10" stroke="#111827" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <div class="relative h-64 overflow-hidden bg-black">
+            <canvas data-anim="phased-array" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-950 to-transparent"></div>
           </div>
           <div class="relative p-6">
             <p data-i18n="bento.c4e" class="text-xs font-semibold uppercase tracking-wide text-violet-400">Cumplimiento</p>
@@ -827,20 +807,9 @@
 
         <!-- Marketplace -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-gray-950 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:ring-white/25 lg:col-span-2">
-          <div class="relative h-64 overflow-hidden bg-white">
-            <svg class="h-full w-full" viewBox="0 0 240 130" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-              <!-- caja de excedente (origen) -->
-              <path d="M 58 54 h 40 a 5 5 0 0 1 5 5 v 26 a 5 5 0 0 1 -5 5 h -40 a 5 5 0 0 1 -5 -5 v -26 a 5 5 0 0 1 5 -5 z" stroke="#111827" stroke-width="1.5" stroke-linejoin="round"/>
-              <path d="M 53 62 L 78 72 L 103 62" stroke="#111827" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M 78 72 V 90" stroke="#111827" stroke-width="1.5"/>
-              <!-- salida hacia el comprador: guía + flujo + flecha -->
-              <path d="M 104 66 C 138 46 164 52 190 46" stroke="#ccd2da" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1.5 7"/>
-              <path class="mk-flow" d="M 104 66 C 138 46 164 52 190 46" stroke="#111827" stroke-width="1.75" stroke-linecap="round" stroke-dasharray="12 400"/>
-              <path d="M 182 41 l 9 4 l -5 8" stroke="#111827" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-              <!-- comprador (destino) que late -->
-              <circle class="mk-ring" cx="196" cy="46" r="3" fill="none" stroke="#111827" stroke-width="1.25"/>
-              <circle class="mk-dot" cx="196" cy="46" r="3" fill="#111827"/>
-            </svg>
+          <div class="relative h-64 overflow-hidden bg-black">
+            <canvas data-anim="interconnecting-waves" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-950 to-transparent"></div>
           </div>
           <div class="relative p-6">
             <p data-i18n="bento.c5e" class="text-xs font-semibold uppercase tracking-wide text-teal-400">Marketplace</p>
@@ -851,6 +820,203 @@
 
       </div>
     </section>
+
+    <!-- ========================================================================
+         Animaciones de las tarjetas bento (canvas monocromo).
+         Port a vanilla JS de "set-of-animations-4" (React) — solo las 3 usadas:
+           · sphere-scan            → Predicción ("Anticípate y recupera margen")
+           · phased-array           → Cumplimiento ("Cumple la Ley 1/2025")
+           · interconnecting-waves  → Marketplace ("Da salida a tus excedentes")
+         Se dibujan en blanco sobre negro; un único bucle rAF, gateado por
+         IntersectionObserver (solo animan cuando están en pantalla) y respetando
+         prefers-reduced-motion (fotograma estático).
+         ======================================================================== -->
+    <script>
+      (function () {
+        var canvases = document.querySelectorAll('canvas[data-anim]');
+        if (!canvases.length) return;
+
+        var SIZE = 180, SPEED = 0.5;
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function fill(o) { o = o < 0 ? 0 : o > 1 ? 1 : o; return 'rgba(255,255,255,' + o + ')'; }
+        function stroke(o) { o = o < 0 ? 0 : o > 1 ? 1 : o; return 'rgba(255,255,255,' + o + ')'; }
+        function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+        var C = SIZE / 2; // centro lógico (90,90)
+
+        // --- 3D Sphere Scan ---
+        function initSphere() {
+          var radius = SIZE * 0.4, n = 250, dots = [];
+          for (var i = 0; i < n; i++) {
+            var theta = Math.acos(1 - 2 * (i / n));
+            var phi = Math.sqrt(n * Math.PI) * theta;
+            dots.push({ x: radius * Math.sin(theta) * Math.cos(phi), y: radius * Math.sin(theta) * Math.sin(phi), z: radius * Math.cos(theta) });
+          }
+          return { dots: dots, radius: radius, time: 0, last: 0 };
+        }
+        function drawSphere(ctx, st, ts) {
+          if (!st.last) st.last = ts;
+          st.time += (ts - st.last) * 0.0005 * SPEED; st.last = ts;
+          var t = st.time, r = st.radius;
+          var rotX = Math.sin(t * 0.3) * 0.5, rotY = t * 0.5;
+          var eased = ease((Math.sin(t * 2.5) + 1) / 2);
+          var scanLine = (eased * 2 - 1) * r, scanW = 25;
+          for (var k = 0; k < st.dots.length; k++) {
+            var d = st.dots[k], x = d.x, y = d.y, z = d.z;
+            var nX = x * Math.cos(rotY) - z * Math.sin(rotY), nZ = x * Math.sin(rotY) + z * Math.cos(rotY); x = nX; z = nZ;
+            var nY = y * Math.cos(rotX) - z * Math.sin(rotX); nZ = y * Math.sin(rotX) + z * Math.cos(rotX); y = nY; z = nZ;
+            var scale = (z + r * 1.5) / (r * 2.5);
+            var dts = Math.abs(y - scanLine);
+            var infl = dts < scanW ? Math.cos((dts / scanW) * (Math.PI / 2)) : 0;
+            var size = Math.max(0, scale * 2.0 + infl * 2.5);
+            ctx.beginPath(); ctx.arc(C + x, C + y, size, 0, Math.PI * 2);
+            ctx.fillStyle = fill(Math.max(0, scale * 0.6 + infl * 0.4)); ctx.fill();
+          }
+        }
+
+        // --- Phased Array Emitter ---
+        function initPhased() {
+          var radii = [20, 40, 60, 80], per = [12, 18, 24, 30], pts = [];
+          for (var i = 0; i < radii.length; i++) for (var j = 0; j < per[i]; j++) {
+            var a = (j / per[i]) * Math.PI * 2;
+            pts.push({ x: Math.cos(a) * radii[i], y: Math.sin(a) * radii[i], z: 0 });
+          }
+          return { pts: pts, maxR: radii[3], fov: 300, time: 0, last: 0 };
+        }
+        function drawPhased(ctx, st, ts) {
+          if (!st.last) st.last = ts;
+          st.time += (ts - st.last) * 0.001 * SPEED; st.last = ts;
+          var t = st.time, fov = st.fov;
+          var rotX = 1.0, rotY = t * 0.2, waveR = (t * 120) % (st.maxR * 1.8), waveW = 50, waveH = 18, out = [];
+          for (var k = 0; k < st.pts.length; k++) {
+            var p = st.pts[k], x = p.x, y = p.y, z = p.z;
+            var dtw = Math.abs(Math.hypot(x, y) - waveR), wInfl = 0;
+            if (dtw < waveW / 2) { z = ease(Math.sin((1 - dtw / (waveW / 2)) * Math.PI)) * waveH; wInfl = z / waveH; }
+            var tX = x * Math.cos(rotY) - z * Math.sin(rotY), tZ = x * Math.sin(rotY) + z * Math.cos(rotY); x = tX; z = tZ;
+            var tY = y * Math.cos(rotX) - z * Math.sin(rotX); tZ = y * Math.sin(rotX) + z * Math.cos(rotX); y = tY; z = tZ;
+            var scale = fov / (fov + z + 100);
+            out.push({ x: C + x * scale, y: C + y * scale, z: z, size: (1.5 + wInfl * 2.5) * scale, opacity: 0.4 + wInfl * 0.6 });
+          }
+          out.sort(function (a, b) { return a.z - b.z; });
+          for (var m = 0; m < out.length; m++) {
+            var q = out[m]; if (q.size < 0.1) continue;
+            ctx.beginPath(); ctx.arc(q.x, q.y, q.size, 0, Math.PI * 2);
+            ctx.fillStyle = fill(q.opacity); ctx.fill();
+          }
+        }
+
+        // --- Interconnecting Waves ---
+        function initWaves() {
+          return { rings: [{ radius: 20, count: 12 }, { radius: 45, count: 24 }, { radius: 70, count: 36 }], time: 0, last: 0 };
+        }
+        function drawWaves(ctx, st, ts) {
+          if (!st.last) st.last = ts;
+          st.time += (ts - st.last) * 0.001 * SPEED; st.last = ts;
+          var t = st.time, rings = st.rings;
+          for (var ri = 0; ri < rings.length; ri++) {
+            if (ri >= rings.length - 1) continue;
+            var ring = rings[ri], next = rings[ri + 1];
+            for (var i = 0; i < ring.count; i++) {
+              var a1 = (i / ring.count) * Math.PI * 2, rp1 = Math.sin(t * 2 - ri * 0.4) * 3;
+              var x1 = C + Math.cos(a1) * (ring.radius + rp1), y1 = C + Math.sin(a1) * (ring.radius + rp1);
+              var ratio = next.count / ring.count;
+              for (var j = 0; j < ratio; j++) {
+                var a2 = ((i * ratio + j) / next.count) * Math.PI * 2, rp2 = Math.sin(t * 2 - (ri + 1) * 0.4) * 3;
+                var x2 = C + Math.cos(a2) * (next.radius + rp2), y2 = C + Math.sin(a2) * (next.radius + rp2);
+                ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.lineWidth = 0.75;
+                ctx.strokeStyle = stroke(0.1 + ((Math.sin(t * 3 - ri * 0.5 + i * 0.3) + 1) / 2) * 0.4); ctx.stroke();
+              }
+            }
+          }
+          for (var r2 = 0; r2 < rings.length; r2++) {
+            var rg = rings[r2];
+            for (var ii = 0; ii < rg.count; ii++) {
+              var ang = (ii / rg.count) * Math.PI * 2, rp = Math.sin(t * 2 - r2 * 0.4) * 3;
+              var x = C + Math.cos(ang) * (rg.radius + rp), y = C + Math.sin(ang) * (rg.radius + rp);
+              ctx.beginPath(); ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+              ctx.fillStyle = fill(0.4 + Math.sin(t * 2 - r2 * 0.4 + ii * 0.2) * 0.6); ctx.fill();
+            }
+          }
+        }
+
+        var REGISTRY = {
+          'sphere-scan': { init: initSphere, draw: drawSphere },
+          'phased-array': { init: initPhased, draw: drawPhased },
+          'interconnecting-waves': { init: initWaves, draw: drawWaves }
+        };
+
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var instances = [];
+
+        canvases.forEach(function (canvas) {
+          var spec = REGISTRY[canvas.getAttribute('data-anim')];
+          if (!spec) return;
+          var ctx = canvas.getContext('2d');
+          if (!ctx) return;
+          var inst = { canvas: canvas, ctx: ctx, spec: spec, state: spec.init(), cw: 0, ch: 0, visible: false };
+
+          function resize() {
+            var w = canvas.clientWidth, h = canvas.clientHeight;
+            if (!w || !h) return;
+            inst.cw = w; inst.ch = h;
+            canvas.width = Math.floor(w * dpr); canvas.height = Math.floor(h * dpr);
+            if (reduce) render(inst, performance.now());
+          }
+          inst.resize = resize;
+
+          if (window.ResizeObserver) { var ro = new ResizeObserver(resize); ro.observe(canvas); }
+          resize();
+          instances.push(inst);
+        });
+
+        // Escala la escena lógica de 180×180 al alto de la tarjeta, centrada.
+        function render(inst, ts) {
+          if (!inst.cw || !inst.ch) inst.resize();
+          var ctx = inst.ctx, cw = inst.cw, ch = inst.ch;
+          if (!cw || !ch) return;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.clearRect(0, 0, cw, ch);
+          var s = ch / SIZE;
+          ctx.translate(cw / 2, ch / 2);
+          ctx.scale(s, s);
+          ctx.translate(-C, -C);
+          inst.spec.draw(ctx, inst.state, ts);
+        }
+
+        var running = false, rafId = 0;
+        function loop(ts) {
+          var any = false;
+          for (var i = 0; i < instances.length; i++) {
+            if (instances[i].visible) { render(instances[i], ts); any = true; }
+          }
+          if (any) { rafId = requestAnimationFrame(loop); } else { running = false; }
+        }
+        function kick() {
+          if (reduce || running) return;
+          running = true; rafId = requestAnimationFrame(loop);
+        }
+
+        if (window.IntersectionObserver) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              var inst = instances.filter(function (x) { return x.canvas === e.target; })[0];
+              if (!inst) return;
+              inst.visible = e.isIntersecting;
+              // Dibuja un fotograma al instante al entrar en pantalla (rAF continúa el movimiento).
+              if (e.isIntersecting) { inst.state.last = 0; render(inst, performance.now()); }
+            });
+            kick();
+          }, { threshold: 0.05 });
+          instances.forEach(function (inst) { io.observe(inst.canvas); });
+        } else {
+          instances.forEach(function (inst) { inst.visible = true; render(inst, performance.now()); });
+          if (!reduce) kick();
+        }
+
+        // Primer fotograma síncrono para todas las tarjetas (garantiza contenido aunque rAF tarde).
+        instances.forEach(function (inst) { render(inst, performance.now()); });
+      })();
+    </script>
 
 
     <!-- ========================================================================
