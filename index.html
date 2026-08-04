@@ -762,6 +762,190 @@
       </div><!-- /contenido del hero -->
     </section>
 
+    <!-- ========================================================================
+         SECCIÓN · ¿QUÉ ES ODAS? — explicación + diagrama que conecta los datos
+         · Movida bajo el hero. El diagrama (AnimatedBeam) va en la columna derecha.
+         ======================================================================== -->
+    <section class="mx-auto max-w-6xl px-5 py-20 sm:py-24">
+      <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <!-- Columna izquierda: qué es ODAS -->
+        <div class="max-w-xl">
+          <p data-i18n="whatis.kicker" class="text-sm font-semibold uppercase tracking-wider text-emerald-600">¿Qué es ODAS?</p>
+          <h2 data-i18n="whatis.h" class="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Un micro-SaaS diseñado para resolver un problema real.</h2>
+          <p data-i18n="whatis.p1" class="mt-5 text-base text-gray-500 md:text-lg">Miles de empresas deberán cumplir la Ley 1/2025 mientras reducen pérdidas operativas. ODAS automatiza ese trabajo.</p>
+          <p data-i18n="whatis.p2" class="mt-3 text-base text-gray-500 md:text-lg">En lugar de utilizar hojas de cálculo, documentos y procesos manuales, centraliza la información y convierte los datos en acciones concretas.</p>
+          <ul class="mt-6 space-y-3 text-sm text-gray-700 md:text-base">
+            <li class="flex items-start gap-3"><span class="mt-0.5 shrink-0 text-emerald-600">✓</span> <span data-i18n="whatis.b1">Predice el desperdicio antes de que ocurra.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-0.5 shrink-0 text-emerald-600">✓</span> <span data-i18n="whatis.b2">Automatiza la documentación exigida por la Ley 1/2025.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-0.5 shrink-0 text-emerald-600">✓</span> <span data-i18n="whatis.b3">Recomienda qué comprar, vender, donar o transformar.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-0.5 shrink-0 text-emerald-600">✓</span> <span data-i18n="whatis.b4">Genera informes sin trabajo manual.</span></li>
+          </ul>
+        </div>
+        <!-- Columna derecha: diagrama que conecta los datos con ODAS -->
+        <div class="relative">
+          <div id="beamContainer" class="relative mx-auto flex h-[380px] w-full max-w-xl items-center justify-center overflow-hidden">
+        <svg id="beamSvg" class="pointer-events-none absolute inset-0 z-0 h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+        <div class="relative z-10 flex size-full max-h-[240px] max-w-md flex-col items-stretch justify-between">
+          <!-- fila superior -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn1" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- Persona -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <div id="bn5" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- Dashboard -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <rect width="7" height="9" x="3" y="3" rx="1"/>
+                <rect width="7" height="5" x="14" y="3" rx="1"/>
+                <rect width="7" height="9" x="14" y="12" rx="1"/>
+                <rect width="7" height="5" x="3" y="16" rx="1"/>
+              </svg>
+            </div>
+          </div>
+          <!-- fila media -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn2" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- Documento -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                <path d="M16 13H8"/>
+                <path d="M16 17H8"/>
+                <path d="M10 9H8"/>
+              </svg>
+            </div>
+            <div id="bn4" class="beam-hub relative z-10 flex size-20 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_34px_-10px_rgba(0,0,0,0.4)]">
+              <img src="odas-simbolo.png" alt="ODAS" class="size-12 object-contain" />
+            </div>
+            <div id="bn6" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- WhatsApp -->
+              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </div>
+          </div>
+          <!-- fila inferior -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn3" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- Caja -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                <path d="m3.3 7 8.7 5 8.7-5"/>
+                <path d="M12 22V12"/>
+              </svg>
+            </div>
+            <div id="bn7" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- Decisión (bifurcación / elegir camino) -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M16 3h5v5"/>
+                <path d="M8 3H3v5"/>
+                <path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/>
+                <path d="m15 9 6-6"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+          </div><!-- /#beamContainer -->
+        </div><!-- /columna derecha -->
+      </div><!-- /grid -->
+    </section>
+
+    <!-- Script del AnimatedBeam: calcula las curvas entre nodos y anima el "haz" con SMIL -->
+    <script>
+      (function () {
+        var container = document.getElementById('beamContainer');
+        if (!container) return;
+        var svg = document.getElementById('beamSvg');
+        if (!svg) return;
+        var NS = 'http://www.w3.org/2000/svg';
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // from → hub(bn4). Lado izquierdo: normal; derecho: reverse (el haz siempre entra al núcleo).
+        var beams = [
+          { from: 'bn1', curvature: -75, endYOffset: -10, reverse: false, dur: 4.6, begin: 0.0 },
+          { from: 'bn2', curvature: 0, endYOffset: 0, reverse: false, dur: 5.2, begin: 0.6 },
+          { from: 'bn3', curvature: 75, endYOffset: 10, reverse: false, dur: 4.9, begin: 1.1 },
+          { from: 'bn5', curvature: -75, endYOffset: -10, reverse: true, dur: 5.0, begin: 0.3 },
+          { from: 'bn6', curvature: 0, endYOffset: 0, reverse: true, dur: 4.7, begin: 0.9 },
+          { from: 'bn7', curvature: 75, endYOffset: 10, reverse: true, dur: 5.3, begin: 1.4 }
+        ];
+        var toEl = document.getElementById('bn4');
+
+        // Construye las capas del SVG una sola vez; el path 'd' se recalcula en resize.
+        var defs = document.createElementNS(NS, 'defs');
+        svg.appendChild(defs);
+        var built = [];
+        beams.forEach(function (b, i) {
+          var gid = 'beamGrad' + i;
+          var grad = document.createElementNS(NS, 'linearGradient');
+          grad.setAttribute('id', gid);
+          grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+          grad.setAttribute('x1', '0%'); grad.setAttribute('x2', '0%');
+          grad.setAttribute('y1', '0%'); grad.setAttribute('y2', '0%');
+          grad.innerHTML =
+            '<stop stop-color="#10b981" stop-opacity="0"></stop>' +
+            '<stop stop-color="#10b981"></stop>' +
+            '<stop offset="32.5%" stop-color="#0ea5e9"></stop>' +
+            '<stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"></stop>';
+          if (!reduce) {
+            var x1v = b.reverse ? '90%;-10%' : '10%;110%';
+            var x2v = b.reverse ? '100%;0%' : '0%;100%';
+            grad.innerHTML +=
+              '<animate attributeName="x1" values="' + x1v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>' +
+              '<animate attributeName="x2" values="' + x2v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>';
+          }
+          defs.appendChild(grad);
+
+          var base = document.createElementNS(NS, 'path');
+          base.setAttribute('stroke', '#c7ccd4');
+          base.setAttribute('stroke-width', '2');
+          base.setAttribute('stroke-opacity', '0.35');
+          base.setAttribute('stroke-linecap', 'round');
+          base.setAttribute('fill', 'none');
+          svg.appendChild(base);
+
+          var glow = document.createElementNS(NS, 'path');
+          glow.setAttribute('stroke', 'url(#' + gid + ')');
+          glow.setAttribute('stroke-width', '2');
+          glow.setAttribute('stroke-linecap', 'round');
+          glow.setAttribute('fill', 'none');
+          svg.appendChild(glow);
+
+          built.push({ cfg: b, base: base, glow: glow });
+        });
+
+        function update() {
+          var cr = container.getBoundingClientRect();
+          if (!cr.width || !cr.height) return;
+          svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + cr.height);
+          var rb = toEl.getBoundingClientRect();
+          built.forEach(function (o) {
+            var fromEl = document.getElementById(o.cfg.from);
+            if (!fromEl) return;
+            var ra = fromEl.getBoundingClientRect();
+            var sx = ra.left - cr.left + ra.width / 2;
+            var sy = ra.top - cr.top + ra.height / 2;
+            var ex = rb.left - cr.left + rb.width / 2;
+            var ey = rb.top - cr.top + rb.height / 2 + o.cfg.endYOffset;
+            var cyc = sy - o.cfg.curvature;
+            var d = 'M ' + sx + ',' + sy + ' Q ' + ((sx + ex) / 2) + ',' + cyc + ' ' + ex + ',' + ey;
+            o.base.setAttribute('d', d);
+            o.glow.setAttribute('d', d);
+          });
+        }
+
+        if (window.ResizeObserver) { new ResizeObserver(update).observe(container); }
+        window.addEventListener('resize', update);
+        // Recalcula tras cargar imágenes/fuentes (los nodos cambian de posición).
+        window.addEventListener('load', update);
+        update();
+      })();
+    </script>
+
+
 
     <!-- ========================================================================
          SECCIÓN · BENTO GRID — capacidades de ODAS (port del componente Tailwind UI)
@@ -1033,176 +1217,6 @@
 
 
     <!-- ========================================================================
-         SECCIÓN · INTEGRACIONES — AnimatedBeam (port vanilla de magicui/framer-motion)
-         · Los datos de las herramientas convergen en el núcleo ODAS.
-         · Iconos exteriores = provisionales (se irán sustituyendo).
-         ======================================================================== -->
-    <section class="mx-auto max-w-6xl px-5 py-20 sm:py-24">
-      <p data-i18n="beam.kicker" class="text-center text-sm font-semibold uppercase tracking-wider text-emerald-600">Conectado</p>
-      <h2 data-i18n-html="beam.sub" class="mx-auto mt-3 max-w-3xl text-center text-3xl font-normal tracking-tight text-gray-900 sm:text-4xl">ODAS reúne la <span class="font-bold">información dispersa</span> de tus herramientas y la convierte en memoria operativa para tomar decisiones.</h2>
-
-      <div id="beamContainer" class="relative mx-auto mt-14 flex h-[380px] w-full max-w-xl items-center justify-center overflow-hidden">
-        <svg id="beamSvg" class="pointer-events-none absolute inset-0 z-0 h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
-        <div class="relative z-10 flex size-full max-h-[240px] max-w-md flex-col items-stretch justify-between">
-          <!-- fila superior -->
-          <div class="flex flex-row items-center justify-between">
-            <div id="bn1" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- Persona -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-              </svg>
-            </div>
-            <div id="bn5" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- Dashboard -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <rect width="7" height="9" x="3" y="3" rx="1"/>
-                <rect width="7" height="5" x="14" y="3" rx="1"/>
-                <rect width="7" height="9" x="14" y="12" rx="1"/>
-                <rect width="7" height="5" x="3" y="16" rx="1"/>
-              </svg>
-            </div>
-          </div>
-          <!-- fila media -->
-          <div class="flex flex-row items-center justify-between">
-            <div id="bn2" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- Documento -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
-                <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
-                <path d="M16 13H8"/>
-                <path d="M16 17H8"/>
-                <path d="M10 9H8"/>
-              </svg>
-            </div>
-            <div id="bn4" class="beam-hub relative z-10 flex size-20 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_34px_-10px_rgba(0,0,0,0.4)]">
-              <img src="odas-simbolo.png" alt="ODAS" class="size-12 object-contain" />
-            </div>
-            <div id="bn6" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- WhatsApp -->
-              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-            </div>
-          </div>
-          <!-- fila inferior -->
-          <div class="flex flex-row items-center justify-between">
-            <div id="bn3" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- Caja -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
-                <path d="m3.3 7 8.7 5 8.7-5"/>
-                <path d="M12 22V12"/>
-              </svg>
-            </div>
-            <div id="bn7" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- Decisión (bifurcación / elegir camino) -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <path d="M16 3h5v5"/>
-                <path d="M8 3H3v5"/>
-                <path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/>
-                <path d="m15 9 6-6"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Script del AnimatedBeam: calcula las curvas entre nodos y anima el "haz" con SMIL -->
-    <script>
-      (function () {
-        var container = document.getElementById('beamContainer');
-        if (!container) return;
-        var svg = document.getElementById('beamSvg');
-        if (!svg) return;
-        var NS = 'http://www.w3.org/2000/svg';
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        // from → hub(bn4). Lado izquierdo: normal; derecho: reverse (el haz siempre entra al núcleo).
-        var beams = [
-          { from: 'bn1', curvature: -75, endYOffset: -10, reverse: false, dur: 4.6, begin: 0.0 },
-          { from: 'bn2', curvature: 0, endYOffset: 0, reverse: false, dur: 5.2, begin: 0.6 },
-          { from: 'bn3', curvature: 75, endYOffset: 10, reverse: false, dur: 4.9, begin: 1.1 },
-          { from: 'bn5', curvature: -75, endYOffset: -10, reverse: true, dur: 5.0, begin: 0.3 },
-          { from: 'bn6', curvature: 0, endYOffset: 0, reverse: true, dur: 4.7, begin: 0.9 },
-          { from: 'bn7', curvature: 75, endYOffset: 10, reverse: true, dur: 5.3, begin: 1.4 }
-        ];
-        var toEl = document.getElementById('bn4');
-
-        // Construye las capas del SVG una sola vez; el path 'd' se recalcula en resize.
-        var defs = document.createElementNS(NS, 'defs');
-        svg.appendChild(defs);
-        var built = [];
-        beams.forEach(function (b, i) {
-          var gid = 'beamGrad' + i;
-          var grad = document.createElementNS(NS, 'linearGradient');
-          grad.setAttribute('id', gid);
-          grad.setAttribute('gradientUnits', 'userSpaceOnUse');
-          grad.setAttribute('x1', '0%'); grad.setAttribute('x2', '0%');
-          grad.setAttribute('y1', '0%'); grad.setAttribute('y2', '0%');
-          grad.innerHTML =
-            '<stop stop-color="#10b981" stop-opacity="0"></stop>' +
-            '<stop stop-color="#10b981"></stop>' +
-            '<stop offset="32.5%" stop-color="#0ea5e9"></stop>' +
-            '<stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"></stop>';
-          if (!reduce) {
-            var x1v = b.reverse ? '90%;-10%' : '10%;110%';
-            var x2v = b.reverse ? '100%;0%' : '0%;100%';
-            grad.innerHTML +=
-              '<animate attributeName="x1" values="' + x1v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>' +
-              '<animate attributeName="x2" values="' + x2v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>';
-          }
-          defs.appendChild(grad);
-
-          var base = document.createElementNS(NS, 'path');
-          base.setAttribute('stroke', '#c7ccd4');
-          base.setAttribute('stroke-width', '2');
-          base.setAttribute('stroke-opacity', '0.35');
-          base.setAttribute('stroke-linecap', 'round');
-          base.setAttribute('fill', 'none');
-          svg.appendChild(base);
-
-          var glow = document.createElementNS(NS, 'path');
-          glow.setAttribute('stroke', 'url(#' + gid + ')');
-          glow.setAttribute('stroke-width', '2');
-          glow.setAttribute('stroke-linecap', 'round');
-          glow.setAttribute('fill', 'none');
-          svg.appendChild(glow);
-
-          built.push({ cfg: b, base: base, glow: glow });
-        });
-
-        function update() {
-          var cr = container.getBoundingClientRect();
-          if (!cr.width || !cr.height) return;
-          svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + cr.height);
-          var rb = toEl.getBoundingClientRect();
-          built.forEach(function (o) {
-            var fromEl = document.getElementById(o.cfg.from);
-            if (!fromEl) return;
-            var ra = fromEl.getBoundingClientRect();
-            var sx = ra.left - cr.left + ra.width / 2;
-            var sy = ra.top - cr.top + ra.height / 2;
-            var ex = rb.left - cr.left + rb.width / 2;
-            var ey = rb.top - cr.top + rb.height / 2 + o.cfg.endYOffset;
-            var cyc = sy - o.cfg.curvature;
-            var d = 'M ' + sx + ',' + sy + ' Q ' + ((sx + ex) / 2) + ',' + cyc + ' ' + ex + ',' + ey;
-            o.base.setAttribute('d', d);
-            o.glow.setAttribute('d', d);
-          });
-        }
-
-        if (window.ResizeObserver) { new ResizeObserver(update).observe(container); }
-        window.addEventListener('resize', update);
-        // Recalcula tras cargar imágenes/fuentes (los nodos cambian de posición).
-        window.addEventListener('load', update);
-        update();
-      })();
-    </script>
-
-
-    <!-- ========================================================================
          SECCIÓN 7 · CHOOSE HOW TO GET STARTED — con fondo animado "Cloudscape" (WebGL)
          ======================================================================== -->
     <div class="relative overflow-hidden">
@@ -1447,6 +1461,14 @@
           "beam.kicker": `Conectado`,
           "beam.h": `Todos tus datos, conectados a ODAS`,
           "beam.sub": `ODAS reúne la <span class="font-bold">información dispersa</span> de tus herramientas y la convierte en memoria operativa para tomar decisiones.`,
+          "whatis.kicker": `¿Qué es ODAS?`,
+          "whatis.h": `Un micro-SaaS diseñado para resolver un problema real.`,
+          "whatis.p1": `Miles de empresas deberán cumplir la Ley 1/2025 mientras reducen pérdidas operativas. ODAS automatiza ese trabajo.`,
+          "whatis.p2": `En lugar de utilizar hojas de cálculo, documentos y procesos manuales, centraliza la información y convierte los datos en acciones concretas.`,
+          "whatis.b1": `Predice el desperdicio antes de que ocurra.`,
+          "whatis.b2": `Automatiza la documentación exigida por la Ley 1/2025.`,
+          "whatis.b3": `Recomienda qué comprar, vender, donar o transformar.`,
+          "whatis.b4": `Genera informes sin trabajo manual.`,
           "hero.sub": `La <span class="texto-degradado">memoria operativa</span> de tu organización.`,
           "hero.sub2": `ODAS conecta tus datos de ventas, inventario y compras para predecir excedentes, automatizar el cumplimiento normativo y ayudarte a tomar mejores decisiones cada día.`,
           "card.explore": `Explora`,
@@ -1551,6 +1573,14 @@
           "beam.kicker": `Connectat`,
           "beam.h": `Totes les teves dades, connectades a ODAS`,
           "beam.sub": `ODAS reuneix la <span class="font-bold">informació dispersa</span> de les teves eines i la converteix en memòria operativa per prendre decisions.`,
+          "whatis.kicker": `Què és ODAS?`,
+          "whatis.h": `Un micro-SaaS dissenyat per resoldre un problema real.`,
+          "whatis.p1": `Milers d'empreses hauran de complir la Llei 1/2025 mentre redueixen pèrdues operatives. ODAS automatitza aquesta feina.`,
+          "whatis.p2": `En lloc d'utilitzar fulls de càlcul, documents i processos manuals, centralitza la informació i converteix les dades en accions concretes.`,
+          "whatis.b1": `Prediu el malbaratament abans que passi.`,
+          "whatis.b2": `Automatitza la documentació exigida per la Llei 1/2025.`,
+          "whatis.b3": `Recomana què comprar, vendre, donar o transformar.`,
+          "whatis.b4": `Genera informes sense feina manual.`,
           "hero.sub": `La <span class="texto-degradado">memòria operativa</span> de la teva organització.`,
           "hero.sub2": `ODAS connecta les teves dades de vendes, inventari i compres per predir excedents, automatitzar el compliment normatiu i ajudar-te a prendre millors decisions cada dia.`,
           "card.explore": `Explora`,
@@ -1655,6 +1685,14 @@
           "beam.kicker": `Connected`,
           "beam.h": `All your data, connected to ODAS`,
           "beam.sub": `ODAS brings together the <span class="font-bold">scattered information</span> from your tools and turns it into operational memory to make decisions.`,
+          "whatis.kicker": `What is ODAS?`,
+          "whatis.h": `A micro-SaaS built to solve a real problem.`,
+          "whatis.p1": `Thousands of businesses must comply with Law 1/2025 while cutting operational losses. ODAS automates that work.`,
+          "whatis.p2": `Instead of using spreadsheets, documents and manual processes, it centralises information and turns data into concrete actions.`,
+          "whatis.b1": `Predicts waste before it happens.`,
+          "whatis.b2": `Automates the documentation required by Law 1/2025.`,
+          "whatis.b3": `Recommends what to buy, sell, donate or transform.`,
+          "whatis.b4": `Generates reports with no manual work.`,
           "hero.sub": `The <span class="texto-degradado">operational memory</span> of your organisation.`,
           "hero.sub2": `ODAS connects your sales, inventory and purchasing data to predict surplus, automate regulatory compliance and help you make better decisions every day.`,
           "card.explore": `Explore`,
