@@ -1378,6 +1378,9 @@
     <div class="relative overflow-hidden">
       <!-- Fondo animado tipo nubes (WebGL); se inicializa en el <script> "Cloudscape" de más abajo -->
       <canvas id="cloudscape" aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full"></canvas>
+      <!-- Difuminado a blanco arriba y abajo: funde el fondo de nubes con la página -->
+      <div class="pointer-events-none absolute inset-x-0 top-0 z-[1] h-32 bg-gradient-to-b from-white to-transparent sm:h-40"></div>
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-32 bg-gradient-to-t from-white to-transparent sm:h-40"></div>
       <section class="relative z-10 mx-auto max-w-6xl px-5 py-24">
       <!-- [[EDITAR: título de la sección]] -->
       <h2 data-i18n="plans.title" class="mb-12 text-center text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Elige el plan que se ajuste a tu negocio</h2>
