@@ -569,30 +569,6 @@
       }
       @media (prefers-reduced-motion: reduce) { .modelo-sheen { animation: none; opacity: 0; } }
 
-      /* Núcleo ODAS del diagrama: destello suave cada vez que un haz llega al logo.
-         Una capa por haz, con la misma duración/retardo que su animación SMIL, así
-         cada llegada enciende el logo y el ritmo nunca se repite igual. */
-      .hub-glow {
-        position: absolute;
-        inset: -20%;
-        border-radius: 9999px;
-        pointer-events: none;
-        opacity: 0;
-        background: radial-gradient(circle,
-          rgba(16, 185, 129, 0.55) 0%,
-          rgba(14, 165, 233, 0.34) 45%,
-          rgba(14, 165, 233, 0) 72%);
-        animation-name: hubGlow;
-        animation-timing-function: ease-out;
-        animation-iteration-count: infinite;
-      }
-      @keyframes hubGlow {
-        0%, 20%  { opacity: 0;   transform: scale(0.86); }
-        34%      { opacity: 0.55; transform: scale(1.06); }
-        62%      { opacity: 0;   transform: scale(1.20); }
-        100%     { opacity: 0;   transform: scale(0.86); }
-      }
-      @media (prefers-reduced-motion: reduce) { .hub-glow { animation: none; opacity: 0; } }
     </style>
 
     <!-- Detección de dispositivo táctil: marca <html class="es-tactil"> cuanto antes
@@ -999,14 +975,7 @@
               </svg>
             </div>
             <div id="bn4" class="beam-hub relative z-10 flex size-20 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_34px_-10px_rgba(0,0,0,0.4)]">
-              <!-- Destellos: una capa por haz, con su misma duración/retardo (ver script del beam) -->
-              <span class="hub-glow" style="animation-duration:4.6s; animation-delay:0s"></span>
-              <span class="hub-glow" style="animation-duration:5.2s; animation-delay:.6s"></span>
-              <span class="hub-glow" style="animation-duration:4.9s; animation-delay:1.1s"></span>
-              <span class="hub-glow" style="animation-duration:5s; animation-delay:.3s"></span>
-              <span class="hub-glow" style="animation-duration:4.7s; animation-delay:.9s"></span>
-              <span class="hub-glow" style="animation-duration:5.3s; animation-delay:1.4s"></span>
-              <img src="odas-simbolo.png" alt="ODAS" class="relative size-12 object-contain" />
+              <img src="odas-simbolo.png" alt="ODAS" class="size-12 object-contain" />
             </div>
             <div id="bn6" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
               <!-- WhatsApp -->
