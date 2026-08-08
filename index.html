@@ -647,8 +647,8 @@
          ======================================================================== -->
     <section class="relative overflow-hidden bg-white pb-20 pt-44">
 
-      <!-- Fondo animado: shader "Silk" (WebGL). Detrás del contenido. -->
-      <canvas id="heroSilk" class="pointer-events-none absolute inset-0 z-0 block h-full w-full" aria-hidden="true"></canvas>
+      <!-- Fondo animado tipo nubes (WebGL); se inicializa en el <script> "Cloudscape" de más abajo -->
+      <canvas id="cloudscape" class="pointer-events-none absolute inset-0 z-0 block h-full w-full" aria-hidden="true"></canvas>
       <!-- Difuminado suave: aclara el shader tras el texto y funde el borde inferior con la página -->
       <div class="pointer-events-none absolute inset-0 z-[1]" style="background:linear-gradient(180deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0) 24%, rgba(255,255,255,0) 66%, rgba(255,255,255,0.85) 90%, rgba(255,255,255,1) 100%), radial-gradient(115% 85% at 16% 34%, rgba(255,255,255,0.60) 0%, rgba(255,255,255,0) 55%);"></div>
 
@@ -780,10 +780,10 @@
     <!-- Fondo del hero: shader "Silk" (port vanilla del componente WebGL de 21st.dev).
          Paleta clara (lavanda casi blanca). Cursor desactivado. Respeta reduced-motion. -->
     <script>
-      (function () {
+      function initSilk() {
         var canvas = document.getElementById('heroSilk');
         if (!canvas) return;
-        var section = canvas.closest('section');
+        var section = canvas.parentElement; // contenedor que define el tamaño
         if (!section) return;
         var gl = canvas.getContext('webgl', { antialias: false });
         if (!gl) return;
@@ -924,7 +924,10 @@
         resize();
         draw(performance.now()); // primer fotograma síncrono
         if (!reduce) kick();
-      })();
+      }
+      // El canvas vive más abajo en el documento: espera a que el DOM esté listo.
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initSilk);
+      else initSilk();
     </script>
 
     <!-- ========================================================================
@@ -1385,8 +1388,8 @@
          SECCIÓN 7 · CHOOSE HOW TO GET STARTED — con fondo animado "Cloudscape" (WebGL)
          ======================================================================== -->
     <div class="relative overflow-hidden">
-      <!-- Fondo animado tipo nubes (WebGL); se inicializa en el <script> "Cloudscape" de más abajo -->
-      <canvas id="cloudscape" aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full"></canvas>
+      <!-- Fondo animado: shader "Silk" (WebGL); se inicializa en el <script> "Silk" de más arriba -->
+      <canvas id="heroSilk" aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full"></canvas>
       <!-- Difuminado a blanco arriba y abajo: funde el fondo de nubes con la página -->
       <div class="pointer-events-none absolute inset-x-0 top-0 z-[1] h-32 bg-gradient-to-b from-white to-transparent sm:h-40"></div>
       <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-32 bg-gradient-to-t from-white to-transparent sm:h-40"></div>
