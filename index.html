@@ -562,12 +562,11 @@
         .odas-word.is-tap .ow-tail { max-width: 14ch; opacity: 1; }
       }
 
-      /* Modelo R · luz que recorre el circuito: copia iluminada de la imagen,
-         enmascarada a una banda horizontal que asciende. En "screen" la banda solo
-         aclara el vidrio (el negro sigue negro), simulando luz que sube por el circuito. */
+      /* Luz que recorre el circuito: copia iluminada de la imagen, enmascarada a una
+         banda horizontal que asciende. La imagen es PNG transparente, así que la banda
+         solo afecta al vidrio y funciona igual sobre fondo claro (sin mix-blend). */
       .modelo-sheen {
-        filter: brightness(2.05) saturate(1.5) contrast(1.05);
-        mix-blend-mode: screen;
+        filter: brightness(1.45) saturate(1.6) contrast(1.02);
         -webkit-mask-image: linear-gradient(180deg, transparent 41%, #000 50%, transparent 59%);
                 mask-image: linear-gradient(180deg, transparent 41%, #000 50%, transparent 59%);
         -webkit-mask-size: 100% 230%; mask-size: 100% 230%;
@@ -1204,13 +1203,7 @@
     <!-- ========================================================================
          SECCIÓN · BENTO GRID — capacidades de ODAS (port del componente Tailwind UI)
          ======================================================================== -->
-    <section class="relative isolate mx-auto max-w-6xl px-5 py-20 sm:py-24">
-      <!-- Halos de color muy suaves: dan algo que refractar al cristal de las tarjetas -->
-      <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-        <div class="absolute -left-24 top-32 h-[30rem] w-[30rem] rounded-full bg-emerald-300/30 blur-3xl"></div>
-        <div class="absolute -right-24 top-1/2 h-[28rem] w-[28rem] rounded-full bg-sky-300/30 blur-3xl"></div>
-        <div class="absolute bottom-8 left-1/3 h-[24rem] w-[24rem] rounded-full bg-violet-300/20 blur-3xl"></div>
-      </div>
+    <section class="mx-auto max-w-6xl px-5 py-20 sm:py-24">
       <p data-i18n="bento.kicker" class="text-center text-sm font-semibold uppercase tracking-wider text-emerald-600">Modelos</p>
       <h2 data-i18n="bento.h" class="mt-2 text-center text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Del dato a la decisión.</h2>
       <p data-i18n="bento.sub" class="mx-auto mt-3 max-w-2xl text-center text-lg text-gray-500">ODAS conecta todo tu negocio y convierte la información en acciones concretas, cada día.</p>
@@ -1219,11 +1212,10 @@
 
         <!-- Modelo H · Horeca (con animación) -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-3">
-          <div class="relative h-64 overflow-hidden bg-black">
-            <img src="modelo-h-circuito.png" alt="" loading="lazy" class="absolute inset-0 mx-auto h-full w-full object-contain py-3" />
+          <div class="relative h-64 overflow-hidden">
+            <img src="modelo-h-circuito-alpha.png" alt="" loading="lazy" class="absolute inset-0 mx-auto h-full w-full object-contain py-3" />
             <!-- Copia iluminada enmascarada a una banda que asciende: la luz recorre el circuito (desfasada respecto al Modelo R) -->
-            <img src="modelo-h-circuito.png" alt="" aria-hidden="true" class="modelo-sheen absolute inset-0 mx-auto h-full w-full object-contain py-3" style="animation-delay:-1.8s" />
-            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-950 to-transparent"></div>
+            <img src="modelo-h-circuito-alpha.png" alt="" aria-hidden="true" class="modelo-sheen absolute inset-0 mx-auto h-full w-full object-contain py-3" style="animation-delay:-1.8s" />
           </div>
           <div class="relative p-6">
             <p data-i18n="bento.c1e" class="text-xs font-semibold uppercase tracking-wide text-emerald-600">Modelo H · Para los que cocinan</p>
@@ -1234,11 +1226,10 @@
 
         <!-- Modelo M · Mercado -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-3">
-          <div class="relative h-64 overflow-hidden bg-black">
-            <img src="modelo-r-circuito.png" alt="" loading="lazy" class="absolute inset-0 mx-auto h-full w-full object-contain py-3" />
+          <div class="relative h-64 overflow-hidden">
+            <img src="modelo-r-circuito-alpha.png" alt="" loading="lazy" class="absolute inset-0 mx-auto h-full w-full object-contain py-3" />
             <!-- Copia iluminada de la misma imagen, enmascarada a una banda que asciende: la luz recorre el circuito -->
-            <img src="modelo-r-circuito.png" alt="" aria-hidden="true" class="modelo-sheen absolute inset-0 mx-auto h-full w-full object-contain py-3" />
-            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-950 to-transparent"></div>
+            <img src="modelo-r-circuito-alpha.png" alt="" aria-hidden="true" class="modelo-sheen absolute inset-0 mx-auto h-full w-full object-contain py-3" />
           </div>
           <div class="relative p-6">
             <p data-i18n="bento.c2e" class="text-xs font-semibold uppercase tracking-wide text-sky-600">Modelo R · Para los que venden</p>
@@ -1249,9 +1240,8 @@
 
         <!-- Predicción + margen -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-2">
-          <div class="relative h-64 overflow-hidden bg-black">
+          <div class="relative h-64 overflow-hidden">
             <canvas data-anim="sphere-scan" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-950 to-transparent"></div>
           </div>
           <div class="relative p-6">
             <p data-i18n="bento.c3e" class="text-xs font-semibold uppercase tracking-wide text-amber-600">Predicción</p>
@@ -1262,9 +1252,8 @@
 
         <!-- Cumplimiento + trazabilidad -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-2">
-          <div class="relative h-64 overflow-hidden bg-black">
+          <div class="relative h-64 overflow-hidden">
             <canvas data-anim="phased-array" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-950 to-transparent"></div>
           </div>
           <div class="relative p-6">
             <p data-i18n="bento.c4e" class="text-xs font-semibold uppercase tracking-wide text-violet-600">Cumplimiento</p>
@@ -1275,9 +1264,8 @@
 
         <!-- Avisos accionables -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-2">
-          <div class="relative h-64 overflow-hidden bg-black">
+          <div class="relative h-64 overflow-hidden">
             <canvas data-anim="sonar-sweep" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-gray-950 to-transparent"></div>
           </div>
           <div class="relative p-6">
             <p data-i18n="bento.c5e" class="text-xs font-semibold uppercase tracking-wide text-rose-600">Avisos</p>
@@ -1307,8 +1295,10 @@
         var SIZE = 180, SPEED = 0.5;
         var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        function fill(o) { o = o < 0 ? 0 : o > 1 ? 1 : o; return 'rgba(255,255,255,' + o + ')'; }
-        function stroke(o) { o = o < 0 ? 0 : o > 1 ? 1 : o; return 'rgba(255,255,255,' + o + ')'; }
+        // Tinta oscura: los paneles ahora son claros (tarjetas de cristal blanco).
+        var TINTA = '17,24,39';
+        function fill(o) { o = o < 0 ? 0 : o > 1 ? 1 : o; return 'rgba(' + TINTA + ',' + o + ')'; }
+        function stroke(o) { o = o < 0 ? 0 : o > 1 ? 1 : o; return 'rgba(' + TINTA + ',' + o + ')'; }
         function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
         var C = SIZE / 2; // centro lógico (90,90)
 
