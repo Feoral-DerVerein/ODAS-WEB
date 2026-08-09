@@ -1251,7 +1251,7 @@
 
       <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-5 lg:grid-cols-2 lg:gap-16">
 
-        <!-- Izquierda: píldora + titular + párrafo -->
+        <!-- Izquierda: píldora + titular + párrafo + puntos -->
         <div class="max-w-xl">
           <p class="inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2 text-sm">
             <span data-i18n="whatis.kicker" class="text-gray-900">¿Qué es ODAS?</span>
@@ -1260,62 +1260,179 @@
           </p>
           <h2 data-i18n="whatis.h" class="mt-6 text-3xl font-semibold leading-[1.1] tracking-tight text-gray-900 sm:text-4xl md:text-5xl">El asistente que está pendiente de tu negocio.</h2>
           <p data-i18n="whatis.p1" class="mt-6 text-base text-gray-500 md:text-lg">Cada día pasan cientos de cosas en una empresa: ventas, compras, inventario, incidencias, caducidades, pedidos y documentos. ODAS las observa, las conecta y te avisa de lo que importa.</p>
+          <ul class="mt-7 space-y-3 text-sm text-gray-700 md:text-base">
+            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b1">Te dice qué está pasando en tu negocio, sin tener que revisar cientos de datos.</span></li>
+            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b2">Se anticipa a lo que viene y te avisa antes de que un problema ocurra.</span></li>
+            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b3">Te recomienda qué hacer: comprar, ajustar, vender, donar o transformar.</span></li>
+            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b4">Te recuerda lo que no puedes olvidar, desde productos próximos a caducar hasta tareas pendientes.</span></li>
+            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b5">Responde a tus preguntas sobre tu operación cuando necesitas una respuesta.</span></li>
+            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b6">Mantiene tu documentación al día y te ayuda a cumplir con la Ley 1/2025.</span></li>
+          </ul>
         </div>
 
-        <!-- Derecha: panel de capacidades -->
-        <div class="rounded-3xl border border-gray-200/70 bg-white/80 p-5 shadow-xl shadow-gray-900/5 backdrop-blur sm:p-6">
-          <p data-i18n="whatis.g1" class="mb-3 text-sm text-gray-500">Cada día</p>
-          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div class="rounded-xl border border-gray-100 bg-gray-50/70 p-4 transition hover:bg-white hover:shadow-sm">
-              <div class="flex items-center gap-2">
-                <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-white ring-1 ring-gray-200"><svg class="size-4 text-emerald-600" aria-hidden="true"><use href="#ico-pulso"/></svg></span>
-                <p data-i18n="whatis.c1t" class="text-sm font-semibold text-gray-900">Qué está pasando</p>
-              </div>
-              <p data-i18n="whatis.c1d" class="mt-2 text-xs leading-relaxed text-gray-500">Te lo resume sin que tengas que revisar cientos de datos.</p>
+        <!-- Columna derecha: diagrama que conecta los datos con ODAS -->
+        <div class="relative">
+          <div id="beamContainer" class="relative mx-auto flex h-[380px] w-full max-w-xl items-center justify-center overflow-hidden">
+        <svg id="beamSvg" class="pointer-events-none absolute inset-0 z-0 h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+        <div class="relative z-10 flex size-full max-h-[240px] max-w-md flex-col items-stretch justify-between">
+          <!-- fila superior -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn1" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- Persona -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
             </div>
-            <div class="rounded-xl border border-gray-100 bg-gray-50/70 p-4 transition hover:bg-white hover:shadow-sm">
-              <div class="flex items-center gap-2">
-                <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-white ring-1 ring-gray-200"><svg class="size-4 text-emerald-600" aria-hidden="true"><use href="#ico-campana"/></svg></span>
-                <p data-i18n="whatis.c2t" class="text-sm font-semibold text-gray-900">Se anticipa</p>
-              </div>
-              <p data-i18n="whatis.c2d" class="mt-2 text-xs leading-relaxed text-gray-500">Te avisa antes de que el problema ocurra.</p>
-            </div>
-            <div class="rounded-xl border border-gray-100 bg-gray-50/70 p-4 transition hover:bg-white hover:shadow-sm">
-              <div class="flex items-center gap-2">
-                <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-white ring-1 ring-gray-200"><svg class="size-4 text-emerald-600" aria-hidden="true"><use href="#ico-ruta"/></svg></span>
-                <p data-i18n="whatis.c3t" class="text-sm font-semibold text-gray-900">Qué hacer</p>
-              </div>
-              <p data-i18n="whatis.c3d" class="mt-2 text-xs leading-relaxed text-gray-500">Comprar, ajustar, vender, donar o transformar.</p>
-            </div>
-            <div class="rounded-xl border border-gray-100 bg-gray-50/70 p-4 transition hover:bg-white hover:shadow-sm">
-              <div class="flex items-center gap-2">
-                <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-white ring-1 ring-gray-200"><svg class="size-4 text-emerald-600" aria-hidden="true"><use href="#ico-reloj"/></svg></span>
-                <p data-i18n="whatis.c4t" class="text-sm font-semibold text-gray-900">Te lo recuerda</p>
-              </div>
-              <p data-i18n="whatis.c4d" class="mt-2 text-xs leading-relaxed text-gray-500">Desde productos por caducar hasta tareas pendientes.</p>
+            <div id="bn5" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- Dashboard -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <rect width="7" height="9" x="3" y="3" rx="1"/>
+                <rect width="7" height="5" x="14" y="3" rx="1"/>
+                <rect width="7" height="9" x="14" y="12" rx="1"/>
+                <rect width="7" height="5" x="3" y="16" rx="1"/>
+              </svg>
             </div>
           </div>
-          <p data-i18n="whatis.g2" class="mb-3 mt-6 text-sm text-gray-500">Cuando lo necesitas</p>
-          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div class="rounded-xl border border-gray-100 bg-gray-50/70 p-4 transition hover:bg-white hover:shadow-sm">
-              <div class="flex items-center gap-2">
-                <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-white ring-1 ring-gray-200"><svg class="size-4 text-emerald-600" aria-hidden="true"><use href="#ico-chat"/></svg></span>
-                <p data-i18n="whatis.c5t" class="text-sm font-semibold text-gray-900">Responde</p>
-              </div>
-              <p data-i18n="whatis.c5d" class="mt-2 text-xs leading-relaxed text-gray-500">Pregúntale por tu operación y te contesta al momento.</p>
+          <!-- fila media -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn2" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- Documento -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                <path d="M16 13H8"/>
+                <path d="M16 17H8"/>
+                <path d="M10 9H8"/>
+              </svg>
             </div>
-            <div class="rounded-xl border border-gray-100 bg-gray-50/70 p-4 transition hover:bg-white hover:shadow-sm">
-              <div class="flex items-center gap-2">
-                <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-white ring-1 ring-gray-200"><svg class="size-4 text-emerald-600" aria-hidden="true"><use href="#ico-doc"/></svg></span>
-                <p data-i18n="whatis.c6t" class="text-sm font-semibold text-gray-900">Documentación al día</p>
-              </div>
-              <p data-i18n="whatis.c6d" class="mt-2 text-xs leading-relaxed text-gray-500">Mantiene la Ley 1/2025 lista para cualquier inspección.</p>
+            <div id="bn4" class="beam-hub relative z-10 flex size-20 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_34px_-10px_rgba(0,0,0,0.4)]">
+              <img src="odas-simbolo.png" alt="ODAS" class="size-12 object-contain" />
+            </div>
+            <div id="bn6" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- WhatsApp -->
+              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </div>
+          </div>
+          <!-- fila inferior -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn3" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- Caja -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                <path d="m3.3 7 8.7 5 8.7-5"/>
+                <path d="M12 22V12"/>
+              </svg>
+            </div>
+            <div id="bn7" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <!-- Decisión (bifurcación / elegir camino) -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M16 3h5v5"/>
+                <path d="M8 3H3v5"/>
+                <path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/>
+                <path d="m15 9 6-6"/>
+              </svg>
             </div>
           </div>
         </div>
-
+          </div><!-- /#beamContainer -->
+        </div><!-- /columna derecha -->
       </div>
     </section>
+
+    <!-- Script del AnimatedBeam: calcula las curvas entre nodos y anima el "haz" con SMIL -->
+    <script>
+      (function () {
+        var container = document.getElementById('beamContainer');
+        if (!container) return;
+        var svg = document.getElementById('beamSvg');
+        if (!svg) return;
+        var NS = 'http://www.w3.org/2000/svg';
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // from → hub(bn4). Lado izquierdo: normal; derecho: reverse (el haz siempre entra al núcleo).
+        var beams = [
+          { from: 'bn1', curvature: -75, endYOffset: -10, reverse: false, dur: 4.6, begin: 0.0 },
+          { from: 'bn2', curvature: 0, endYOffset: 0, reverse: false, dur: 5.2, begin: 0.6 },
+          { from: 'bn3', curvature: 75, endYOffset: 10, reverse: false, dur: 4.9, begin: 1.1 },
+          { from: 'bn5', curvature: -75, endYOffset: -10, reverse: true, dur: 5.0, begin: 0.3 },
+          { from: 'bn6', curvature: 0, endYOffset: 0, reverse: true, dur: 4.7, begin: 0.9 },
+          { from: 'bn7', curvature: 75, endYOffset: 10, reverse: true, dur: 5.3, begin: 1.4 }
+        ];
+        var toEl = document.getElementById('bn4');
+
+        // Construye las capas del SVG una sola vez; el path 'd' se recalcula en resize.
+        var defs = document.createElementNS(NS, 'defs');
+        svg.appendChild(defs);
+        var built = [];
+        beams.forEach(function (b, i) {
+          var gid = 'beamGrad' + i;
+          var grad = document.createElementNS(NS, 'linearGradient');
+          grad.setAttribute('id', gid);
+          grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+          grad.setAttribute('x1', '0%'); grad.setAttribute('x2', '0%');
+          grad.setAttribute('y1', '0%'); grad.setAttribute('y2', '0%');
+          grad.innerHTML =
+            '<stop stop-color="#10b981" stop-opacity="0"></stop>' +
+            '<stop stop-color="#10b981"></stop>' +
+            '<stop offset="32.5%" stop-color="#0ea5e9"></stop>' +
+            '<stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"></stop>';
+          if (!reduce) {
+            var x1v = b.reverse ? '90%;-10%' : '10%;110%';
+            var x2v = b.reverse ? '100%;0%' : '0%;100%';
+            grad.innerHTML +=
+              '<animate attributeName="x1" values="' + x1v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>' +
+              '<animate attributeName="x2" values="' + x2v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>';
+          }
+          defs.appendChild(grad);
+
+          var base = document.createElementNS(NS, 'path');
+          base.setAttribute('stroke', '#c7ccd4');
+          base.setAttribute('stroke-width', '2');
+          base.setAttribute('stroke-opacity', '0.35');
+          base.setAttribute('stroke-linecap', 'round');
+          base.setAttribute('fill', 'none');
+          svg.appendChild(base);
+
+          var glow = document.createElementNS(NS, 'path');
+          glow.setAttribute('stroke', 'url(#' + gid + ')');
+          glow.setAttribute('stroke-width', '2');
+          glow.setAttribute('stroke-linecap', 'round');
+          glow.setAttribute('fill', 'none');
+          svg.appendChild(glow);
+
+          built.push({ cfg: b, base: base, glow: glow });
+        });
+
+        function update() {
+          var cr = container.getBoundingClientRect();
+          if (!cr.width || !cr.height) return;
+          svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + cr.height);
+          var rb = toEl.getBoundingClientRect();
+          built.forEach(function (o) {
+            var fromEl = document.getElementById(o.cfg.from);
+            if (!fromEl) return;
+            var ra = fromEl.getBoundingClientRect();
+            var sx = ra.left - cr.left + ra.width / 2;
+            var sy = ra.top - cr.top + ra.height / 2;
+            var ex = rb.left - cr.left + rb.width / 2;
+            var ey = rb.top - cr.top + rb.height / 2 + o.cfg.endYOffset;
+            var cyc = sy - o.cfg.curvature;
+            var d = 'M ' + sx + ',' + sy + ' Q ' + ((sx + ex) / 2) + ',' + cyc + ' ' + ex + ',' + ey;
+            o.base.setAttribute('d', d);
+            o.glow.setAttribute('d', d);
+          });
+        }
+
+        if (window.ResizeObserver) { new ResizeObserver(update).observe(container); }
+        window.addEventListener('resize', update);
+        // Recalcula tras cargar imágenes/fuentes (los nodos cambian de posición).
+        window.addEventListener('load', update);
+        update();
+      })();
+    </script>
 
 
     <!-- ========================================================================
@@ -1987,27 +2104,49 @@
         </div>
       </div>
 
-      <!-- Embudo: la jerarquía de la Ley 1/2025. Cuanto más arriba se resuelve,
-           menos acaba en la basura (la banda roja del final). -->
+      <!-- Embudo horizontal: cuánto desperdicio queda cada año trabajando con ODAS.
+           Las cintas van del rojo (hoy) al verde (año 4). -->
       <div class="mt-12 px-5">
-        <svg class="mx-auto h-auto w-full max-w-3xl" viewBox="0 0 1000 306" role="img" aria-labelledby="tituloEmbudo">
-          <title id="tituloEmbudo" data-i18n="funnel.alt">Jerarquía de la Ley 1/2025: prevenir, donar, alimentación animal, transformar y, como última opción, tirar</title>
-          <polygon points="50,0 950,0 872.5,54 127.5,54" fill="#059669" fill-opacity="0.95" />
-          <text x="500" y="25" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="600" data-i18n="funnel.f1t">Prevenir</text>
-          <text x="500" y="44" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="14" data-i18n="funnel.f1d">que no llegue a sobrar</text>
-          <polygon points="127.5,63 872.5,63 795,117 205,117" fill="#10b981" fill-opacity="0.95" />
-          <text x="500" y="88" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="600" data-i18n="funnel.f2t">Donar</text>
-          <text x="500" y="107" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="14" data-i18n="funnel.f2d">a personas</text>
-          <polygon points="205,126 795,126 717.5,180 282.5,180" fill="#34d399" fill-opacity="0.95" />
-          <text x="500" y="160" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="600" data-i18n="funnel.f3t">Alimentación animal</text>
-          <polygon points="282.5,189 717.5,189 640,243 360,243" fill="#6ee7b7" fill-opacity="0.95" />
-          <text x="500" y="214" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="600" data-i18n="funnel.f4t">Transformar</text>
-          <text x="500" y="233" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="14" data-i18n="funnel.f4d">darle otro uso</text>
-          <polygon points="360,252 640,252 575,306 425,306" fill="#f43f5e" fill-opacity="0.92" />
-          <text x="500" y="277" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="600" data-i18n="funnel.f5t">Tirar</text>
-          <text x="500" y="296" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="14" data-i18n="funnel.f5d">última opción</text>
+        <svg class="mx-auto h-auto w-full max-w-4xl" viewBox="0 0 1000 500" role="img" aria-labelledby="tituloEmbudo">
+          <title id="tituloEmbudo" data-i18n="funnel.alt">Reducción del desperdicio alimentario año a año trabajando con ODAS</title>
+          <defs>
+            <linearGradient id="gradf1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#e11d48"/><stop offset="100%" stop-color="#fb7185"/></linearGradient>
+            <linearGradient id="gradf2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#f43f5e"/><stop offset="100%" stop-color="#fda4af"/></linearGradient>
+            <linearGradient id="gradf3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#fcd34d"/></linearGradient>
+            <linearGradient id="gradf4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#84cc16"/><stop offset="100%" stop-color="#bef264"/></linearGradient>
+            <linearGradient id="gradf5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#6ee7b7"/></linearGradient>
+          </defs>
+          <path d="M 0,86 C 100,86 100,131 200,131 L 200,369 C 100,369 100,414 0,414 Z" fill="url(#gradf1)" fill-opacity="0.18" />
+          <path d="M 0,100 C 100,100 100,145 200,145 L 200,355 C 100,355 100,400 0,400 Z" fill="url(#gradf1)" />
+          <path d="M 200,131 C 300,131 300,162.5 400,162.5 L 400,337.5 C 300,337.5 300,369 200,369 Z" fill="url(#gradf2)" fill-opacity="0.18" />
+          <path d="M 200,145 C 300,145 300,176.5 400,176.5 L 400,323.5 C 300,323.5 300,355 200,355 Z" fill="url(#gradf2)" />
+          <path d="M 400,162.5 C 500,162.5 500,185 600,185 L 600,315 C 500,315 500,337.5 400,337.5 Z" fill="url(#gradf3)" fill-opacity="0.18" />
+          <path d="M 400,176.5 C 500,176.5 500,199 600,199 L 600,301 C 500,301 500,323.5 400,323.5 Z" fill="url(#gradf3)" />
+          <path d="M 600,185 C 700,185 700,201.5 800,201.5 L 800,298.5 C 700,298.5 700,315 600,315 Z" fill="url(#gradf4)" fill-opacity="0.18" />
+          <path d="M 600,199 C 700,199 700,215.5 800,215.5 L 800,284.5 C 700,284.5 700,301 600,301 Z" fill="url(#gradf4)" />
+          <path d="M 800,201.5 C 900,201.5 900,201.5 1000,201.5 L 1000,298.5 C 900,298.5 900,298.5 800,298.5 Z" fill="url(#gradf5)" fill-opacity="0.18" />
+          <path d="M 800,215.5 C 900,215.5 900,215.5 1000,215.5 L 1000,284.5 C 900,284.5 900,284.5 800,284.5 Z" fill="url(#gradf5)" />
+          <line x1="200" y1="70" x2="200" y2="430" stroke="#ffffff" stroke-width="4" />
+          <line x1="400" y1="70" x2="400" y2="430" stroke="#ffffff" stroke-width="4" />
+          <line x1="600" y1="70" x2="600" y2="430" stroke="#ffffff" stroke-width="4" />
+          <line x1="800" y1="70" x2="800" y2="430" stroke="#ffffff" stroke-width="4" />
+          <text x="100" y="48" text-anchor="middle" font-size="26" font-weight="700" fill="#111827" data-i18n="funnel.f1v">100%</text>
+          <g><rect x="57" y="232" width="86" height="36" rx="18" fill="#111827"/><text x="100" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff" data-i18n="funnel.f1p">base</text></g>
+          <text x="100" y="466" text-anchor="middle" font-size="20" fill="#6b7280" data-i18n="funnel.f1t">Hoy</text>
+          <text x="300" y="48" text-anchor="middle" font-size="26" font-weight="700" fill="#111827" data-i18n="funnel.f2v">70%</text>
+          <g><rect x="257" y="232" width="86" height="36" rx="18" fill="#111827"/><text x="300" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff" data-i18n="funnel.f2p">−30%</text></g>
+          <text x="300" y="466" text-anchor="middle" font-size="20" fill="#6b7280" data-i18n="funnel.f2t">Año 1</text>
+          <text x="500" y="48" text-anchor="middle" font-size="26" font-weight="700" fill="#111827" data-i18n="funnel.f3v">49%</text>
+          <g><rect x="457" y="232" width="86" height="36" rx="18" fill="#111827"/><text x="500" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff" data-i18n="funnel.f3p">−51%</text></g>
+          <text x="500" y="466" text-anchor="middle" font-size="20" fill="#6b7280" data-i18n="funnel.f3t">Año 2</text>
+          <text x="700" y="48" text-anchor="middle" font-size="26" font-weight="700" fill="#111827" data-i18n="funnel.f4v">34%</text>
+          <g><rect x="657" y="232" width="86" height="36" rx="18" fill="#111827"/><text x="700" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff" data-i18n="funnel.f4p">−66%</text></g>
+          <text x="700" y="466" text-anchor="middle" font-size="20" fill="#6b7280" data-i18n="funnel.f4t">Año 3</text>
+          <text x="900" y="48" text-anchor="middle" font-size="26" font-weight="700" fill="#111827" data-i18n="funnel.f5v">23%</text>
+          <g><rect x="857" y="232" width="86" height="36" rx="18" fill="#111827"/><text x="900" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff" data-i18n="funnel.f5p">−77%</text></g>
+          <text x="900" y="466" text-anchor="middle" font-size="20" fill="#6b7280" data-i18n="funnel.f5t">Año 4</text>
         </svg>
-        <p data-i18n="funnel.pie" class="mx-auto mt-5 max-w-2xl text-center text-sm text-gray-500">La jerarquía que marca la Ley 1/2025. ODAS empuja cada producto lo más arriba posible: cuanto antes actúas, menos acaba abajo.</p>
+        <p data-i18n="funnel.pie" class="mx-auto mt-6 max-w-2xl text-center text-sm text-gray-500">Trayectoria objetivo: cuanto más aprende ODAS de tu operación, menos producto acaba en la basura. Partiendo de tu propia línea base.</p>
       </div>
     </section>
 
@@ -2110,20 +2249,12 @@
           "whatis.h": `El asistente que está pendiente de tu negocio.`,
           "whatis.p1": `Cada día pasan cientos de cosas en una empresa: ventas, compras, inventario, incidencias, caducidades, pedidos y documentos. ODAS las observa, las conecta y te avisa de lo que importa.`,
           "whatis.badge": `El asistente de tu operación`,
-          "whatis.g1": `Cada día`,
-          "whatis.g2": `Cuando lo necesitas`,
-          "whatis.c1t": `Qué está pasando`,
-          "whatis.c1d": `Te lo resume sin que tengas que revisar cientos de datos.`,
-          "whatis.c2t": `Se anticipa`,
-          "whatis.c2d": `Te avisa antes de que el problema ocurra.`,
-          "whatis.c3t": `Qué hacer`,
-          "whatis.c3d": `Comprar, ajustar, vender, donar o transformar.`,
-          "whatis.c4t": `Te lo recuerda`,
-          "whatis.c4d": `Desde productos por caducar hasta tareas pendientes.`,
-          "whatis.c5t": `Responde`,
-          "whatis.c5d": `Pregúntale por tu operación y te contesta al momento.`,
-          "whatis.c6t": `Documentación al día`,
-          "whatis.c6d": `Mantiene la Ley 1/2025 lista para cualquier inspección.`,
+          "whatis.b1": `Te dice qué está pasando en tu negocio, sin tener que revisar cientos de datos.`,
+          "whatis.b2": `Se anticipa a lo que viene y te avisa antes de que un problema ocurra.`,
+          "whatis.b3": `Te recomienda qué hacer: comprar, ajustar, vender, donar o transformar.`,
+          "whatis.b4": `Te recuerda lo que no puedes olvidar, desde productos próximos a caducar hasta tareas pendientes.`,
+          "whatis.b5": `Responde a tus preguntas sobre tu operación cuando necesitas una respuesta.`,
+          "whatis.b6": `Mantiene tu documentación al día y te ayuda a cumplir con la Ley 1/2025.`,
           "faq.h": `Un Asistente para tu día a día`,
           "faq.sub": `ODAS entiende lo que ocurre en tu negocio y convierte datos dispersos en decisiones.`,
           "faq.q1": `¿Qué caduca hoy?`,
@@ -2203,17 +2334,23 @@
           "plans.p2f3": `Previsión avanzada multi-tienda`,
           "footer.ods": `Nuestra tecnología contribuye a la reducción del desperdicio alimentario, alineada con los <span class="text-black">Objetivos de Desarrollo Sostenible 2, 12, 13 y 17</span> de la ONU.`,
           "footer.division": `Una división de <span class="text-black">Negentropy Labs</span>`,
-          "funnel.alt": `Jerarquía de la Ley 1/2025: prevenir, donar, alimentación animal, transformar y, como última opción, tirar`,
-          "funnel.f1t": `Prevenir`,
-          "funnel.f1d": `que no llegue a sobrar`,
-          "funnel.f2t": `Donar`,
-          "funnel.f2d": `a personas`,
-          "funnel.f3t": `Alimentación animal`,
-          "funnel.f4t": `Transformar`,
-          "funnel.f4d": `darle otro uso`,
-          "funnel.f5t": `Tirar`,
-          "funnel.f5d": `última opción`,
-          "funnel.pie": `La jerarquía que marca la Ley 1/2025. ODAS empuja cada producto lo más arriba posible: cuanto antes actúas, menos acaba abajo.`,
+          "funnel.alt": `Reducción del desperdicio alimentario año a año trabajando con ODAS`,
+          "funnel.f1v": `100%`,
+          "funnel.f1p": `base`,
+          "funnel.f1t": `Hoy`,
+          "funnel.f2v": `70%`,
+          "funnel.f2p": `−30%`,
+          "funnel.f2t": `Año 1`,
+          "funnel.f3v": `49%`,
+          "funnel.f3p": `−51%`,
+          "funnel.f3t": `Año 2`,
+          "funnel.f4v": `34%`,
+          "funnel.f4p": `−66%`,
+          "funnel.f4t": `Año 3`,
+          "funnel.f5v": `23%`,
+          "funnel.f5p": `−77%`,
+          "funnel.f5t": `Año 4`,
+          "funnel.pie": `Trayectoria objetivo: cuanto más aprende ODAS de tu operación, menos producto acaba en la basura. Partiendo de tu propia línea base.`,
           "stats.h": `Cada día que pasa, ODAS conoce mejor tu negocio.`,
           "stats.hsub": `Aprende de cada entrada, cada venta y cada decisión que tomas, y afina la previsión del día siguiente.`,
           "stats.n1": `1/2025`,
@@ -2275,20 +2412,12 @@
           "whatis.h": `L'assistent que està pendent del teu negoci.`,
           "whatis.p1": `Cada dia passen centenars de coses en una empresa: vendes, compres, inventari, incidències, caducitats, comandes i documents. ODAS les observa, les connecta i t'avisa del que importa.`,
           "whatis.badge": `L'assistent de la teva operació`,
-          "whatis.g1": `Cada dia`,
-          "whatis.g2": `Quan ho necessites`,
-          "whatis.c1t": `Què està passant`,
-          "whatis.c1d": `T'ho resumeix sense haver de revisar centenars de dades.`,
-          "whatis.c2t": `S'anticipa`,
-          "whatis.c2d": `T'avisa abans que el problema passi.`,
-          "whatis.c3t": `Què fer`,
-          "whatis.c3d": `Comprar, ajustar, vendre, donar o transformar.`,
-          "whatis.c4t": `T'ho recorda`,
-          "whatis.c4d": `Des de productes a punt de caducar fins a tasques pendents.`,
-          "whatis.c5t": `Respon`,
-          "whatis.c5d": `Pregunta-li per la teva operació i et contesta a l'instant.`,
-          "whatis.c6t": `Documentació al dia`,
-          "whatis.c6d": `Manté la Llei 1/2025 llesta per a qualsevol inspecció.`,
+          "whatis.b1": `Et diu què està passant al teu negoci, sense haver de revisar centenars de dades.`,
+          "whatis.b2": `S'anticipa al que ve i t'avisa abans que un problema passi.`,
+          "whatis.b3": `Et recomana què fer: comprar, ajustar, vendre, donar o transformar.`,
+          "whatis.b4": `Et recorda el que no pots oblidar, des de productes a punt de caducar fins a tasques pendents.`,
+          "whatis.b5": `Respon les teves preguntes sobre l'operació quan necessites una resposta.`,
+          "whatis.b6": `Manté la teva documentació al dia i t'ajuda a complir la Llei 1/2025.`,
           "faq.h": `Un Assistent per al teu dia a dia`,
           "faq.sub": `ODAS entén el que passa al teu negoci i converteix dades disperses en decisions.`,
           "faq.q1": `Què caduca avui?`,
@@ -2368,17 +2497,23 @@
           "plans.p2f3": `Previsió avançada multibotiga`,
           "footer.ods": `La nostra tecnologia contribueix a reduir el malbaratament alimentari, alineada amb els <span class="text-black">Objectius de Desenvolupament Sostenible 2, 12, 13 i 17</span> de l'ONU.`,
           "footer.division": `Una divisió de <span class="text-black">Negentropy Labs</span>`,
-          "funnel.alt": `Jerarquia de la Llei 1/2025: prevenir, donar, alimentació animal, transformar i, com a última opció, llençar`,
-          "funnel.f1t": `Prevenir`,
-          "funnel.f1d": `que no arribi a sobrar`,
-          "funnel.f2t": `Donar`,
-          "funnel.f2d": `a persones`,
-          "funnel.f3t": `Alimentació animal`,
-          "funnel.f4t": `Transformar`,
-          "funnel.f4d": `donar-li un altre ús`,
-          "funnel.f5t": `Llençar`,
-          "funnel.f5d": `última opció`,
-          "funnel.pie": `La jerarquia que marca la Llei 1/2025. ODAS empeny cada producte tan amunt com pot: com abans actues, menys acaba a baix.`,
+          "funnel.alt": `Reducció del malbaratament alimentari any rere any treballant amb ODAS`,
+          "funnel.f1v": `100%`,
+          "funnel.f1p": `base`,
+          "funnel.f1t": `Avui`,
+          "funnel.f2v": `70%`,
+          "funnel.f2p": `−30%`,
+          "funnel.f2t": `Any 1`,
+          "funnel.f3v": `49%`,
+          "funnel.f3p": `−51%`,
+          "funnel.f3t": `Any 2`,
+          "funnel.f4v": `34%`,
+          "funnel.f4p": `−66%`,
+          "funnel.f4t": `Any 3`,
+          "funnel.f5v": `23%`,
+          "funnel.f5p": `−77%`,
+          "funnel.f5t": `Any 4`,
+          "funnel.pie": `Trajectòria objectiu: com més aprèn ODAS de la teva operació, menys producte acaba a les escombraries. Partint de la teva pròpia línia base.`,
           "stats.h": `Cada dia que passa, ODAS coneix millor el teu negoci.`,
           "stats.hsub": `Aprèn de cada entrada, cada venda i cada decisió que prens, i afina la previsió de l'endemà.`,
           "stats.n1": `1/2025`,
@@ -2440,20 +2575,12 @@
           "whatis.h": `The assistant that keeps an eye on your business.`,
           "whatis.p1": `Hundreds of things happen in a business every day: sales, purchases, inventory, incidents, expiry dates, orders and documents. ODAS watches them, connects them and alerts you to what matters.`,
           "whatis.badge": `The assistant for your operation`,
-          "whatis.g1": `Every day`,
-          "whatis.g2": `Whenever you need it`,
-          "whatis.c1t": `What's happening`,
-          "whatis.c1d": `It sums it up so you don't review hundreds of data points.`,
-          "whatis.c2t": `Stays ahead`,
-          "whatis.c2d": `It warns you before the problem happens.`,
-          "whatis.c3t": `What to do`,
-          "whatis.c3d": `Buy, adjust, sell, donate or transform.`,
-          "whatis.c4t": `Reminds you`,
-          "whatis.c4d": `From products about to expire to pending tasks.`,
-          "whatis.c5t": `Answers`,
-          "whatis.c5d": `Ask about your operation and it replies right away.`,
-          "whatis.c6t": `Docs up to date`,
-          "whatis.c6d": `Keeps Law 1/2025 ready for any inspection.`,
+          "whatis.b1": `Tells you what's happening in your business, without reviewing hundreds of data points.`,
+          "whatis.b2": `Anticipates what's coming and warns you before a problem happens.`,
+          "whatis.b3": `Recommends what to do: buy, adjust, sell, donate or transform.`,
+          "whatis.b4": `Reminds you of what you can't forget, from products about to expire to pending tasks.`,
+          "whatis.b5": `Answers your questions about your operation whenever you need an answer.`,
+          "whatis.b6": `Keeps your documentation up to date and helps you comply with Law 1/2025.`,
           "faq.h": `An Assistant for your day to day`,
           "faq.sub": `ODAS understands what happens in your business and turns scattered data into decisions.`,
           "faq.q1": `What expires today?`,
@@ -2533,17 +2660,23 @@
           "plans.p2f3": `Advanced multi-store forecasting`,
           "footer.ods": `Our technology helps reduce food waste, aligned with the United Nations <span class="text-black">Sustainable Development Goals 2, 12, 13 and 17</span>.`,
           "footer.division": `A division of <span class="text-black">Negentropy Labs</span>`,
-          "funnel.alt": `Law 1/2025 hierarchy: prevent, donate, animal feed, transform and, as a last resort, dispose`,
-          "funnel.f1t": `Prevent`,
-          "funnel.f1d": `so there is no surplus`,
-          "funnel.f2t": `Donate`,
-          "funnel.f2d": `to people`,
-          "funnel.f3t": `Animal feed`,
-          "funnel.f4t": `Transform`,
-          "funnel.f4d": `give it another use`,
-          "funnel.f5t": `Dispose`,
-          "funnel.f5d": `last resort`,
-          "funnel.pie": `The hierarchy set by Law 1/2025. ODAS pushes every product as high up as possible: the sooner you act, the less ends up at the bottom.`,
+          "funnel.alt": `Year-on-year reduction of food waste working with ODAS`,
+          "funnel.f1v": `100%`,
+          "funnel.f1p": `baseline`,
+          "funnel.f1t": `Today`,
+          "funnel.f2v": `70%`,
+          "funnel.f2p": `−30%`,
+          "funnel.f2t": `Year 1`,
+          "funnel.f3v": `49%`,
+          "funnel.f3p": `−51%`,
+          "funnel.f3t": `Year 2`,
+          "funnel.f4v": `34%`,
+          "funnel.f4p": `−66%`,
+          "funnel.f4t": `Year 3`,
+          "funnel.f5v": `23%`,
+          "funnel.f5p": `−77%`,
+          "funnel.f5t": `Year 4`,
+          "funnel.pie": `Target trajectory: the more ODAS learns about your operation, the less product ends up in the bin. Starting from your own baseline.`,
           "stats.h": `Every day that passes, ODAS knows your business better.`,
           "stats.hsub": `It learns from every delivery, every sale and every decision you make, and sharpens the next day's forecast.`,
           "stats.n1": `1/2025`,
