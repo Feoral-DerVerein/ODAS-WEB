@@ -2043,6 +2043,54 @@
 
 
     <!-- ========================================================================
+         SECCIÓN · CIFRAS + TENDENCIA
+         · Port del componente FeaturedSectionStats (React + recharts) a HTML:
+           el área se dibuja en SVG, sin dependencias.
+         ======================================================================== -->
+    <section class="mx-auto w-full max-w-6xl py-24 text-left sm:py-32">
+      <div class="px-5">
+        <h3 class="mb-14 text-lg font-medium text-gray-900 sm:text-xl lg:text-4xl">
+          <span data-i18n="stats.h">Cada día que pasa, ODAS conoce mejor tu negocio.</span>
+          <span data-i18n="stats.hsub" class="text-sm text-gray-500 sm:text-base lg:text-4xl">Aprende de cada entrada, cada venta y cada decisión que tomas, y afina la previsión del día siguiente.</span>
+        </h3>
+
+        <div class="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <div>
+            <p data-i18n="stats.n1" class="text-3xl font-medium text-gray-900">1/2025</p>
+            <p data-i18n="stats.l1" class="text-md text-gray-500">La ley que ya te obliga</p>
+          </div>
+          <div>
+            <p data-i18n="stats.n2" class="text-3xl font-medium text-gray-900">24/7</p>
+            <p data-i18n="stats.l2" class="text-md text-gray-500">Vigilando tus caducidades</p>
+          </div>
+          <div>
+            <p data-i18n="stats.n3" class="text-3xl font-medium text-gray-900">SHA-256</p>
+            <p data-i18n="stats.l3" class="text-md text-gray-500">Trazabilidad sellada</p>
+          </div>
+          <div>
+            <p data-i18n="stats.n4" class="text-3xl font-medium text-gray-900">3</p>
+            <p data-i18n="stats.l4" class="text-md text-gray-500">Idiomas: es · ca · en</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Área: misma curva ascendente del componente, en SVG -->
+      <div class="mt-10 h-48 w-full px-5">
+        <svg class="h-full w-full" viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="areaVerde" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stop-color="#10b981" stop-opacity="0.35" />
+              <stop offset="95%" stop-color="#10b981" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#areaVerde)" d="M 0,169.8 C 83.3,169.8 83.3,147.5 166.7,147.5 C 250,147.5 250,125.2 333.3,125.2 C 416.6,125.2 416.6,103 500,103 C 583.4,103 583.4,80.8 666.7,80.8 C 750,80.8 750,47.4 833.3,47.4 C 916.6,47.4 916.6,14 1000,14 L 1000,200 L 0,200 Z" />
+          <path fill="none" stroke="#10b981" stroke-width="2" vector-effect="non-scaling-stroke" d="M 0,169.8 C 83.3,169.8 83.3,147.5 166.7,147.5 C 250,147.5 250,125.2 333.3,125.2 C 416.6,125.2 416.6,103 500,103 C 583.4,103 583.4,80.8 666.7,80.8 C 750,80.8 750,47.4 833.3,47.4 C 916.6,47.4 916.6,14 1000,14" />
+        </svg>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================
          SECCIÓN 8 · PIE DE PÁGINA (FOOTER)
          ------------------------------------------------------------------------
          · Línea superior + columnas de enlaces + línea final.
@@ -2224,6 +2272,16 @@
           "plans.p2f3": `Previsión avanzada multi-tienda`,
           "footer.ods": `Nuestra tecnología contribuye a la reducción del desperdicio alimentario, alineada con los <span class="text-black">Objetivos de Desarrollo Sostenible 2, 12, 13 y 17</span> de la ONU.`,
           "footer.division": `Una división de <span class="text-black">Negentropy Labs</span>`,
+          "stats.h": `Cada día que pasa, ODAS conoce mejor tu negocio.`,
+          "stats.hsub": `Aprende de cada entrada, cada venta y cada decisión que tomas, y afina la previsión del día siguiente.`,
+          "stats.n1": `1/2025`,
+          "stats.l1": `La ley que ya te obliga`,
+          "stats.n2": `24/7`,
+          "stats.l2": `Vigilando tus caducidades`,
+          "stats.n3": `SHA-256`,
+          "stats.l3": `Trazabilidad sellada`,
+          "stats.n4": `3`,
+          "stats.l4": `Idiomas: es · ca · en`,
           "footer.supportedBy": `Un proyecto apoyado por:`,
           "footer.ods2Alt": `ODS 2: Hambre cero`,
           "footer.ods12Alt": `ODS 12: Producción y consumo responsables`,
@@ -2359,6 +2417,16 @@
           "plans.p2f3": `Previsió avançada multibotiga`,
           "footer.ods": `La nostra tecnologia contribueix a reduir el malbaratament alimentari, alineada amb els <span class="text-black">Objectius de Desenvolupament Sostenible 2, 12, 13 i 17</span> de l'ONU.`,
           "footer.division": `Una divisió de <span class="text-black">Negentropy Labs</span>`,
+          "stats.h": `Cada dia que passa, ODAS coneix millor el teu negoci.`,
+          "stats.hsub": `Aprèn de cada entrada, cada venda i cada decisió que prens, i afina la previsió de l'endemà.`,
+          "stats.n1": `1/2025`,
+          "stats.l1": `La llei que ja t'obliga`,
+          "stats.n2": `24/7`,
+          "stats.l2": `Vigilant les teves caducitats`,
+          "stats.n3": `SHA-256`,
+          "stats.l3": `Traçabilitat segellada`,
+          "stats.n4": `3`,
+          "stats.l4": `Idiomes: es · ca · en`,
           "footer.supportedBy": `Un projecte amb el suport de:`,
           "footer.ods2Alt": `ODS 2: Fam zero`,
           "footer.ods12Alt": `ODS 12: Producció i consum responsables`,
@@ -2494,6 +2562,16 @@
           "plans.p2f3": `Advanced multi-store forecasting`,
           "footer.ods": `Our technology helps reduce food waste, aligned with the United Nations <span class="text-black">Sustainable Development Goals 2, 12, 13 and 17</span>.`,
           "footer.division": `A division of <span class="text-black">Negentropy Labs</span>`,
+          "stats.h": `Every day that passes, ODAS knows your business better.`,
+          "stats.hsub": `It learns from every delivery, every sale and every decision you make, and sharpens the next day's forecast.`,
+          "stats.n1": `1/2025`,
+          "stats.l1": `The law that already applies to you`,
+          "stats.n2": `24/7`,
+          "stats.l2": `Watching your expiry dates`,
+          "stats.n3": `SHA-256`,
+          "stats.l3": `Sealed traceability`,
+          "stats.n4": `3`,
+          "stats.l4": `Languages: es · ca · en`,
           "footer.supportedBy": `A project supported by:`,
           "footer.ods2Alt": `SDG 2: Zero hunger`,
           "footer.ods12Alt": `SDG 12: Responsible consumption and production`,
