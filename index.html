@@ -127,6 +127,15 @@
       }
       @keyframes degradadoMovil { to { background-position: 300% 0; } }
 
+      /* Pantalla del teléfono: degradado frío y muy suave, a juego con el hero
+         (nubes) y con el celeste de las esculturas. */
+      .chat-fondo {
+        background:
+          radial-gradient(120% 70% at 50% 0%, rgba(56, 189, 248, 0.13) 0%, rgba(56, 189, 248, 0) 62%),
+          radial-gradient(90% 60% at 85% 100%, rgba(16, 185, 129, 0.07) 0%, rgba(16, 185, 129, 0) 60%),
+          linear-gradient(180deg, #f7fbff 0%, #eff3f9 100%);
+      }
+
       /* Asistente del hero: hilo de altura fija (el teléfono no cambia de tamaño) */
       .chat-hilo {
         height: 340px;
@@ -811,7 +820,7 @@
           </div>
 
           <!-- Teléfono: asistente por WhatsApp -->
-          <div class="absolute -bottom-4 right-0 hidden w-60 overflow-hidden rounded-[1.6rem] border-2 border-gray-900 bg-[#efe7de] shadow-2xl md:block lg:-right-4">
+          <div class="absolute -bottom-4 right-0 hidden w-60 overflow-hidden rounded-[1.6rem] border-2 border-gray-900 chat-fondo shadow-2xl md:block lg:-right-4">
             <!-- Barra de estado -->
             <div class="flex items-center justify-between bg-white px-4 pt-1.5 text-[9px] font-semibold text-gray-900"><span>7:43</span><span class="tracking-tight text-gray-500">▪▪▪ ᯤ 84</span></div>
             <!-- Cabecera del chat -->
