@@ -129,7 +129,7 @@
 
       /* Asistente del hero: hilo de altura fija (el teléfono no cambia de tamaño) */
       .chat-hilo {
-        height: 168px;
+        height: 232px;
         overflow-y: auto;
         scrollbar-width: none;
         scroll-behavior: smooth;
@@ -140,12 +140,12 @@
       @keyframes chatEntra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
       /* Cursor que parpadea en la barra de entrada */
       .chat-cursor {
-        display: inline-block; width: 1px; height: 8px; vertical-align: -1px;
+        display: inline-block; width: 1px; height: 11px; vertical-align: -2px;
         background: #6b7280; animation: chatCursor 1s step-end infinite;
       }
       @keyframes chatCursor { 50% { opacity: 0; } }
       /* Indicador "escribiendo…" */
-      .chat-punto { display: inline-block; width: 3px; height: 3px; border-radius: 9999px; background: #9ca3af; animation: chatPunto 1.2s infinite; }
+      .chat-punto { display: inline-block; width: 4px; height: 4px; border-radius: 9999px; background: #9ca3af; animation: chatPunto 1.2s infinite; }
       .chat-punto:nth-child(2) { animation-delay: .15s; }
       .chat-punto:nth-child(3) { animation-delay: .3s; }
       @keyframes chatPunto { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
@@ -805,39 +805,39 @@
           </div>
 
           <!-- Teléfono: asistente por WhatsApp -->
-          <div class="absolute -bottom-4 right-0 hidden w-60 overflow-hidden rounded-[1.6rem] border-2 border-gray-900 bg-[#efe7de] shadow-2xl md:block lg:-right-4">
+          <div class="absolute -bottom-4 right-0 hidden w-80 overflow-hidden rounded-[2rem] border-2 border-gray-900 bg-[#efe7de] shadow-2xl md:block lg:-right-4">
             <!-- Barra de estado -->
-            <div class="flex items-center justify-between bg-white px-4 pt-1.5 text-[9px] font-semibold text-gray-900"><span>7:43</span><span class="tracking-tight text-gray-500">▪▪▪ ᯤ 84</span></div>
+            <div class="flex items-center justify-between bg-white px-4 pt-2 text-[12px] font-semibold text-gray-900"><span>7:43</span><span class="tracking-tight text-gray-500">▪▪▪ ᯤ 84</span></div>
             <!-- Cabecera del chat -->
-            <div class="flex items-center gap-2 bg-white px-3 py-1.5">
-              <span class="text-[10px] text-gray-400">‹ 8</span>
-              <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-gray-100"><img src="odas-simbolo.png" alt="" class="h-2.5 w-auto" /></span>
-              <span class="text-[11px] font-semibold text-gray-900">ODAS · Asistente</span>
+            <div class="flex items-center gap-2 bg-white px-3 py-2">
+              <span class="text-[13px] text-gray-400">‹ 8</span>
+              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gray-100"><img src="odas-simbolo.png" alt="" class="h-3.5 w-auto" /></span>
+              <span class="text-[14px] font-semibold text-gray-900">ODAS · Asistente</span>
             </div>
             <!-- Mensajes -->
-            <div id="chatHilo" class="chat-hilo space-y-2 px-2 py-2 text-[9px] leading-snug">
-              <div class="rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm">
+            <div id="chatHilo" class="chat-hilo space-y-2.5 px-2.5 py-2.5 text-[12px] leading-snug">
+              <div class="rounded-lg rounded-tl-none bg-white p-2.5 text-gray-800 shadow-sm">
                 <p class="font-semibold">ODAS · Restaurante Santa Julia</p>
                 <p class="mt-0.5">3 lotes de tu cámara caducan en los próximos días. Lo más urgente: <span class="font-semibold">Lubina fresca, 12,8 kg</span> del lote LB-0108B, caduca hoy. Toca lo que vas a hacer y queda registrado.</p>
-                <div class="mt-1 text-right text-[7px] text-gray-400">7:21 pm</div>
+                <div class="mt-1 text-right text-[9px] text-gray-400">7:21 pm</div>
                 <div class="mt-1 divide-y divide-gray-100 border-t border-gray-100 text-center font-medium">
                   <div class="py-1 text-gray-700">↩ Cocinar</div>
                   <div class="py-1 text-emerald-600">↩ Donar</div>
                   <div class="py-1 text-emerald-600">↩ Retirar</div>
                 </div>
               </div>
-              <div class="ml-5 rounded-lg rounded-tr-none bg-[#d9fdd3] p-1.5 text-gray-800 shadow-sm">
-                <div class="rounded border-l-2 border-emerald-500 bg-black/[0.03] px-1.5 py-1"><p class="text-[8px] font-semibold text-emerald-700">ODAS · Asistente</p><p class="text-[7px] text-gray-500">3 lotes de tu cámara caducan en los próximos días.</p></div>
+              <div class="ml-6 rounded-lg rounded-tr-none bg-[#d9fdd3] p-2 text-gray-800 shadow-sm">
+                <div class="rounded border-l-2 border-emerald-500 bg-black/[0.03] px-1.5 py-1"><p class="text-[10px] font-semibold text-emerald-700">ODAS · Asistente</p><p class="text-[10px] text-gray-500">3 lotes de tu cámara caducan en los próximos días.</p></div>
                 <p class="mt-1">Cocinar</p>
-                <div class="text-right text-[7px] text-gray-500">7:23 pm ✓✓</div>
+                <div class="text-right text-[9px] text-gray-500">7:23 pm ✓✓</div>
               </div>
-              <div class="rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm">
+              <div class="rounded-lg rounded-tl-none bg-white p-2.5 text-gray-800 shadow-sm">
                 <p>✅ Anotado: transformación de <span class="font-semibold">Lubina fresca (12,8 kg)</span>. Ya consta en tus registros oficiales (Ley 1/2025).</p>
-                <div class="text-right text-[7px] text-gray-400">7:23 pm</div>
+                <div class="text-right text-[9px] text-gray-400">7:23 pm</div>
               </div>
             </div>
             <!-- Barra de entrada -->
-            <div class="flex items-center gap-2 bg-white px-2 py-1.5 text-[11px] text-gray-400"><span>+</span><div class="h-4 flex-1 overflow-hidden whitespace-nowrap rounded-full bg-gray-100 px-2 text-[8px] leading-4 text-gray-700"><span id="chatEntrada"></span><span class="chat-cursor"></span></div><span class="text-[9px]">◎ ⌗ ⬚</span></div>
+            <div class="flex items-center gap-2 bg-white px-2.5 py-2 text-[14px] text-gray-400"><span>+</span><div class="h-6 flex-1 overflow-hidden whitespace-nowrap rounded-full bg-gray-100 px-3 text-[11px] leading-6 text-gray-700"><span id="chatEntrada"></span><span class="chat-cursor"></span></div><span class="text-[12px]">◎ ⌗ ⬚</span></div>
           </div>
 
         </div>
@@ -969,27 +969,27 @@
 
         function burbujaUsuario(texto, hora) {
           var d = document.createElement('div');
-          d.className = 'chat-burbuja ml-5 rounded-lg rounded-tr-none bg-[#d9fdd3] p-1.5 text-gray-800 shadow-sm';
-          d.innerHTML = '<p></p><div class="text-right text-[7px] text-gray-500">' + hora + ' ✓✓</div>';
+          d.className = 'chat-burbuja ml-6 rounded-lg rounded-tr-none bg-[#d9fdd3] p-2 text-gray-800 shadow-sm';
+          d.innerHTML = '<p></p><div class="text-right text-[9px] text-gray-500">' + hora + ' ✓✓</div>';
           d.querySelector('p').textContent = texto;
           hilo.appendChild(d); abajo();
         }
         function burbujaEscribiendo() {
           var d = document.createElement('div');
-          d.className = 'chat-burbuja rounded-lg rounded-tl-none bg-white px-2 py-1.5 shadow-sm';
+          d.className = 'chat-burbuja rounded-lg rounded-tl-none bg-white px-3 py-2.5 shadow-sm';
           d.innerHTML = '<span class="chat-punto"></span> <span class="chat-punto"></span> <span class="chat-punto"></span>';
           hilo.appendChild(d); abajo();
           return d;
         }
         function burbujaOdas(html, acciones, hora) {
           var d = document.createElement('div');
-          d.className = 'chat-burbuja rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm';
+          d.className = 'chat-burbuja rounded-lg rounded-tl-none bg-white p-2.5 text-gray-800 shadow-sm';
           var s = '<p class="font-semibold">ODAS · Restaurante Santa Julia</p><p class="mt-0.5">' + html + '</p>' +
-                  '<div class="mt-1 text-right text-[7px] text-gray-400">' + hora + '</div>';
+                  '<div class="mt-1 text-right text-[9px] text-gray-400">' + hora + '</div>';
           if (acciones && acciones.length) {
             s += '<div class="mt-1 divide-y divide-gray-100 border-t border-gray-100 text-center font-medium">';
             acciones.forEach(function (a, i) {
-              s += '<div class="py-1 ' + (i === 0 ? 'text-gray-700' : 'text-emerald-600') + '">↩ ' + a + '</div>';
+              s += '<div class="py-1.5 ' + (i === 0 ? 'text-gray-700' : 'text-emerald-600') + '">↩ ' + a + '</div>';
             });
             s += '</div>';
           }
