@@ -632,24 +632,6 @@
         .odas-word.is-tap .ow-tail { max-width: 14ch; opacity: 1; }
       }
 
-      /* Luz que recorre el circuito: copia iluminada de la imagen, enmascarada a una
-         banda horizontal que asciende. La imagen es PNG transparente, así que la banda
-         solo afecta al vidrio y funciona igual sobre fondo claro (sin mix-blend). */
-      .modelo-sheen {
-        filter: brightness(1.45) saturate(1.6) contrast(1.02);
-        -webkit-mask-image: linear-gradient(180deg, transparent 41%, #000 50%, transparent 59%);
-                mask-image: linear-gradient(180deg, transparent 41%, #000 50%, transparent 59%);
-        -webkit-mask-size: 100% 230%; mask-size: 100% 230%;
-        -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-        will-change: mask-position;
-        animation: modeloSheen 3.6s ease-in-out infinite;
-      }
-      @keyframes modeloSheen {
-        0%   { -webkit-mask-position: 0 135%; mask-position: 0 135%; }
-        62%  { -webkit-mask-position: 0 -35%; mask-position: 0 -35%; }
-        100% { -webkit-mask-position: 0 -35%; mask-position: 0 -35%; }
-      }
-      @media (prefers-reduced-motion: reduce) { .modelo-sheen { animation: none; opacity: 0; } }
 
     </style>
 
@@ -1554,9 +1536,7 @@
         <!-- Modelo H · Horeca (con animación) -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-3">
           <div class="relative h-64 overflow-hidden">
-            <img src="modelo-h-circuito-celeste.png" alt="" loading="lazy" class="absolute inset-0 mx-auto h-full w-full object-contain py-3" />
-            <!-- Copia iluminada enmascarada a una banda que asciende: la luz recorre el circuito (desfasada respecto al Modelo R) -->
-            <img src="modelo-h-circuito-celeste.png" alt="" aria-hidden="true" class="modelo-sheen absolute inset-0 mx-auto h-full w-full object-contain py-3" style="animation-delay:-1.8s" />
+            <canvas data-anim="modelo-h" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
           </div>
           <div class="relative p-6">
             <p data-i18n="bento.c1e" class="text-xs font-semibold uppercase tracking-wide text-emerald-600">Modelo H · Para los que cocinan</p>
@@ -1568,9 +1548,7 @@
         <!-- Modelo M · Mercado -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-3">
           <div class="relative h-64 overflow-hidden">
-            <img src="modelo-r-circuito-celeste.png" alt="" loading="lazy" class="absolute inset-0 mx-auto h-full w-full object-contain py-3" />
-            <!-- Copia iluminada de la misma imagen, enmascarada a una banda que asciende: la luz recorre el circuito -->
-            <img src="modelo-r-circuito-celeste.png" alt="" aria-hidden="true" class="modelo-sheen absolute inset-0 mx-auto h-full w-full object-contain py-3" />
+            <canvas data-anim="modelo-r" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
           </div>
           <div class="relative p-6">
             <p data-i18n="bento.c2e" class="text-xs font-semibold uppercase tracking-wide text-sky-600">Modelo R · Para los que venden</p>
@@ -1727,10 +1705,95 @@
           }
         }
 
+        /* --- Símbolos de los modelos, en el mismo lenguaje de puntos que los
+               de arriba. Conservan el efecto original: un pulso de luz que
+               sube recorriendo el circuito. --------------------------------- */
+
+        // Muestrea una recta, una curva cuadrática y una elipse como series de puntos
+        function ptsRecta(x1, y1, x2, y2, paso) {
+          var out = [], d = Math.hypot(x2 - x1, y2 - y1), n = Math.max(2, Math.round(d / paso));
+          for (var i = 0; i <= n; i++) out.push([x1 + (x2 - x1) * i / n, y1 + (y2 - y1) * i / n]);
+          return out;
+        }
+        function ptsCurva(x1, y1, cx, cy, x2, y2, n) {
+          var out = [];
+          for (var i = 0; i <= n; i++) {
+            var t = i / n, u = 1 - t;
+            out.push([u * u * x1 + 2 * u * t * cx + t * t * x2, u * u * y1 + 2 * u * t * cy + t * t * y2]);
+          }
+          return out;
+        }
+        function ptsElipse(cx, cy, rx, ry, n) {
+          var out = [];
+          for (var i = 0; i < n; i++) {
+            var a = (i / n) * Math.PI * 2;
+            out.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]);
+          }
+          return out;
+        }
+        // Disco = elipse rellena de puntos concéntricos (los "platos" de la escultura)
+        function disco(cx, cy, rx, ry) {
+          var out = ptsElipse(cx, cy, rx, ry, 22);
+          out = out.concat(ptsElipse(cx, cy, rx * 0.6, ry * 0.6, 13));
+          out.push([cx, cy]);
+          return out;
+        }
+
+        function initModeloH() {
+          var p = [];
+          p = p.concat(ptsElipse(90, 149, 34, 9, 34));              // anillo de la base
+          p = p.concat(disco(90, 149, 12, 4));                       // disco de la base
+          p = p.concat(ptsRecta(90, 145, 90, 40, 5));                // tallo
+          p = p.concat(disco(90, 86, 13, 4.5));                      // disco central del tallo
+          p = p.concat(disco(90, 38, 13, 4.5));                      // disco superior
+          [[-1], [1]].forEach(function (s) {
+            var d = s[0];
+            p = p.concat(ptsCurva(90, 112, 90 + 30 * d, 106, 90 + 52 * d, 84, 22));
+            p = p.concat(disco(90 + 52 * d, 84, 12, 4));
+            p = p.concat(ptsCurva(90, 104, 90 + 20 * d, 92, 90 + 34 * d, 58, 22));
+            p = p.concat(disco(90 + 34 * d, 58, 12, 4));
+          });
+          return { pts: p, t: 0, last: 0 };
+        }
+
+        function initModeloR() {
+          var p = [];
+          p = p.concat(ptsElipse(90, 96, 36, 36, 46));               // círculo
+          p = p.concat(ptsRecta(90, 150, 90, 62, 5));                // tallo
+          p = p.concat(disco(90, 150, 13, 4.5));                     // disco inferior
+          p = p.concat(disco(90, 96, 14, 5));                        // disco central
+          [[-1, 46, 40], [1, 46, 40], [-1, 22, 30], [1, 22, 30]].forEach(function (b) {
+            var d = b[0], dx = b[1], y = b[2];
+            p = p.concat(ptsCurva(90, 64, 90 + dx * d * 0.5, 46, 90 + dx * d, y + 6, 20));
+            p = p.concat(disco(90 + dx * d, y, 12, 4));
+          });
+          return { pts: p, t: 0, last: 0 };
+        }
+
+        // Pulso que asciende: los puntos que atraviesa se agrandan y oscurecen
+        function drawCircuito(ctx, st, ts) {
+          if (!st.last) st.last = ts;
+          st.t += (ts - st.last) * 0.001 * SPEED; st.last = ts;
+          var ciclo = 3.6;
+          var pulso = 170 - ((st.t % ciclo) / ciclo) * 190;          // de abajo arriba
+          var ancho = 26;
+          for (var i = 0; i < st.pts.length; i++) {
+            var x = st.pts[i][0], y = st.pts[i][1];
+            var d = Math.abs(y - pulso);
+            var infl = d < ancho ? Math.cos((d / ancho) * (Math.PI / 2)) : 0;
+            ctx.beginPath();
+            ctx.arc(x, y, 0.8 + infl * 0.85, 0, Math.PI * 2);
+            ctx.fillStyle = fill(0.26 + infl * 0.5);
+            ctx.fill();
+          }
+        }
+
         var REGISTRY = {
           'sphere-scan': { init: initSphere, draw: drawSphere },
           'phased-array': { init: initPhased, draw: drawPhased },
-          'sonar-sweep': { init: initSonar, draw: drawSonar }
+          'sonar-sweep': { init: initSonar, draw: drawSonar },
+          'modelo-h': { init: initModeloH, draw: drawCircuito },
+          'modelo-r': { init: initModeloR, draw: drawCircuito }
         };
 
         var dpr = Math.min(window.devicePixelRatio || 1, 2);
