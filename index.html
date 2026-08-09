@@ -129,11 +129,18 @@
 
       /* Asistente del hero: hilo de altura fija (el teléfono no cambia de tamaño) */
       .chat-hilo {
-        height: 232px;
+        /* Altura que da al teléfono proporción de móvil real (~300 × 590 = 1:1,96) */
+        height: 480px;
         overflow-y: auto;
         scrollbar-width: none;
         scroll-behavior: smooth;
+        /* Los mensajes se apoyan abajo, como en un chat de verdad */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
       }
+      /* En pantallas medianas el panel del informe es más bajo: acorta el teléfono */
+      @media (max-width: 1023px) { .chat-hilo { height: 300px; } }
       .chat-hilo::-webkit-scrollbar { display: none; }
       /* Cada burbuja entra desde abajo */
       .chat-burbuja { animation: chatEntra .32s ease-out both; }
@@ -743,7 +750,7 @@
         </div>
 
         <!-- Mockup del producto (recreado en HTML para máxima nitidez): informe anual + asistente WhatsApp -->
-        <div class="relative mx-auto mt-16 w-full max-w-5xl pb-8 text-left sm:pb-0">
+        <div class="relative mx-auto mt-24 w-full max-w-5xl pb-8 text-left sm:pb-0">
 
           <!-- Panel: Informe anual -->
           <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
