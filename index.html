@@ -127,6 +127,29 @@
       }
       @keyframes degradadoMovil { to { background-position: 300% 0; } }
 
+      /* FAQ: filas de tarjetas que se desplazan en horizontal, en bucle continuo.
+         La pista lleva el grupo de tarjetas DOS veces; al desplazar el 50% del
+         total, el segundo grupo cae justo donde estaba el primero → sin costura. */
+      .faq-fila {
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+                mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+      }
+      .faq-pista {
+        display: flex;
+        width: max-content;
+        animation: faqScroll var(--vel, 60s) linear infinite;
+      }
+      .faq-pista.derecha { animation-name: faqScrollInv; }
+      /* Al pasar el ratón se detiene, para poder leer la tarjeta */
+      .faq-fila:hover .faq-pista { animation-play-state: paused; }
+      @keyframes faqScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+      @keyframes faqScrollInv { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+      @media (prefers-reduced-motion: reduce) {
+        .faq-pista { animation: none; }
+        .faq-fila { overflow-x: auto; }
+      }
+
       /* Palabra que va rotando en el titular del hero (decisiones → tranquilidad → …) */
       .rotador {
         display: inline-block;
@@ -1106,6 +1129,115 @@
       </div><!-- /grid -->
     </section>
 
+
+    <!-- ========================================================================
+         SECCIÓN · PREGUNTAS FRECUENTES — filas horizontales en bucle
+         · Port vanilla del componente FaqSection (React) de 21st.dev.
+         · Las tarjetas se escriben UNA vez; el script clona el grupo hasta llenar
+           la pantalla y luego duplica todo para que el bucle no tenga costura.
+         ======================================================================== -->
+    <section class="overflow-hidden py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-5">
+        <h2 data-i18n="faq.h" class="text-center text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Un agente para tu día a día</h2>
+        <p data-i18n="faq.sub" class="mx-auto mt-3 max-w-2xl text-center text-lg text-gray-500">Lo que ODAS hace por ti cada jornada, sin que tengas que pedírselo.</p>
+      </div>
+
+      <div class="mt-12 flex flex-col gap-6">
+        <!-- fila 1 -->
+        <div class="faq-fila">
+          <div class="faq-pista" style="--vel:60s">
+            <div class="faq-grupo flex shrink-0 items-stretch gap-6 px-3">
+              <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
+                <h3 data-i18n="faq.q1" class="text-lg font-semibold text-gray-900">¿Tengo que escanear cada producto?</h3>
+                <p data-i18n="faq.a1" class="text-base text-gray-600">No. ODAS lee tus albaranes y tus ventas, y de ahí deduce qué tienes, de qué lote y cuándo vence.</p>
+              </div>
+              <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
+                <h3 data-i18n="faq.q2" class="text-lg font-semibold text-gray-900">¿Cómo me avisa de lo que va a caducar?</h3>
+                <p data-i18n="faq.a2" class="text-base text-gray-600">Cada día recibes un aviso por WhatsApp con lo que está a punto de caducar y la acción recomendada, en un solo toque.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- fila 2 -->
+        <div class="faq-fila">
+          <div class="faq-pista derecha" style="--vel:45s">
+            <div class="faq-grupo flex shrink-0 items-stretch gap-6 px-3">
+              <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
+                <h3 data-i18n="faq.q3" class="text-lg font-semibold text-gray-900">¿Qué me recomienda hacer con lo que va a sobrar?</h3>
+                <p data-i18n="faq.a3" class="text-base text-gray-600">Te dice si conviene cocinarlo, venderlo con descuento, donarlo o transformarlo, y deja registrada la decisión.</p>
+              </div>
+              <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
+                <h3 data-i18n="faq.q4" class="text-lg font-semibold text-gray-900">¿Sirve si tengo varios locales?</h3>
+                <p data-i18n="faq.a4" class="text-base text-gray-600">Sí. Cada tienda o cocina tiene su propia previsión y puedes seguir todo el grupo desde un mismo panel.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- fila 3 -->
+        <div class="faq-fila">
+          <div class="faq-pista" style="--vel:70s">
+            <div class="faq-grupo flex shrink-0 items-stretch gap-6 px-3">
+              <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
+                <h3 data-i18n="faq.q5" class="text-lg font-semibold text-gray-900">¿Y el papeleo de la Ley 1/2025?</h3>
+                <p data-i18n="faq.a5" class="text-base text-gray-600">ODAS mantiene el plan de prevención y la documentación al día, con trazabilidad sellada e inmutable ante cualquier inspección.</p>
+              </div>
+              <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
+                <h3 data-i18n="faq.q6" class="text-lg font-semibold text-gray-900">¿Quién puede ver mis datos?</h3>
+                <p data-i18n="faq.a6" class="text-base text-gray-600">Solo tu equipo. Cada organización está aislada del resto y todo lo que se registra queda de forma inalterable.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ: clona el grupo hasta llenar el ancho y duplica todo para el bucle sin costura -->
+    <script>
+      (function () {
+        function construir() {
+          var vw = window.innerWidth || document.documentElement.clientWidth || 1280;
+          document.querySelectorAll('.faq-pista').forEach(function (pista) {
+            var grupos = pista.querySelectorAll('.faq-grupo');
+            // deja solo el grupo original (permite reconstruir al redimensionar)
+            for (var g = grupos.length - 1; g > 0; g--) grupos[g].remove();
+            var base = pista.querySelector('.faq-grupo');
+            if (!base) return;
+            var ancho = base.getBoundingClientRect().width;
+            if (!ancho) return;
+            var repes = Math.max(2, Math.ceil(vw / ancho) + 1);
+            var frag = document.createDocumentFragment();
+            for (var i = 1; i < repes; i++) {
+              var c = base.cloneNode(true);
+              c.setAttribute('aria-hidden', 'true');
+              frag.appendChild(c);
+            }
+            pista.appendChild(frag);
+            // duplica la mitad construida: translateX(-50%) cae justo en la costura
+            var mitad = Array.prototype.slice.call(pista.children);
+            var frag2 = document.createDocumentFragment();
+            mitad.forEach(function (el) {
+              var c = el.cloneNode(true);
+              c.setAttribute('aria-hidden', 'true');
+              frag2.appendChild(c);
+            });
+            pista.appendChild(frag2);
+          });
+        }
+        function init() {
+          construir();
+          var t, ultimoAncho = window.innerWidth;
+          window.addEventListener('resize', function () {
+            if (Math.abs(window.innerWidth - ultimoAncho) < 80) return;
+            ultimoAncho = window.innerWidth;
+            clearTimeout(t);
+            t = setTimeout(construir, 200);
+          });
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+        else init();
+      })();
+    </script>
+
     <!-- Script del AnimatedBeam: calcula las curvas entre nodos y anima el "haz" con SMIL -->
     <script>
       (function () {
@@ -1722,6 +1854,20 @@
           "whatis.b3": `Te avisa de lo que va a sobrar antes de que sobre.`,
           "whatis.b4": `Te dice qué comprar, vender, donar o transformar.`,
           "whatis.b5": `Deja la Ley 1/2025 documentada, día a día.`,
+          "faq.h": `Un agente para tu día a día`,
+          "faq.sub": `Lo que ODAS hace por ti cada jornada, sin que tengas que pedírselo.`,
+          "faq.q1": `¿Tengo que escanear cada producto?`,
+          "faq.a1": `No. ODAS lee tus albaranes y tus ventas, y de ahí deduce qué tienes, de qué lote y cuándo vence.`,
+          "faq.q2": `¿Cómo me avisa de lo que va a caducar?`,
+          "faq.a2": `Cada día recibes un aviso por WhatsApp con lo que está a punto de caducar y la acción recomendada, en un solo toque.`,
+          "faq.q3": `¿Qué me recomienda hacer con lo que va a sobrar?`,
+          "faq.a3": `Te dice si conviene cocinarlo, venderlo con descuento, donarlo o transformarlo, y deja registrada la decisión.`,
+          "faq.q4": `¿Sirve si tengo varios locales?`,
+          "faq.a4": `Sí. Cada tienda o cocina tiene su propia previsión y puedes seguir todo el grupo desde un mismo panel.`,
+          "faq.q5": `¿Y el papeleo de la Ley 1/2025?`,
+          "faq.a5": `ODAS mantiene el plan de prevención y la documentación al día, con trazabilidad sellada e inmutable ante cualquier inspección.`,
+          "faq.q6": `¿Quién puede ver mis datos?`,
+          "faq.a6": `Solo tu equipo. Cada organización está aislada del resto y todo lo que se registra queda de forma inalterable.`,
           "hero.sub": `ODAS convierte los datos de tu empresa en <span class="rotador texto-degradado" data-palabras="decisiones.|tranquilidad.|control.|ahorro.">decisiones.</span>`,
           "hero.sub2": `ODAS conecta tus datos de ventas, inventario y compras para predecir excedentes, automatizar el cumplimiento normativo y ayudarte a tomar mejores decisiones cada día.`,
           "card.explore": `Explora`,
@@ -1834,6 +1980,20 @@
           "whatis.b3": `T'avisa del que sobrarà abans que sobri.`,
           "whatis.b4": `Et diu què comprar, vendre, donar o transformar.`,
           "whatis.b5": `Deixa la Llei 1/2025 documentada, dia a dia.`,
+          "faq.h": `Un agent per al teu dia a dia`,
+          "faq.sub": `El que ODAS fa per tu cada jornada, sense que li ho hagis de demanar.`,
+          "faq.q1": `He d'escanejar cada producte?`,
+          "faq.a1": `No. ODAS llegeix els teus albarans i les teves vendes, i d'aquí dedueix què tens, de quin lot i quan venç.`,
+          "faq.q2": `Com m'avisa del que caducarà?`,
+          "faq.a2": `Cada dia reps un avís per WhatsApp amb el que està a punt de caducar i l'acció recomanada, en un sol toc.`,
+          "faq.q3": `Què em recomana fer amb el que sobrarà?`,
+          "faq.a3": `Et diu si convé cuinar-ho, vendre'l amb descompte, donar-lo o transformar-lo, i deixa registrada la decisió.`,
+          "faq.q4": `Serveix si tinc diversos locals?`,
+          "faq.a4": `Sí. Cada botiga o cuina té la seva pròpia previsió i pots seguir tot el grup des d'un mateix panell.`,
+          "faq.q5": `I la paperassa de la Llei 1/2025?`,
+          "faq.a5": `ODAS manté el pla de prevenció i la documentació al dia, amb traçabilitat segellada i immutable davant de qualsevol inspecció.`,
+          "faq.q6": `Qui pot veure les meves dades?`,
+          "faq.a6": `Només el teu equip. Cada organització està aïllada de la resta i tot el que es registra queda de forma inalterable.`,
           "hero.sub": `ODAS converteix les dades de la teva empresa en <span class="rotador texto-degradado" data-palabras="decisions.|tranquil·litat.|control.|estalvi.">decisions.</span>`,
           "hero.sub2": `ODAS connecta les teves dades de vendes, inventari i compres per predir excedents, automatitzar el compliment normatiu i ajudar-te a prendre millors decisions cada dia.`,
           "card.explore": `Explora`,
@@ -1946,6 +2106,20 @@
           "whatis.b3": `Warns you what's going to be left over before it is.`,
           "whatis.b4": `Tells you what to buy, sell, donate or transform.`,
           "whatis.b5": `Keeps Law 1/2025 documented, day by day.`,
+          "faq.h": `An agent for your day to day`,
+          "faq.sub": `What ODAS does for you every day, without you having to ask.`,
+          "faq.q1": `Do I have to scan every product?`,
+          "faq.a1": `No. ODAS reads your delivery notes and your sales, and works out what you have, which batch and when it expires.`,
+          "faq.q2": `How does it warn me about what's expiring?`,
+          "faq.a2": `Every day you get a WhatsApp alert with what's about to expire and the recommended action, in a single tap.`,
+          "faq.q3": `What does it suggest doing with the surplus?`,
+          "faq.a3": `It tells you whether to cook it, sell it at a discount, donate it or transform it, and records the decision.`,
+          "faq.q4": `Does it work if I have several locations?`,
+          "faq.a4": `Yes. Each shop or kitchen has its own forecast and you can follow the whole group from a single dashboard.`,
+          "faq.q5": `What about the Law 1/2025 paperwork?`,
+          "faq.a5": `ODAS keeps the prevention plan and documentation up to date, with sealed, tamper-proof traceability for any inspection.`,
+          "faq.q6": `Who can see my data?`,
+          "faq.a6": `Only your team. Each organisation is isolated from the rest and everything recorded stays tamper-proof.`,
           "hero.sub": `ODAS turns your company's data into <span class="rotador texto-degradado" data-palabras="decisions.|peace of mind.|control.|savings.">decisions.</span>`,
           "hero.sub2": `ODAS connects your sales, inventory and purchasing data to predict surplus, automate regulatory compliance and help you make better decisions every day.`,
           "card.explore": `Explore`,
