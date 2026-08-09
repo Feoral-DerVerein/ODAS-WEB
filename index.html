@@ -127,6 +127,33 @@
       }
       @keyframes degradadoMovil { to { background-position: 300% 0; } }
 
+      /* Asistente del hero: hilo de altura fija (el teléfono no cambia de tamaño) */
+      .chat-hilo {
+        height: 168px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+      }
+      .chat-hilo::-webkit-scrollbar { display: none; }
+      /* Cada burbuja entra desde abajo */
+      .chat-burbuja { animation: chatEntra .32s ease-out both; }
+      @keyframes chatEntra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+      /* Cursor que parpadea en la barra de entrada */
+      .chat-cursor {
+        display: inline-block; width: 1px; height: 8px; vertical-align: -1px;
+        background: #6b7280; animation: chatCursor 1s step-end infinite;
+      }
+      @keyframes chatCursor { 50% { opacity: 0; } }
+      /* Indicador "escribiendo…" */
+      .chat-punto { display: inline-block; width: 3px; height: 3px; border-radius: 9999px; background: #9ca3af; animation: chatPunto 1.2s infinite; }
+      .chat-punto:nth-child(2) { animation-delay: .15s; }
+      .chat-punto:nth-child(3) { animation-delay: .3s; }
+      @keyframes chatPunto { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        .chat-burbuja, .chat-cursor, .chat-punto { animation: none; }
+        .chat-hilo { scroll-behavior: auto; }
+      }
+
       /* FAQ: filas de tarjetas que se desplazan en horizontal, en bucle continuo.
          La pista lleva el grupo de tarjetas DOS veces; al desplazar el 50% del
          total, el segundo grupo cae justo donde estaba el primero → sin costura. */
@@ -753,24 +780,24 @@
                 </div>
                 <!-- Tarjetas de cifras -->
                 <div class="mb-4 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
-                  <div class="rounded-xl border border-rose-100 bg-rose-50 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Malbaratament (MA)</div><div class="mt-1 text-lg font-bold text-rose-700">27.0 kg</div></div>
-                  <div class="rounded-xl border border-gray-100 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Donado (no MA)</div><div class="mt-1 text-lg font-bold text-emerald-700">23.5 kg</div></div>
-                  <div class="rounded-xl border border-gray-100 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Alim. animal (no MA)</div><div class="mt-1 text-lg font-bold text-emerald-700">24.0 kg</div></div>
-                  <div class="rounded-xl border border-gray-100 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Transformado (no MA)</div><div class="mt-1 text-lg font-bold text-emerald-700">15.3 kg</div></div>
+                  <div class="rounded-xl border border-rose-100 bg-rose-50 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Malbaratament (MA)</div><div class="mt-1 text-lg font-bold text-rose-700" data-cifra="27.0" data-dec="1" data-suf=" kg">27.0 kg</div></div>
+                  <div class="rounded-xl border border-gray-100 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Donado (no MA)</div><div class="mt-1 text-lg font-bold text-emerald-700" data-cifra="23.5" data-dec="1" data-suf=" kg">23.5 kg</div></div>
+                  <div class="rounded-xl border border-gray-100 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Alim. animal (no MA)</div><div class="mt-1 text-lg font-bold text-emerald-700" data-cifra="24.0" data-dec="1" data-suf=" kg">24.0 kg</div></div>
+                  <div class="rounded-xl border border-gray-100 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Transformado (no MA)</div><div class="mt-1 text-lg font-bold text-emerald-700" data-cifra="15.3" data-dec="1" data-suf=" kg">15.3 kg</div></div>
                 </div>
                 <!-- Tabla -->
                 <div class="overflow-hidden rounded-xl border border-gray-100 text-[12px]">
                   <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 border-b border-gray-100 px-4 py-2 text-[9px] font-semibold uppercase tracking-wide text-gray-400"><span>Concepto</span><span class="text-right">Kg anuales</span><span class="text-right">% sobre total</span><span class="text-right">CO₂ (kg × 2,54)</span></div>
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 bg-rose-50 px-4 py-2 font-medium text-rose-700"><span>Desperdicio alimentario (MA)</span><span class="text-right">27.0</span><span class="text-right">30.07%</span><span class="text-right">68.6</span></div>
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 px-4 py-2 text-gray-700"><span>Productos donados</span><span class="text-right font-semibold text-gray-900">23.5</span><span class="text-right">26.17%</span><span class="text-right text-gray-300">—</span></div>
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 bg-amber-50 px-4 py-2 font-medium text-amber-700"><span>Alimentación animal</span><span class="text-right">24.0</span><span class="text-right">26.73%</span><span class="text-right text-amber-300">—</span></div>
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 px-4 py-2 text-gray-700"><span>Transformado / reutilizado</span><span class="text-right font-semibold text-gray-900">15.3</span><span class="text-right">17.04%</span><span class="text-right text-gray-300">—</span></div>
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 bg-rose-50 px-4 py-2 font-medium text-rose-700"><span>Valorización energética</span><span class="text-right">0.0</span><span class="text-right">0.00%</span><span class="text-right text-rose-300">—</span></div>
+                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 bg-rose-50 px-4 py-2 font-medium text-rose-700"><span>Desperdicio alimentario (MA)</span><span class="text-right" data-cifra="27.0" data-dec="1">27.0</span><span class="text-right">30.07%</span><span class="text-right" data-cifra="68.6" data-dec="1">68.6</span></div>
+                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 px-4 py-2 text-gray-700"><span>Productos donados</span><span class="text-right font-semibold text-gray-900" data-cifra="23.5" data-dec="1">23.5</span><span class="text-right">26.17%</span><span class="text-right text-gray-300">—</span></div>
+                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 bg-amber-50 px-4 py-2 font-medium text-amber-700"><span>Alimentación animal</span><span class="text-right" data-cifra="24.0" data-dec="1">24.0</span><span class="text-right">26.73%</span><span class="text-right text-amber-300">—</span></div>
+                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 px-4 py-2 text-gray-700"><span>Transformado / reutilizado</span><span class="text-right font-semibold text-gray-900" data-cifra="15.3" data-dec="1">15.3</span><span class="text-right">17.04%</span><span class="text-right text-gray-300">—</span></div>
+                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 bg-rose-50 px-4 py-2 font-medium text-rose-700"><span>Valorización energética</span><span class="text-right" data-cifra="0.0" data-dec="1">0.0</span><span class="text-right">0.00%</span><span class="text-right text-rose-300">—</span></div>
                 </div>
                 <!-- Nota al pie -->
                 <div class="mt-3 rounded-xl bg-gray-50 px-4 py-3 text-[11px]">
                   <p class="text-gray-600"><span class="font-semibold text-gray-800">% MA sobre total:</span> 30.07%</p>
-                  <p class="text-gray-600"><span class="font-semibold text-gray-800">Equivalente CO₂ evitado (no-MA):</span> 215.4 kg</p>
+                  <p class="text-gray-600"><span class="font-semibold text-gray-800">Equivalente CO₂ evitado (no-MA):</span> <span data-cifra="215.4" data-dec="1" data-suf=" kg">215.4 kg</span></p>
                   <p class="mt-1 text-[9px] text-gray-400">Ref: Ley 1/2025 · Llei 3/2020 Cat. · Decisió Delegada (UE) 2019/1597</p>
                 </div>
               </div>
@@ -788,7 +815,7 @@
               <span class="text-[11px] font-semibold text-gray-900">ODAS · Asistente</span>
             </div>
             <!-- Mensajes -->
-            <div class="space-y-2 px-2 py-2 text-[9px] leading-snug">
+            <div id="chatHilo" class="chat-hilo space-y-2 px-2 py-2 text-[9px] leading-snug">
               <div class="rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm">
                 <p class="font-semibold">ODAS · Restaurante Santa Julia</p>
                 <p class="mt-0.5">3 lotes de tu cámara caducan en los próximos días. Lo más urgente: <span class="font-semibold">Lubina fresca, 12,8 kg</span> del lote LB-0108B, caduca hoy. Toca lo que vas a hacer y queda registrado.</p>
@@ -810,7 +837,7 @@
               </div>
             </div>
             <!-- Barra de entrada -->
-            <div class="flex items-center gap-2 bg-white px-2 py-1.5 text-[11px] text-gray-400"><span>+</span><div class="h-4 flex-1 rounded-full bg-gray-100"></div><span class="text-[9px]">◎ ⌗ ⬚</span></div>
+            <div class="flex items-center gap-2 bg-white px-2 py-1.5 text-[11px] text-gray-400"><span>+</span><div class="h-4 flex-1 overflow-hidden whitespace-nowrap rounded-full bg-gray-100 px-2 text-[8px] leading-4 text-gray-700"><span id="chatEntrada"></span><span class="chat-cursor"></span></div><span class="text-[9px]">◎ ⌗ ⬚</span></div>
           </div>
 
         </div>
@@ -887,6 +914,160 @@
         }
         if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
         else init();
+      })();
+    </script>
+
+    <!-- Mockup del hero, vivo: el asistente conversa en bucle y las cifras del
+         informe cuentan hacia arriba al entrar en pantalla.
+         Con prefers-reduced-motion se deja el mockup estático tal cual está en el HTML. -->
+    <script>
+      (function () {
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        /* ---------- Cifras del informe: cuentan hacia arriba ---------- */
+        var cifras = [].slice.call(document.querySelectorAll('[data-cifra]'));
+        function pinta(el, v) {
+          var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+          el.textContent = (el.getAttribute('data-pre') || '') + v.toFixed(dec) + (el.getAttribute('data-suf') || '');
+        }
+        function contar() {
+          cifras.forEach(function (el, i) {
+            var fin = parseFloat(el.getAttribute('data-cifra'));
+            if (isNaN(fin)) return;
+            var dur = 1300, retardo = i * 55, t0 = null;
+            pinta(el, 0);
+            function paso(ts) {
+              if (t0 === null) t0 = ts + retardo;
+              var p = Math.min(Math.max((ts - t0) / dur, 0), 1);
+              pinta(el, fin * (1 - Math.pow(1 - p, 3)));
+              if (p < 1) requestAnimationFrame(paso);
+            }
+            requestAnimationFrame(paso);
+          });
+        }
+
+        /* ---------- Asistente: conversación en bucle ---------- */
+        var hilo = document.getElementById('chatHilo');
+        var entrada = document.getElementById('chatEntrada');
+
+        var GUION = [
+          { p: '¿Qué caduca hoy?',
+            r: '3 lotes de tu cámara caducan en los próximos días. Lo más urgente: <span class="font-semibold">Lubina fresca, 12,8 kg</span> del lote LB-0108B, caduca hoy.',
+            acciones: ['Cocinar', 'Donar', 'Retirar'] },
+          { p: 'Se me han caído 3 kg de merluza',
+            r: '✅ Anotado como merma: <span class="font-semibold">merluza, 3 kg</span>. Descontado del stock y registrado con motivo y hora para el informe.' },
+          { p: '¿Cuántos desayunos preparo mañana?',
+            r: '<span class="font-semibold">142 desayunos.</span> Hay 96 habitaciones ocupadas y mañana es festivo: un 18 % más que un jueves normal.' },
+          { p: 'Sanidad me pide los registros de marzo',
+            r: 'Listo: PDF con entradas, salidas y trazabilidad de marzo, sellada e inmutable (Ley 1/2025).' }
+        ];
+
+        var HORAS = ['7:21 pm', '7:22 pm', '7:23 pm', '7:24 pm'];
+        var tempo = [];
+        function esperar(ms) { return new Promise(function (r) { tempo.push(setTimeout(r, ms)); }); }
+        function abajo() { hilo.scrollTop = hilo.scrollHeight; }
+
+        function burbujaUsuario(texto, hora) {
+          var d = document.createElement('div');
+          d.className = 'chat-burbuja ml-5 rounded-lg rounded-tr-none bg-[#d9fdd3] p-1.5 text-gray-800 shadow-sm';
+          d.innerHTML = '<p></p><div class="text-right text-[7px] text-gray-500">' + hora + ' ✓✓</div>';
+          d.querySelector('p').textContent = texto;
+          hilo.appendChild(d); abajo();
+        }
+        function burbujaEscribiendo() {
+          var d = document.createElement('div');
+          d.className = 'chat-burbuja rounded-lg rounded-tl-none bg-white px-2 py-1.5 shadow-sm';
+          d.innerHTML = '<span class="chat-punto"></span> <span class="chat-punto"></span> <span class="chat-punto"></span>';
+          hilo.appendChild(d); abajo();
+          return d;
+        }
+        function burbujaOdas(html, acciones, hora) {
+          var d = document.createElement('div');
+          d.className = 'chat-burbuja rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm';
+          var s = '<p class="font-semibold">ODAS · Restaurante Santa Julia</p><p class="mt-0.5">' + html + '</p>' +
+                  '<div class="mt-1 text-right text-[7px] text-gray-400">' + hora + '</div>';
+          if (acciones && acciones.length) {
+            s += '<div class="mt-1 divide-y divide-gray-100 border-t border-gray-100 text-center font-medium">';
+            acciones.forEach(function (a, i) {
+              s += '<div class="py-1 ' + (i === 0 ? 'text-gray-700' : 'text-emerald-600') + '">↩ ' + a + '</div>';
+            });
+            s += '</div>';
+          }
+          d.innerHTML = s;
+          hilo.appendChild(d); abajo();
+        }
+
+        function escribir(texto) {
+          entrada.textContent = '';
+          var i = 0;
+          return new Promise(function (res) {
+            (function tecla() {
+              entrada.textContent = texto.slice(0, ++i);
+              if (i < texto.length) tempo.push(setTimeout(tecla, 32));
+              else res();
+            })();
+          });
+        }
+
+        var vivo = false, turno = 0;
+        function parar() { vivo = false; tempo.forEach(clearTimeout); tempo = []; }
+
+        function ciclo() {
+          if (!vivo) return Promise.resolve();
+          var g = GUION[turno % GUION.length];
+          var hora = HORAS[turno % HORAS.length];
+          turno++;
+          return escribir(g.p)
+            .then(function () { return esperar(320); })
+            .then(function () {
+              if (!vivo) return;
+              entrada.textContent = '';
+              burbujaUsuario(g.p, hora);
+              return esperar(520);
+            })
+            .then(function () {
+              if (!vivo) return;
+              var esc = burbujaEscribiendo();
+              return esperar(1150).then(function () { if (esc.parentNode) esc.remove(); });
+            })
+            .then(function () {
+              if (!vivo) return;
+              burbujaOdas(g.r, g.acciones, hora);
+              return esperar(g.acciones ? 4200 : 3400);
+            })
+            .then(function () {
+              if (!vivo) return;
+              // deja los dos últimos mensajes y sigue: el hilo crece como una conversación real
+              while (hilo.children.length > 4) hilo.removeChild(hilo.firstElementChild);
+              return ciclo();
+            });
+        }
+
+        function arrancar() {
+          if (vivo) return;
+          vivo = true;
+          hilo.innerHTML = '';
+          entrada.textContent = '';
+          ciclo();
+        }
+
+        /* ---------- Se activa al entrar en pantalla ---------- */
+        var mockup = hilo ? hilo.closest('section') : null;
+        if (reduce || !hilo || !entrada) {
+          cifras.forEach(function (el) { pinta(el, parseFloat(el.getAttribute('data-cifra')) || 0); });
+          return;
+        }
+        if (window.IntersectionObserver && mockup) {
+          new IntersectionObserver(function (e) {
+            if (e[0] && e[0].isIntersecting) { contar(); arrancar(); }
+            else parar();
+          }, { threshold: 0.2 }).observe(mockup);
+        } else {
+          contar(); arrancar();
+        }
+        document.addEventListener('visibilitychange', function () {
+          if (document.visibilityState === 'visible') arrancar(); else parar();
+        });
       })();
     </script>
 
