@@ -166,10 +166,12 @@
         -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
                 mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
       }
-      /* El bloque de filas se funde por arriba y por abajo con la página */
+      /* El bloque de filas se funde por arriba y por abajo con la página.
+         En píxeles fijos, no en %: con filas de ~150px un 14% se comía un tercio
+         de las tarjetas y solo quedaba nítida una banda central. */
       .faq-bloque {
-        -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
-                mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+        -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+                mask-image: linear-gradient(180deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
       }
       .faq-pista {
         display: flex;
