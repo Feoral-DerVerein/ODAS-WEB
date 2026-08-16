@@ -603,6 +603,49 @@
         }
       }
 
+      /* Embudo por capas, adaptado del componente FunnelChart al HTML estático
+         de producción. Cada tramo entra con retardo y responde al puntero sin
+         alterar las cifras ni la traducción existente. */
+      .funnel-chart .funnel-etapa {
+        cursor: pointer;
+        transition: opacity .3s ease, filter .3s ease;
+      }
+      .funnel-chart:has(.funnel-etapa:hover) .funnel-etapa:not(:hover) {
+        opacity: .38;
+        filter: saturate(.6);
+      }
+      .funnel-chart .funnel-forma {
+        transform-box: fill-box;
+        transform-origin: left center;
+        animation: funnelEntrada .85s cubic-bezier(.2,.75,.2,1) both;
+        animation-delay: var(--funnel-delay, 0s);
+      }
+      .funnel-chart .funnel-capa {
+        transform-box: fill-box;
+        transform-origin: center;
+        transition: transform .38s cubic-bezier(.2,.75,.2,1), opacity .3s ease;
+      }
+      .funnel-chart .funnel-etapa:hover .funnel-capa-1 { transform: scaleY(1.12); }
+      .funnel-chart .funnel-etapa:hover .funnel-capa-2 { transform: scaleY(1.08); }
+      .funnel-chart .funnel-etapa:hover .funnel-capa-3 { transform: scaleY(1.04); }
+      .funnel-chart .funnel-etiqueta {
+        animation: funnelEtiqueta .45s ease both;
+        animation-delay: calc(var(--funnel-delay, 0s) + .28s);
+      }
+      @keyframes funnelEntrada {
+        from { opacity: 0; transform: scaleX(0) scaleY(.82); }
+        to { opacity: 1; transform: scaleX(1) scaleY(1); }
+      }
+      @keyframes funnelEtiqueta {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .funnel-chart .funnel-forma,
+        .funnel-chart .funnel-etiqueta { animation: none; }
+        .funnel-chart .funnel-capa { transition: none; }
+      }
+
       /* ============================================================
          MÓVIL / TÁCTIL: en pantallas sin ratón NO existe el ":hover",
          así que aquí recuperamos todos los efectos que en escritorio
@@ -2123,10 +2166,10 @@
         </div>
       </div>
 
-      <!-- Embudo horizontal: cuánto desperdicio queda cada año trabajando con ODAS.
-           Las cintas van del rojo (hoy) al verde (año 4). -->
+      <!-- Embudo horizontal por capas: mismo contenido y cifras, nueva forma
+           curva inspirada en el componente FunnelChart proporcionado. -->
       <div class="mt-12 px-5">
-        <svg class="mx-auto h-auto w-full max-w-4xl" viewBox="0 62 1000 428" role="img" aria-labelledby="tituloEmbudo">
+        <svg class="funnel-chart mx-auto h-auto w-full max-w-4xl overflow-visible" viewBox="0 0 1000 500" role="img" aria-labelledby="tituloEmbudo">
           <title id="tituloEmbudo" data-i18n="funnel.alt">Reducción del desperdicio alimentario año a año trabajando con ODAS</title>
           <defs>
             <linearGradient id="gradf1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#e11d48"/><stop offset="100%" stop-color="#fb7185"/></linearGradient>
@@ -2134,31 +2177,70 @@
             <linearGradient id="gradf3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#fcd34d"/></linearGradient>
             <linearGradient id="gradf4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#84cc16"/><stop offset="100%" stop-color="#bef264"/></linearGradient>
             <linearGradient id="gradf5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#6ee7b7"/></linearGradient>
+            <filter id="sombraEmbudo" x="-20%" y="-25%" width="140%" height="150%">
+              <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#111827" flood-opacity=".10"/>
+            </filter>
           </defs>
-          <path d="M 0,86 C 100,86 100,108.5 200,108.5 L 200,391.5 C 100,391.5 100,414 0,414 Z" fill="url(#gradf1)" fill-opacity="0.18" />
-          <path d="M 0,100 C 100,100 100,122.5 200,122.5 L 200,377.5 C 100,377.5 100,400 0,400 Z" fill="url(#gradf1)" />
-          <path d="M 200,108.5 C 300,108.5 300,126.5 400,126.5 L 400,373.5 C 300,373.5 300,391.5 200,391.5 Z" fill="url(#gradf2)" fill-opacity="0.18" />
-          <path d="M 200,122.5 C 300,122.5 300,140.5 400,140.5 L 400,359.5 C 300,359.5 300,377.5 200,377.5 Z" fill="url(#gradf2)" />
-          <path d="M 400,126.5 C 500,126.5 500,143 600,143 L 600,357 C 500,357 500,373.5 400,373.5 Z" fill="url(#gradf3)" fill-opacity="0.18" />
-          <path d="M 400,140.5 C 500,140.5 500,157 600,157 L 600,343 C 500,343 500,359.5 400,359.5 Z" fill="url(#gradf3)" />
-          <path d="M 600,143 C 700,143 700,161 800,161 L 800,339 C 700,339 700,357 600,357 Z" fill="url(#gradf4)" fill-opacity="0.18" />
-          <path d="M 600,157 C 700,157 700,175 800,175 L 800,325 C 700,325 700,343 600,343 Z" fill="url(#gradf4)" />
-          <path d="M 800,161 C 900,161 900,161 1000,161 L 1000,339 C 900,339 900,339 800,339 Z" fill="url(#gradf5)" fill-opacity="0.18" />
-          <path d="M 800,175 C 900,175 900,175 1000,175 L 1000,325 C 900,325 900,325 800,325 Z" fill="url(#gradf5)" />
-          <line x1="200" y1="70" x2="200" y2="430" stroke="#ffffff" stroke-width="4" />
-          <line x1="400" y1="70" x2="400" y2="430" stroke="#ffffff" stroke-width="4" />
-          <line x1="600" y1="70" x2="600" y2="430" stroke="#ffffff" stroke-width="4" />
-          <line x1="800" y1="70" x2="800" y2="430" stroke="#ffffff" stroke-width="4" />
-          <g><rect x="57" y="232" width="86" height="36" rx="18" fill="#111827"/><text x="100" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff" data-i18n="funnel.f1p">base</text></g>
-          <text x="100" y="466" text-anchor="middle" font-size="20" fill="#6b7280" data-i18n="funnel.f1t">Hoy</text>
-          <g><rect x="257" y="232" width="86" height="36" rx="18" fill="#111827"/><text x="300" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff" data-i18n="funnel.f2p">−15%</text></g>
-          <text x="300" y="466" text-anchor="middle" font-size="20" fill="#6b7280" data-i18n="funnel.f2t">Año 1</text>
-          <g><rect x="457" y="232" width="86" height="36" rx="18" fill="#111827"/><text x="500" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff" data-i18n="funnel.f3p">−27%</text></g>
-          <text x="500" y="466" text-anchor="middle" font-size="20" fill="#6b7280" data-i18n="funnel.f3t">Año 2</text>
-          <g><rect x="657" y="232" width="86" height="36" rx="18" fill="#111827"/><text x="700" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff" data-i18n="funnel.f4p">−38%</text></g>
-          <text x="700" y="466" text-anchor="middle" font-size="20" fill="#6b7280" data-i18n="funnel.f4t">Año 3</text>
-          <g><rect x="857" y="232" width="86" height="36" rx="18" fill="#111827"/><text x="900" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff" data-i18n="funnel.f5p">−50%</text></g>
-          <text x="900" y="466" text-anchor="middle" font-size="20" fill="#6b7280" data-i18n="funnel.f5t">Año 4</text>
+
+          <!-- Bandas de fondo del componente de referencia -->
+          <g fill="#f8fafc">
+            <rect x="0" y="50" width="192" height="360" rx="14"/>
+            <rect x="404" y="50" width="192" height="360" rx="14"/>
+            <rect x="808" y="50" width="192" height="360" rx="14"/>
+          </g>
+
+          <g class="funnel-etapa" style="--funnel-delay:0s" transform="translate(0 50)">
+            <g class="funnel-forma" filter="url(#sombraEmbudo)">
+              <path class="funnel-capa funnel-capa-1" d="M0 21.6 C105.6 21.6 86.4 45.36 192 45.36 L192 314.64 C86.4 314.64 105.6 338.4 0 338.4Z" fill="url(#gradf1)" opacity=".18"/>
+              <path class="funnel-capa funnel-capa-2" d="M0 40.09 C105.6 40.09 86.4 61.07 192 61.07 L192 298.93 C86.4 298.93 105.6 319.91 0 319.91Z" fill="url(#gradf1)" opacity=".48"/>
+              <path class="funnel-capa funnel-capa-3" d="M0 58.55 C105.6 58.55 86.4 76.77 192 76.77 L192 283.23 C86.4 283.23 105.6 301.45 0 301.45Z" fill="url(#gradf1)" opacity=".88"/>
+            </g>
+            <g class="funnel-etiqueta"><rect x="53" y="162" width="86" height="36" rx="18" fill="#111827"/><text x="96" y="186" text-anchor="middle" font-size="17" font-weight="700" fill="#fff" data-i18n="funnel.f1p">base</text></g>
+          </g>
+
+          <g class="funnel-etapa" style="--funnel-delay:.12s" transform="translate(202 50)">
+            <g class="funnel-forma" filter="url(#sombraEmbudo)">
+              <path class="funnel-capa funnel-capa-1" d="M0 45.36 C105.6 45.36 86.4 64.37 192 64.37 L192 295.63 C86.4 295.63 105.6 314.64 0 314.64Z" fill="url(#gradf2)" opacity=".18"/>
+              <path class="funnel-capa funnel-capa-2" d="M0 61.07 C105.6 61.07 86.4 77.86 192 77.86 L192 282.14 C86.4 282.14 105.6 298.93 0 298.93Z" fill="url(#gradf2)" opacity=".48"/>
+              <path class="funnel-capa funnel-capa-3" d="M0 76.77 C105.6 76.77 86.4 91.34 192 91.34 L192 268.66 C86.4 268.66 105.6 283.23 0 283.23Z" fill="url(#gradf2)" opacity=".88"/>
+            </g>
+            <g class="funnel-etiqueta"><rect x="53" y="162" width="86" height="36" rx="18" fill="#111827"/><text x="96" y="186" text-anchor="middle" font-size="17" font-weight="700" fill="#fff" data-i18n="funnel.f2p">−15%</text></g>
+          </g>
+
+          <g class="funnel-etapa" style="--funnel-delay:.24s" transform="translate(404 50)">
+            <g class="funnel-forma" filter="url(#sombraEmbudo)">
+              <path class="funnel-capa funnel-capa-1" d="M0 64.37 C105.6 64.37 86.4 81.79 192 81.79 L192 278.21 C86.4 278.21 105.6 295.63 0 295.63Z" fill="url(#gradf3)" opacity=".18"/>
+              <path class="funnel-capa funnel-capa-2" d="M0 77.86 C105.6 77.86 86.4 93.25 192 93.25 L192 266.75 C86.4 266.75 105.6 282.14 0 282.14Z" fill="url(#gradf3)" opacity=".48"/>
+              <path class="funnel-capa funnel-capa-3" d="M0 91.34 C105.6 91.34 86.4 104.7 192 104.7 L192 255.3 C86.4 255.3 105.6 268.66 0 268.66Z" fill="url(#gradf3)" opacity=".88"/>
+            </g>
+            <g class="funnel-etiqueta"><rect x="53" y="162" width="86" height="36" rx="18" fill="#111827"/><text x="96" y="186" text-anchor="middle" font-size="17" font-weight="700" fill="#fff" data-i18n="funnel.f3p">−27%</text></g>
+          </g>
+
+          <g class="funnel-etapa" style="--funnel-delay:.36s" transform="translate(606 50)">
+            <g class="funnel-forma" filter="url(#sombraEmbudo)">
+              <path class="funnel-capa funnel-capa-1" d="M0 81.79 C105.6 81.79 86.4 100.8 192 100.8 L192 259.2 C86.4 259.2 105.6 278.21 0 278.21Z" fill="url(#gradf4)" opacity=".18"/>
+              <path class="funnel-capa funnel-capa-2" d="M0 93.25 C105.6 93.25 86.4 110.04 192 110.04 L192 249.96 C86.4 249.96 105.6 266.75 0 266.75Z" fill="url(#gradf4)" opacity=".48"/>
+              <path class="funnel-capa funnel-capa-3" d="M0 104.7 C105.6 104.7 86.4 119.28 192 119.28 L192 240.72 C86.4 240.72 105.6 255.3 0 255.3Z" fill="url(#gradf4)" opacity=".88"/>
+            </g>
+            <g class="funnel-etiqueta"><rect x="53" y="162" width="86" height="36" rx="18" fill="#111827"/><text x="96" y="186" text-anchor="middle" font-size="17" font-weight="700" fill="#fff" data-i18n="funnel.f4p">−38%</text></g>
+          </g>
+
+          <g class="funnel-etapa" style="--funnel-delay:.48s" transform="translate(808 50)">
+            <g class="funnel-forma" filter="url(#sombraEmbudo)">
+              <path class="funnel-capa funnel-capa-1" d="M0 100.8 C105.6 100.8 86.4 100.8 192 100.8 L192 259.2 C86.4 259.2 105.6 259.2 0 259.2Z" fill="url(#gradf5)" opacity=".18"/>
+              <path class="funnel-capa funnel-capa-2" d="M0 110.04 C105.6 110.04 86.4 110.04 192 110.04 L192 249.96 C86.4 249.96 105.6 249.96 0 249.96Z" fill="url(#gradf5)" opacity=".48"/>
+              <path class="funnel-capa funnel-capa-3" d="M0 119.28 C105.6 119.28 86.4 119.28 192 119.28 L192 240.72 C86.4 240.72 105.6 240.72 0 240.72Z" fill="url(#gradf5)" opacity=".88"/>
+            </g>
+            <g class="funnel-etiqueta"><rect x="53" y="162" width="86" height="36" rx="18" fill="#111827"/><text x="96" y="186" text-anchor="middle" font-size="17" font-weight="700" fill="#fff" data-i18n="funnel.f5p">−50%</text></g>
+          </g>
+
+          <g class="funnel-etiqueta" font-size="20" fill="#6b7280" text-anchor="middle">
+            <text x="96" y="462" data-i18n="funnel.f1t">Hoy</text>
+            <text x="298" y="462" data-i18n="funnel.f2t">Año 1</text>
+            <text x="500" y="462" data-i18n="funnel.f3t">Año 2</text>
+            <text x="702" y="462" data-i18n="funnel.f4t">Año 3</text>
+            <text x="904" y="462" data-i18n="funnel.f5t">Año 4</text>
+          </g>
         </svg>
         <p data-i18n="funnel.pie" class="mx-auto mt-6 max-w-2xl text-center text-sm text-gray-500">Trayectoria objetivo: cuanto más aprende ODAS de tu operación, menos producto acaba en la basura. Partiendo de tu propia línea base.</p>
       </div>
