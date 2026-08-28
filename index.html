@@ -895,22 +895,22 @@
             <!-- Mensajes -->
             <div id="chatHilo" class="chat-hilo space-y-2 px-2 py-2 text-[9px] leading-snug">
               <div class="rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm">
-                <p class="font-semibold">ODAS · Restaurante Santa Julia</p>
-                <p class="mt-0.5">3 lotes de tu cámara caducan en los próximos días. Lo más urgente: <span class="font-semibold">Lubina fresca, 12,8 kg</span> del lote LB-0108B, caduca hoy. Toca lo que vas a hacer y queda registrado.</p>
+                <p data-i18n="chat.store" class="font-semibold">ODAS · Supermercado Centro</p>
+                <p data-i18n-html="chat.a1" class="mt-0.5">Hay <span class="font-semibold">40 yogures naturales</span> que caducan hoy y 18 bandejas de pollo que caducan mañana. Los yogures son lo más urgente.</p>
                 <div class="mt-1 text-right text-[7px] text-gray-400">7:21 pm</div>
                 <div class="mt-1 divide-y divide-gray-100 border-t border-gray-100 text-center font-medium">
-                  <div class="py-1 text-gray-700">↩ Cocinar</div>
-                  <div class="py-1 text-emerald-600">↩ Donar</div>
-                  <div class="py-1 text-emerald-600">↩ Retirar</div>
+                  <div class="py-1 text-gray-700">↩ <span data-i18n="chat.action1">Aplicar −40%</span></div>
+                  <div class="py-1 text-emerald-600">↩ <span data-i18n="chat.action2">Donar</span></div>
+                  <div class="py-1 text-emerald-600">↩ <span data-i18n="chat.action3">Retirar</span></div>
                 </div>
               </div>
               <div class="ml-5 rounded-lg rounded-tr-none bg-[#d9fdd3] p-1.5 text-gray-800 shadow-sm">
-                <div class="rounded border-l-2 border-emerald-500 bg-black/[0.03] px-1.5 py-1"><p class="text-[8px] font-semibold text-emerald-700">ODAS · Asistente</p><p class="text-[7px] text-gray-500">3 lotes de tu cámara caducan en los próximos días.</p></div>
-                <p class="mt-1">Cocinar</p>
+                <div class="rounded border-l-2 border-emerald-500 bg-black/[0.03] px-1.5 py-1"><p class="text-[8px] font-semibold text-emerald-700">ODAS · Asistente</p><p data-i18n="chat.a1short" class="text-[7px] text-gray-500">40 yogures naturales caducan hoy.</p></div>
+                <p data-i18n="chat.action1" class="mt-1">Aplicar −40%</p>
                 <div class="text-right text-[7px] text-gray-500">7:23 pm ✓✓</div>
               </div>
               <div class="rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm">
-                <p>✅ Anotado: transformación de <span class="font-semibold">Lubina fresca (12,8 kg)</span>. Ya consta en tus registros oficiales (Ley 1/2025).</p>
+                <p data-i18n-html="chat.confirm1">✅ Descuento del <span class="font-semibold">40 % aplicado a 40 yogures</span>. Etiquetas actualizadas y acción registrada.</p>
                 <div class="text-right text-[7px] text-gray-400">7:23 pm</div>
               </div>
             </div>
@@ -1028,17 +1028,23 @@
         var hilo = document.getElementById('chatHilo');
         var entrada = document.getElementById('chatEntrada');
 
-        var GUION = [
-          { p: '¿Qué caduca hoy?',
-            r: '3 lotes de tu cámara caducan en los próximos días. Lo más urgente: <span class="font-semibold">Lubina fresca, 12,8 kg</span> del lote LB-0108B, caduca hoy.',
-            acciones: ['Cocinar', 'Donar', 'Retirar'] },
-          { p: 'Se me han caído 3 kg de merluza',
-            r: '✅ Anotado como merma: <span class="font-semibold">merluza, 3 kg</span>. Descontado del stock y registrado con motivo y hora para el informe.' },
-          { p: '¿Cuántos desayunos preparo mañana?',
-            r: '<span class="font-semibold">142 desayunos.</span> Hay 96 habitaciones ocupadas y mañana es festivo: un 18 % más que un jueves normal.' },
-          { p: 'Sanidad me pide los registros de marzo',
-            r: 'Listo: PDF con entradas, salidas y trazabilidad de marzo, sellada e inmutable (Ley 1/2025).' }
-        ];
+        function chatT(key, fallback) {
+          return typeof window.t === 'function' ? window.t(key) : fallback;
+        }
+
+        function guionActual() {
+          return [
+            { p: chatT('chat.q1', '¿Qué productos caducan hoy?'),
+              r: chatT('chat.a1', 'Hay <span class="font-semibold">40 yogures naturales</span> que caducan hoy y 18 bandejas de pollo que caducan mañana. Los yogures son lo más urgente.'),
+              acciones: [chatT('chat.action1', 'Aplicar −40%'), chatT('chat.action2', 'Donar'), chatT('chat.action3', 'Retirar')] },
+            { p: chatT('chat.q2', 'Pon los yogures al 40 %'),
+              r: chatT('chat.a2', '✅ Descuento del <span class="font-semibold">40 % aplicado a 40 yogures</span>. Etiquetas actualizadas y acción registrada.') },
+            { p: chatT('chat.q3', '¿Qué tengo que pedir para mañana?'),
+              r: chatT('chat.a3', 'Pide <span class="font-semibold">25 cajas de leche y 18 de plátanos</span>. No pidas tomates: tienes stock para 12 días.') },
+            { p: chatT('chat.q4', 'Sanidad pide el lote L260814'),
+              r: chatT('chat.a4', 'Listo: PDF con recepción, movimientos, ventas y retiradas del lote, sellado e inmutable.') }
+          ];
+        }
 
         var HORAS = ['7:21 pm', '7:22 pm', '7:23 pm', '7:24 pm'];
         var tempo = [];
@@ -1062,7 +1068,7 @@
         function burbujaOdas(html, acciones, hora) {
           var d = document.createElement('div');
           d.className = 'chat-burbuja rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm';
-          var s = '<p class="font-semibold">ODAS · Restaurante Santa Julia</p><p class="mt-0.5">' + html + '</p>' +
+          var s = '<p class="font-semibold">' + chatT('chat.store', 'ODAS · Supermercado Centro') + '</p><p class="mt-0.5">' + html + '</p>' +
                   '<div class="mt-1 text-right text-[7px] text-gray-400">' + hora + '</div>';
           if (acciones && acciones.length) {
             s += '<div class="mt-1 divide-y divide-gray-100 border-t border-gray-100 text-center font-medium">';
@@ -1092,7 +1098,8 @@
 
         function ciclo() {
           if (!vivo) return Promise.resolve();
-          var g = GUION[turno % GUION.length];
+          var guion = guionActual();
+          var g = guion[turno % guion.length];
           var hora = HORAS[turno % HORAS.length];
           turno++;
           return escribir(g.p)
@@ -1128,6 +1135,11 @@
           entrada.textContent = '';
           ciclo();
         }
+
+        document.addEventListener('odas:langchange', function () {
+          turno = 0;
+          if (vivo) { parar(); arrancar(); }
+        });
 
         /* ---------- Se activa al entrar en pantalla ---------- */
         var mockup = hilo ? hilo.closest('section') : null;
@@ -1514,24 +1526,24 @@
           <div class="faq-pista" style="--vel:70s">
             <div class="faq-grupo flex shrink-0 items-stretch gap-6 px-3">
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q1" class="text-lg font-semibold text-gray-900">¿Qué caduca hoy?</h3>
-                <p data-i18n="faq.a1" class="text-base text-gray-600">3 lotes: lubina (12,8 kg), nata (4 uds) y ensaladilla (2,1 kg). Lo más urgente es la lubina.</p>
+                <h3 data-i18n="faq.q1" class="text-lg font-semibold text-gray-900">¿Qué productos caducan esta semana?</h3>
+                <p data-i18n="faq.a1" class="text-base text-gray-600">40 yogures caducan hoy, 18 bandejas de pollo mañana y 12 ensaladas el viernes. Lo más urgente son los yogures.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q2" class="text-lg font-semibold text-gray-900">¿Cuánto queda de solomillo?</h3>
-                <p data-i18n="faq.a2" class="text-base text-gray-600">7,4 kg del lote LB-0108B, entrado el martes. Da para unas 24 raciones.</p>
+                <h3 data-i18n="faq.q2" class="text-lg font-semibold text-gray-900">¿Cuánto voy a vender mañana?</h3>
+                <p data-i18n="faq.a2" class="text-base text-gray-600">Unas 1.840 unidades, un 12 % más que un viernes normal. El mayor crecimiento estará en bebidas y frescos.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q3" class="text-lg font-semibold text-gray-900">¿Me quedan huevos?</h3>
-                <p data-i18n="faq.a3" class="text-base text-gray-600">Sí, 6 docenas. Con la previsión de mañana te sobran: no hace falta pedir.</p>
+                <h3 data-i18n="faq.q3" class="text-lg font-semibold text-gray-900">¿Qué tengo que pedir hoy?</h3>
+                <p data-i18n="faq.a3" class="text-base text-gray-600">Pide 25 cajas de leche y 18 de plátanos. No pidas tomates: tienes stock para 12 días.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q4" class="text-lg font-semibold text-gray-900">¿Esto lo puedo poner mañana?</h3>
-                <p data-i18n="faq.a4" class="text-base text-gray-600">Sí, ese lote vence el jueves. Te lo recuerdo mañana a primera hora.</p>
+                <h3 data-i18n="faq.q4" class="text-lg font-semibold text-gray-900">¿Dónde tengo riesgo de rotura de stock?</h3>
+                <p data-i18n="faq.a4" class="text-base text-gray-600">En leche semidesnatada y plátanos para el sábado. Te faltarán 42 y 28 unidades si no ajustas hoy.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q5" class="text-lg font-semibold text-gray-900">¿Cuántos desayunos preparo mañana?</h3>
-                <p data-i18n="faq.a5" class="text-base text-gray-600">142. Hay 96 habitaciones ocupadas y mañana es festivo: un 18 % más que un jueves normal.</p>
+                <h3 data-i18n="faq.q5" class="text-lg font-semibold text-gray-900">¿Qué productos tienen sobrestock?</h3>
+                <p data-i18n="faq.a5" class="text-base text-gray-600">Tomates, agua con gas y cereales. Los tomates son prioritarios: 120 unidades y 12 días de cobertura.</p>
               </div>
             </div>
           </div>
@@ -1540,24 +1552,24 @@
           <div class="faq-pista derecha" style="--vel:55s">
             <div class="faq-grupo flex shrink-0 items-stretch gap-6 px-3">
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q6" class="text-lg font-semibold text-gray-900">Se me han caído 3 kg de merluza</h3>
-                <p data-i18n="faq.a6" class="text-base text-gray-600">Anotado como merma: descontado del stock y registrado con motivo y hora para el informe.</p>
+                <h3 data-i18n="faq.q6" class="text-lg font-semibold text-gray-900">Pon los yogures que caducan al 40 %</h3>
+                <p data-i18n="faq.a6" class="text-base text-gray-600">Hecho: descuento aplicado a 40 unidades, etiquetas actualizadas y acción registrada.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q7" class="text-lg font-semibold text-gray-900">He tirado la ensaladilla de ayer</h3>
-                <p data-i18n="faq.a7" class="text-base text-gray-600">Registrado. Es la tercera vez este mes con ese plato: te propongo bajar la producción un 20 %.</p>
+                <h3 data-i18n="faq.q7" class="text-lg font-semibold text-gray-900">Registra 6 paquetes rotos de arroz</h3>
+                <p data-i18n="faq.a7" class="text-base text-gray-600">Registrados como merma por rotura, descontados del stock y añadidos al informe mensual.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q8" class="text-lg font-semibold text-gray-900">Pon 12, pero de la caja nueva</h3>
-                <p data-i18n="faq.a8" class="text-base text-gray-600">Hecho, 12 de la caja nueva. Ojo: la anterior caduca en 2 días, te lo recuerdo esta tarde.</p>
+                <h3 data-i18n="faq.q8" class="text-lg font-semibold text-gray-900">¿Qué tienda está desperdiciando más?</h3>
+                <p data-i18n="faq.a8" class="text-base text-gray-600">La tienda Centro: 86 kg este mes, un 23 % sobre la media. Panadería concentra la mayor desviación.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q9" class="text-lg font-semibold text-gray-900">¿Cuánto he tirado este mes y cuánto me ha costado?</h3>
-                <p data-i18n="faq.a9" class="text-base text-gray-600">128 kg y 1.240 €, además de 325 kg de CO₂. El 41 % es pescado y casi todo cae en viernes.</p>
+                <h3 data-i18n="faq.q9" class="text-lg font-semibold text-gray-900">¿Cuánto he ahorrado este mes?</h3>
+                <p data-i18n="faq.a9" class="text-base text-gray-600">3.840 € frente a tu línea base y 420 kg de merma evitados. Frescos aporta el 61 % del ahorro.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q10" class="text-lg font-semibold text-gray-900">Sanidad me pide los registros de marzo</h3>
-                <p data-i18n="faq.a10" class="text-base text-gray-600">Listo: PDF con entradas, salidas y trazabilidad de marzo, sellada e inmutable.</p>
+                <h3 data-i18n="faq.q10" class="text-lg font-semibold text-gray-900">Sanidad pide la trazabilidad del lote L260814</h3>
+                <p data-i18n="faq.a10" class="text-base text-gray-600">Lista: recepción, movimientos, ventas y retiradas del lote en un PDF sellado e inmutable.</p>
               </div>
             </div>
           </div>
@@ -2315,28 +2327,42 @@
           "whatis.b4": `Te recuerda lo que no puedes olvidar, desde productos próximos a caducar hasta tareas pendientes.`,
           "whatis.b5": `Responde a tus preguntas sobre tu operación cuando necesitas una respuesta.`,
           "whatis.b6": `Mantiene tu documentación al día y te ayuda a cumplir con la Ley 1/2025.`,
+          "chat.store": `ODAS · Supermercado Centro`,
+          "chat.q1": `¿Qué productos caducan hoy?`,
+          "chat.a1": `Hay <span class="font-semibold">40 yogures naturales</span> que caducan hoy y 18 bandejas de pollo que caducan mañana. Los yogures son lo más urgente.`,
+          "chat.a1short": `40 yogures naturales caducan hoy.`,
+          "chat.action1": `Aplicar −40%`,
+          "chat.action2": `Donar`,
+          "chat.action3": `Retirar`,
+          "chat.confirm1": `✅ Descuento del <span class="font-semibold">40 % aplicado a 40 yogures</span>. Etiquetas actualizadas y acción registrada.`,
+          "chat.q2": `Pon los yogures al 40 %`,
+          "chat.a2": `✅ Descuento del <span class="font-semibold">40 % aplicado a 40 yogures</span>. Etiquetas actualizadas y acción registrada.`,
+          "chat.q3": `¿Qué tengo que pedir para mañana?`,
+          "chat.a3": `Pide <span class="font-semibold">25 cajas de leche y 18 de plátanos</span>. No pidas tomates: tienes stock para 12 días.`,
+          "chat.q4": `Sanidad pide el lote L260814`,
+          "chat.a4": `Listo: PDF con recepción, movimientos, ventas y retiradas del lote, sellado e inmutable.`,
           "faq.h": `Un Asistente para tu día a día`,
           "faq.sub": `ODAS entiende lo que ocurre en tu negocio y convierte datos dispersos en decisiones.`,
-          "faq.q1": `¿Qué caduca hoy?`,
-          "faq.a1": `3 lotes: lubina (12,8 kg), nata (4 uds) y ensaladilla (2,1 kg). Lo más urgente es la lubina.`,
-          "faq.q2": `¿Cuánto queda de solomillo?`,
-          "faq.a2": `7,4 kg del lote LB-0108B, entrado el martes. Da para unas 24 raciones.`,
-          "faq.q3": `¿Me quedan huevos?`,
-          "faq.a3": `Sí, 6 docenas. Con la previsión de mañana te sobran: no hace falta pedir.`,
-          "faq.q4": `¿Esto lo puedo poner mañana?`,
-          "faq.a4": `Sí, ese lote vence el jueves. Te lo recuerdo mañana a primera hora.`,
-          "faq.q5": `¿Cuántos desayunos preparo mañana?`,
-          "faq.a5": `142. Hay 96 habitaciones ocupadas y mañana es festivo: un 18 % más que un jueves normal.`,
-          "faq.q6": `Se me han caído 3 kg de merluza`,
-          "faq.a6": `Anotado como merma: descontado del stock y registrado con motivo y hora para el informe.`,
-          "faq.q7": `He tirado la ensaladilla de ayer`,
-          "faq.a7": `Registrado. Es la tercera vez este mes con ese plato: te propongo bajar la producción un 20 %.`,
-          "faq.q8": `Pon 12, pero de la caja nueva`,
-          "faq.a8": `Hecho, 12 de la caja nueva. Ojo: la anterior caduca en 2 días, te lo recuerdo esta tarde.`,
-          "faq.q9": `¿Cuánto he tirado este mes y cuánto me ha costado?`,
-          "faq.a9": `128 kg y 1.240 €, además de 325 kg de CO₂. El 41 % es pescado y casi todo cae en viernes.`,
-          "faq.q10": `Sanidad me pide los registros de marzo`,
-          "faq.a10": `Listo: PDF con entradas, salidas y trazabilidad de marzo, sellada e inmutable.`,
+          "faq.q1": `¿Qué productos caducan esta semana?`,
+          "faq.a1": `40 yogures caducan hoy, 18 bandejas de pollo mañana y 12 ensaladas el viernes. Lo más urgente son los yogures.`,
+          "faq.q2": `¿Cuánto voy a vender mañana?`,
+          "faq.a2": `Unas 1.840 unidades, un 12 % más que un viernes normal. El mayor crecimiento estará en bebidas y frescos.`,
+          "faq.q3": `¿Qué tengo que pedir hoy?`,
+          "faq.a3": `Pide 25 cajas de leche y 18 de plátanos. No pidas tomates: tienes stock para 12 días.`,
+          "faq.q4": `¿Dónde tengo riesgo de rotura de stock?`,
+          "faq.a4": `En leche semidesnatada y plátanos para el sábado. Te faltarán 42 y 28 unidades si no ajustas hoy.`,
+          "faq.q5": `¿Qué productos tienen sobrestock?`,
+          "faq.a5": `Tomates, agua con gas y cereales. Los tomates son prioritarios: 120 unidades y 12 días de cobertura.`,
+          "faq.q6": `Pon los yogures que caducan al 40 %`,
+          "faq.a6": `Hecho: descuento aplicado a 40 unidades, etiquetas actualizadas y acción registrada.`,
+          "faq.q7": `Registra 6 paquetes rotos de arroz`,
+          "faq.a7": `Registrados como merma por rotura, descontados del stock y añadidos al informe mensual.`,
+          "faq.q8": `¿Qué tienda está desperdiciando más?`,
+          "faq.a8": `La tienda Centro: 86 kg este mes, un 23 % sobre la media. Panadería concentra la mayor desviación.`,
+          "faq.q9": `¿Cuánto he ahorrado este mes?`,
+          "faq.a9": `3.840 € frente a tu línea base y 420 kg de merma evitados. Frescos aporta el 61 % del ahorro.`,
+          "faq.q10": `Sanidad pide la trazabilidad del lote L260814`,
+          "faq.a10": `Lista: recepción, movimientos, ventas y retiradas del lote en un PDF sellado e inmutable.`,
           "hero.sub": `ODAS convierte los datos de tu empresa en <span class="rotador texto-degradado" data-palabras="decisiones.|tranquilidad.|control.|ahorro.">decisiones.</span>`,
           "hero.sub2": `ODAS conecta tus datos de ventas, inventario y compras para predecir excedentes, automatizar el cumplimiento normativo y ayudarte a tomar mejores decisiones cada día.`,
           "card.explore": `Explora`,
@@ -2470,28 +2496,42 @@
           "whatis.b4": `Et recorda el que no pots oblidar, des de productes a punt de caducar fins a tasques pendents.`,
           "whatis.b5": `Respon les teves preguntes sobre l'operació quan necessites una resposta.`,
           "whatis.b6": `Manté la teva documentació al dia i t'ajuda a complir la Llei 1/2025.`,
+          "chat.store": `ODAS · Supermercat Centre`,
+          "chat.q1": `Quins productes caduquen avui?`,
+          "chat.a1": `Hi ha <span class="font-semibold">40 iogurts naturals</span> que caduquen avui i 18 safates de pollastre que caduquen demà. Els iogurts són el més urgent.`,
+          "chat.a1short": `40 iogurts naturals caduquen avui.`,
+          "chat.action1": `Aplicar −40%`,
+          "chat.action2": `Donar`,
+          "chat.action3": `Retirar`,
+          "chat.confirm1": `✅ Descompte del <span class="font-semibold">40 % aplicat a 40 iogurts</span>. Etiquetes actualitzades i acció registrada.`,
+          "chat.q2": `Posa els iogurts al 40 %`,
+          "chat.a2": `✅ Descompte del <span class="font-semibold">40 % aplicat a 40 iogurts</span>. Etiquetes actualitzades i acció registrada.`,
+          "chat.q3": `Què he de demanar per demà?`,
+          "chat.a3": `Demana <span class="font-semibold">25 caixes de llet i 18 de plàtans</span>. No demanis tomàquets: tens estoc per a 12 dies.`,
+          "chat.q4": `Sanitat demana el lot L260814`,
+          "chat.a4": `Llest: PDF amb recepció, moviments, vendes i retirades del lot, segellat i immutable.`,
           "faq.h": `Un Assistent per al teu dia a dia`,
           "faq.sub": `ODAS entén el que passa al teu negoci i converteix dades disperses en decisions.`,
-          "faq.q1": `Què caduca avui?`,
-          "faq.a1": `3 lots: llobarro (12,8 kg), nata (4 u.) i ensalada russa (2,1 kg). El més urgent és el llobarro.`,
-          "faq.q2": `Quant queda de filet?`,
-          "faq.a2": `7,4 kg del lot LB-0108B, entrat dimarts. Dona per unes 24 racions.`,
-          "faq.q3": `Em queden ous?`,
-          "faq.a3": `Sí, 6 dotzenes. Amb la previsió de demà te'n sobren: no cal demanar.`,
-          "faq.q4": `Això ho puc posar demà?`,
-          "faq.a4": `Sí, aquest lot venç dijous. T'ho recordo demà a primera hora.`,
-          "faq.q5": `Quants esmorzars preparo demà?`,
-          "faq.a5": `142. Hi ha 96 habitacions ocupades i demà és festiu: un 18 % més que un dijous normal.`,
-          "faq.q6": `Se m'han caigut 3 kg de lluç`,
-          "faq.a6": `Anotat com a minva: descomptat de l'estoc i registrat amb motiu i hora per a l'informe.`,
-          "faq.q7": `He llençat l'ensalada russa d'ahir`,
-          "faq.a7": `Registrat. És la tercera vegada aquest mes amb aquest plat: et proposo baixar la producció un 20 %.`,
-          "faq.q8": `Posa'n 12, però de la caixa nova`,
-          "faq.a8": `Fet, 12 de la caixa nova. Compte: l'anterior caduca d'aquí a 2 dies, t'ho recordo aquesta tarda.`,
-          "faq.q9": `Quant he llençat aquest mes i quant m'ha costat?`,
-          "faq.a9": `128 kg i 1.240 €, a més de 325 kg de CO₂. El 41 % és peix i gairebé tot cau en divendres.`,
-          "faq.q10": `Sanitat em demana els registres de març`,
-          "faq.a10": `Llest: PDF amb entrades, sortides i traçabilitat de març, segellada i immutable.`,
+          "faq.q1": `Quins productes caduquen aquesta setmana?`,
+          "faq.a1": `40 iogurts caduquen avui, 18 safates de pollastre demà i 12 amanides divendres. El més urgent són els iogurts.`,
+          "faq.q2": `Quant vendré demà?`,
+          "faq.a2": `Unes 1.840 unitats, un 12 % més que un divendres normal. El creixement més gran serà en begudes i frescos.`,
+          "faq.q3": `Què he de demanar avui?`,
+          "faq.a3": `Demana 25 caixes de llet i 18 de plàtans. No demanis tomàquets: tens estoc per a 12 dies.`,
+          "faq.q4": `On tinc risc de ruptura d'estoc?`,
+          "faq.a4": `En llet semidesnatada i plàtans per dissabte. Te'n faltaran 42 i 28 unitats si no ajustes avui.`,
+          "faq.q5": `Quins productes tenen sobreestoc?`,
+          "faq.a5": `Tomàquets, aigua amb gas i cereals. Els tomàquets són prioritaris: 120 unitats i 12 dies de cobertura.`,
+          "faq.q6": `Posa els iogurts que caduquen al 40 %`,
+          "faq.a6": `Fet: descompte aplicat a 40 unitats, etiquetes actualitzades i acció registrada.`,
+          "faq.q7": `Registra 6 paquets d'arròs trencats`,
+          "faq.a7": `Registrats com a minva per trencament, descomptats de l'estoc i afegits a l'informe mensual.`,
+          "faq.q8": `Quina botiga malbarata més?`,
+          "faq.a8": `La botiga Centre: 86 kg aquest mes, un 23 % sobre la mitjana. Fleca concentra la desviació més gran.`,
+          "faq.q9": `Quant he estalviat aquest mes?`,
+          "faq.a9": `3.840 € respecte de la teva línia base i 420 kg de minva evitats. Frescos aporta el 61 % de l'estalvi.`,
+          "faq.q10": `Sanitat demana la traçabilitat del lot L260814`,
+          "faq.a10": `Llesta: recepció, moviments, vendes i retirades del lot en un PDF segellat i immutable.`,
           "hero.sub": `ODAS converteix les dades de la teva empresa en <span class="rotador texto-degradado" data-palabras="decisions.|tranquil·litat.|control.|estalvi.">decisions.</span>`,
           "hero.sub2": `ODAS connecta les teves dades de vendes, inventari i compres per predir excedents, automatitzar el compliment normatiu i ajudar-te a prendre millors decisions cada dia.`,
           "card.explore": `Explora`,
@@ -2625,28 +2665,42 @@
           "whatis.b4": `Reminds you of what you can't forget, from products about to expire to pending tasks.`,
           "whatis.b5": `Answers your questions about your operation whenever you need an answer.`,
           "whatis.b6": `Keeps your documentation up to date and helps you comply with Law 1/2025.`,
+          "chat.store": `ODAS · Central Supermarket`,
+          "chat.q1": `Which products expire today?`,
+          "chat.a1": `There are <span class="font-semibold">40 natural yoghurts</span> expiring today and 18 trays of chicken expiring tomorrow. The yoghurts are the most urgent.`,
+          "chat.a1short": `40 natural yoghurts expire today.`,
+          "chat.action1": `Apply −40%`,
+          "chat.action2": `Donate`,
+          "chat.action3": `Withdraw`,
+          "chat.confirm1": `✅ <span class="font-semibold">40% discount applied to 40 yoghurts</span>. Labels updated and action recorded.`,
+          "chat.q2": `Put the yoghurts at 40% off`,
+          "chat.a2": `✅ <span class="font-semibold">40% discount applied to 40 yoghurts</span>. Labels updated and action recorded.`,
+          "chat.q3": `What should I order for tomorrow?`,
+          "chat.a3": `Order <span class="font-semibold">25 cases of milk and 18 of bananas</span>. Do not order tomatoes: you have 12 days of stock.`,
+          "chat.q4": `The inspector needs batch L260814`,
+          "chat.a4": `Ready: a sealed, tamper-proof PDF with the batch's receipt, movements, sales and withdrawals.`,
           "faq.h": `An Assistant for your day to day`,
           "faq.sub": `ODAS understands what happens in your business and turns scattered data into decisions.`,
-          "faq.q1": `What expires today?`,
-          "faq.a1": `3 batches: sea bass (12.8 kg), cream (4 units) and potato salad (2.1 kg). The sea bass is the most urgent.`,
-          "faq.q2": `How much sirloin is left?`,
-          "faq.a2": `7.4 kg from batch LB-0108B, received on Tuesday. Enough for about 24 portions.`,
-          "faq.q3": `Do I have any eggs left?`,
-          "faq.a3": `Yes, 6 dozen. With tomorrow's forecast you'll have some spare: no need to order.`,
-          "faq.q4": `Can I serve this tomorrow?`,
-          "faq.a4": `Yes, that batch expires on Thursday. I'll remind you first thing tomorrow.`,
-          "faq.q5": `How many breakfasts should I prep tomorrow?`,
-          "faq.a5": `142. There are 96 rooms occupied and tomorrow is a holiday: 18% more than a normal Thursday.`,
-          "faq.q6": `I dropped 3 kg of hake`,
-          "faq.a6": `Logged as waste: deducted from stock and recorded with reason and time for the report.`,
-          "faq.q7": `I threw out yesterday's potato salad`,
-          "faq.a7": `Recorded. That's the third time this month with that dish: I suggest cutting production by 20%.`,
-          "faq.q8": `Add 12, but from the new box`,
-          "faq.a8": `Done, 12 from the new box. Heads up: the previous one expires in 2 days, I'll remind you this afternoon.`,
-          "faq.q9": `How much have I thrown away this month and what did it cost?`,
-          "faq.a9": `128 kg and €1,240, plus 325 kg of CO₂. 41% is fish and almost all of it lands on Fridays.`,
-          "faq.q10": `The health inspector wants March's records`,
-          "faq.a10": `Ready: a PDF with March's inbound, outbound and traceability, sealed and tamper-proof.`,
+          "faq.q1": `Which products expire this week?`,
+          "faq.a1": `40 yoghurts expire today, 18 trays of chicken tomorrow and 12 salads on Friday. The yoghurts are the most urgent.`,
+          "faq.q2": `How much will I sell tomorrow?`,
+          "faq.a2": `Around 1,840 units, 12% more than a normal Friday. The strongest growth will be in drinks and fresh food.`,
+          "faq.q3": `What should I order today?`,
+          "faq.a3": `Order 25 cases of milk and 18 of bananas. Do not order tomatoes: you have 12 days of stock.`,
+          "faq.q4": `Where am I at risk of a stockout?`,
+          "faq.a4": `Semi-skimmed milk and bananas for Saturday. You will be short by 42 and 28 units unless you adjust today.`,
+          "faq.q5": `Which products are overstocked?`,
+          "faq.a5": `Tomatoes, sparkling water and cereal. Tomatoes are the priority: 120 units and 12 days of cover.`,
+          "faq.q6": `Put the expiring yoghurts at 40% off`,
+          "faq.a6": `Done: discount applied to 40 units, labels updated and action recorded.`,
+          "faq.q7": `Log 6 damaged packs of rice`,
+          "faq.a7": `Logged as damage waste, deducted from stock and added to the monthly report.`,
+          "faq.q8": `Which store is wasting the most?`,
+          "faq.a8": `Central store: 86 kg this month, 23% above average. Bakery accounts for the largest variance.`,
+          "faq.q9": `How much have I saved this month?`,
+          "faq.a9": `€3,840 against your baseline and 420 kg of waste avoided. Fresh food contributes 61% of the savings.`,
+          "faq.q10": `The inspector needs traceability for batch L260814`,
+          "faq.a10": `Ready: the batch's receipt, movements, sales and withdrawals in a sealed, tamper-proof PDF.`,
           "hero.sub": `ODAS turns your company's data into <span class="rotador texto-degradado" data-palabras="decisions.|peace of mind.|control.|savings.">decisions.</span>`,
           "hero.sub2": `ODAS connects your sales, inventory and purchasing data to predict surplus, automate regulatory compliance and help you make better decisions every day.`,
           "card.explore": `Explore`,
