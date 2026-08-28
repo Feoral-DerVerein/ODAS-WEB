@@ -899,18 +899,18 @@
                 <p data-i18n-html="chat.a1" class="mt-0.5">Hay <span class="font-semibold">40 yogures naturales</span> que caducan hoy y 18 bandejas de pollo que caducan mañana. Los yogures son lo más urgente.</p>
                 <div class="mt-1 text-right text-[7px] text-gray-400">7:21 pm</div>
                 <div class="mt-1 divide-y divide-gray-100 border-t border-gray-100 text-center font-medium">
-                  <div class="py-1 text-gray-700">↩ <span data-i18n="chat.action1">Aplicar −40%</span></div>
+                  <div class="py-1 text-gray-700">↩ <span data-i18n="chat.action1">Mover a Tienda Norte</span></div>
                   <div class="py-1 text-emerald-600">↩ <span data-i18n="chat.action2">Donar</span></div>
                   <div class="py-1 text-emerald-600">↩ <span data-i18n="chat.action3">Retirar</span></div>
                 </div>
               </div>
               <div class="ml-5 rounded-lg rounded-tr-none bg-[#d9fdd3] p-1.5 text-gray-800 shadow-sm">
                 <div class="rounded border-l-2 border-emerald-500 bg-black/[0.03] px-1.5 py-1"><p class="text-[8px] font-semibold text-emerald-700">ODAS · Asistente</p><p data-i18n="chat.a1short" class="text-[7px] text-gray-500">40 yogures naturales caducan hoy.</p></div>
-                <p data-i18n="chat.action1" class="mt-1">Aplicar −40%</p>
+                <p data-i18n="chat.action1" class="mt-1">Mover a Tienda Norte</p>
                 <div class="text-right text-[7px] text-gray-500">7:23 pm ✓✓</div>
               </div>
               <div class="rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm">
-                <p data-i18n-html="chat.confirm1">✅ Descuento del <span class="font-semibold">40 % aplicado a 40 yogures</span>. Etiquetas actualizadas y acción registrada.</p>
+                <p data-i18n-html="chat.confirm1">✅ Traslado de <span class="font-semibold">24 yogures a Tienda Norte</span> preparado. Quedan 16 unidades para donación y el stock está actualizado.</p>
                 <div class="text-right text-[7px] text-gray-400">7:23 pm</div>
               </div>
             </div>
@@ -1036,9 +1036,9 @@
           return [
             { p: chatT('chat.q1', '¿Qué productos caducan hoy?'),
               r: chatT('chat.a1', 'Hay <span class="font-semibold">40 yogures naturales</span> que caducan hoy y 18 bandejas de pollo que caducan mañana. Los yogures son lo más urgente.'),
-              acciones: [chatT('chat.action1', 'Aplicar −40%'), chatT('chat.action2', 'Donar'), chatT('chat.action3', 'Retirar')] },
-            { p: chatT('chat.q2', 'Pon los yogures al 40 %'),
-              r: chatT('chat.a2', '✅ Descuento del <span class="font-semibold">40 % aplicado a 40 yogures</span>. Etiquetas actualizadas y acción registrada.') },
+              acciones: [chatT('chat.action1', 'Mover a Tienda Norte'), chatT('chat.action2', 'Donar'), chatT('chat.action3', 'Retirar')] },
+            { p: chatT('chat.q2', 'Reubica los yogures con exceso de stock'),
+              r: chatT('chat.a2', '✅ Traslado de <span class="font-semibold">24 yogures a Tienda Norte</span> preparado. Quedan 16 unidades para donación y el stock está actualizado.') },
             { p: chatT('chat.q3', '¿Qué tengo que pedir para mañana?'),
               r: chatT('chat.a3', 'Pide <span class="font-semibold">25 cajas de leche y 18 de plátanos</span>. No pidas tomates: tienes stock para 12 días.') },
             { p: chatT('chat.q4', 'Sanidad pide el lote L260814'),
@@ -1552,8 +1552,8 @@
           <div class="faq-pista derecha" style="--vel:55s">
             <div class="faq-grupo flex shrink-0 items-stretch gap-6 px-3">
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q6" class="text-lg font-semibold text-gray-900">Pon los yogures que caducan al 40 %</h3>
-                <p data-i18n="faq.a6" class="text-base text-gray-600">Hecho: descuento aplicado a 40 unidades, etiquetas actualizadas y acción registrada.</p>
+                <h3 data-i18n="faq.q6" class="text-lg font-semibold text-gray-900">¿Dónde reubico los yogures que caducan hoy?</h3>
+                <p data-i18n="faq.a6" class="text-base text-gray-600">Tienda Norte puede absorber 24 unidades. He preparado el traslado y la donación de las 16 restantes.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
                 <h3 data-i18n="faq.q7" class="text-lg font-semibold text-gray-900">Registra 6 paquetes rotos de arroz</h3>
@@ -2331,12 +2331,12 @@
           "chat.q1": `¿Qué productos caducan hoy?`,
           "chat.a1": `Hay <span class="font-semibold">40 yogures naturales</span> que caducan hoy y 18 bandejas de pollo que caducan mañana. Los yogures son lo más urgente.`,
           "chat.a1short": `40 yogures naturales caducan hoy.`,
-          "chat.action1": `Aplicar −40%`,
+          "chat.action1": `Mover a Tienda Norte`,
           "chat.action2": `Donar`,
           "chat.action3": `Retirar`,
-          "chat.confirm1": `✅ Descuento del <span class="font-semibold">40 % aplicado a 40 yogures</span>. Etiquetas actualizadas y acción registrada.`,
-          "chat.q2": `Pon los yogures al 40 %`,
-          "chat.a2": `✅ Descuento del <span class="font-semibold">40 % aplicado a 40 yogures</span>. Etiquetas actualizadas y acción registrada.`,
+          "chat.confirm1": `✅ Traslado de <span class="font-semibold">24 yogures a Tienda Norte</span> preparado. Quedan 16 unidades para donación y el stock está actualizado.`,
+          "chat.q2": `Reubica los yogures con exceso de stock`,
+          "chat.a2": `✅ Traslado de <span class="font-semibold">24 yogures a Tienda Norte</span> preparado. Quedan 16 unidades para donación y el stock está actualizado.`,
           "chat.q3": `¿Qué tengo que pedir para mañana?`,
           "chat.a3": `Pide <span class="font-semibold">25 cajas de leche y 18 de plátanos</span>. No pidas tomates: tienes stock para 12 días.`,
           "chat.q4": `Sanidad pide el lote L260814`,
@@ -2353,8 +2353,8 @@
           "faq.a4": `En leche semidesnatada y plátanos para el sábado. Te faltarán 42 y 28 unidades si no ajustas hoy.`,
           "faq.q5": `¿Qué productos tienen sobrestock?`,
           "faq.a5": `Tomates, agua con gas y cereales. Los tomates son prioritarios: 120 unidades y 12 días de cobertura.`,
-          "faq.q6": `Pon los yogures que caducan al 40 %`,
-          "faq.a6": `Hecho: descuento aplicado a 40 unidades, etiquetas actualizadas y acción registrada.`,
+          "faq.q6": `¿Dónde reubico los yogures que caducan hoy?`,
+          "faq.a6": `Tienda Norte puede absorber 24 unidades. He preparado el traslado y la donación de las 16 restantes.`,
           "faq.q7": `Registra 6 paquetes rotos de arroz`,
           "faq.a7": `Registrados como merma por rotura, descontados del stock y añadidos al informe mensual.`,
           "faq.q8": `¿Qué tienda está desperdiciando más?`,
@@ -2500,12 +2500,12 @@
           "chat.q1": `Quins productes caduquen avui?`,
           "chat.a1": `Hi ha <span class="font-semibold">40 iogurts naturals</span> que caduquen avui i 18 safates de pollastre que caduquen demà. Els iogurts són el més urgent.`,
           "chat.a1short": `40 iogurts naturals caduquen avui.`,
-          "chat.action1": `Aplicar −40%`,
+          "chat.action1": `Moure a Botiga Nord`,
           "chat.action2": `Donar`,
           "chat.action3": `Retirar`,
-          "chat.confirm1": `✅ Descompte del <span class="font-semibold">40 % aplicat a 40 iogurts</span>. Etiquetes actualitzades i acció registrada.`,
-          "chat.q2": `Posa els iogurts al 40 %`,
-          "chat.a2": `✅ Descompte del <span class="font-semibold">40 % aplicat a 40 iogurts</span>. Etiquetes actualitzades i acció registrada.`,
+          "chat.confirm1": `✅ Trasllat de <span class="font-semibold">24 iogurts a Botiga Nord</span> preparat. Queden 16 unitats per donar i l'estoc està actualitzat.`,
+          "chat.q2": `Reubica els iogurts amb excés d'estoc`,
+          "chat.a2": `✅ Trasllat de <span class="font-semibold">24 iogurts a Botiga Nord</span> preparat. Queden 16 unitats per donar i l'estoc està actualitzat.`,
           "chat.q3": `Què he de demanar per demà?`,
           "chat.a3": `Demana <span class="font-semibold">25 caixes de llet i 18 de plàtans</span>. No demanis tomàquets: tens estoc per a 12 dies.`,
           "chat.q4": `Sanitat demana el lot L260814`,
@@ -2522,8 +2522,8 @@
           "faq.a4": `En llet semidesnatada i plàtans per dissabte. Te'n faltaran 42 i 28 unitats si no ajustes avui.`,
           "faq.q5": `Quins productes tenen sobreestoc?`,
           "faq.a5": `Tomàquets, aigua amb gas i cereals. Els tomàquets són prioritaris: 120 unitats i 12 dies de cobertura.`,
-          "faq.q6": `Posa els iogurts que caduquen al 40 %`,
-          "faq.a6": `Fet: descompte aplicat a 40 unitats, etiquetes actualitzades i acció registrada.`,
+          "faq.q6": `On reubico els iogurts que caduquen avui?`,
+          "faq.a6": `Botiga Nord pot absorbir 24 unitats. He preparat el trasllat i la donació de les 16 restants.`,
           "faq.q7": `Registra 6 paquets d'arròs trencats`,
           "faq.a7": `Registrats com a minva per trencament, descomptats de l'estoc i afegits a l'informe mensual.`,
           "faq.q8": `Quina botiga malbarata més?`,
@@ -2669,12 +2669,12 @@
           "chat.q1": `Which products expire today?`,
           "chat.a1": `There are <span class="font-semibold">40 natural yoghurts</span> expiring today and 18 trays of chicken expiring tomorrow. The yoghurts are the most urgent.`,
           "chat.a1short": `40 natural yoghurts expire today.`,
-          "chat.action1": `Apply −40%`,
+          "chat.action1": `Move to North Store`,
           "chat.action2": `Donate`,
           "chat.action3": `Withdraw`,
-          "chat.confirm1": `✅ <span class="font-semibold">40% discount applied to 40 yoghurts</span>. Labels updated and action recorded.`,
-          "chat.q2": `Put the yoghurts at 40% off`,
-          "chat.a2": `✅ <span class="font-semibold">40% discount applied to 40 yoghurts</span>. Labels updated and action recorded.`,
+          "chat.confirm1": `✅ Transfer of <span class="font-semibold">24 yoghurts to North Store</span> prepared. The remaining 16 units are set aside for donation and stock is updated.`,
+          "chat.q2": `Reallocate the excess yoghurt stock`,
+          "chat.a2": `✅ Transfer of <span class="font-semibold">24 yoghurts to North Store</span> prepared. The remaining 16 units are set aside for donation and stock is updated.`,
           "chat.q3": `What should I order for tomorrow?`,
           "chat.a3": `Order <span class="font-semibold">25 cases of milk and 18 of bananas</span>. Do not order tomatoes: you have 12 days of stock.`,
           "chat.q4": `The inspector needs batch L260814`,
@@ -2691,8 +2691,8 @@
           "faq.a4": `Semi-skimmed milk and bananas for Saturday. You will be short by 42 and 28 units unless you adjust today.`,
           "faq.q5": `Which products are overstocked?`,
           "faq.a5": `Tomatoes, sparkling water and cereal. Tomatoes are the priority: 120 units and 12 days of cover.`,
-          "faq.q6": `Put the expiring yoghurts at 40% off`,
-          "faq.a6": `Done: discount applied to 40 units, labels updated and action recorded.`,
+          "faq.q6": `Where should I reallocate the yoghurts expiring today?`,
+          "faq.a6": `North Store can absorb 24 units. I have prepared the transfer and the donation of the remaining 16.`,
           "faq.q7": `Log 6 damaged packs of rice`,
           "faq.a7": `Logged as damage waste, deducted from stock and added to the monthly report.`,
           "faq.q8": `Which store is wasting the most?`,
