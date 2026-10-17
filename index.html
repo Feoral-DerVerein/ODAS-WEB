@@ -710,7 +710,260 @@
         } catch (e) {}
       })();
     </script>
-  </head>
+  <style>
+.shared-header{position:sticky;top:0;z-index:50;background:#f8f9f5!important;color:#203a2c;border-bottom:1px solid #dce3d8}
+.shared-header nav{max-width:1440px;margin:auto;padding:28px 5%;display:flex;align-items:center;justify-content:space-between;gap:24px;font-family:Arial,Helvetica,sans-serif}
+.shared-header nav img{height:46px;width:auto;max-width:150px;object-fit:contain}
+.shared-header nav div{display:flex;gap:28px;font-size:14px}
+.shared-header nav a:hover{color:#62816b}
+.shared-header nav a:focus-visible{outline:2px solid #264b35;outline-offset:6px}
+@media(max-width:760px){.shared-header nav{padding:22px 24px}.shared-header nav div{gap:16px;font-size:12px}}
+</style>
+<style>
+.pages-top-brand{position:absolute;top:18px;left:clamp(24px,5vw,72px);z-index:40;display:block}
+.pages-top-brand img{width:100px;height:100px;object-fit:contain}
+#header.shared-header{position:fixed;top:12px;left:3%;width:94%;border-radius:22px;background:rgba(255,255,255,.55)!important;border:1px solid rgba(255,255,255,.75);backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);box-shadow:0 8px 32px rgba(24,60,40,.1);opacity:0;visibility:hidden;transform:translateY(-120%);pointer-events:none;transition:opacity .25s,transform .25s,visibility .25s}
+#header.shared-header.glass-visible{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+#header.shared-header nav{padding:8px 24px}
+#header.shared-header nav img{height:60px;width:70px;object-fit:contain}
+@media(prefers-reduced-motion:reduce){#header.shared-header{transition:none}}
+</style>
+<style>
+.pages-phone .chat-hilo{justify-content:flex-start;overscroll-behavior:contain;overflow-anchor:none}
+.pages-phone .chat-hilo>:first-child{margin-top:auto}
+.pages-phone .chat-burbuja{flex-shrink:0;max-width:94%;padding:8px;border-radius:10px;background:#fff;color:#28352e;box-shadow:0 1px 2px #0000000a}
+.pages-phone .chat-productor{align-self:flex-end;background:#d9fdd3;border-top-right-radius:2px}
+.pages-phone .chat-ai{align-self:flex-start;border-top-left-radius:2px}
+.chat-demo-meta{font-size:7px;color:#758078;text-align:right;margin-top:4px}
+.chat-demo-name{font-size:8px;font-weight:600;color:#315546;margin-bottom:3px}
+.chat-offer{margin-top:8px;padding:9px;border:1px solid #dfe9e0;border-radius:9px;background:#f8fbf8}
+.chat-offer dl{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:7px;font-size:8px}
+.chat-offer dd{margin:0;text-align:right;font-weight:500}
+.chat-offer dt{color:#68766b}
+.chat-demo-actions{display:flex;gap:6px;margin-top:9px}
+.chat-demo-actions button{flex:1;min-height:32px;border-radius:7px;padding:6px 5px;font:inherit;font-weight:600;border:1px solid #d7e2d8;cursor:pointer}
+.chat-demo-actions button:first-child{background:#315546;color:#fff;border-color:#315546}
+.chat-demo-actions button:last-child{background:#fff;color:#315546}
+.chat-demo-actions button:focus-visible{outline:2px solid #315546;outline-offset:2px}
+.chat-demo-actions button:disabled{opacity:.55;cursor:default}
+@media(prefers-reduced-motion:reduce){.pages-phone .chat-burbuja,.pages-phone .chat-punto,.pages-phone .chat-cursor{animation:none}.pages-phone .chat-hilo{scroll-behavior:auto}}
+</style>
+<style>
+.buyer-market{display:flex;min-height:500px;overflow:hidden;border:1px solid #e1e8e1;border-radius:18px;background:#fff;box-shadow:0 22px 55px #233a2920;color:#253b2c;font-family:inherit;text-align:left}
+.buyer-sidebar{width:145px;flex-shrink:0;padding:22px 12px;border-right:1px solid #edf0eb;display:flex;flex-direction:column;gap:8px;font-size:10px}
+.buyer-sidebar img{width:90px;height:32px;object-fit:contain;margin:0 0 22px 8px}.buyer-sidebar>span{padding:10px 9px;border-radius:7px}.buyer-selected{background:#edf5ed;font-weight:600}.buyer-sidebar>small{margin-top:auto;padding:30px 9px 0;color:#819080;font-size:9px;line-height:1.7}
+.buyer-main{min-width:0;flex:1;padding:22px 230px 22px 24px}.buyer-top{display:flex;justify-content:space-between;gap:12px;color:#7a887c;font-size:9px;margin-bottom:18px}.buyer-account{font-size:8px}.buyer-main h3{font-size:23px;font-weight:500;letter-spacing:-.035em;margin:0}.buyer-intro{font-size:10px;color:#7a887c;margin:6px 0 16px}.buyer-search input{width:100%;background:#f7f9f6;border:1px solid #e5eae2;border-radius:8px;padding:10px 12px;font:inherit;font-size:10px;color:#253b2c}.buyer-filters{display:flex;gap:6px;margin:12px 0}.buyer-filters button{border:1px solid #e3e9e1;background:white;border-radius:30px;padding:6px 12px;font-size:9px;color:#536452}.buyer-filters [aria-pressed=true]{background:#315546;color:white;border-color:#315546}.buyer-products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.buyer-product{border:1px solid #e9ede6;border-radius:10px;overflow:hidden}.buyer-product[hidden]{display:none}.buyer-product-image{position:relative;background:var(--fruit-bg);height:85px}.buyer-product-image svg{width:100%;height:100%}.buyer-product-image>span{position:absolute;top:7px;left:7px;font-size:7px;background:#ffffffb0;border-radius:20px;padding:3px 6px;color:#5a7058}.buyer-product-copy{padding:10px}.buyer-product h4{font-size:11px;font-weight:600;margin:0}.buyer-product p{font-size:8px;color:#7b887b;margin:4px 0 10px}.buyer-price{display:flex;justify-content:space-between;align-items:center;gap:4px}.buyer-price strong{font-size:13px;font-weight:600}.buyer-price small{font-size:8px;font-weight:400}.buyer-price>span{font-size:7px;color:#71826e}.buyer-order{width:100%;margin-top:10px;border:1px solid #dce6d8;background:#f2f7ef;color:#315546;border-radius:6px;padding:7px 3px;font-size:8px}.buyer-market button{cursor:pointer}.buyer-market :focus-visible{outline:2px solid #315546;outline-offset:2px}.buyer-feedback,.buyer-empty{font-size:9px;color:#6b7d69;margin:12px 0 0;line-height:1.5}
+@media(max-width:767px){.buyer-sidebar{display:none}.buyer-main{padding:20px}.buyer-market{min-height:0}.buyer-top{flex-wrap:wrap}.buyer-main h3{font-size:22px}.buyer-product-image{height:90px}}
+</style>
+<style>
+.buyer-market-image-frame{width:100%;height:540px;overflow:hidden;border:1px solid #e1e8e1;border-radius:18px;background:#fff;box-shadow:0 22px 55px #233a2920;scrollbar-width:thin;scrollbar-color:#cbd9cb transparent}
+.buyer-market-image-frame img{display:block;width:100%;height:auto}
+.buyer-market-image-frame:focus-visible{outline:2px solid #315546;outline-offset:4px}
+@media(max-width:767px){.buyer-market-image-frame{height:420px}}
+</style>
+<style>
+.market-harvest-art{position:absolute;inset:0;pointer-events:none;z-index:0}
+.harvest-left{position:absolute;width:290px;height:400px;left:-190px;bottom:-35px}
+.harvest-right{position:absolute;width:300px;height:410px;right:-185px;bottom:-40px}
+.buyer-market-image-frame{position:relative;z-index:1}
+.pages-phone{z-index:2}
+@media(max-width:1300px){.harvest-left{width:240px;left:-90px}.harvest-right{width:250px;right:-90px}}
+@media(max-width:767px){.harvest-left{width:150px;left:-35px;bottom:100px;opacity:.8}.harvest-right{width:160px;right:-30px;bottom:10px;opacity:.8}.market-harvest-art{overflow:hidden;inset:-30px -15px}}
+</style>
+<style>
+.harvest-photo{position:absolute;width:145%;max-width:none;height:auto;left:-22.5%;bottom:-65px;pointer-events:none}
+@media(max-width:1300px){.harvest-photo{width:125%;left:-12.5%;bottom:-40px}}
+@media(max-width:767px){.harvest-photo{width:155%;left:-27.5%;bottom:30px}.market-harvest-art{overflow:hidden}}
+</style>
+<style>
+.harvest-reference{mix-blend-mode:multiply;overflow:visible}
+.harvest-item{position:absolute;pointer-events:none;height:auto;overflow:hidden}
+.harvest-tomatoes{width:285px;left:-220px;bottom:5px}
+.harvest-berries{width:275px;left:-125px;bottom:-75px}
+.harvest-lettuce{width:310px;right:-245px;bottom:70px;transform:rotate(18deg)}
+.harvest-bread{width:300px;right:-230px;bottom:-25px}
+.harvest-peach{width:115px;right:-80px;bottom:-85px;transform:rotate(-15deg)}
+@media(max-width:1300px){.harvest-tomatoes{width:220px;left:-100px}.harvest-berries{width:215px;left:-45px;bottom:-55px}.harvest-lettuce{width:240px;right:-125px}.harvest-bread{width:235px;right:-115px}.harvest-peach{width:90px;right:-25px;bottom:-60px}}
+@media(max-width:767px){.harvest-reference{inset:0 -15px;overflow:hidden}.harvest-tomatoes{width:130px;left:-40px;bottom:40px}.harvest-berries{width:140px;left:0;bottom:-5px}.harvest-lettuce{width:160px;right:-50px;bottom:75px}.harvest-bread{width:160px;right:-30px;bottom:10px}.harvest-peach{width:65px;right:40px;bottom:0}}
+</style>
+<style>
+.harvest-reference{mix-blend-mode:normal}
+.harvest-tomatoes{width:260px;left:-185px;bottom:10px}
+.harvest-berries{width:250px;left:-100px;bottom:-55px}
+.harvest-lettuce{width:290px;right:-205px;bottom:110px;transform:rotate(12deg)}
+.harvest-bread{width:270px;right:-195px;bottom:-5px}
+.harvest-peach{width:100px;right:-65px;bottom:-60px}
+@media(max-width:1300px){.harvest-tomatoes{width:210px;left:-90px}.harvest-berries{width:200px;left:-35px;bottom:-40px}.harvest-lettuce{width:230px;right:-115px;bottom:100px}.harvest-bread{width:220px;right:-100px}.harvest-peach{width:80px;right:-15px;bottom:-45px}}
+@media(max-width:767px){.harvest-tomatoes{width:130px;left:-35px;bottom:60px}.harvest-berries{width:130px;left:0;bottom:5px}.harvest-lettuce{width:150px;right:-40px;bottom:120px}.harvest-bread{width:150px;right:-25px;bottom:35px}.harvest-peach{width:60px;right:40px;bottom:5px}}
+</style>
+<style>
+.harvest-berries{top:-105px;bottom:auto;left:-85px}
+.harvest-peach{top:-70px;bottom:auto;right:-55px}
+@media(max-width:1300px){.harvest-berries{top:-90px;bottom:auto;left:-30px}.harvest-peach{top:-55px;bottom:auto;right:-10px}}
+@media(max-width:767px){.market-harvest-art.harvest-reference{overflow:visible}.harvest-berries{top:-65px;bottom:auto;left:5px}.harvest-peach{top:-45px;bottom:auto;right:20px}}
+</style>
+<style>
+.pages-hero-copy{max-width:1000px;margin:0 auto;text-align:center;color:#172419}
+.pages-hero-kicker{font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#83867a;margin:0 0 24px}
+.pages-hero-copy h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(32px,4.8vw,62px);font-weight:400;line-height:1.04;letter-spacing:-.045em;color:#172419;margin:0;text-wrap:balance}
+.pages-hero-description{max-width:740px;margin:28px auto 0;font-size:clamp(15px,1.45vw,18px);font-weight:400;line-height:1.55;color:#777b70;text-wrap:pretty}
+.pages-hero-actions{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:18px;margin-top:34px}
+.pages-hero-actions a{display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:999px;padding:11px 23px;font-size:14px;line-height:1.25;transition:background .2s}
+.pages-explore{background:#505b31;color:white;border:1px solid #505b31}.pages-explore:hover{background:#3f4c24}.pages-how{border:1px solid #92978a;color:#62685a;background:rgba(255,255,255,.6)}.pages-how:hover{background:#f0f3e8}
+.pages-hero-actions a:focus-visible{outline:2px solid #505b31;outline-offset:5px}
+#marketplace,#como-funciona{scroll-margin-top:110px}
+@media(max-width:639px){.pages-hero-kicker{font-size:10px;letter-spacing:.12em}.pages-hero-actions{gap:12px}.pages-hero-actions a{font-size:13px;padding:10px 20px}.pages-hero-description{margin-top:22px}}
+</style>
+<style>
+.faq-bloque{-webkit-mask-image:none;mask-image:none;gap:8px;padding:8px 0}
+.faq-fila{padding:20px 0 24px}
+</style>
+<style>
+.orchard-transition{position:relative;height:200px;margin-top:-35px;isolation:isolate;pointer-events:none;z-index:0}
+.orchard-branch{position:absolute;width:min(45vw,600px);top:0}.orchard-branch svg{display:block;width:100%;height:auto;filter:drop-shadow(0 5px 4px #30482915)}
+.orchard-branch-left{left:-35px}.orchard-branch-right{right:-35px;transform:scaleX(-1)}
+.orchard-apple{position:absolute;top:70px;left:calc(26% - 80px);width:160px;will-change:transform,opacity;transform-origin:50% 0}
+.orchard-apple img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 8px #343e241a)}
+.orchard-stalk{position:absolute;top:-28px;left:50%;height:51px;width:2px;background:#796b42;transform:rotate(6deg);transform-origin:top}
+.orchard-apple.is-falling .orchard-stalk{opacity:0}
+.farmer-assistant-section{z-index:1;background:#fff}
+@media(max-width:639px){.orchard-transition{height:150px;margin-top:0}.orchard-branch{width:55vw;top:5px}.orchard-apple{width:105px;top:42px;left:calc(24% - 52px)}}
+@media(prefers-reduced-motion:reduce){.orchard-apple{will-change:auto}}
+</style>
+<style>
+.orchard-transition{height:240px;margin-top:-20px}
+.orchard-branch img{display:block;width:100%;height:auto;filter:drop-shadow(0 5px 8px #30482910)}
+.orchard-branch-left{width:min(48vw,670px);left:-80px;top:20px}
+.orchard-branch-right{width:min(32vw,420px);right:-50px;top:-35px;transform:none}
+.orchard-apple{top:90px;left:calc(24% - 80px);width:140px}
+@media(max-width:639px){.orchard-transition{height:160px}.orchard-branch-left{width:65vw;left:-45px;top:25px}.orchard-branch-right{width:40vw;right:-25px;top:0}.orchard-apple{top:65px;left:calc(24% - 45px);width:90px}}
+</style>
+<style>
+.orchard-branch-right{width:min(45vw,640px);right:0;top:20px;transform:none}
+.orchard-branch-right img{object-fit:contain}
+@media(max-width:639px){.orchard-branch-right{width:46vw;right:0;top:28px}}
+</style>
+<style>
+.seller-origin-card{display:grid;grid-template-columns:1fr 1.1fr;overflow:hidden;background:#fff;border:1px solid #e1e7dd;border-radius:24px;box-shadow:0 16px 40px #253a2810}
+.seller-origin-visual{position:relative;padding:32px;background:#edf0df;color:#35543a;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:24px}
+.origin-topline{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px}.origin-topline img{width:85px;height:30px;object-fit:contain}.origin-topline>span{font-size:9px;letter-spacing:.04em;color:#7b886c}.origin-seal{width:140px;margin-top:12px}.origin-caption{font:30px/1.2 Georgia,serif;text-align:center;letter-spacing:-.03em}.origin-caption em{font-weight:400;color:#70875d}.origin-ticket{width:100%;padding:20px;border-radius:10px;background:#fffaf0;box-shadow:0 5px 14px #3043290c;border:1px dashed #c8ceba}.origin-ticket>span{font-size:8px;letter-spacing:.15em;color:#8a937b}.origin-ticket strong{display:block;font-size:14px;font-weight:500;margin-top:10px}.origin-ticket>div{display:flex;gap:12px;border-top:1px solid #e8e7d9;margin-top:14px;padding-top:12px;font-size:9px;color:#7d876d}
+.seller-origin-content{padding:40px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}.seller-label{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#84917d;margin-bottom:18px}.seller-selector{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px}.seller-selector button{transition:background-color .25s ease,color .25s ease,border-color .25s ease,box-shadow .25s ease;border:1px solid #e0e7dc;border-radius:30px;background:#fff;color:#6f7c67;font-size:11px;padding:8px 12px;cursor:pointer}.seller-selector [aria-pressed=true]{background:#35543a;color:#fff;border-color:#35543a}.seller-copy h3{font:32px/1.16 Georgia,serif;color:#253e2b;letter-spacing:-.025em}.seller-copy>p{font-size:14px;line-height:1.8;color:#7a8475;margin-top:20px;min-height:76px}.seller-copy ul{margin-top:20px;display:grid;gap:11px;list-style:none;padding:0;font-size:12px;line-height:1.6;color:#4f6349}.seller-copy li::before{content:'✓';color:#69895a;margin-right:9px}.seller-origin-cta{margin-top:28px;font-size:12px;padding:12px 19px;background:#35543a;color:#fff;border-radius:30px}.seller-origin-card :focus-visible{outline:2px solid #35543a;outline-offset:4px}
+@media(max-width:767px){.seller-origin-card{grid-template-columns:1fr}.seller-origin-content{padding:28px}.seller-origin-visual{padding:24px;gap:20px}.origin-seal{width:100px}.origin-caption{font-size:26px}.seller-copy h3{font-size:28px}}
+</style>
+<style>
+button.seller-origin-cta{border:0;cursor:pointer;font-family:inherit}
+#pages-contact-dialog{width:calc(100% - 32px);max-width:500px;max-height:90svh;overflow:auto;margin:auto;padding:30px;border:1px solid #e1e7dd;border-radius:22px;background:#fff;color:#253e2b;box-shadow:0 24px 90px #18331f30}
+#pages-contact-dialog::backdrop{background:#14261c70;backdrop-filter:blur(7px)}
+.contact-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:8px}.contact-heading h2{font:28px/1.2 Georgia,serif}.contact-heading button{font-size:26px;border:0;background:none;cursor:pointer;color:#6d7c67;padding:4px}#pages-contact-form{display:grid;gap:15px}#pages-contact-form label{display:grid;gap:7px;font-size:12px;color:#465b40}#pages-contact-form input,#pages-contact-form textarea{width:100%;padding:11px 12px;border:1px solid #dae2d6;border-radius:9px;background:#fafcf8;color:#253e2b;font-family:inherit;font-size:14px;resize:vertical}.contact-note,#contact-form-status{font-size:11px;line-height:1.6;color:#7b8976}.contact-send{border:0;background:#35543a;color:white;padding:13px 20px;border-radius:30px;font-family:inherit;font-size:13px;cursor:pointer}#pages-contact-dialog :focus-visible{outline:2px solid #35543a;outline-offset:3px}
+</style>
+<style>
+.orchard-branch{isolation:isolate}
+.orchard-branch-left img{-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 86%,transparent)}
+.orchard-branch-right img{-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 90%,transparent)}
+.orchard-branch::after{content:"";position:absolute;inset:-8px;background:linear-gradient(to bottom,transparent 45%,rgba(255,255,255,.25) 80%,#fff);pointer-events:none}
+.botanical-foreground{position:absolute;width:260px;height:220px;z-index:2;pointer-events:none;filter:blur(5px);opacity:.6}
+.botanical-foreground-left{left:-45px;top:10px;transform:rotate(-12deg)}
+.botanical-foreground-right{right:-45px;top:5px;transform:scaleX(-1) rotate(-8deg)}
+@media(max-width:639px){.botanical-foreground{width:140px;height:140px;filter:blur(4px);opacity:.45}.botanical-foreground-left{left:-35px;top:10px}.botanical-foreground-right{right:-35px;top:10px}}
+</style>
+<style>
+.seller-origin-visual.seller-harvest-visual{padding:0;display:block;min-height:430px;overflow:hidden;background:#ede8d6}
+.seller-harvest-gif{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center}
+@media(max-width:767px){.seller-origin-visual.seller-harvest-visual{min-height:0;aspect-ratio:9/8}}
+</style>
+<style>
+.pages-hero-actions button{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:11px 23px;font-family:inherit;font-size:14px;line-height:1.25;cursor:pointer;transition:background .2s}
+.pages-hero-actions button:focus-visible{outline:2px solid #505b31;outline-offset:5px}
+@media(max-width:639px){.pages-hero-actions button{font-size:13px;padding:10px 20px}}
+</style>
+<style>
+.pages-intro-harvest{position:relative;max-width:520px;margin:auto;border-radius:24px;overflow:hidden;aspect-ratio:9/8;background:#ede8d6}
+.pages-intro-harvest img{display:block;width:100%;height:100%;object-fit:cover}
+.seller-origin-visual.seller-connections-visual{padding:24px;justify-content:center;background:linear-gradient(145deg,#e5f3ee,#f9fcfa)}
+.seller-connections-visual #beamContainer{height:430px;max-width:100%}
+@media(max-width:767px){.seller-connections-visual #beamContainer{height:330px}.seller-origin-visual.seller-connections-visual{padding:20px}}
+</style>
+<style>
+.pages-intro-harvest{border-radius:0;background:transparent;overflow:visible}
+.pages-intro-harvest img{-webkit-mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent),linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent),linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);-webkit-mask-composite:source-in;mask-composite:intersect}
+</style>
+<style>
+.site-language{display:inline-flex;align-items:center}.site-language-select{font:500 12px/1.4 Arial,sans-serif;color:#315546;border:1px solid #a9bcaa70;background:#ffffffa6;border-radius:20px;padding:8px 10px;max-width:142px;cursor:pointer}.site-language-select:focus-visible{outline:2px solid #315546;outline-offset:3px}.pages-top-language{position:absolute;right:clamp(24px,5vw,72px);top:42px;z-index:40}.shared-header nav div{align-items:center;flex-wrap:wrap}html[lang=de] .hero-title-line,html[lang=en] .hero-title-line{white-space:normal}
+@media(max-width:640px){.shared-header nav div{gap:8px}.site-language-select{font-size:11px;padding:7px;max-width:112px}.pages-top-language{top:32px}}
+</style>
+<style>.orchard-transition{overflow-x:clip}html{overflow-x:clip}</style>
+<style>
+#header{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+#header.shared-header{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+.site-language-select{width:62px;max-width:62px;padding:8px;font-size:12px}
+</style>
+<style>
+#header .site-language{position:relative;display:inline-flex;align-items:center;flex:0 0 auto;margin:0;line-height:1}
+#header .site-language::after{content:"";position:absolute;right:12px;top:50%;width:5px;height:5px;border-right:1.5px solid #315546;border-bottom:1.5px solid #315546;transform:translateY(-70%) rotate(45deg);pointer-events:none}
+#header .site-language-select{appearance:none;-webkit-appearance:none;display:block;width:65px;min-width:65px;max-width:65px;height:36px;margin:0;padding:0 25px 0 13px;border:1px solid rgba(49,85,70,.18);border-radius:999px;background:rgba(255,255,255,.65);color:#315546;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;line-height:normal;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.8);transition:background .2s,border-color .2s}
+#header .site-language-select:hover{background:#fff;border-color:rgba(49,85,70,.4)}
+#header .site-language-select:focus-visible{outline:2px solid #315546;outline-offset:3px}
+#header .site-language-select option{background:#fff;color:#25382e;font-weight:400}
+#header .menu-right,#header.shared-header nav>div{align-items:center}
+</style>
+<style>
+#header.shared-header{top:0;left:0;width:100%;border-radius:0;border:0;border-bottom:1px solid #e7e9e6;background:rgba(255,255,255,.96)!important;box-shadow:none;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+#header.shared-header nav{max-width:1600px;padding:12px 40px;min-height:82px;gap:40px;justify-content:space-between}
+#header.shared-header .pages-nav-left{display:flex;align-items:center;gap:44px;flex-wrap:nowrap}
+#header.shared-header .pages-nav-brand img{width:70px;height:54px}
+#header.shared-header .pages-nav-links{display:flex;align-items:center;gap:32px;flex-wrap:nowrap}
+.pages-nav-links a{font-size:15px;font-weight:500;color:#202821}
+#header.shared-header .pages-nav-right{display:flex;align-items:center;gap:12px;flex-wrap:nowrap}
+.pages-nav-contact{border:0;border-radius:999px;background:#f1f2ef;color:#25382e;font-family:inherit;font-size:14px;font-weight:500;padding:12px 23px;cursor:pointer}
+.pages-nav-contact:hover{background:#e6ebe3}
+@media(max-width:640px){#header.shared-header nav{padding:10px 18px;gap:12px;min-height:70px}#header.shared-header .pages-nav-left{gap:18px}#header.shared-header .pages-nav-brand img{width:48px;height:46px}#header.shared-header .pages-nav-links{gap:14px}.pages-nav-links a{font-size:12px}.pages-nav-contact{font-size:12px;padding:10px 13px}#header.shared-header .pages-nav-right{gap:8px}}
+</style>
+<style>
+#header.shared-header{background:rgba(255,255,255,.48)!important;backdrop-filter:blur(22px) saturate(155%);-webkit-backdrop-filter:blur(22px) saturate(155%);border-bottom:1px solid rgba(255,255,255,.75);box-shadow:0 5px 24px rgba(35,64,47,.06),inset 0 1px 0 rgba(255,255,255,.8)}
+.pages-nav-contact{background:rgba(255,255,255,.45);border:1px solid rgba(49,85,70,.12)}
+.pages-nav-contact:hover{background:rgba(255,255,255,.75)}
+</style>
+<style>
+#como-funciona>.mx-auto.grid{grid-template-columns:1fr;max-width:850px}
+#como-funciona .max-w-xl{max-width:none}
+</style>
+<style>
+.orchard-transition.orchard-full-width{position:relative;width:100%;height:clamp(240px,40vw,640px);margin:0;overflow:hidden;isolation:isolate}
+.orchard-full-width>img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;filter:drop-shadow(0 8px 10px rgba(37,59,30,.08))}
+@media(max-width:639px){.orchard-transition.orchard-full-width{height:clamp(200px,60vw,300px)}.orchard-full-width>img{object-fit:contain}}
+</style>
+<style>.orchard-transition.orchard-full-width{height:auto}.orchard-full-width>img{width:100%;height:auto}</style>
+<style>
+.apple-scroll-journey{position:relative;z-index:10;isolation:isolate;overflow:clip}
+.apple-scroll-fruit{position:absolute;top:0;left:0;width:clamp(105px,12vw,180px);z-index:1;pointer-events:none;will-change:transform,opacity;transform-origin:52% 15%;visibility:hidden}
+.apple-scroll-fruit img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 9px rgba(40,50,25,.12))}
+.apple-scroll-journey .orchard-transition{z-index:2;pointer-events:none}
+.apple-scroll-journey .farmer-assistant-section{position:relative;z-index:2;background:transparent}
+.apple-scroll-journey .farmer-assistant-section>.mx-auto{position:relative;z-index:2}
+.apple-scroll-journey .faq-grupo>div{background:#fff}
+.apple-scroll-journey>section:not(.farmer-assistant-section){position:relative;z-index:2}
+.apple-scroll-journey .seller-origin-card{position:relative;z-index:3;background:#fff}
+@media(max-width:639px){.apple-scroll-fruit{width:96px}}
+@media(prefers-reduced-motion:reduce){.apple-scroll-fruit{will-change:auto}}
+</style>
+<style>@media(max-width:640px){#header.shared-header nav{gap:8px;padding-inline:12px;flex-wrap:wrap}#header.shared-header .pages-nav-left{gap:12px}#header.shared-header .pages-nav-links{gap:12px}}</style>
+<style>
+.seller-copy{touch-action:pan-y;overflow:hidden;width:100%}
+.seller-carousel-controls{display:flex;align-items:center;gap:12px;margin-top:24px;color:#7a8475;font-size:12px}
+.seller-carousel-controls button{display:grid;place-items:center;width:36px;height:36px;border:1px solid #dce4d8;border-radius:50%;background:#fff;color:#35543a;cursor:pointer;transition:background .2s,transform .2s}
+.seller-carousel-controls button:hover{background:#edf2e9;transform:translateY(-1px)}
+.seller-carousel-controls svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+</style><style>
+.buyer-profiles{grid-column:1/-1;padding:40px 0 16px}.buyer-profiles-heading{text-align:center;max-width:620px;margin:0 auto 30px}.buyer-profiles-heading .seller-label{margin-bottom:12px}.buyer-profiles-heading h3{font:clamp(28px,3vw,38px)/1.16 Georgia,serif;color:#253e2b}.buyer-profiles-heading>p:last-child{font-size:14px;line-height:1.7;color:#7a8475;margin-top:14px}.buyer-profiles-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.buyer-profile-card{display:flex;flex-direction:column;padding:26px;border:1px solid #e1e7dd;border-radius:22px;background:#fff;box-shadow:0 8px 28px #253e2b05}.buyer-profile-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#eff4eb;color:#35543a;margin-bottom:24px}.buyer-profile-icon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.buyer-profile-type{font-size:11px;color:#69805e;margin-bottom:12px}.buyer-profile-card h4{font:23px/1.2 Georgia,serif;color:#253e2b;margin-bottom:14px}.buyer-profile-card>p:last-of-type{font-size:13px;line-height:1.8;color:#7a8475;margin-bottom:24px}.buyer-profile-card button{margin-top:auto;display:flex;justify-content:space-between;align-items:center;border:0;border-top:1px solid #e8ede4;background:transparent;padding:17px 0 0;color:#35543a;font:500 12px Arial,sans-serif;cursor:pointer}.buyer-profile-card button:focus-visible{outline:2px solid #35543a;outline-offset:5px}@media(max-width:1000px){.buyer-profiles-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:540px){.buyer-profiles-grid{grid-template-columns:1fr}.buyer-profile-card{padding:24px}}
+</style><style id="unified-heading-font">
+body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New Roman',serif!important;font-weight:400!important}
+</style>
+<style>
+.buyer-profile-card{overflow:hidden;padding-top:0}
+.buyer-profile-photo{height:205px;flex:none;margin:0 -26px -12px;background-image:linear-gradient(to bottom,rgba(255,255,255,0) 30%,rgba(255,255,255,.18) 52%,rgba(255,255,255,.8) 80%,#fff 100%),url('buyer-venues.png');background-size:100% 100%,400% 100%;background-position:center,var(--photo-position) center;background-repeat:no-repeat}
+.buyer-profile-type,.buyer-profile-card h4{position:relative;z-index:1}
+@media(max-width:540px){.buyer-profile-photo{margin-left:-24px;margin-right:-24px;height:220px}}
+</style></head>
 
   <body class="bg-fondo text-black antialiased selection:bg-black selection:text-white">
 
@@ -748,41 +1001,21 @@
          · Izquierda: logo.  Centro: menús desplegables.  Derecha: botón.
          · Los menús se abren al pasar el ratón (en móvil con el botón ☰).
          ======================================================================== -->
-    <header id="header" class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md transition-colors">
-      <nav class="relative mx-auto flex max-w-6xl items-center justify-end px-5 py-4 sm:justify-between">
-
-        <!-- Logo ODAS (símbolo + marca). Se oculta en móvil para dejar sitio a los botones -->
-        <a href="#" class="hidden items-center sm:flex" aria-label="ODAS">
-          <img src="odas-marca.png" alt="ODAS" class="h-6 w-auto" />
-        </a>
-
-        <!-- BOTÓN DESTACADO (derecha) -->
-        <div class="flex items-center gap-3">
-          <!-- [[EDITAR: texto y enlace del botón principal del header]] -->
-          <a href="https://app.odas-eu.com/login" data-i18n="nav.login" class="inline-block rounded-full border border-gray-300 px-5 py-2 text-sm font-semibold text-black transition hover:bg-black/5">
-            Iniciar sesión
-          </a>
-          <a href="mailto:hello@negentropylabs.com?subject=Contacto%20ODAS" data-i18n="nav.contact" class="inline-block rounded-full bg-black px-5 py-2 text-sm font-semibold text-white transition hover:bg-gray-800">
-            Contacto
-          </a>
-
-          <!-- SELECTOR DE IDIOMA (junto a Contacto): al hacer clic despliega el resto -->
-          <div id="langSelect" class="relative text-sm">
-            <button type="button" id="langTrigger" class="flex items-center gap-1 rounded-md px-2 py-1 font-semibold text-black transition hover:bg-black/5" aria-haspopup="listbox" aria-expanded="false" aria-label="Selector de idioma">
-              <span id="langActual">ES</span>
-              <svg class="lang-chevron h-3.5 w-3.5 text-gray-400 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div id="langMenu" class="menu-card absolute right-0 top-full z-50 mt-1.5 hidden min-w-[8.5rem] overflow-hidden rounded-xl border border-borde bg-white py-1 shadow-xl" role="listbox" aria-label="Idiomas">
-              <button type="button" role="option" data-lang="es" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>Español</span><span class="text-[11px] text-gray-400">ES</span></button>
-              <button type="button" role="option" data-lang="ca" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>Català</span><span class="text-[11px] text-gray-400">CA</span></button>
-              <button type="button" role="option" data-lang="en" class="lang-btn flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-medium text-gray-400 transition hover:bg-black/5 hover:text-black"><span>English</span><span class="text-[11px] text-gray-400">EN</span></button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <!-- (Menú de móvil eliminado a petición) -->
-    </header>
+    <header id="header" class="shared-header glass-visible" aria-hidden="false"><nav aria-label="Navegación de Pagès"><div class="pages-nav-left"><a class="pages-nav-brand" href="index.html" aria-label="ODAS, inicio"><img src="odas-solo-letras.svg" alt="ODAS"></a></div><div class="pages-nav-right"><button type="button" class="pages-nav-contact" id="nav-pages-contact">Contacto</button><label class="site-language"><span class="sr-only">Idioma / Language</span><select class="site-language-select" aria-label="Idioma / Language"><option value="es">ES</option><option value="ca">CA</option><option value="en">EN</option><option value="de">DE</option></select></label></div></nav></header>
+    <script>
+      (function () {
+        var header = document.getElementById('header');
+        function updateGlassMenu() {
+          var visible = true;
+          header.classList.toggle('glass-visible', visible);
+          header.inert = !visible;
+          header.setAttribute('aria-hidden', String(!visible));
+        }
+        window.addEventListener('scroll', updateGlassMenu, { passive: true });
+        window.addEventListener('pageshow', updateGlassMenu);
+        updateGlassMenu();
+      })();
+    </script>
 
 
     <!-- ========================================================================
@@ -790,130 +1023,42 @@
          ------------------------------------------------------------------------
          · Etiqueta pequeña + titular gigante + subtítulo + dos botones.
          ======================================================================== -->
-    <section class="relative overflow-hidden bg-white pb-20 pt-44">
-
+    <div class="pages-cloud-sections relative isolate overflow-hidden bg-white">
       <!-- Fondo animado tipo nubes (WebGL); se inicializa en el <script> "Cloudscape" de más abajo -->
       <canvas id="cloudscape" class="pointer-events-none absolute inset-0 z-0 block h-full w-full" aria-hidden="true"></canvas>
       <!-- Difuminado suave: aclara el shader tras el texto y funde el borde inferior con la página -->
-      <div class="pointer-events-none absolute inset-0 z-[1]" style="background:linear-gradient(180deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0) 24%, rgba(255,255,255,0) 66%, rgba(255,255,255,0.85) 90%, rgba(255,255,255,1) 100%), radial-gradient(115% 85% at 16% 34%, rgba(255,255,255,0.60) 0%, rgba(255,255,255,0) 55%);"></div>
+      <div class="pointer-events-none absolute inset-0 z-[1]" style="background:linear-gradient(180deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0) 24%, rgba(255,255,255,0) var(--cloud-fade-start,65%), rgba(255,255,255,1) var(--cloud-fade-end,80%), rgba(255,255,255,1) 100%), radial-gradient(115% 85% at 16% 34%, rgba(255,255,255,0.60) 0%, rgba(255,255,255,0) 55%);"></div>
+
+    <section class="relative z-10 overflow-hidden bg-transparent pb-20 pt-44">
 
       <!-- Contenido del hero (alineado a la izquierda, algo más centrado) -->
       <div class="relative z-10 mx-auto max-w-6xl px-5">
-        <div class="mx-auto max-w-2xl text-center">
-
-          <!-- Titular: gancho del hero -->
-          <h1 data-i18n-html="hero.sub" class="text-3xl font-semibold leading-[1.12] tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
-            <!-- [[EDITAR: titular / gancho del hero]] -->
-            ODAS convierte los datos de tu empresa en <span class="rotador texto-degradado" data-palabras="decisiones.|tranquilidad.|control.|ahorro.">decisiones.</span>
-          </h1>
-
-          <!-- [[EDITAR: descripción del producto]] -->
-          <p data-i18n="hero.sub2" class="relative top-[5px] mt-6 max-w-2xl text-base text-gray-500 md:text-lg">ODAS conecta tus datos de ventas, inventario y compras para predecir excedentes, automatizar el cumplimiento normativo y ayudarte a tomar mejores decisiones cada día.</p>
-
-          <!-- Botón principal (a la izquierda) -->
-          <div class="mt-10 flex justify-center">
-            <!-- [[EDITAR: botón principal (texto y enlace)]] -->
-            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS" data-i18n="cta.demo" class="w-full rounded-full bg-black px-7 py-3 font-semibold text-white transition hover:bg-gray-800 sm:w-auto">
-              Solicita una Demo
-            </a>
-          </div>
-
+        <div class="pages-hero-copy">
+          <p class="pages-hero-kicker">Organismo de Desarrollo Alimentario Sostenible</p>
+          <h1>Del campo al negocio,<br>de forma más simple.</h1>
+          <p class="pages-hero-description">Conoce nuestro proyecto Pagès en donde conectamos productores, cooperativas y fabricantes con compradores profesionales para que los alimentos locales lleguen más lejos.</p>
+          <div class="pages-hero-actions"><button type="button" class="pages-explore" id="hero-pages-contact">Compra o Vende en Pagès</button></div>
         </div>
 
         <!-- Mockup del producto (recreado en HTML para máxima nitidez): informe anual + asistente WhatsApp -->
         <div class="relative mx-auto mt-16 w-full max-w-5xl pb-8 text-left sm:pb-0">
 
-          <!-- Panel: Informe anual -->
-          <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
-            <div class="flex">
-              <!-- Barra lateral -->
-              <aside class="hidden w-44 shrink-0 flex-col gap-0.5 border-r border-gray-100 p-3 text-[12px] md:flex">
-                <div class="rounded-lg bg-emerald-50 px-3 py-2 font-semibold text-emerald-700">Resumen</div>
-                <div class="rounded-lg px-3 py-2 text-gray-500">Diagnóstico</div>
-                <div class="rounded-lg px-3 py-2 text-gray-500">Plan de Prevención</div>
-                <div class="rounded-lg px-3 py-2 text-gray-500">Donaciones</div>
-                <div class="rounded-lg px-3 py-2 text-gray-500">Desperdicio</div>
-                <div class="rounded-lg px-3 py-2 text-gray-500">Formación</div>
-                <div class="rounded-lg px-3 py-2 text-gray-500">Recall/RASFF</div>
-                <div class="rounded-lg px-3 py-2 text-gray-500">Auditoría</div>
-                <div class="mt-3 rounded-lg bg-gray-900 px-3 py-2 text-center text-[11px] font-semibold text-white">Exportar ZIP auditor 2026</div>
-              </aside>
-
-              <!-- Contenido principal -->
-              <div class="min-w-0 flex-1 p-4 sm:p-5">
-                <!-- Pestañas -->
-                <div class="mb-4 flex flex-wrap gap-1.5 text-[12px]">
-                  <span class="rounded-lg px-3 py-1.5 text-gray-500">Vista semanal</span>
-                  <span class="rounded-lg bg-emerald-600 px-3 py-1.5 font-semibold text-white">Vista anual</span>
-                  <span class="rounded-lg px-3 py-1.5 text-gray-500">Historial</span>
-                  <span class="rounded-lg px-3 py-1.5 text-gray-500">Documentos</span>
-                </div>
-                <!-- Cabecera -->
-                <div class="mb-4 flex items-start justify-between gap-3">
-                  <div>
-                    <h3 class="text-base font-bold text-gray-900 sm:text-lg">Informe anual 2026</h3>
-                    <p class="text-[11px] text-gray-500 sm:text-xs">Resumen oficial para presentar a la Administración</p>
-                  </div>
-                  <span class="hidden shrink-0 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[11px] font-medium text-emerald-700 sm:inline-block">Exportar informe anual PDF</span>
-                </div>
-                <!-- Tarjetas de cifras -->
-                <div class="mb-4 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
-                  <div class="rounded-xl border border-rose-100 bg-rose-50 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Malbaratament (MA)</div><div class="mt-1 text-lg font-bold text-rose-700" data-cifra="27.0" data-dec="1" data-suf=" kg">27.0 kg</div></div>
-                  <div class="rounded-xl border border-gray-100 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Donado (no MA)</div><div class="mt-1 text-lg font-bold text-emerald-700" data-cifra="23.5" data-dec="1" data-suf=" kg">23.5 kg</div></div>
-                  <div class="rounded-xl border border-gray-100 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Alim. animal (no MA)</div><div class="mt-1 text-lg font-bold text-emerald-700" data-cifra="24.0" data-dec="1" data-suf=" kg">24.0 kg</div></div>
-                  <div class="rounded-xl border border-gray-100 p-3"><div class="text-[9px] font-semibold uppercase tracking-wide text-gray-500">Transformado (no MA)</div><div class="mt-1 text-lg font-bold text-emerald-700" data-cifra="15.3" data-dec="1" data-suf=" kg">15.3 kg</div></div>
-                </div>
-                <!-- Tabla -->
-                <div class="overflow-hidden rounded-xl border border-gray-100 text-[12px]">
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 border-b border-gray-100 px-4 py-2 text-[9px] font-semibold uppercase tracking-wide text-gray-400"><span>Concepto</span><span class="text-right">Kg anuales</span><span class="text-right">% sobre total</span><span class="text-right">CO₂ (kg × 2,54)</span></div>
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 bg-rose-50 px-4 py-2 font-medium text-rose-700"><span>Desperdicio alimentario (MA)</span><span class="text-right" data-cifra="27.0" data-dec="1">27.0</span><span class="text-right">30.07%</span><span class="text-right" data-cifra="68.6" data-dec="1">68.6</span></div>
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 px-4 py-2 text-gray-700"><span>Productos donados</span><span class="text-right font-semibold text-gray-900" data-cifra="23.5" data-dec="1">23.5</span><span class="text-right">26.17%</span><span class="text-right text-gray-300">—</span></div>
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 bg-amber-50 px-4 py-2 font-medium text-amber-700"><span>Alimentación animal</span><span class="text-right" data-cifra="24.0" data-dec="1">24.0</span><span class="text-right">26.73%</span><span class="text-right text-amber-300">—</span></div>
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 px-4 py-2 text-gray-700"><span>Transformado / reutilizado</span><span class="text-right font-semibold text-gray-900" data-cifra="15.3" data-dec="1">15.3</span><span class="text-right">17.04%</span><span class="text-right text-gray-300">—</span></div>
-                  <div class="grid grid-cols-[1.7fr_0.7fr_0.9fr_0.9fr] gap-2 bg-rose-50 px-4 py-2 font-medium text-rose-700"><span>Valorización energética</span><span class="text-right" data-cifra="0.0" data-dec="1">0.0</span><span class="text-right">0.00%</span><span class="text-right text-rose-300">—</span></div>
-                </div>
-                <!-- Nota al pie -->
-                <div class="mt-3 rounded-xl bg-gray-50 px-4 py-3 text-[11px]">
-                  <p class="text-gray-600"><span class="font-semibold text-gray-800">% MA sobre total:</span> 30.07%</p>
-                  <p class="text-gray-600"><span class="font-semibold text-gray-800">Equivalente CO₂ evitado (no-MA):</span> <span data-cifra="215.4" data-dec="1" data-suf=" kg">215.4 kg</span></p>
-                  <p class="mt-1 text-[9px] text-gray-400">Ref: Ley 1/2025 · Llei 3/2020 Cat. · Decisió Delegada (UE) 2019/1597</p>
-                </div>
-              </div>
-            </div>
+          <div id="marketplace" class="buyer-market-image-frame" role="region" aria-label="Vista del marketplace de Pagès para compradores">
+            <img src="pages-marketplace-vector.svg?v=five-products" alt="Marketplace Pagès: catálogo de productos locales para compradores profesionales, con frutas, verduras, aceite y queso, precios y disponibilidad." width="1122" height="1402" decoding="async">
           </div>
 
           <!-- Teléfono: asistente por WhatsApp -->
-          <div class="absolute -bottom-4 right-0 hidden w-60 overflow-hidden rounded-[1.6rem] border-2 border-gray-900 chat-fondo shadow-2xl md:block lg:-right-4">
+          <div class="pages-phone relative mx-auto mt-6 w-60 overflow-hidden rounded-[1.6rem] border-2 border-gray-900 chat-fondo shadow-2xl md:absolute md:-bottom-4 md:right-0 md:mt-0 lg:-right-4">
             <!-- Barra de estado -->
-            <div class="flex items-center justify-between bg-white px-4 pt-1.5 text-[9px] font-semibold text-gray-900"><span>7:43</span><span class="tracking-tight text-gray-500">▪▪▪ ᯤ 84</span></div>
+            <div class="flex items-center justify-between bg-white px-4 pt-1.5 text-[9px] font-semibold text-gray-900"><span>09:41</span><span class="tracking-tight text-gray-500">▪▪▪ ᯤ 84</span></div>
             <!-- Cabecera del chat -->
             <div class="flex items-center gap-2 bg-white px-3 py-1.5">
               <span class="text-[10px] text-gray-400">‹ 8</span>
-              <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-gray-100"><img src="odas-simbolo.png" alt="" class="h-2.5 w-auto" /></span>
-              <span class="text-[11px] font-semibold text-gray-900">ODAS · Asistente</span>
+              <span class="grid h-7 w-7 shrink-0 place-items-center overflow-hidden rounded-full bg-white"><img src="pages-logo.svg" alt="Pagès" class="h-7 w-7 object-contain" /></span>
+              <span class="text-[11px] font-semibold text-gray-900">Pagès AI</span>
             </div>
             <!-- Mensajes -->
-            <div id="chatHilo" class="chat-hilo space-y-2 px-2 py-2 text-[9px] leading-snug">
-              <div class="rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm">
-                <p data-i18n="chat.store" class="font-semibold">ODAS · Supermercado Centro</p>
-                <p data-i18n-html="chat.a1" class="mt-0.5">Hay <span class="font-semibold">40 yogures naturales</span> que caducan hoy y 18 bandejas de pollo que caducan mañana. Los yogures son lo más urgente.</p>
-                <div class="mt-1 text-right text-[7px] text-gray-400">7:21 pm</div>
-                <div class="mt-1 divide-y divide-gray-100 border-t border-gray-100 text-center font-medium">
-                  <div class="py-1 text-gray-700">↩ <span data-i18n="chat.action1">Mover a Tienda Norte</span></div>
-                  <div class="py-1 text-emerald-600">↩ <span data-i18n="chat.action2">Donar</span></div>
-                  <div class="py-1 text-emerald-600">↩ <span data-i18n="chat.action3">Retirar</span></div>
-                </div>
-              </div>
-              <div class="ml-5 rounded-lg rounded-tr-none bg-[#d9fdd3] p-1.5 text-gray-800 shadow-sm">
-                <div class="rounded border-l-2 border-emerald-500 bg-black/[0.03] px-1.5 py-1"><p class="text-[8px] font-semibold text-emerald-700">ODAS · Asistente</p><p data-i18n="chat.a1short" class="text-[7px] text-gray-500">40 yogures naturales caducan hoy.</p></div>
-                <p data-i18n="chat.action1" class="mt-1">Mover a Tienda Norte</p>
-                <div class="text-right text-[7px] text-gray-500">7:23 pm ✓✓</div>
-              </div>
-              <div class="rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm">
-                <p data-i18n-html="chat.confirm1">✅ Traslado de <span class="font-semibold">24 yogures a Tienda Norte</span> preparado. Quedan 16 unidades para donación y el stock está actualizado.</p>
-                <div class="text-right text-[7px] text-gray-400">7:23 pm</div>
-              </div>
-            </div>
+            <div id="chatHilo" class="chat-hilo space-y-2 px-2 py-2 text-[9px] leading-snug" lang="ca" role="log" aria-label="Demostració de conversa amb Pagès AI" aria-live="off"></div>
             <!-- Barra de entrada -->
             <div class="flex items-center gap-2 bg-white px-2 py-1.5 text-[11px] text-gray-400"><span>+</span><div class="h-4 flex-1 overflow-hidden whitespace-nowrap rounded-full bg-gray-100 px-2 text-[8px] leading-4 text-gray-700"><span id="chatEntrada"></span><span class="chat-cursor"></span></div><span class="text-[9px]">◎ ⌗ ⬚</span></div>
           </div>
@@ -992,172 +1137,6 @@
         }
         if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
         else init();
-      })();
-    </script>
-
-    <!-- Mockup del hero, vivo: el asistente conversa en bucle y las cifras del
-         informe cuentan hacia arriba al entrar en pantalla.
-         Con prefers-reduced-motion se deja el mockup estático tal cual está en el HTML. -->
-    <script>
-      (function () {
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        /* ---------- Cifras del informe: cuentan hacia arriba ---------- */
-        var cifras = [].slice.call(document.querySelectorAll('[data-cifra]'));
-        function pinta(el, v) {
-          var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
-          el.textContent = (el.getAttribute('data-pre') || '') + v.toFixed(dec) + (el.getAttribute('data-suf') || '');
-        }
-        function contar() {
-          cifras.forEach(function (el, i) {
-            var fin = parseFloat(el.getAttribute('data-cifra'));
-            if (isNaN(fin)) return;
-            var dur = 1300, retardo = i * 55, t0 = null;
-            pinta(el, 0);
-            function paso(ts) {
-              if (t0 === null) t0 = ts + retardo;
-              var p = Math.min(Math.max((ts - t0) / dur, 0), 1);
-              pinta(el, fin * (1 - Math.pow(1 - p, 3)));
-              if (p < 1) requestAnimationFrame(paso);
-            }
-            requestAnimationFrame(paso);
-          });
-        }
-
-        /* ---------- Asistente: conversación en bucle ---------- */
-        var hilo = document.getElementById('chatHilo');
-        var entrada = document.getElementById('chatEntrada');
-
-        function chatT(key, fallback) {
-          return typeof window.t === 'function' ? window.t(key) : fallback;
-        }
-
-        function guionActual() {
-          return [
-            { p: chatT('chat.q1', '¿Qué productos caducan hoy?'),
-              r: chatT('chat.a1', 'Hay <span class="font-semibold">40 yogures naturales</span> que caducan hoy y 18 bandejas de pollo que caducan mañana. Los yogures son lo más urgente.'),
-              acciones: [chatT('chat.action1', 'Mover a Tienda Norte'), chatT('chat.action2', 'Donar'), chatT('chat.action3', 'Retirar')] },
-            { p: chatT('chat.q2', 'Reubica los yogures con exceso de stock'),
-              r: chatT('chat.a2', '✅ Traslado de <span class="font-semibold">24 yogures a Tienda Norte</span> preparado. Quedan 16 unidades para donación y el stock está actualizado.') },
-            { p: chatT('chat.q3', '¿Qué tengo que pedir para mañana?'),
-              r: chatT('chat.a3', 'Pide <span class="font-semibold">25 cajas de leche y 18 de plátanos</span>. No pidas tomates: tienes stock para 12 días.') },
-            { p: chatT('chat.q4', 'Sanidad pide el lote L260814'),
-              r: chatT('chat.a4', 'Listo: PDF con recepción, movimientos, ventas y retiradas del lote, sellado e inmutable.') }
-          ];
-        }
-
-        var HORAS = ['7:21 pm', '7:22 pm', '7:23 pm', '7:24 pm'];
-        var tempo = [];
-        function esperar(ms) { return new Promise(function (r) { tempo.push(setTimeout(r, ms)); }); }
-        function abajo() { hilo.scrollTop = hilo.scrollHeight; }
-
-        function burbujaUsuario(texto, hora) {
-          var d = document.createElement('div');
-          d.className = 'chat-burbuja ml-5 rounded-lg rounded-tr-none bg-[#d9fdd3] p-1.5 text-gray-800 shadow-sm';
-          d.innerHTML = '<p></p><div class="text-right text-[7px] text-gray-500">' + hora + ' ✓✓</div>';
-          d.querySelector('p').textContent = texto;
-          hilo.appendChild(d); abajo();
-        }
-        function burbujaEscribiendo() {
-          var d = document.createElement('div');
-          d.className = 'chat-burbuja rounded-lg rounded-tl-none bg-white px-2 py-1.5 shadow-sm';
-          d.innerHTML = '<span class="chat-punto"></span> <span class="chat-punto"></span> <span class="chat-punto"></span>';
-          hilo.appendChild(d); abajo();
-          return d;
-        }
-        function burbujaOdas(html, acciones, hora) {
-          var d = document.createElement('div');
-          d.className = 'chat-burbuja rounded-lg rounded-tl-none bg-white p-2 text-gray-800 shadow-sm';
-          var s = '<p class="font-semibold">' + chatT('chat.store', 'ODAS · Supermercado Centro') + '</p><p class="mt-0.5">' + html + '</p>' +
-                  '<div class="mt-1 text-right text-[7px] text-gray-400">' + hora + '</div>';
-          if (acciones && acciones.length) {
-            s += '<div class="mt-1 divide-y divide-gray-100 border-t border-gray-100 text-center font-medium">';
-            acciones.forEach(function (a, i) {
-              s += '<div class="py-1 ' + (i === 0 ? 'text-gray-700' : 'text-emerald-600') + '">↩ ' + a + '</div>';
-            });
-            s += '</div>';
-          }
-          d.innerHTML = s;
-          hilo.appendChild(d); abajo();
-        }
-
-        function escribir(texto) {
-          entrada.textContent = '';
-          var i = 0;
-          return new Promise(function (res) {
-            (function tecla() {
-              entrada.textContent = texto.slice(0, ++i);
-              if (i < texto.length) tempo.push(setTimeout(tecla, 32));
-              else res();
-            })();
-          });
-        }
-
-        var vivo = false, turno = 0;
-        function parar() { vivo = false; tempo.forEach(clearTimeout); tempo = []; }
-
-        function ciclo() {
-          if (!vivo) return Promise.resolve();
-          var guion = guionActual();
-          var g = guion[turno % guion.length];
-          var hora = HORAS[turno % HORAS.length];
-          turno++;
-          return escribir(g.p)
-            .then(function () { return esperar(320); })
-            .then(function () {
-              if (!vivo) return;
-              entrada.textContent = '';
-              burbujaUsuario(g.p, hora);
-              return esperar(520);
-            })
-            .then(function () {
-              if (!vivo) return;
-              var esc = burbujaEscribiendo();
-              return esperar(1150).then(function () { if (esc.parentNode) esc.remove(); });
-            })
-            .then(function () {
-              if (!vivo) return;
-              burbujaOdas(g.r, g.acciones, hora);
-              return esperar(g.acciones ? 4200 : 3400);
-            })
-            .then(function () {
-              if (!vivo) return;
-              // deja los dos últimos mensajes y sigue: el hilo crece como una conversación real
-              while (hilo.children.length > 4) hilo.removeChild(hilo.firstElementChild);
-              return ciclo();
-            });
-        }
-
-        function arrancar() {
-          if (vivo) return;
-          vivo = true;
-          hilo.innerHTML = '';
-          entrada.textContent = '';
-          ciclo();
-        }
-
-        document.addEventListener('odas:langchange', function () {
-          turno = 0;
-          if (vivo) { parar(); arrancar(); }
-        });
-
-        /* ---------- Se activa al entrar en pantalla ---------- */
-        var mockup = hilo ? hilo.closest('section') : null;
-        if (reduce || !hilo || !entrada) {
-          cifras.forEach(function (el) { pinta(el, parseFloat(el.getAttribute('data-cifra')) || 0); });
-          return;
-        }
-        if (window.IntersectionObserver && mockup) {
-          new IntersectionObserver(function (e) {
-            if (e[0] && e[0].isIntersecting) { contar(); arrancar(); }
-            else parar();
-          }, { threshold: 0.2 }).observe(mockup);
-        } else {
-          contar(); arrancar();
-        }
-        document.addEventListener('visibilitychange', function () {
-          if (document.visibilityState === 'visible') arrancar(); else parar();
-        });
       })();
     </script>
 
@@ -1318,7 +1297,7 @@
          SECCIÓN · ¿QUÉ ES ODAS? — píldora + titular a la izquierda y panel de
          capacidades a la derecha (patrón tipo Glean).
          ======================================================================== -->
-    <section class="relative overflow-hidden py-20 sm:py-28">
+    <section id="como-funciona" class="relative z-10 overflow-hidden py-20 sm:py-28">
       <!-- Lavado de color muy suave detrás del panel -->
       <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true"
            style="background: radial-gradient(70% 55% at 78% 42%, rgba(16,185,129,0.09) 0%, rgba(16,185,129,0) 62%), radial-gradient(55% 45% at 92% 12%, rgba(56,189,248,0.10) 0%, rgba(56,189,248,0) 60%);"></div>
@@ -1327,186 +1306,17 @@
 
         <!-- Izquierda: píldora + titular + párrafo + puntos -->
         <div class="max-w-xl">
-          <p class="inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2 text-sm">
-            <span data-i18n="whatis.kicker" class="text-gray-900">¿Qué es ODAS?</span>
-            <span class="text-gray-300" aria-hidden="true">·</span>
-            <span data-i18n="whatis.badge" class="text-emerald-600">El asistente de tu operación</span>
-          </p>
-          <h2 data-i18n="whatis.h" class="mt-6 text-3xl font-semibold leading-[1.1] tracking-tight text-gray-900 sm:text-4xl md:text-5xl">El asistente que está pendiente de tu negocio.</h2>
-          <p data-i18n="whatis.p1" class="mt-6 text-base text-gray-500 md:text-lg">Cada día pasan cientos de cosas en una empresa: ventas, compras, inventario, incidencias, caducidades, pedidos y documentos. ODAS las observa, las conecta y te avisa de lo que importa.</p>
-          <ul class="mt-7 space-y-3 text-sm text-gray-700 md:text-base">
-            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b1">Te dice qué está pasando en tu negocio, sin tener que revisar cientos de datos.</span></li>
-            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b2">Se anticipa a lo que viene y te avisa antes de que un problema ocurra.</span></li>
-            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b3">Te recomienda qué hacer: comprar, ajustar, vender, donar o transformar.</span></li>
-            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b4">Te recuerda lo que no puedes olvidar, desde productos próximos a caducar hasta tareas pendientes.</span></li>
-            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b5">Responde a tus preguntas sobre tu operación cuando necesitas una respuesta.</span></li>
-            <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n="whatis.b6">Mantiene tu documentación al día y te ayuda a cumplir con la Ley 1/2025.</span></li>
-          </ul>
+          <p class="inline-flex rounded-full bg-gray-100 px-4 py-2 text-sm text-emerald-700">¿Qué es Pagès?</p>
+          <h2 class="mt-6 text-3xl font-semibold leading-[1.12] tracking-tight text-gray-900 sm:text-4xl">Del campo local a tu negocio. Más fácil, más directo.</h2>
+          <p class="mt-6 text-base leading-relaxed text-gray-500">Pagès es un marketplace B2B que conecta a agricultores, cooperativas y productores locales con hoteles, restaurantes, distribuidores y empresas de catering.</p>
+          <p class="mt-4 text-base leading-relaxed text-gray-500">En un solo lugar puedes descubrir productos frescos y excedentes de calidad, consultar precios y disponibilidad, y gestionar tus pedidos directamente con los productores.</p>
+          <p class="mt-6 text-base font-semibold leading-relaxed text-gray-800">Más oportunidades para quienes producen. Mejores compras para tu negocio. Menos desperdicio alimentario.</p>
         </div>
-
-        <!-- Columna derecha: diagrama que conecta los datos con ODAS -->
-        <div class="relative">
-          <div id="beamContainer" class="relative mx-auto flex h-[380px] w-full max-w-xl items-center justify-center overflow-hidden">
-        <svg id="beamSvg" class="pointer-events-none absolute inset-0 z-0 h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
-        <div class="relative z-10 flex size-full max-h-[240px] max-w-md flex-col items-stretch justify-between">
-          <!-- fila superior -->
-          <div class="flex flex-row items-center justify-between">
-            <div id="bn1" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- Persona -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-              </svg>
-            </div>
-            <div id="bn5" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- Dashboard -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <rect width="7" height="9" x="3" y="3" rx="1"/>
-                <rect width="7" height="5" x="14" y="3" rx="1"/>
-                <rect width="7" height="9" x="14" y="12" rx="1"/>
-                <rect width="7" height="5" x="3" y="16" rx="1"/>
-              </svg>
-            </div>
-          </div>
-          <!-- fila media -->
-          <div class="flex flex-row items-center justify-between">
-            <div id="bn2" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- Documento -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
-                <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
-                <path d="M16 13H8"/>
-                <path d="M16 17H8"/>
-                <path d="M10 9H8"/>
-              </svg>
-            </div>
-            <div id="bn4" class="beam-hub relative z-10 flex size-20 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_34px_-10px_rgba(0,0,0,0.4)]">
-              <img src="odas-simbolo.png" alt="ODAS" class="size-12 object-contain" />
-            </div>
-            <div id="bn6" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- WhatsApp -->
-              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-            </div>
-          </div>
-          <!-- fila inferior -->
-          <div class="flex flex-row items-center justify-between">
-            <div id="bn3" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- Caja -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
-                <path d="m3.3 7 8.7 5 8.7-5"/>
-                <path d="M12 22V12"/>
-              </svg>
-            </div>
-            <div id="bn7" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
-              <!-- Decisión (bifurcación / elegir camino) -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
-                <path d="M16 3h5v5"/>
-                <path d="M8 3H3v5"/>
-                <path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/>
-                <path d="m15 9 6-6"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-          </div><!-- /#beamContainer -->
-        </div><!-- /columna derecha -->
       </div>
     </section>
 
-    <!-- Script del AnimatedBeam: calcula las curvas entre nodos y anima el "haz" con SMIL -->
-    <script>
-      (function () {
-        var container = document.getElementById('beamContainer');
-        if (!container) return;
-        var svg = document.getElementById('beamSvg');
-        if (!svg) return;
-        var NS = 'http://www.w3.org/2000/svg';
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // from → hub(bn4). Lado izquierdo: normal; derecho: reverse (el haz siempre entra al núcleo).
-        var beams = [
-          { from: 'bn1', curvature: -75, endYOffset: -10, reverse: false, dur: 4.6, begin: 0.0 },
-          { from: 'bn2', curvature: 0, endYOffset: 0, reverse: false, dur: 5.2, begin: 0.6 },
-          { from: 'bn3', curvature: 75, endYOffset: 10, reverse: false, dur: 4.9, begin: 1.1 },
-          { from: 'bn5', curvature: -75, endYOffset: -10, reverse: true, dur: 5.0, begin: 0.3 },
-          { from: 'bn6', curvature: 0, endYOffset: 0, reverse: true, dur: 4.7, begin: 0.9 },
-          { from: 'bn7', curvature: 75, endYOffset: 10, reverse: true, dur: 5.3, begin: 1.4 }
-        ];
-        var toEl = document.getElementById('bn4');
 
-        // Construye las capas del SVG una sola vez; el path 'd' se recalcula en resize.
-        var defs = document.createElementNS(NS, 'defs');
-        svg.appendChild(defs);
-        var built = [];
-        beams.forEach(function (b, i) {
-          var gid = 'beamGrad' + i;
-          var grad = document.createElementNS(NS, 'linearGradient');
-          grad.setAttribute('id', gid);
-          grad.setAttribute('gradientUnits', 'userSpaceOnUse');
-          grad.setAttribute('x1', '0%'); grad.setAttribute('x2', '0%');
-          grad.setAttribute('y1', '0%'); grad.setAttribute('y2', '0%');
-          grad.innerHTML =
-            '<stop stop-color="#10b981" stop-opacity="0"></stop>' +
-            '<stop stop-color="#10b981"></stop>' +
-            '<stop offset="32.5%" stop-color="#0ea5e9"></stop>' +
-            '<stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"></stop>';
-          if (!reduce) {
-            var x1v = b.reverse ? '90%;-10%' : '10%;110%';
-            var x2v = b.reverse ? '100%;0%' : '0%;100%';
-            grad.innerHTML +=
-              '<animate attributeName="x1" values="' + x1v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>' +
-              '<animate attributeName="x2" values="' + x2v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>';
-          }
-          defs.appendChild(grad);
-
-          var base = document.createElementNS(NS, 'path');
-          base.setAttribute('stroke', '#c7ccd4');
-          base.setAttribute('stroke-width', '2');
-          base.setAttribute('stroke-opacity', '0.35');
-          base.setAttribute('stroke-linecap', 'round');
-          base.setAttribute('fill', 'none');
-          svg.appendChild(base);
-
-          var glow = document.createElementNS(NS, 'path');
-          glow.setAttribute('stroke', 'url(#' + gid + ')');
-          glow.setAttribute('stroke-width', '2');
-          glow.setAttribute('stroke-linecap', 'round');
-          glow.setAttribute('fill', 'none');
-          svg.appendChild(glow);
-
-          built.push({ cfg: b, base: base, glow: glow });
-        });
-
-        function update() {
-          var cr = container.getBoundingClientRect();
-          if (!cr.width || !cr.height) return;
-          svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + cr.height);
-          var rb = toEl.getBoundingClientRect();
-          built.forEach(function (o) {
-            var fromEl = document.getElementById(o.cfg.from);
-            if (!fromEl) return;
-            var ra = fromEl.getBoundingClientRect();
-            var sx = ra.left - cr.left + ra.width / 2;
-            var sy = ra.top - cr.top + ra.height / 2;
-            var ex = rb.left - cr.left + rb.width / 2;
-            var ey = rb.top - cr.top + rb.height / 2 + o.cfg.endYOffset;
-            var cyc = sy - o.cfg.curvature;
-            var d = 'M ' + sx + ',' + sy + ' Q ' + ((sx + ex) / 2) + ',' + cyc + ' ' + ex + ',' + ey;
-            o.base.setAttribute('d', d);
-            o.glow.setAttribute('d', d);
-          });
-        }
-
-        if (window.ResizeObserver) { new ResizeObserver(update).observe(container); }
-        window.addEventListener('resize', update);
-        // Recalcula tras cargar imágenes/fuentes (los nodos cambian de posición).
-        window.addEventListener('load', update);
-        update();
-      })();
-    </script>
 
 
     <!-- ========================================================================
@@ -1515,10 +1325,13 @@
          · Las tarjetas se escriben UNA vez; el script clona el grupo hasta llenar
            la pantalla y luego duplica todo para que el bucle no tenga costura.
          ======================================================================== -->
-    <section class="overflow-hidden py-20 sm:py-24">
+    <div class="apple-scroll-journey">
+  <div class="apple-scroll-fruit" aria-hidden="true"><img src="pages-manzana-scroll.png" alt="" decoding="async" width="1254" height="1254"></div>
+<div class="orchard-transition orchard-full-width" aria-hidden="true"><img src="pages-rama-pantalla-completa.png" alt="" decoding="async"></div>
+    <section class="farmer-assistant-section relative overflow-hidden py-20 sm:py-24">
       <div class="mx-auto max-w-6xl px-5">
-        <h2 data-i18n="faq.h" class="text-center text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Un Asistente para tu día a día</h2>
-        <p data-i18n="faq.sub" class="mx-auto mt-3 max-w-2xl text-center text-lg text-gray-500">ODAS entiende lo que ocurre en tu negocio y convierte datos dispersos en decisiones.</p>
+        <h2 class="text-center text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Un asistente para quienes cultivan</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-center text-lg text-gray-500">Pagès te acompaña por WhatsApp para gestionar tus productos, publicar tus excedentes, actualizar precios y disponibilidad, recibir pedidos y organizar tus ventas de forma fácil, rápida y sin complicaciones.</p>
       </div>
 
       <div class="faq-bloque mt-12 flex flex-col gap-6">
@@ -1526,24 +1339,24 @@
           <div class="faq-pista" style="--vel:70s">
             <div class="faq-grupo flex shrink-0 items-stretch gap-6 px-3">
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q1" class="text-lg font-semibold text-gray-900">¿Qué productos caducan esta semana?</h3>
-                <p data-i18n="faq.a1" class="text-base text-gray-600">40 yogures caducan hoy, 18 bandejas de pollo mañana y 12 ensaladas el viernes. Lo más urgente son los yogures.</p>
+                <h3 class="text-lg font-semibold text-gray-900">Tengo 500 kg de melocotones. ¿Cómo los publico?</h3>
+                <p class="text-base text-gray-600">Dime el precio por kilo y hasta cuándo están disponibles. Prepararé tu oferta para que la revises antes de publicarla en Pagès.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q2" class="text-lg font-semibold text-gray-900">¿Cuánto voy a vender mañana?</h3>
-                <p data-i18n="faq.a2" class="text-base text-gray-600">Unas 1.840 unidades, un 12 % más que un viernes normal. El mayor crecimiento estará en bebidas y frescos.</p>
+                <h3 class="text-lg font-semibold text-gray-900">¿Qué información necesito para ofrecer mi cosecha?</h3>
+                <p class="text-base text-gray-600">Indica qué cultivas, cuántos kilos tienes, el precio y la fecha de disponibilidad. Añade fotos y la ubicación de tu finca.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q3" class="text-lg font-semibold text-gray-900">¿Qué tengo que pedir hoy?</h3>
-                <p data-i18n="faq.a3" class="text-base text-gray-600">Pide 25 cajas de leche y 18 de plátanos. No pidas tomates: tienes stock para 12 días.</p>
+                <h3 class="text-lg font-semibold text-gray-900">Mi cosecha estará lista el viernes. ¿Puedo ofrecerla ya?</h3>
+                <p class="text-base text-gray-600">Puedes indicar la fecha prevista de cosecha en tu oferta, para que los interesados conozcan cuándo podrás preparar el producto.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q4" class="text-lg font-semibold text-gray-900">¿Dónde tengo riesgo de rotura de stock?</h3>
-                <p data-i18n="faq.a4" class="text-base text-gray-600">En leche semidesnatada y plátanos para el sábado. Te faltarán 42 y 28 unidades si no ajustas hoy.</p>
+                <h3 class="text-lg font-semibold text-gray-900">¿Puedo vender fruta de aspecto irregular?</h3>
+                <p class="text-base text-gray-600">Sí, si es apta para el consumo. Describe su estado y añade fotos para mostrar con claridad el producto que ofreces.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q5" class="text-lg font-semibold text-gray-900">¿Qué productos tienen sobrestock?</h3>
-                <p data-i18n="faq.a5" class="text-base text-gray-600">Tomates, agua con gas y cereales. Los tomates son prioritarios: 120 unidades y 12 días de cobertura.</p>
+                <h3 class="text-lg font-semibold text-gray-900">¿Cómo cambio el precio de mi oferta?</h3>
+                <p class="text-base text-gray-600">Dime qué producto quieres modificar y el nuevo precio por kilo. Te mostraré la oferta actualizada para que confirmes el cambio.</p>
               </div>
             </div>
           </div>
@@ -1552,24 +1365,24 @@
           <div class="faq-pista derecha" style="--vel:55s">
             <div class="faq-grupo flex shrink-0 items-stretch gap-6 px-3">
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q6" class="text-lg font-semibold text-gray-900">¿Dónde reubico los yogures que caducan hoy?</h3>
-                <p data-i18n="faq.a6" class="text-base text-gray-600">Tienda Norte puede absorber 24 unidades. He preparado el traslado y la donación de las 16 restantes.</p>
+                <h3 class="text-lg font-semibold text-gray-900">¿Cómo indico dónde recoger mi producción?</h3>
+                <p class="text-base text-gray-600">Añade el punto de recogida, los días y los horarios que te vienen bien. Acuerda los detalles antes de preparar el pedido.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q7" class="text-lg font-semibold text-gray-900">Registra 6 paquetes rotos de arroz</h3>
-                <p data-i18n="faq.a7" class="text-base text-gray-600">Registrados como merma por rotura, descontados del stock y añadidos al informe mensual.</p>
+                <h3 class="text-lg font-semibold text-gray-900">He vendido parte de la cosecha. ¿Cómo actualizo los kilos?</h3>
+                <p class="text-base text-gray-600">Indícame cuánta cantidad te queda y qué oferta quieres cambiar. Revisaremos la disponibilidad antes de actualizarla.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q8" class="text-lg font-semibold text-gray-900">¿Qué tienda está desperdiciando más?</h3>
-                <p data-i18n="faq.a8" class="text-base text-gray-600">La tienda Centro: 86 kg este mes, un 23 % sobre la media. Panadería concentra la mayor desviación.</p>
+                <h3 class="text-lg font-semibold text-gray-900">Tengo excedentes que necesito vender antes del viernes.</h3>
+                <p class="text-base text-gray-600">Dime qué producto tienes, cuántos kilos y a qué precio. Incluiremos la fecha límite para dar visibilidad a tu excedente.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q9" class="text-lg font-semibold text-gray-900">¿Cuánto he ahorrado este mes?</h3>
-                <p data-i18n="faq.a9" class="text-base text-gray-600">3.840 € frente a tu línea base y 420 kg de merma evitados. Frescos aporta el 61 % del ahorro.</p>
+                <h3 class="text-lg font-semibold text-gray-900">¿Puedo ofrecer producción cada semana?</h3>
+                <p class="text-base text-gray-600">Indica qué cantidad puedes preparar, con qué frecuencia y durante qué temporada. Así podrás plantear un suministro recurrente.</p>
               </div>
               <div class="flex w-80 shrink-0 flex-col items-start gap-3 rounded-2xl bg-white p-6 shadow-lg shadow-gray-900/5 ring-1 ring-gray-900/5 sm:w-96">
-                <h3 data-i18n="faq.q10" class="text-lg font-semibold text-gray-900">Sanidad pide la trazabilidad del lote L260814</h3>
-                <p data-i18n="faq.a10" class="text-base text-gray-600">Lista: recepción, movimientos, ventas y retiradas del lote en un PDF sellado e inmutable.</p>
+                <h3 class="text-lg font-semibold text-gray-900">¿Qué datos de mi finca debo añadir al producto?</h3>
+                <p class="text-base text-gray-600">Incluye el origen, la fecha de cosecha y el lote cuando corresponda. También puedes indicar el calibre, el formato de las cajas y las necesidades de conservación.</p>
               </div>
             </div>
           </div>
@@ -1631,41 +1444,70 @@
          SECCIÓN · BENTO GRID — capacidades de ODAS (port del componente Tailwind UI)
          ======================================================================== -->
     <section class="mx-auto max-w-6xl px-5 py-20 sm:py-24">
-      <p data-i18n="bento.kicker" class="text-center text-sm font-semibold uppercase tracking-wider text-emerald-600">Modelos</p>
-      <h2 data-i18n="bento.h" class="mt-2 text-center text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Del dato a la decisión.</h2>
-      <p data-i18n="bento.sub" class="mx-auto mt-3 max-w-2xl text-center text-lg text-gray-500">ODAS conecta todo tu negocio y convierte la información en acciones concretas, cada día.</p>
+      <p class="text-center text-sm font-semibold uppercase tracking-wider text-emerald-600">Quiénes venden en Pagès</p>
+      <h2 class="mt-2 text-center text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Aumenta tus ventas y contactos con el sector profesional</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-center text-lg text-gray-500">Del campo, la cooperativa y el obrador al mercado profesional. Un lugar para dar valor a lo que produces.</p>
 
       <div class="modelos-grid mt-10 grid grid-cols-1 gap-4 sm:mt-14 lg:grid-cols-6">
 
-        <!-- Modelo R · Retail (con animación) -->
-        <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-6 lg:grid lg:grid-cols-2">
-          <div class="relative h-64 overflow-hidden lg:h-auto lg:min-h-[26rem] lg:border-r lg:border-gray-900/5">
-            <canvas data-anim="modelo-r" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+        <article class="seller-origin-card lg:col-span-6" aria-labelledby="seller-origin-title">
+          <div class="seller-origin-visual seller-connections-visual">          <div id="beamContainer" class="relative mx-auto flex h-[380px] w-full max-w-xl items-center justify-center overflow-hidden">
+        <svg id="beamSvg" class="pointer-events-none absolute inset-0 z-0 h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+        <div class="relative z-10 flex size-full max-h-[240px] max-w-md flex-col items-stretch justify-between">
+          <!-- fila superior -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn1" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]"><svg role="img" aria-label="Campesino" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7 text-gray-800"><path d="M3 10h18M5 10l2-5h10l2 5M9 5V3h6v2M7 10v3a5 5 0 0 0 10 0v-3M4 22v-2a5 5 0 0 1 5-5m6 0a5 5 0 0 1 5 5v2M9 18v4m6-4v4M9 20h6"/></svg></div>
+            <div id="bn5" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg role="img" aria-label="Hotel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7 text-gray-800"><path d="M5 22V3h14v19M2 22h20M10 22v-4h4v4M9 7h1m4 0h1M9 11h1m4 0h1M9 15h1m4 0h1"/></svg>
+            </div>
           </div>
-          <div class="relative flex flex-col justify-center p-6 sm:p-10 lg:p-12">
-            <p data-i18n="bento.c2e" class="text-xs font-semibold uppercase tracking-wide text-sky-600">Modelo R · Para los que venden</p>
-            <h3 data-i18n="bento.c2t" class="mt-1 text-xl font-semibold text-gray-900">Supermercados</h3>
-            <p data-i18n-html="bento.c2d" class="mt-2 max-w-[54ch] text-sm text-gray-600">Convierte datos históricos, ventas, clima, eventos y comportamiento del consumidor en una previsión precisa de la demanda. ODAS anticipa qué productos se venderán, cuándo y en qué cantidad, ayudando a reducir desperdicio, optimizar inventario y maximizar la rentabilidad.<span class="mt-3 block text-gray-800"><span class="font-semibold text-sky-600">Resultado:</span> menos exceso de stock, menos roturas y mejores decisiones comerciales.</span></p>
+          <!-- fila media -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn2" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg role="img" aria-label="WhatsApp" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </div>
+            <div id="bn4" class="beam-hub relative z-10 flex size-20 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_34px_-10px_rgba(0,0,0,0.4)]">
+              <img src="pages-logo-solo.svg" alt="Pagès" class="size-12 object-contain">
+            </div>
+            <div id="bn6" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg role="img" aria-label="Supermercado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7 text-gray-800"><path d="M3 10V8l2-5h14l2 5v2M3 10a3 3 0 0 0 4 2 3 3 0 0 0 5 0 3 3 0 0 0 5 0 3 3 0 0 0 4-2M4 13v8h16v-8M9 21v-6h6v6M3 8h18"/></svg>
+            </div>
+          </div>
+          <!-- fila inferior -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn3" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg role="img" aria-label="Caja de frutas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7 text-gray-800"><path d="M3 11h18v10H3zM3 16h18M8 11v10m8-10v10"/><path d="M5 11V8a3 3 0 0 1 6 0v3m2 0V7a3 3 0 0 1 6 0v4M8 5V2m0 2 3-1M16 4V1m0 2 3 1"/></svg>
+            </div>
+            <div id="bn7" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg role="img" aria-label="Catering" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7 text-gray-800"><path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 10V8m-1 0h2M2 21h20M12 3v1M6 5l1 1m11-1-1 1"/></svg>
+            </div>
           </div>
         </div>
+          </div><!-- /#beamContainer --></div>
+          <div class="seller-origin-content">
+            <p class="seller-label">Tu lugar en Pagès</p>
+            <div class="seller-selector" role="group" aria-label="Elige tu perfil de productor"><button type="button" data-seller="farm" aria-pressed="true">Agricultores</button><button type="button" data-seller="coop" aria-pressed="false">Cooperativas</button><button type="button" data-seller="maker" aria-pressed="false">Elaboradores</button></div>
+            <div class="seller-copy" aria-live="polite"><h3 id="seller-origin-title">Cultivas con esfuerzo.<br>Vende con más oportunidades.</h3><p id="seller-origin-description">Ofrece tu cosecha y tus excedentes a compradores profesionales. Comparte lo que tienes disponible, a tu precio y con tus tiempos.</p><ul id="seller-origin-benefits"><li>Publica productos y cantidades disponibles.</li><li>Da visibilidad a tu finca y al origen de tu cosecha.</li><li>Prepara tus ofertas con ayuda de WhatsApp.</li></ul></div>
+            <button type="button" class="seller-origin-cta" id="open-pages-contact">Contáctanos</button>
+          </div>
+        </article>
 
+<section class="buyer-profiles" aria-labelledby="buyer-profiles-title"><div class="buyer-profiles-heading"><p class="seller-label">Quiénes compran en Pagès</p><h3 id="buyer-profiles-title">Creamos un marketplace hecho para los compradores</h3><p>Creamos un marketplace hecho para los compradores, nuestro foco es del productor y la cooperativa a tu negocio. Un solo lugar para descubrir productos de proximidad, encontrar nuevas oportunidades de compra y simplificar tu abastecimiento.</p></div><div class="buyer-profiles-grid"><article class="buyer-profile-card"><div class="buyer-profile-photo" aria-hidden="true" style="--photo-position:0%"></div><p class="buyer-profile-type">Hoteles</p><h4>Producto local para cada estancia.</h4><p>Encuentra alimentos de proximidad para desayunos, restaurantes y eventos de tu hotel.</p></article><article class="buyer-profile-card"><div class="buyer-profile-photo" aria-hidden="true" style="--photo-position:33.3333%"></div><p class="buyer-profile-type">Restaurantes</p><h4>Del productor a tu cocina.</h4><p>Consulta productos de temporada, precios y cantidades para crear tu próxima carta.</p></article><article class="buyer-profile-card"><div class="buyer-profile-photo" aria-hidden="true" style="--photo-position:66.6667%"></div><p class="buyer-profile-type">Supermercados</p><h4>Más origen en tus estanterías.</h4><p>Amplía tu oferta con productos locales y excedentes de calidad de productores de tu región.</p></article><article class="buyer-profile-card"><div class="buyer-profile-photo" aria-hidden="true" style="--photo-position:100%"></div><p class="buyer-profile-type">Catering y distribuidores</p><h4>Nuevos contactos para tus compras.</h4><p>Descubre proveedores, consulta su disponibilidad y coordina tus pedidos directamente con ellos.</p></article></div></section>
         <!-- Predicción + margen -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-2">
-          <div class="relative h-64 overflow-hidden">
-            <canvas data-anim="sphere-scan" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-          </div>
+          
           <div class="relative p-6">
-            <p data-i18n="bento.c3e" class="text-xs font-semibold uppercase tracking-wide text-amber-600">Predicción</p>
-            <h3 data-i18n="bento.c3t" class="mt-1 text-xl font-semibold text-gray-900">Anticípate y recupera margen</h3>
-            <p data-i18n="bento.c3d" class="mt-2 text-sm text-gray-600">ODAS predice cuánto venderás para que compres justo lo necesario y dejes de tirar dinero a la basura.</p>
+            <p class="text-xs font-semibold uppercase tracking-wide text-amber-600">Oportunidades</p>
+            <h3 class="mt-1 text-xl font-semibold text-gray-900">Dale salida a tu producción</h3>
+            <p class="mt-2 text-sm text-gray-600">Publica tu cosecha y tus excedentes en Pagès para llegar a compradores profesionales. Comparte precios, cantidades y disponibilidad y transforma tu producción en nuevas oportunidades de venta.</p>
           </div>
         </div>
 
         <!-- Cumplimiento + trazabilidad -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-2">
-          <div class="relative h-64 overflow-hidden">
-            <canvas data-anim="phased-array" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-          </div>
+          
           <div class="relative p-6">
             <p data-i18n="bento.c4e" class="text-xs font-semibold uppercase tracking-wide text-violet-600">Cumplimiento</p>
             <h3 data-i18n="bento.c4t" class="mt-1 text-xl font-semibold text-gray-900">Cumple la Ley 1/2025</h3>
@@ -1675,18 +1517,18 @@
 
         <!-- Avisos accionables -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-2">
-          <div class="relative h-64 overflow-hidden">
-            <canvas data-anim="sonar-sweep" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-          </div>
+          
           <div class="relative p-6">
-            <p data-i18n="bento.c5e" class="text-xs font-semibold uppercase tracking-wide text-rose-600">Avisos</p>
-            <h3 data-i18n="bento.c5t" class="mt-1 text-xl font-semibold text-gray-900">Actúa antes de que caduque</h3>
-            <p data-i18n="bento.c5d" class="mt-2 text-sm text-gray-600">ODAS te avisa cada día por WhatsApp de lo que está a punto de caducar, con la acción recomendada en un solo toque.</p>
+            <p class="text-xs font-semibold uppercase tracking-wide text-rose-600">WhatsApp</p>
+            <h3 class="mt-1 text-xl font-semibold text-gray-900">Tus ofertas al día, sin complicaciones</h3>
+            <p class="mt-2 text-sm text-gray-600">Con el asistente de Pagès puedes preparar ofertas, actualizar precios y cantidades y consultar tus pedidos desde WhatsApp, dedicando menos tiempo a la gestión y más a tu campo.</p>
           </div>
         </div>
 
       </div>
     </section>
+</div><!-- /apple-scroll-journey -->
+    </div><!-- /fondo continuo hasta el asistente -->
 
     <!-- ========================================================================
          Animaciones de las tarjetas bento (canvas monocromo).
@@ -1962,42 +1804,7 @@
     <!-- ========================================================================
          SECCIÓN 7 · CHOOSE HOW TO GET STARTED — con fondo animado "Cloudscape" (WebGL)
          ======================================================================== -->
-    <div class="relative overflow-hidden">
-      <!-- Fondo animado: shader "Silk" (WebGL); se inicializa en el <script> "Silk" de más arriba -->
-      <canvas id="heroSilk" aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full"></canvas>
-      <!-- Difuminado a blanco arriba y abajo: funde el fondo de nubes con la página -->
-      <div class="pointer-events-none absolute inset-x-0 top-0 z-[1] h-32 bg-gradient-to-b from-white to-transparent sm:h-40"></div>
-      <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-32 bg-gradient-to-t from-white to-transparent sm:h-40"></div>
-      <section class="relative z-10 mx-auto max-w-6xl px-5 py-24">
-      <!-- [[EDITAR: título de la sección]] -->
-      <h2 data-i18n="plans.title" class="mb-12 text-center text-3xl font-extrabold tracking-tight text-black sm:text-4xl">Elige el plan que se ajuste a tu negocio</h2>
-
-      <div class="mx-auto max-w-xl">
-        <!-- Tarjeta única: para pymes y grandes empresas (beneficios por prioridad) -->
-        <div class="flex flex-col gap-6 rounded-xl border border-borde bg-white py-6 text-black shadow-sm transition hover:shadow-md">
-          <!-- Cabecera (título + descripción) -->
-          <div class="flex flex-col gap-1.5 px-6">
-            <h3 data-i18n="plans.oneName" class="text-2xl font-semibold leading-none tracking-tight">Pymes y grandes empresas</h3>
-            <p data-i18n="plans.oneDesc" class="text-sm text-gray-500">Desde un solo local hasta cadenas multi-tienda. ODAS aprende de tus ventas, anticipa la demanda y mantiene tu cumplimiento de la Ley 1/2025 siempre al día.</p>
-          </div>
-          <!-- Contenido (todos los beneficios) -->
-          <div class="flex-1 px-6">
-            <!-- [[EDITAR: lista de beneficios (añade o quita <li> según necesites)]] -->
-            <ul class="space-y-4 text-sm text-gray-700">
-              <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n-html="plans.o1"><strong class="font-semibold text-black">Reduce el coste de tus compras.</strong> Predice la demanda para comprar solo lo necesario y recibe alertas antes de que un producto caduque, evitando pérdidas económicas.</span></li>
-              <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n-html="plans.o2"><strong class="font-semibold text-black">Disminuye el desperdicio alimentario.</strong> Identifica dónde se generan las pérdidas y actúa antes de que ocurran, reduciendo también tu huella de CO₂.</span></li>
-              <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n-html="plans.o3"><strong class="font-semibold text-black">Cumple la Ley 1/2025 automáticamente.</strong> Plan de prevención, trazabilidad y documentación siempre actualizada y preparada para cualquier inspección.</span></li>
-              <li class="flex items-start gap-3"><svg class="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden="true"><use href="#ico-check"/></svg> <span data-i18n-html="plans.o4"><strong class="font-semibold text-black">Demuestra tu compromiso.</strong> Obtén el Sello ODAS y comunica con datos reales tu impacto en sostenibilidad frente a clientes, inversores y administraciones.</span></li>
-            </ul>
-          </div>
-          <!-- Pie (botón) -->
-          <div class="px-6">
-            <a href="mailto:hello@negentropylabs.com?subject=Solicito%20una%20Demo%20de%20ODAS" data-i18n="cta.demo" class="inline-flex w-full items-center justify-center rounded-md bg-black px-4 py-2.5 text-sm font-semibold text-white shadow transition hover:bg-gray-800">Solicita una Demo</a>
-          </div>
-        </div>
-      </div>
-    </section>
-    </div>
+    
 
     <!-- Cloudscape: fondo animado WebGL detrás del plan (port del componente React) -->
     <script>
@@ -2005,6 +1812,17 @@
         var canvas = document.getElementById('cloudscape');
         if (!canvas) return;
         var host = canvas.parentElement;
+        var assistant = host.querySelector('.farmer-assistant-section');
+        function alignCloudFade() {
+          if (!assistant) return;
+          var top = assistant.getBoundingClientRect().top - host.getBoundingClientRect().top;
+          host.style.setProperty('--cloud-fade-start', top + 'px');
+          host.style.setProperty('--cloud-fade-end', (top + assistant.offsetHeight * .5) + 'px');
+        }
+        alignCloudFade();
+        if (window.ResizeObserver) new ResizeObserver(alignCloudFade).observe(host);
+        window.addEventListener('resize', alignCloudFade);
+        document.fonts.ready.then(alignCloudFade);
         var gl = canvas.getContext('webgl', { antialias: true, alpha: true });
         if (!gl) { console.warn('WebGL no soportado; se omite el fondo Cloudscape'); return; }
 
@@ -2120,27 +1938,25 @@
          ======================================================================== -->
     <section class="mx-auto w-full max-w-6xl py-24 text-left sm:py-32">
       <div class="px-5">
-        <h3 class="mb-14 text-lg font-medium text-gray-900 sm:text-xl lg:text-4xl">
-          <span data-i18n="stats.h">Menos desperdicio cada año.</span>
-          <span data-i18n="stats.hsub" class="text-sm text-gray-500 sm:text-base lg:text-4xl">Cada kilo que hoy acaba en la basura ya lo has comprado, transportado y preparado. ODAS aprende de tu operación para que ese kilo no llegue a perderse.</span>
-        </h3>
+        <h3 class="text-center text-2xl font-medium tracking-tight text-gray-900 sm:text-3xl">Más cosecha y productos vendidos. Menos alimentos desperdiciados.</h3>
+        <p class="mx-auto mt-5 max-w-3xl text-center text-base leading-relaxed text-gray-500 sm:text-lg">Cada kilo que no consigues vender representa tiempo, esfuerzo y recursos invertidos. Con Pagès queremos transformar esos excedentes o producción en nuevas oportunidades de venta.</p>
 
         <div class="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
           <div>
-            <p data-i18n="stats.n1" class="text-3xl font-medium text-gray-900">1/3</p>
-            <p data-i18n="stats.l1" class="text-md text-gray-500">De la comida del mundo se pierde o desperdicia (FAO)</p>
+            <p class="text-3xl font-medium text-gray-900">1/3</p>
+            <p class="text-md text-gray-500">De los alimentos producidos en el mundo se pierde o desperdicia (FAO, estimación histórica).</p>
           </div>
           <div>
-            <p data-i18n="stats.n2" class="text-3xl font-medium text-gray-900">8–10 %</p>
-            <p data-i18n="stats.l2" class="text-md text-gray-500">De las emisiones globales de CO₂ (PNUMA)</p>
+            <p class="text-3xl font-medium text-gray-900">8–10 %</p>
+            <p class="text-md text-gray-500">De las emisiones globales de gases de efecto invernadero están asociadas a pérdidas y desperdicios alimentarios (PNUMA).</p>
           </div>
           <div>
-            <p data-i18n="stats.n3" class="text-3xl font-medium text-gray-900">1/2025</p>
-            <p data-i18n="stats.l3" class="text-md text-gray-500">La ley que ya te obliga</p>
+            <p class="text-3xl font-medium text-gray-900">Ley 1/2025</p>
+            <p class="text-md text-gray-500">Un nuevo marco para prevenir y reducir las pérdidas y el desperdicio alimentario en España.</p>
           </div>
           <div>
-            <p data-i18n="stats.n4" class="text-3xl font-medium text-gray-900">−50 %</p>
-            <p data-i18n="stats.l4" class="text-md text-gray-500">Objetivo a 4 años (ODS 12.3 de la ONU)</p>
+            <p class="text-3xl font-medium text-gray-900">−50 %</p>
+            <p class="text-md text-gray-500">Nuestra meta a cuatro años: reducir a la mitad los excedentes alimentarios aptos que quedan sin vender entre los productores participantes.</p>
           </div>
         </div>
       </div>
@@ -2148,8 +1964,10 @@
       <!-- Embudo horizontal por capas: mismo contenido y cifras, nueva forma
            curva inspirada en el componente FunnelChart proporcionado. -->
       <div class="mt-12 px-5">
+        <h4 class="text-center text-xl font-medium text-gray-900">Nuestro objetivo de impacto</h4>
+        <p class="mx-auto mt-3 mb-8 max-w-2xl text-center text-base leading-relaxed text-gray-500">Reducir progresivamente los excedentes sin vender mediante nuevas oportunidades comerciales.</p>
         <svg class="funnel-chart mx-auto h-auto w-full max-w-4xl overflow-visible" viewBox="0 0 1000 500" role="img" aria-labelledby="tituloEmbudo">
-          <title id="tituloEmbudo" data-i18n="funnel.alt">Reducción del desperdicio alimentario año a año trabajando con ODAS</title>
+          <title id="tituloEmbudo">Objetivo de impacto de Pagès: reducción progresiva de excedentes sin vender a cuatro años</title>
           <defs>
             <linearGradient id="gradf1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#e11d48"/><stop offset="100%" stop-color="#fb7185"/></linearGradient>
             <linearGradient id="gradf2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#f43f5e"/><stop offset="100%" stop-color="#fda4af"/></linearGradient>
@@ -2161,14 +1979,7 @@
             </filter>
           </defs>
 
-          <!-- Bandas de fondo del componente de referencia -->
-          <g fill="#f8fafc">
-            <rect x="0" y="50" width="192" height="360" rx="14"/>
-            <rect x="404" y="50" width="192" height="360" rx="14"/>
-            <rect x="808" y="50" width="192" height="360" rx="14"/>
-          </g>
-
-          <g class="funnel-etapa" style="--funnel-delay:0s" transform="translate(0 50)">
+<g class="funnel-etapa" style="--funnel-delay:0s" transform="translate(0 50)">
             <g class="funnel-forma" filter="url(#sombraEmbudo)">
               <path class="funnel-capa funnel-capa-1" d="M0 21.6 C105.6 21.6 86.4 45.36 192 45.36 L192 314.64 C86.4 314.64 105.6 338.4 0 338.4Z" fill="url(#gradf1)" opacity=".18"/>
               <path class="funnel-capa funnel-capa-2" d="M0 40.09 C105.6 40.09 86.4 61.07 192 61.07 L192 298.93 C86.4 298.93 105.6 319.91 0 319.91Z" fill="url(#gradf1)" opacity=".48"/>
@@ -2221,7 +2032,6 @@
             <text x="904" y="462" data-i18n="funnel.f5t">Año 4</text>
           </g>
         </svg>
-        <p data-i18n="funnel.pie" class="mx-auto mt-6 max-w-2xl text-center text-sm text-gray-500">Trayectoria objetivo: cuanto más aprende ODAS de tu operación, menos producto acaba en la basura. Partiendo de tu propia línea base.</p>
       </div>
     </section>
 
@@ -2231,9 +2041,11 @@
          ------------------------------------------------------------------------
          · Línea superior + columnas de enlaces + línea final.
          ======================================================================== -->
-    <footer class="relative overflow-hidden bg-white">
-      <!-- Fondo interactivo tipo "boxes": se ilumina al pasar el ratón (lo genera el JS de abajo) -->
-      <div id="footerBoxes" aria-hidden="true"></div>
+
+
+
+    <footer id="footer" class="relative overflow-hidden bg-transparent">
+      
       <div class="pointer-events-none relative z-10 mx-auto max-w-6xl px-5 py-16">
 
         <!-- Bloque ODS (Objetivos de Desarrollo Sostenible de la ONU) -->
@@ -2260,9 +2072,12 @@
               <img src="cambra-lleida.png" alt="Cambra de Comerç de Lleida · Doing Business" class="h-16 w-auto sm:h-20" />
             </a>
             <a href="https://oap.camaraibizayformentera.com/" target="_blank" rel="noopener" class="pointer-events-auto inline-block transition hover:opacity-80" aria-label="Oficina Acelera Pyme · Ibiza y Formentera">
-              <img src="acelera-pyme.png" alt="Oficina Acelera Pyme · Ibiza y Formentera" class="h-14 w-auto sm:h-16" />
+              <img src="acelera-pyme.png" alt="Oficina Acelera Pyme · Ibiza y Formentera" class="h-9 w-auto sm:h-10" />
             </a>
             <img src="agrobiotech.png" alt="AgroBioTech Innovation Forum" class="h-16 w-auto sm:h-20" />
+            <img src="emprenbit-transparent.png" alt="Fundació BIT · Balears Innovation TechHub" class="h-14 w-auto max-w-[190px] object-contain sm:h-16" />
+            <img src="campus-founders-transparent.png" alt="Campus Founders" class="h-14 w-auto max-w-[165px] object-contain sm:h-16" loading="lazy">
+            <img src="ibiza-innovation-summit-transparent.png" alt="Ibiza Innovation Summit" class="h-14 w-auto max-w-[165px] object-contain sm:h-16" loading="lazy">
           </div>
         </div>
 
@@ -2273,15 +2088,14 @@
         <div class="flex flex-col items-center gap-4 text-sm text-gray-500 sm:flex-row sm:justify-between">
           <!-- [[EDITAR: logo del pie — marca ODAS]] -->
           <div class="flex items-center">
-            <img src="odas-marca.png" alt="ODAS" class="h-7 w-auto" />
+            <img src="odas-solo-letras.svg" alt="ODAS" class="h-14 w-auto max-w-[165px] object-contain sm:h-16" />
           </div>
           <!-- [[EDITAR: empresa madre y copyright]] -->
-          <p data-i18n-html="footer.division">Una división de <span class="text-black">Negentropy Labs</span></p>
           <p>© 2026 ODAS</p>
         </div>
       </div>
+      <img src="footer-brote-verde.png" alt="" aria-hidden="true" width="2172" height="724" loading="lazy" style="display:block;width:100%;height:auto;position:relative;margin-top:clamp(-80px,-5vw,-32px);" />
     </footer>
-
 
     <!-- ========================================================================
          IDIOMAS (i18n) · Español / Català / English
@@ -2289,581 +2103,7 @@
          · Para editar un texto, cámbialo en los 3 idiomas (es / ca / en).
          · Conserva las etiquetas HTML (<span ...>, <strong ...>) tal cual.
          ======================================================================== -->
-    <script>
-      window.I18N = {
-        es: {
-          "meta.title": `ODAS · Software para el comercio alimentario`,
-          "intro.unit": `kilos`,
-          "intro.caption": `de comida se han tirado en el último minuto`,
-          "meta.desc": `ODAS predice la demanda, reduce el desperdicio alimentario y documenta la Ley 1/2025 sin esfuerzo.`,
-          "nav.login": `Iniciar sesión`,
-          "nav.contact": `Contacto`,
-          "cta.demo": `Solicita una Demo`,
-          "bento.kicker": `Modelos`,
-          "bento.h": `Del dato a la decisión.`,
-          "bento.sub": `ODAS conecta todo tu negocio y convierte la información en acciones concretas, cada día.`,
-          "bento.c2e": `Modelo R · Para los que venden`,
-          "bento.c2t": `Supermercados`,
-          "bento.c2d": `Convierte datos históricos, ventas, clima, eventos y comportamiento del consumidor en una previsión precisa de la demanda. ODAS anticipa qué productos se venderán, cuándo y en qué cantidad, ayudando a reducir desperdicio, optimizar inventario y maximizar la rentabilidad.<span class="mt-3 block text-gray-800"><span class="font-semibold text-sky-600">Resultado:</span> menos exceso de stock, menos roturas y mejores decisiones comerciales.</span>`,
-          "bento.c3e": `Predicción`,
-          "bento.c3t": `Anticípate y recupera margen`,
-          "bento.c3d": `ODAS predice cuánto venderás para que compres justo lo necesario y dejes de tirar dinero a la basura.`,
-          "bento.c4e": `Cumplimiento`,
-          "bento.c4t": `Cumple la Ley 1/2025`,
-          "bento.c4d": `Plan de prevención, documentación y trazabilidad sellada e inmutable, lista para cualquier inspección.`,
-          "bento.c5e": `Avisos`,
-          "bento.c5t": `Actúa antes de que caduque`,
-          "bento.c5d": `ODAS te avisa cada día por WhatsApp de lo que está a punto de caducar, con la acción recomendada en un solo toque.`,
-          "beam.kicker": `Conectado`,
-          "beam.h": `Todos tus datos, conectados a ODAS`,
-          "beam.sub": `ODAS reúne la <span class="font-bold">información dispersa</span> de tus herramientas y la convierte en memoria operativa para tomar decisiones.`,
-          "whatis.kicker": `¿Qué es ODAS?`,
-          "whatis.h": `El asistente que está pendiente de tu negocio.`,
-          "whatis.p1": `Cada día pasan cientos de cosas en una empresa: ventas, compras, inventario, incidencias, caducidades, pedidos y documentos. ODAS las observa, las conecta y te avisa de lo que importa.`,
-          "whatis.badge": `El asistente de tu operación`,
-          "whatis.b1": `Te dice qué está pasando en tu negocio, sin tener que revisar cientos de datos.`,
-          "whatis.b2": `Se anticipa a lo que viene y te avisa antes de que un problema ocurra.`,
-          "whatis.b3": `Te recomienda qué hacer: comprar, ajustar, vender, donar o transformar.`,
-          "whatis.b4": `Te recuerda lo que no puedes olvidar, desde productos próximos a caducar hasta tareas pendientes.`,
-          "whatis.b5": `Responde a tus preguntas sobre tu operación cuando necesitas una respuesta.`,
-          "whatis.b6": `Mantiene tu documentación al día y te ayuda a cumplir con la Ley 1/2025.`,
-          "chat.store": `ODAS · Supermercado Centro`,
-          "chat.q1": `¿Qué productos caducan hoy?`,
-          "chat.a1": `Hay <span class="font-semibold">40 yogures naturales</span> que caducan hoy y 18 bandejas de pollo que caducan mañana. Los yogures son lo más urgente.`,
-          "chat.a1short": `40 yogures naturales caducan hoy.`,
-          "chat.action1": `Mover a Tienda Norte`,
-          "chat.action2": `Donar`,
-          "chat.action3": `Retirar`,
-          "chat.confirm1": `✅ Traslado de <span class="font-semibold">24 yogures a Tienda Norte</span> preparado. Quedan 16 unidades para donación y el stock está actualizado.`,
-          "chat.q2": `Reubica los yogures con exceso de stock`,
-          "chat.a2": `✅ Traslado de <span class="font-semibold">24 yogures a Tienda Norte</span> preparado. Quedan 16 unidades para donación y el stock está actualizado.`,
-          "chat.q3": `¿Qué tengo que pedir para mañana?`,
-          "chat.a3": `Pide <span class="font-semibold">25 cajas de leche y 18 de plátanos</span>. No pidas tomates: tienes stock para 12 días.`,
-          "chat.q4": `Sanidad pide el lote L260814`,
-          "chat.a4": `Listo: PDF con recepción, movimientos, ventas y retiradas del lote, sellado e inmutable.`,
-          "faq.h": `Un Asistente para tu día a día`,
-          "faq.sub": `ODAS entiende lo que ocurre en tu negocio y convierte datos dispersos en decisiones.`,
-          "faq.q1": `¿Qué productos caducan esta semana?`,
-          "faq.a1": `40 yogures caducan hoy, 18 bandejas de pollo mañana y 12 ensaladas el viernes. Lo más urgente son los yogures.`,
-          "faq.q2": `¿Cuánto voy a vender mañana?`,
-          "faq.a2": `Unas 1.840 unidades, un 12 % más que un viernes normal. El mayor crecimiento estará en bebidas y frescos.`,
-          "faq.q3": `¿Qué tengo que pedir hoy?`,
-          "faq.a3": `Pide 25 cajas de leche y 18 de plátanos. No pidas tomates: tienes stock para 12 días.`,
-          "faq.q4": `¿Dónde tengo riesgo de rotura de stock?`,
-          "faq.a4": `En leche semidesnatada y plátanos para el sábado. Te faltarán 42 y 28 unidades si no ajustas hoy.`,
-          "faq.q5": `¿Qué productos tienen sobrestock?`,
-          "faq.a5": `Tomates, agua con gas y cereales. Los tomates son prioritarios: 120 unidades y 12 días de cobertura.`,
-          "faq.q6": `¿Dónde reubico los yogures que caducan hoy?`,
-          "faq.a6": `Tienda Norte puede absorber 24 unidades. He preparado el traslado y la donación de las 16 restantes.`,
-          "faq.q7": `Registra 6 paquetes rotos de arroz`,
-          "faq.a7": `Registrados como merma por rotura, descontados del stock y añadidos al informe mensual.`,
-          "faq.q8": `¿Qué tienda está desperdiciando más?`,
-          "faq.a8": `La tienda Centro: 86 kg este mes, un 23 % sobre la media. Panadería concentra la mayor desviación.`,
-          "faq.q9": `¿Cuánto he ahorrado este mes?`,
-          "faq.a9": `3.840 € frente a tu línea base y 420 kg de merma evitados. Frescos aporta el 61 % del ahorro.`,
-          "faq.q10": `Sanidad pide la trazabilidad del lote L260814`,
-          "faq.a10": `Lista: recepción, movimientos, ventas y retiradas del lote en un PDF sellado e inmutable.`,
-          "hero.sub": `ODAS convierte los datos de tu empresa en <span class="rotador texto-degradado" data-palabras="decisiones.|tranquilidad.|control.|ahorro.">decisiones.</span>`,
-          "hero.sub2": `ODAS conecta tus datos de ventas, inventario y compras para predecir excedentes, automatizar el cumplimiento normativo y ayudarte a tomar mejores decisiones cada día.`,
-          "card.explore": `Explora`,
-          "card1.label": `Análisis de predicción de demanda`,
-          "card1.saved": `guardado`,
-          "card1.recLabel": `Recomendación`,
-          "card1.title": `Previsión de demanda con IA`,
-          "card2.title": `Cumplimiento Ley 1/2025`,
-          "card3.product": `Croissants de mantequilla (pack 6)`,
-          "card3.lot": `Lote L26061402 · Panadería y Pastelería`,
-          "card3.temp": `Temperatura ambiente`,
-          "card3.stock": `18 uds disponibles`,
-          "card3.priceUnit": `1,99 €/uds`,
-          "card3.today": `Hoy`,
-          "card3.edit": `Comprar`,
-          "card3.title": `Marketplace para proveedores`,
-          "card4.chainLabel": `Cadena de trazabilidad · SHA-256`,
-          "card4.step1": `Recepción`,
-          "card4.step2": `Almacenaje`,
-          "card4.step3": `Venta / Donación`,
-          "card4.step4": `Registro Ley 1/2025 · sellado`,
-          "card4.title": `Trazabilidad SHA-256`,
-          "card1.pop": `Modelos de IA por SKU que anticipan las ventas y ajustan los pedidos para minimizar la merma.`,
-          "card2.pop": `<ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Plan de prevención</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Jerarquía de excedentes</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Formación bonificada</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Documentación auditable</li></ul>`,
-          "card3.pop": `Canal de redistribución de stock entre operadores.`,
-          "card4.pop": `Prueba verificable ante una inspección.`,
-          "chart.title": `Predicción de demanda — próximos 7 días`,
-          "chart.outOfStock": `Sin stock (3.5d)`,
-          "chart.legPrevision": `Previsión`,
-          "chart.legStock": `Stock restante`,
-          "chart.legInterval": `Intervalo`,
-          "chart.mTotal": `Total previsto`,
-          "chart.mAvg": `Media diaria`,
-          "chart.mStock": `Stock actual`,
-          "chart.mError": `Error modelo`,
-          "banda.label1": `en ahorro en multas.`,
-          "banda.label2": `Creación del Plan de prevención gratis.`,
-          "banda.label3": `en la ejecución del plan.`,
-          "plans.title": `Un plan para pymes y grandes empresas`,
-          "plans.oneName": `Pymes y grandes empresas`,
-          "plans.oneDesc": `Desde un solo local hasta cadenas multi-tienda. ODAS aprende de tus ventas, anticipa la demanda y mantiene tu cumplimiento de la Ley 1/2025 siempre al día.`,
-          "plans.p1Name": `Starter PYME`,
-          "plans.p1Desc": `Comercios y cadenas pequeñas de menos de 1.300 m² que necesitan cumplir y empezar a prevenir.`,
-          "plans.p1f1": `Previsión IA`,
-          "plans.p1f2": `Documentación Ley 1/2025`,
-          "plans.p1f3": `Trazabilidad SHA-256`,
-          "plans.p2Name": `Profesional`,
-          "plans.p2Desc": `Cadenas medianas multi-tienda que quieren optimización, cumplir la ley y vender en el marketplace.`,
-          "plans.p2f1": `Todo lo de Starter`,
-          "plans.p2f2": `Marketplace B2B + soporte`,
-          "plans.o1": `<strong class="font-semibold text-black">Reduce el coste de tus compras.</strong> Predice la demanda para comprar solo lo necesario y recibe alertas antes de que un producto caduque, evitando pérdidas económicas.`,
-          "plans.o2": `<strong class="font-semibold text-black">Disminuye el desperdicio alimentario.</strong> Identifica dónde se generan las pérdidas y actúa antes de que ocurran, reduciendo también tu huella de CO₂.`,
-          "plans.o3": `<strong class="font-semibold text-black">Cumple la Ley 1/2025 automáticamente.</strong> Plan de prevención, trazabilidad y documentación siempre actualizada y preparada para cualquier inspección.`,
-          "plans.o4": `<strong class="font-semibold text-black">Demuestra tu compromiso.</strong> Obtén el Sello ODAS y comunica con datos reales tu impacto en sostenibilidad frente a clientes, inversores y administraciones.`,
-          "plans.p2f3": `Previsión avanzada multi-tienda`,
-          "footer.ods": `Nuestra tecnología contribuye a la reducción del desperdicio alimentario, alineada con los <span class="text-black">Objetivos de Desarrollo Sostenible 2, 12, 13 y 17</span> de la ONU.`,
-          "footer.division": `Una división de <span class="text-black">Negentropy Labs</span>`,
-          "funnel.alt": `Reducción del desperdicio alimentario año a año trabajando con ODAS`,
-          "funnel.f1p": `base`,
-          "funnel.f1t": `Hoy`,
-          "funnel.f2p": `−15%`,
-          "funnel.f2t": `Año 1`,
-          "funnel.f3p": `−27%`,
-          "funnel.f3t": `Año 2`,
-          "funnel.f4p": `−38%`,
-          "funnel.f4t": `Año 3`,
-          "funnel.f5p": `−50%`,
-          "funnel.f5t": `Año 4`,
-          "funnel.pie": `Trayectoria objetivo: cuanto más aprende ODAS de tu operación, menos producto acaba en la basura. Partiendo de tu propia línea base.`,
-          "stats.h": `Menos desperdicio cada año.`,
-          "stats.hsub": `Cada kilo que hoy acaba en la basura ya lo has comprado, transportado y preparado. ODAS aprende de tu operación para que ese kilo no llegue a perderse.`,
-          "stats.n1": `1/3`,
-          "stats.l1": `De la comida del mundo se pierde o desperdicia (FAO)`,
-          "stats.n2": `8–10 %`,
-          "stats.l2": `De las emisiones globales de CO₂ (PNUMA)`,
-          "stats.n3": `1/2025`,
-          "stats.l3": `La ley que ya te obliga`,
-          "stats.n4": `−50 %`,
-          "stats.l4": `Objetivo a 4 años (ODS 12.3 de la ONU)`,
-          "footer.supportedBy": `Un proyecto apoyado por:`,
-          "footer.ods2Alt": `ODS 2: Hambre cero`,
-          "footer.ods12Alt": `ODS 12: Producción y consumo responsables`,
-          "footer.ods13Alt": `ODS 13: Acción por el clima`,
-          "footer.ods17Alt": `ODS 17: Alianzas para lograr los objetivos`,
-          "sc1.m1": `El stock cubre 3 días, con riesgo de rotura el <strong class="font-semibold">sábado</strong>.`,
-          "sc1.m2": `Sin acción, se perderán ventas el <strong class="font-semibold">sábado</strong> por <strong class="font-semibold">falta de stock</strong>.`,
-          "sc1.rec": `Pide <strong class="font-semibold">25 unidades</strong> antes del <strong class="font-semibold">viernes</strong> para evitar rotura.`,
-          "sc2.m1": `Tienes <strong class="font-semibold">40 yogures</strong> que caducan en <strong class="font-semibold">2 días</strong>.`,
-          "sc2.m2": `Al ritmo actual, <strong class="font-semibold">18 uds</strong> acabarían en merma.`,
-          "sc2.rec": `Publícalos en el <strong class="font-semibold">Mercado a −40%</strong> o <strong class="font-semibold">dónalos</strong> hoy.`,
-          "sc3.m1": `Sobrestock: <strong class="font-semibold">12 días</strong> de tomates en almacén.`,
-          "sc3.m2": `Hay riesgo de <strong class="font-semibold">merma</strong> antes de venderlo todo.`,
-          "sc3.rec": `Aplica <strong class="font-semibold">−30%</strong> los <strong class="font-semibold">2 próximos días</strong> para acelerar la venta.`,
-          "sc4.m1": `Quedan <strong class="font-semibold">15 barras</strong> de pan del día.`,
-          "sc4.m2": `No se venderán antes del <strong class="font-semibold">cierre</strong>.`,
-          "sc4.rec": `<strong class="font-semibold">Transfórmalas</strong> (rallado/picatostes) o <strong class="font-semibold">dónalas</strong> antes de las 21:00.`
-        },
-        ca: {
-          "meta.title": `ODAS · Programari per al comerç alimentari`,
-          "intro.unit": `quilos`,
-          "intro.caption": `de menjar s'han llençat en l'últim minut`,
-          "meta.desc": `ODAS preveu la demanda, redueix el malbaratament alimentari i documenta la Llei 1/2025 sense esforç.`,
-          "nav.login": `Iniciar sessió`,
-          "nav.contact": `Contacte`,
-          "cta.demo": `Demana una Demo`,
-          "bento.kicker": `Models`,
-          "bento.h": `De la dada a la decisió.`,
-          "bento.sub": `ODAS connecta tot el teu negoci i converteix la informació en accions concretes, cada dia.`,
-          "bento.c2e": `Model R · Per als qui venen`,
-          "bento.c2t": `Supermercats`,
-          "bento.c2d": `Converteix dades històriques, vendes, clima, esdeveniments i comportament del consumidor en una previsió precisa de la demanda. ODAS anticipa quins productes es vendran, quan i en quina quantitat, ajudant a reduir el malbaratament, optimitzar l'inventari i maximitzar la rendibilitat.<span class="mt-3 block text-gray-800"><span class="font-semibold text-sky-600">Resultat:</span> menys excés d'estoc, menys ruptures i millors decisions comercials.</span>`,
-          "bento.c3e": `Predicció`,
-          "bento.c3t": `Anticipa't i recupera marge`,
-          "bento.c3d": `ODAS preveu quant vendràs perquè compris just el necessari i deixis de llençar diners a les escombraries.`,
-          "bento.c4e": `Compliment`,
-          "bento.c4t": `Compleix la Llei 1/2025`,
-          "bento.c4d": `Pla de prevenció, documentació i traçabilitat segellada i immutable, a punt per a qualsevol inspecció.`,
-          "bento.c5e": `Avisos`,
-          "bento.c5t": `Actua abans que caduqui`,
-          "bento.c5d": `ODAS t'avisa cada dia per WhatsApp del que està a punt de caducar, amb l'acció recomanada en un sol toc.`,
-          "beam.kicker": `Connectat`,
-          "beam.h": `Totes les teves dades, connectades a ODAS`,
-          "beam.sub": `ODAS reuneix la <span class="font-bold">informació dispersa</span> de les teves eines i la converteix en memòria operativa per prendre decisions.`,
-          "whatis.kicker": `Què és ODAS?`,
-          "whatis.h": `L'assistent que està pendent del teu negoci.`,
-          "whatis.p1": `Cada dia passen centenars de coses en una empresa: vendes, compres, inventari, incidències, caducitats, comandes i documents. ODAS les observa, les connecta i t'avisa del que importa.`,
-          "whatis.badge": `L'assistent de la teva operació`,
-          "whatis.b1": `Et diu què està passant al teu negoci, sense haver de revisar centenars de dades.`,
-          "whatis.b2": `S'anticipa al que ve i t'avisa abans que un problema passi.`,
-          "whatis.b3": `Et recomana què fer: comprar, ajustar, vendre, donar o transformar.`,
-          "whatis.b4": `Et recorda el que no pots oblidar, des de productes a punt de caducar fins a tasques pendents.`,
-          "whatis.b5": `Respon les teves preguntes sobre l'operació quan necessites una resposta.`,
-          "whatis.b6": `Manté la teva documentació al dia i t'ajuda a complir la Llei 1/2025.`,
-          "chat.store": `ODAS · Supermercat Centre`,
-          "chat.q1": `Quins productes caduquen avui?`,
-          "chat.a1": `Hi ha <span class="font-semibold">40 iogurts naturals</span> que caduquen avui i 18 safates de pollastre que caduquen demà. Els iogurts són el més urgent.`,
-          "chat.a1short": `40 iogurts naturals caduquen avui.`,
-          "chat.action1": `Moure a Botiga Nord`,
-          "chat.action2": `Donar`,
-          "chat.action3": `Retirar`,
-          "chat.confirm1": `✅ Trasllat de <span class="font-semibold">24 iogurts a Botiga Nord</span> preparat. Queden 16 unitats per donar i l'estoc està actualitzat.`,
-          "chat.q2": `Reubica els iogurts amb excés d'estoc`,
-          "chat.a2": `✅ Trasllat de <span class="font-semibold">24 iogurts a Botiga Nord</span> preparat. Queden 16 unitats per donar i l'estoc està actualitzat.`,
-          "chat.q3": `Què he de demanar per demà?`,
-          "chat.a3": `Demana <span class="font-semibold">25 caixes de llet i 18 de plàtans</span>. No demanis tomàquets: tens estoc per a 12 dies.`,
-          "chat.q4": `Sanitat demana el lot L260814`,
-          "chat.a4": `Llest: PDF amb recepció, moviments, vendes i retirades del lot, segellat i immutable.`,
-          "faq.h": `Un Assistent per al teu dia a dia`,
-          "faq.sub": `ODAS entén el que passa al teu negoci i converteix dades disperses en decisions.`,
-          "faq.q1": `Quins productes caduquen aquesta setmana?`,
-          "faq.a1": `40 iogurts caduquen avui, 18 safates de pollastre demà i 12 amanides divendres. El més urgent són els iogurts.`,
-          "faq.q2": `Quant vendré demà?`,
-          "faq.a2": `Unes 1.840 unitats, un 12 % més que un divendres normal. El creixement més gran serà en begudes i frescos.`,
-          "faq.q3": `Què he de demanar avui?`,
-          "faq.a3": `Demana 25 caixes de llet i 18 de plàtans. No demanis tomàquets: tens estoc per a 12 dies.`,
-          "faq.q4": `On tinc risc de ruptura d'estoc?`,
-          "faq.a4": `En llet semidesnatada i plàtans per dissabte. Te'n faltaran 42 i 28 unitats si no ajustes avui.`,
-          "faq.q5": `Quins productes tenen sobreestoc?`,
-          "faq.a5": `Tomàquets, aigua amb gas i cereals. Els tomàquets són prioritaris: 120 unitats i 12 dies de cobertura.`,
-          "faq.q6": `On reubico els iogurts que caduquen avui?`,
-          "faq.a6": `Botiga Nord pot absorbir 24 unitats. He preparat el trasllat i la donació de les 16 restants.`,
-          "faq.q7": `Registra 6 paquets d'arròs trencats`,
-          "faq.a7": `Registrats com a minva per trencament, descomptats de l'estoc i afegits a l'informe mensual.`,
-          "faq.q8": `Quina botiga malbarata més?`,
-          "faq.a8": `La botiga Centre: 86 kg aquest mes, un 23 % sobre la mitjana. Fleca concentra la desviació més gran.`,
-          "faq.q9": `Quant he estalviat aquest mes?`,
-          "faq.a9": `3.840 € respecte de la teva línia base i 420 kg de minva evitats. Frescos aporta el 61 % de l'estalvi.`,
-          "faq.q10": `Sanitat demana la traçabilitat del lot L260814`,
-          "faq.a10": `Llesta: recepció, moviments, vendes i retirades del lot en un PDF segellat i immutable.`,
-          "hero.sub": `ODAS converteix les dades de la teva empresa en <span class="rotador texto-degradado" data-palabras="decisions.|tranquil·litat.|control.|estalvi.">decisions.</span>`,
-          "hero.sub2": `ODAS connecta les teves dades de vendes, inventari i compres per predir excedents, automatitzar el compliment normatiu i ajudar-te a prendre millors decisions cada dia.`,
-          "card.explore": `Explora`,
-          "card1.label": `Anàlisi de predicció de demanda`,
-          "card1.saved": `desat`,
-          "card1.recLabel": `Recomanació`,
-          "card1.title": `Previsió de demanda amb IA`,
-          "card2.title": `Compliment de la Llei 1/2025`,
-          "card3.product": `Croissants de mantega (paquet de 6)`,
-          "card3.lot": `Lot L26061402 · Forn i Pastisseria`,
-          "card3.temp": `Temperatura ambient`,
-          "card3.stock": `18 u. disponibles`,
-          "card3.priceUnit": `1,99 €/u`,
-          "card3.today": `Avui`,
-          "card3.edit": `Compra`,
-          "card3.title": `Marketplace per a proveïdors`,
-          "card4.chainLabel": `Cadena de traçabilitat · SHA-256`,
-          "card4.step1": `Recepció`,
-          "card4.step2": `Emmagatzematge`,
-          "card4.step3": `Venda / Donació`,
-          "card4.step4": `Registre Llei 1/2025 · segellat`,
-          "card4.title": `Traçabilitat SHA-256`,
-          "card1.pop": `Models d'IA per SKU que anticipen les vendes i ajusten les comandes per minimitzar les minves.`,
-          "card2.pop": `<ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Pla de prevenció</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Jerarquia d'excedents</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Formació bonificada</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Documentació auditable</li></ul>`,
-          "card3.pop": `Canal de redistribució d'estoc entre operadors.`,
-          "card4.pop": `Prova verificable davant d'una inspecció.`,
-          "chart.title": `Predicció de demanda — pròxims 7 dies`,
-          "chart.outOfStock": `Sense estoc (3.5d)`,
-          "chart.legPrevision": `Previsió`,
-          "chart.legStock": `Estoc restant`,
-          "chart.legInterval": `Interval`,
-          "chart.mTotal": `Total previst`,
-          "chart.mAvg": `Mitjana diària`,
-          "chart.mStock": `Estoc actual`,
-          "chart.mError": `Error del model`,
-          "banda.label1": `d'estalvi en multes.`,
-          "banda.label2": `Creació del Pla de prevenció gratis.`,
-          "banda.label3": `en l'execució del pla.`,
-          "plans.title": `Un pla per a pimes i grans empreses`,
-          "plans.oneName": `Pimes i grans empreses`,
-          "plans.oneDesc": `Des d'un sol local fins a cadenes multibotiga. ODAS aprèn de les teves vendes, anticipa la demanda i manté el teu compliment de la Llei 1/2025 sempre al dia.`,
-          "plans.p1Name": `Starter PIME`,
-          "plans.p1Desc": `Comerços i cadenes petites de menys de 1.300 m² que necessiten complir i començar a prevenir.`,
-          "plans.p1f1": `Previsió amb IA`,
-          "plans.p1f2": `Documentació Llei 1/2025`,
-          "plans.p1f3": `Traçabilitat SHA-256`,
-          "plans.p2Name": `Professional`,
-          "plans.p2Desc": `Cadenes mitjanes multibotiga que volen optimització, complir la llei i vendre al marketplace.`,
-          "plans.p2f1": `Tot el de Starter`,
-          "plans.p2f2": `Marketplace B2B + suport`,
-          "plans.o1": `<strong class="font-semibold text-black">Redueix el cost de les teves compres.</strong> Prediu la demanda per comprar només el necessari i rep alertes abans que un producte caduqui, evitant pèrdues econòmiques.`,
-          "plans.o2": `<strong class="font-semibold text-black">Disminueix el malbaratament alimentari.</strong> Identifica on es generen les pèrdues i actua abans que passin, reduint també la teva petjada de CO₂.`,
-          "plans.o3": `<strong class="font-semibold text-black">Compleix la Llei 1/2025 automàticament.</strong> Pla de prevenció, traçabilitat i documentació sempre actualitzada i preparada per a qualsevol inspecció.`,
-          "plans.o4": `<strong class="font-semibold text-black">Demostra el teu compromís.</strong> Obtén el Segell ODAS i comunica amb dades reals el teu impacte en sostenibilitat davant de clients, inversors i administracions.`,
-          "plans.p2f3": `Previsió avançada multibotiga`,
-          "footer.ods": `La nostra tecnologia contribueix a reduir el malbaratament alimentari, alineada amb els <span class="text-black">Objectius de Desenvolupament Sostenible 2, 12, 13 i 17</span> de l'ONU.`,
-          "footer.division": `Una divisió de <span class="text-black">Negentropy Labs</span>`,
-          "funnel.alt": `Reducció del malbaratament alimentari any rere any treballant amb ODAS`,
-          "funnel.f1p": `base`,
-          "funnel.f1t": `Avui`,
-          "funnel.f2p": `−15%`,
-          "funnel.f2t": `Any 1`,
-          "funnel.f3p": `−27%`,
-          "funnel.f3t": `Any 2`,
-          "funnel.f4p": `−38%`,
-          "funnel.f4t": `Any 3`,
-          "funnel.f5p": `−50%`,
-          "funnel.f5t": `Any 4`,
-          "funnel.pie": `Trajectòria objectiu: com més aprèn ODAS de la teva operació, menys producte acaba a les escombraries. Partint de la teva pròpia línia base.`,
-          "stats.h": `Menys malbaratament cada any.`,
-          "stats.hsub": `Cada quilo que avui acaba a les escombraries ja l'has comprat, transportat i preparat. ODAS aprèn de la teva operació perquè aquest quilo no arribi a perdre's.`,
-          "stats.n1": `1/3`,
-          "stats.l1": `Del menjar del món es perd o es malbarata (FAO)`,
-          "stats.n2": `8–10 %`,
-          "stats.l2": `De les emissions globals de CO₂ (PNUMA)`,
-          "stats.n3": `1/2025`,
-          "stats.l3": `La llei que ja t'obliga`,
-          "stats.n4": `−50 %`,
-          "stats.l4": `Objectiu a 4 anys (ODS 12.3 de l'ONU)`,
-          "footer.supportedBy": `Un projecte amb el suport de:`,
-          "footer.ods2Alt": `ODS 2: Fam zero`,
-          "footer.ods12Alt": `ODS 12: Producció i consum responsables`,
-          "footer.ods13Alt": `ODS 13: Acció climàtica`,
-          "footer.ods17Alt": `ODS 17: Aliança per assolir els objectius`,
-          "sc1.m1": `L'estoc cobreix 3 dies, amb risc de trencament el <strong class="font-semibold">dissabte</strong>.`,
-          "sc1.m2": `Sense actuar, es perdran vendes el <strong class="font-semibold">dissabte</strong> per <strong class="font-semibold">manca d'estoc</strong>.`,
-          "sc1.rec": `Demana <strong class="font-semibold">25 unitats</strong> abans del <strong class="font-semibold">divendres</strong> per evitar el trencament.`,
-          "sc2.m1": `Tens <strong class="font-semibold">40 iogurts</strong> que caduquen d'aquí a <strong class="font-semibold">2 dies</strong>.`,
-          "sc2.m2": `Al ritme actual, <strong class="font-semibold">18 u.</strong> acabarien en minves.`,
-          "sc2.rec": `Publica'ls al <strong class="font-semibold">Mercat a −40%</strong> o <strong class="font-semibold">dóna'ls</strong> avui.`,
-          "sc3.m1": `Sobreestoc: <strong class="font-semibold">12 dies</strong> de tomàquets al magatzem.`,
-          "sc3.m2": `Hi ha risc de <strong class="font-semibold">minves</strong> abans de vendre-ho tot.`,
-          "sc3.rec": `Aplica <strong class="font-semibold">−30%</strong> els <strong class="font-semibold">2 pròxims dies</strong> per accelerar la venda.`,
-          "sc4.m1": `Queden <strong class="font-semibold">15 barres</strong> de pa del dia.`,
-          "sc4.m2": `No es vendran abans del <strong class="font-semibold">tancament</strong>.`,
-          "sc4.rec": `<strong class="font-semibold">Transforma-les</strong> (ratllat/crostons) o <strong class="font-semibold">dóna-les</strong> abans de les 21:00.`
-        },
-        en: {
-          "meta.title": `ODAS · Software for the food trade`,
-          "intro.unit": `kilos`,
-          "intro.caption": `of food thrown away in the last minute`,
-          "meta.desc": `ODAS forecasts demand, cuts food waste and documents Spain's Law 1/2025 effortlessly.`,
-          "nav.login": `Log in`,
-          "nav.contact": `Contact`,
-          "cta.demo": `Request a Demo`,
-          "bento.kicker": `Models`,
-          "bento.h": `From data to decision.`,
-          "bento.sub": `ODAS connects your whole business and turns information into concrete actions, every day.`,
-          "bento.c2e": `Model R · For those who sell`,
-          "bento.c2t": `Supermarkets`,
-          "bento.c2d": `Turns historical data, sales, weather, events and consumer behaviour into an accurate demand forecast. ODAS predicts which products will sell, when and in what quantity, helping to reduce waste, optimise inventory and maximise profitability.<span class="mt-3 block text-gray-800"><span class="font-semibold text-sky-600">Result:</span> less overstock, fewer stockouts and better commercial decisions.</span>`,
-          "bento.c3e": `Forecasting`,
-          "bento.c3t": `Stay ahead and recover margin`,
-          "bento.c3d": `ODAS predicts how much you'll sell so you buy exactly what you need and stop binning money.`,
-          "bento.c4e": `Compliance`,
-          "bento.c4t": `Meet Law 1/2025`,
-          "bento.c4d": `Prevention plan, documentation and sealed, immutable traceability, ready for any inspection.`,
-          "bento.c5e": `Alerts`,
-          "bento.c5t": `Act before it expires`,
-          "bento.c5d": `ODAS alerts you every day on WhatsApp about what's about to expire, with the recommended action in a single tap.`,
-          "beam.kicker": `Connected`,
-          "beam.h": `All your data, connected to ODAS`,
-          "beam.sub": `ODAS brings together the <span class="font-bold">scattered information</span> from your tools and turns it into operational memory to make decisions.`,
-          "whatis.kicker": `What is ODAS?`,
-          "whatis.h": `The assistant that keeps an eye on your business.`,
-          "whatis.p1": `Hundreds of things happen in a business every day: sales, purchases, inventory, incidents, expiry dates, orders and documents. ODAS watches them, connects them and alerts you to what matters.`,
-          "whatis.badge": `The assistant for your operation`,
-          "whatis.b1": `Tells you what's happening in your business, without reviewing hundreds of data points.`,
-          "whatis.b2": `Anticipates what's coming and warns you before a problem happens.`,
-          "whatis.b3": `Recommends what to do: buy, adjust, sell, donate or transform.`,
-          "whatis.b4": `Reminds you of what you can't forget, from products about to expire to pending tasks.`,
-          "whatis.b5": `Answers your questions about your operation whenever you need an answer.`,
-          "whatis.b6": `Keeps your documentation up to date and helps you comply with Law 1/2025.`,
-          "chat.store": `ODAS · Central Supermarket`,
-          "chat.q1": `Which products expire today?`,
-          "chat.a1": `There are <span class="font-semibold">40 natural yoghurts</span> expiring today and 18 trays of chicken expiring tomorrow. The yoghurts are the most urgent.`,
-          "chat.a1short": `40 natural yoghurts expire today.`,
-          "chat.action1": `Move to North Store`,
-          "chat.action2": `Donate`,
-          "chat.action3": `Withdraw`,
-          "chat.confirm1": `✅ Transfer of <span class="font-semibold">24 yoghurts to North Store</span> prepared. The remaining 16 units are set aside for donation and stock is updated.`,
-          "chat.q2": `Reallocate the excess yoghurt stock`,
-          "chat.a2": `✅ Transfer of <span class="font-semibold">24 yoghurts to North Store</span> prepared. The remaining 16 units are set aside for donation and stock is updated.`,
-          "chat.q3": `What should I order for tomorrow?`,
-          "chat.a3": `Order <span class="font-semibold">25 cases of milk and 18 of bananas</span>. Do not order tomatoes: you have 12 days of stock.`,
-          "chat.q4": `The inspector needs batch L260814`,
-          "chat.a4": `Ready: a sealed, tamper-proof PDF with the batch's receipt, movements, sales and withdrawals.`,
-          "faq.h": `An Assistant for your day to day`,
-          "faq.sub": `ODAS understands what happens in your business and turns scattered data into decisions.`,
-          "faq.q1": `Which products expire this week?`,
-          "faq.a1": `40 yoghurts expire today, 18 trays of chicken tomorrow and 12 salads on Friday. The yoghurts are the most urgent.`,
-          "faq.q2": `How much will I sell tomorrow?`,
-          "faq.a2": `Around 1,840 units, 12% more than a normal Friday. The strongest growth will be in drinks and fresh food.`,
-          "faq.q3": `What should I order today?`,
-          "faq.a3": `Order 25 cases of milk and 18 of bananas. Do not order tomatoes: you have 12 days of stock.`,
-          "faq.q4": `Where am I at risk of a stockout?`,
-          "faq.a4": `Semi-skimmed milk and bananas for Saturday. You will be short by 42 and 28 units unless you adjust today.`,
-          "faq.q5": `Which products are overstocked?`,
-          "faq.a5": `Tomatoes, sparkling water and cereal. Tomatoes are the priority: 120 units and 12 days of cover.`,
-          "faq.q6": `Where should I reallocate the yoghurts expiring today?`,
-          "faq.a6": `North Store can absorb 24 units. I have prepared the transfer and the donation of the remaining 16.`,
-          "faq.q7": `Log 6 damaged packs of rice`,
-          "faq.a7": `Logged as damage waste, deducted from stock and added to the monthly report.`,
-          "faq.q8": `Which store is wasting the most?`,
-          "faq.a8": `Central store: 86 kg this month, 23% above average. Bakery accounts for the largest variance.`,
-          "faq.q9": `How much have I saved this month?`,
-          "faq.a9": `€3,840 against your baseline and 420 kg of waste avoided. Fresh food contributes 61% of the savings.`,
-          "faq.q10": `The inspector needs traceability for batch L260814`,
-          "faq.a10": `Ready: the batch's receipt, movements, sales and withdrawals in a sealed, tamper-proof PDF.`,
-          "hero.sub": `ODAS turns your company's data into <span class="rotador texto-degradado" data-palabras="decisions.|peace of mind.|control.|savings.">decisions.</span>`,
-          "hero.sub2": `ODAS connects your sales, inventory and purchasing data to predict surplus, automate regulatory compliance and help you make better decisions every day.`,
-          "card.explore": `Explore`,
-          "card1.label": `Demand forecast analysis`,
-          "card1.saved": `saved`,
-          "card1.recLabel": `Recommendation`,
-          "card1.title": `AI demand forecasting`,
-          "card2.title": `Law 1/2025 compliance`,
-          "card3.product": `Butter croissants (pack of 6)`,
-          "card3.lot": `Batch L26061402 · Bakery & Pastry`,
-          "card3.temp": `Room temperature`,
-          "card3.stock": `18 units available`,
-          "card3.priceUnit": `€1.99/unit`,
-          "card3.today": `Today`,
-          "card3.edit": `Buy`,
-          "card3.title": `Marketplace for suppliers`,
-          "card4.chainLabel": `Traceability chain · SHA-256`,
-          "card4.step1": `Receiving`,
-          "card4.step2": `Storage`,
-          "card4.step3": `Sale / Donation`,
-          "card4.step4": `Law 1/2025 record · sealed`,
-          "card4.title": `SHA-256 traceability`,
-          "card1.pop": `Per-SKU AI models that anticipate sales and adjust orders to minimise waste.`,
-          "card2.pop": `<ul class="space-y-1.5 text-left"><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Prevention plan</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Surplus hierarchy</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Subsidised training</li><li class="flex items-start gap-2"><span class="text-emerald-600">✓</span> Auditable documentation</li></ul>`,
-          "card3.pop": `A channel to redistribute stock between operators.`,
-          "card4.pop": `Verifiable proof for inspections.`,
-          "chart.title": `Demand forecast — next 7 days`,
-          "chart.outOfStock": `Out of stock (3.5d)`,
-          "chart.legPrevision": `Forecast`,
-          "chart.legStock": `Remaining stock`,
-          "chart.legInterval": `Interval`,
-          "chart.mTotal": `Total forecast`,
-          "chart.mAvg": `Daily average`,
-          "chart.mStock": `Current stock`,
-          "chart.mError": `Model error`,
-          "banda.label1": `saved in fines.`,
-          "banda.label2": `to create your prevention Plan, free.`,
-          "banda.label3": `in plan execution.`,
-          "plans.title": `One plan for SMEs and large companies`,
-          "plans.oneName": `SMEs & large companies`,
-          "plans.oneDesc": `From a single location to multi-store chains. ODAS learns from your sales, anticipates demand and keeps your Law 1/2025 compliance always up to date.`,
-          "plans.p1Name": `Starter SME`,
-          "plans.p1Desc": `Shops and small chains under 1,300 m² that need to comply and start preventing.`,
-          "plans.p1f1": `AI forecasting`,
-          "plans.p1f2": `Law 1/2025 documentation`,
-          "plans.p1f3": `SHA-256 traceability`,
-          "plans.p2Name": `Professional`,
-          "plans.p2Desc": `Mid-sized multi-store chains that want optimisation, legal compliance and to sell on the marketplace.`,
-          "plans.p2f1": `Everything in Starter`,
-          "plans.p2f2": `B2B marketplace + support`,
-          "plans.o1": `<strong class="font-semibold text-black">Cut your purchasing costs.</strong> Predict demand to buy only what you need and get alerts before a product expires, avoiding financial losses.`,
-          "plans.o2": `<strong class="font-semibold text-black">Reduce food waste.</strong> Identify where losses are generated and act before they happen, also cutting your CO₂ footprint.`,
-          "plans.o3": `<strong class="font-semibold text-black">Comply with Law 1/2025 automatically.</strong> Prevention plan, traceability and documentation always up to date and ready for any inspection.`,
-          "plans.o4": `<strong class="font-semibold text-black">Prove your commitment.</strong> Earn the ODAS Seal and communicate your sustainability impact with real data to customers, investors and authorities.`,
-          "plans.p2f3": `Advanced multi-store forecasting`,
-          "footer.ods": `Our technology helps reduce food waste, aligned with the United Nations <span class="text-black">Sustainable Development Goals 2, 12, 13 and 17</span>.`,
-          "footer.division": `A division of <span class="text-black">Negentropy Labs</span>`,
-          "funnel.alt": `Year-on-year reduction of food waste working with ODAS`,
-          "funnel.f1p": `baseline`,
-          "funnel.f1t": `Today`,
-          "funnel.f2p": `−15%`,
-          "funnel.f2t": `Year 1`,
-          "funnel.f3p": `−27%`,
-          "funnel.f3t": `Year 2`,
-          "funnel.f4p": `−38%`,
-          "funnel.f4t": `Year 3`,
-          "funnel.f5p": `−50%`,
-          "funnel.f5t": `Year 4`,
-          "funnel.pie": `Target trajectory: the more ODAS learns about your operation, the less product ends up in the bin. Starting from your own baseline.`,
-          "stats.h": `Less waste every year.`,
-          "stats.hsub": `Every kilo that ends up in the bin today was already bought, shipped and prepared. ODAS learns from your operation so that kilo never gets lost.`,
-          "stats.n1": `1/3`,
-          "stats.l1": `Of the world's food is lost or wasted (FAO)`,
-          "stats.n2": `8–10%`,
-          "stats.l2": `Of global CO₂ emissions (UNEP)`,
-          "stats.n3": `1/2025`,
-          "stats.l3": `The law that already applies to you`,
-          "stats.n4": `−50%`,
-          "stats.l4": `4-year target (UN SDG 12.3)`,
-          "footer.supportedBy": `A project supported by:`,
-          "footer.ods2Alt": `SDG 2: Zero hunger`,
-          "footer.ods12Alt": `SDG 12: Responsible consumption and production`,
-          "footer.ods13Alt": `SDG 13: Climate action`,
-          "footer.ods17Alt": `SDG 17: Partnerships for the goals`,
-          "sc1.m1": `Stock covers 3 days, with a risk of running out on <strong class="font-semibold">Saturday</strong>.`,
-          "sc1.m2": `Without action, you'll lose sales on <strong class="font-semibold">Saturday</strong> due to <strong class="font-semibold">stockouts</strong>.`,
-          "sc1.rec": `Order <strong class="font-semibold">25 units</strong> before <strong class="font-semibold">Friday</strong> to avoid running out.`,
-          "sc2.m1": `You have <strong class="font-semibold">40 yoghurts</strong> expiring in <strong class="font-semibold">2 days</strong>.`,
-          "sc2.m2": `At the current pace, <strong class="font-semibold">18 units</strong> would end up as waste.`,
-          "sc2.rec": `List them on the <strong class="font-semibold">Marketplace at −40%</strong> or <strong class="font-semibold">donate them</strong> today.`,
-          "sc3.m1": `Overstock: <strong class="font-semibold">12 days</strong> of tomatoes in the warehouse.`,
-          "sc3.m2": `There's a risk of <strong class="font-semibold">waste</strong> before selling it all.`,
-          "sc3.rec": `Apply <strong class="font-semibold">−30%</strong> for the <strong class="font-semibold">next 2 days</strong> to speed up sales.`,
-          "sc4.m1": `There are <strong class="font-semibold">15 loaves</strong> of today's bread left.`,
-          "sc4.m2": `They won't sell before <strong class="font-semibold">closing</strong>.`,
-          "sc4.rec": `<strong class="font-semibold">Repurpose them</strong> (breadcrumbs/croutons) or <strong class="font-semibold">donate them</strong> before 9 p.m.`
-        }
-      };
-
-      (function () {
-        var STORE = 'odas_lang';
-        var SUPPORTED = ['es', 'ca', 'en'];
-        function detect() {
-          try { var s = localStorage.getItem(STORE); if (s && SUPPORTED.indexOf(s) >= 0) return s; } catch (e) {}
-          var n = (navigator.language || 'es').slice(0, 2).toLowerCase();
-          return SUPPORTED.indexOf(n) >= 0 ? n : 'es';
-        }
-        window.LANG = detect();
-        window.t = function (key) {
-          var d = window.I18N[window.LANG] || window.I18N.es;
-          if (d && d[key] != null) return d[key];
-          return window.I18N.es[key] != null ? window.I18N.es[key] : '';
-        };
-        window.applyLang = function (lang) {
-          if (SUPPORTED.indexOf(lang) < 0) lang = 'es';
-          window.LANG = lang;
-          try { localStorage.setItem(STORE, lang); } catch (e) {}
-          document.documentElement.setAttribute('lang', lang);
-          document.querySelectorAll('[data-i18n]').forEach(function (el) {
-            var v = window.t(el.getAttribute('data-i18n')); if (v) el.textContent = v;
-          });
-          document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-            var v = window.t(el.getAttribute('data-i18n-html')); if (v) el.innerHTML = v;
-          });
-          document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
-            var v = window.t(el.getAttribute('data-i18n-alt')); if (v) el.setAttribute('alt', v);
-          });
-          var mt = window.t('meta.title'); if (mt) document.title = mt;
-          var md = window.t('meta.desc'); var mde = document.querySelector('meta[name="description"]'); if (md && mde) mde.setAttribute('content', md);
-          document.querySelectorAll('.lang-btn').forEach(function (b) {
-            var on = b.getAttribute('data-lang') === lang;
-            b.classList.toggle('text-black', on);
-            b.classList.toggle('font-semibold', on);
-            b.classList.toggle('text-gray-400', !on);
-          });
-          // Botón del selector: muestra el idioma actual (ES / CA / EN)
-          var act = document.getElementById('langActual');
-          if (act) act.textContent = lang.toUpperCase();
-          document.dispatchEvent(new CustomEvent('odas:langchange'));
-        };
-
-        // --- Desplegable del selector de idioma ---
-        var langTrigger = document.getElementById('langTrigger');
-        var langMenu = document.getElementById('langMenu');
-        function cerrarLang() { if (langMenu) { langMenu.classList.add('hidden'); langTrigger.setAttribute('aria-expanded', 'false'); } }
-        function abrirLang() { if (langMenu) { langMenu.classList.remove('hidden'); langTrigger.setAttribute('aria-expanded', 'true'); } }
-        if (langTrigger && langMenu) {
-          langTrigger.addEventListener('click', function (e) {
-            e.preventDefault(); e.stopPropagation();
-            langMenu.classList.contains('hidden') ? abrirLang() : cerrarLang();
-          });
-          document.addEventListener('click', function (e) {
-            if (!langMenu.contains(e.target) && !langTrigger.contains(e.target)) cerrarLang();
-          });
-          document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarLang(); });
-        }
-        document.addEventListener('click', function (e) {
-          var b = e.target.closest && e.target.closest('.lang-btn');
-          if (b) { e.preventDefault(); window.applyLang(b.getAttribute('data-lang')); cerrarLang(); }
-        });
-        window.applyLang(window.LANG);
-      })();
-    </script>
+    
 
 
     <!-- ========================================================================
@@ -3056,5 +2296,306 @@
     </script>
 
 
-  </body>
+  <script>
+(function(){
+  const phone=document.querySelector('.pages-phone'), thread=document.getElementById('chatHilo');
+  if(!phone || !thread) return;
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let started=false, inView=false, interactionUntil=0;
+  const scenarios=[
+    {name:'Joan',product:'préssecs',label:'Préssecs frescos',qty:500,price:'0,80',value:'400',until:'Fins divendres',request:'Tinc 500 kg de préssecs que necessito vendre.',answer:'A 0,80 €/kg. Fins divendres.'},
+    {name:'Maria',product:'tomàquets',label:'Tomàquets de temporada',qty:200,price:'1,20',value:'240',until:'Fins dijous',request:'Tinc un excedent de 200 kg de tomàquets. Els podem oferir?',answer:'A 1,20 €/kg. Estan disponibles fins dijous.'},
+    {name:'Pere',product:'carbassons',label:'Carbassons frescos',qty:150,price:'0,90',value:'135',until:'Fins dissabte',request:'Em queden 150 kg de carbassons de la collita. Els vull vendre.',answer:'A 0,90 €/kg, fins dissabte.'}
+  ];
+  const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  function scrollChat(){thread.scrollTo({top:thread.scrollHeight,behavior:reduce.matches?'auto':'smooth'});}
+  function message(text,producer,time){
+    const bubble=document.createElement('div');
+    bubble.className='chat-burbuja '+(producer?'chat-productor':'chat-ai');
+    const name=document.createElement('p');name.className='chat-demo-name';name.textContent=producer?'Productor':'Pagès AI';
+    const body=document.createElement('p');body.textContent=text;
+    const meta=document.createElement('div');meta.className='chat-demo-meta';meta.textContent=time+(producer?' ✓✓':'');
+    bubble.append(name,body,meta);thread.append(bubble);scrollChat();return bubble;
+  }
+  async function typing(){
+    if(reduce.matches)return;
+    const bubble=document.createElement('div');bubble.className='chat-burbuja chat-ai';bubble.setAttribute('aria-label','Pagès AI està escrivint');
+    bubble.innerHTML='<span class="chat-punto"></span> <span class="chat-punto"></span> <span class="chat-punto"></span>';
+    thread.append(bubble);scrollChat();await wait(850);bubble.remove();
+  }
+  async function activeWait(ms){
+    let remaining=ms;
+    while(remaining>0){await wait(Math.min(250,remaining));if(inView && !document.hidden)remaining-=250;}
+  }
+  async function conversation(data){
+    thread.replaceChildren();thread.scrollTop=0;thread.setAttribute('aria-live','off');
+    const pause=()=>reduce.matches?Promise.resolve():activeWait(1500);
+    message("Bon dia, "+data.name+"! Soc l'assistent de Pagès. En què et puc ajudar avui?",false,'09:41');await pause();
+    message(data.request,true,'09:42');await pause();await typing();
+    message("Perfecte! A quin preu vols vendre'ls i fins quan estan disponibles?",false,'09:42');await pause();
+    message(data.answer,true,'09:43');await pause();await typing();
+    const final=message('Perfecte, '+data.name+'! Ja tinc la teva oferta preparada.',false,'09:43');
+    const card=document.createElement('div');card.className='chat-offer';
+    const title=document.createElement('strong');title.textContent='Oferta preparada';
+    const list=document.createElement('dl');
+    [['Producte',data.label],['Quantitat',data.qty+' kg'],['Preu',data.price+' €/kg'],['Valor potencial',data.value+' €'],['Disponibilitat',data.until]].forEach(([label,value])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;list.append(dt,dd);});
+    card.append(title,list);final.insertBefore(card,final.lastChild);scrollChat();await pause();
+    const question=document.createElement('p');question.style.marginTop='9px';question.textContent='Vols publicar aquesta oferta al marketplace Pagès?';
+    const actions=document.createElement('div');actions.className='chat-demo-actions';
+    const publish=document.createElement('button');publish.type='button';publish.textContent='Publicar oferta';
+    const modify=document.createElement('button');modify.type='button';modify.textContent='Modificar';
+    publish.addEventListener('click',()=>{interactionUntil=Date.now()+14000;publish.disabled=true;modify.disabled=true;thread.setAttribute('aria-live','polite');message('Oferta publicada correctament!',false,'09:44');message('La teva oferta de '+data.qty+' kg de '+data.product+' ja és visible al marketplace Pagès.',false,'09:44');});
+    modify.addEventListener('click',()=>{interactionUntil=Date.now()+14000;modify.disabled=true;thread.setAttribute('aria-live','polite');message("Cap problema! Quina informació de l'oferta vols modificar?",false,'09:44');});
+    actions.append(publish,modify);final.insertBefore(question,final.lastChild);final.insertBefore(actions,final.lastChild);scrollChat();
+    if(reduce.matches)return;
+    await activeWait(11000);
+    while(Date.now()<interactionUntil || phone.contains(document.activeElement))await activeWait(500);
+  }
+  async function play(){
+    if(started)return;started=true;
+    let index=0;
+    do{await conversation(scenarios[index]);index=(index+1)%scenarios.length;}while(!reduce.matches);
+  }
+  if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{inView=entries.some(e=>e.isIntersecting);if(inView)play();},{threshold:.2});observer.observe(phone);}else{inView=true;play();}
+
+})();
+</script>
+<script>
+(function(){const market=document.querySelector('.buyer-market');if(!market)return;const search=market.querySelector('input'),filters=market.querySelectorAll('[data-filter]'),cards=market.querySelectorAll('.buyer-product');let category='all';function update(){let count=0;const query=search.value.toLocaleLowerCase('ca');cards.forEach(card=>{card.hidden=!((category==='all'||card.dataset.category===category)&&card.textContent.toLocaleLowerCase('ca').includes(query));if(!card.hidden)count++;});market.querySelector('.buyer-empty').hidden=count>0;}search.addEventListener('input',update);filters.forEach(button=>button.addEventListener('click',()=>{category=button.dataset.filter;filters.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));update();}));market.querySelectorAll('.buyer-order').forEach(button=>button.addEventListener('click',()=>{market.querySelector('.buyer-feedback').textContent='Sol·licitud de '+button.dataset.product.toLocaleLowerCase('ca')+' preparada. És una demostració; no s’ha enviat cap comanda.';}));})();
+</script>
+
+<script>
+(function(){const card=document.querySelector('.seller-origin-card');if(!card)return;const profiles={farm:{title:'Cultivas con esfuerzo. Vende con más oportunidades.',description:'Ofrece tu cosecha y tus excedentes a compradores profesionales. Comparte lo que tienes disponible, a tu precio y con tus tiempos.',origin:'De tu finca a nuevas mesas.',benefits:['Publica productos y cantidades disponibles.','Da visibilidad a tu finca y al origen de tu cosecha.','Prepara tus ofertas con ayuda de WhatsApp.']},coop:{title:'Muchas manos. Una oferta con más alcance.',description:'Reúne la producción de tus socios y presenta tu oferta a negocios que buscan producto local. Haz visible la variedad y disponibilidad de tu cooperativa.',origin:'De vuestra cooperativa al mercado profesional.',benefits:['Presenta la oferta de tus productores.','Comparte cantidades, formatos y disponibilidad.','Abre nuevas conversaciones comerciales.']},maker:{title:'Tu saber hacer merece llegar más lejos.',description:'Da a conocer los alimentos que elaboras y ofrece tu producción o lotes excedentes aptos para el consumo a compradores profesionales.',origin:'De tu obrador a nuevos negocios.',benefits:['Muestra tus productos y formatos de venta.','Ofrece lotes disponibles y excedentes de producción.','Comparte el origen y las condiciones del producto.']}};const copy=card.querySelector('.seller-copy');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+let revision=0,active='farm';
+const tabs=[...card.querySelectorAll('[data-seller]')];
+const controls=document.createElement('div');controls.className='seller-carousel-controls';
+controls.innerHTML='<button type="button" aria-label="Perfil anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><span class="seller-carousel-count" aria-hidden="true">1 / 3</span><button type="button" aria-label="Perfil siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>';
+copy.after(controls);
+function step(direction){const index=tabs.findIndex(b=>b.dataset.seller===active);tabs[(index+direction+tabs.length)%tabs.length].click();}
+controls.firstElementChild.addEventListener('click',()=>step(-1));
+controls.lastElementChild.addEventListener('click',()=>step(1));
+card.querySelector('.seller-selector').addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();step(event.key==='ArrowRight'?1:-1);tabs.find(b=>b.dataset.seller===active).focus();}});
+let touchStart=null;
+copy.addEventListener('touchstart',event=>{const t=event.touches[0];touchStart={x:t.clientX,y:t.clientY};},{passive:true});
+copy.addEventListener('touchend',event=>{if(!touchStart)return;const t=event.changedTouches[0],dx=t.clientX-touchStart.x,dy=t.clientY-touchStart.y;touchStart=null;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.5)step(dx<0?1:-1);},{passive:true});
+copy.addEventListener('touchcancel',()=>{touchStart=null;},{passive:true});
+card.querySelectorAll('[data-seller]').forEach(button=>button.addEventListener('click',async()=>{
+ const key=button.dataset.seller;if(key===active)return;const direction=tabs.indexOf(button)>tabs.findIndex(b=>b.dataset.seller===active)?1:-1;active=key;
+ controls.querySelector('.seller-carousel-count').textContent=(tabs.indexOf(button)+1)+' / '+tabs.length;
+ const turn=++revision,data=profiles[key];
+ card.querySelectorAll('[data-seller]').forEach(b=>b.setAttribute('aria-pressed',String(b===button))); 
+ const oldHeight=copy.getBoundingClientRect().height;
+ copy.getAnimations().forEach(a=>a.cancel());
+ if(!reduced.matches){
+  const out=copy.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateX('+(-direction*14)+'px)'}],{duration:140,easing:'ease-out',fill:'forwards'});
+  try{await out.finished;}catch{return;}
+ }
+ if(turn!==revision)return;
+ copy.querySelector('h3').textContent=data.title;
+ copy.querySelector('#seller-origin-description').textContent=data.description;
+ copy.querySelector('ul').replaceChildren(...data.benefits.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
+ await new Promise(requestAnimationFrame);
+ if(turn!==revision)return;
+ const newHeight=copy.getBoundingClientRect().height;
+ copy.getAnimations().forEach(a=>a.cancel());
+ if(!reduced.matches)copy.animate([
+  {opacity:0,transform:'translateX('+(direction*20)+'px)',height:oldHeight+'px'},
+  {opacity:1,transform:'translateY(0)',height:newHeight+'px'}
+ ],{duration:300,easing:'cubic-bezier(.22,1,.36,1)'});
+}));})();
+</script>
+<dialog id="pages-contact-dialog" aria-labelledby="pages-contact-title">
+<form id="pages-contact-form"><div class="contact-heading"><h2 id="pages-contact-title">Contacta con Pagès</h2><button type="button" id="close-pages-contact" aria-label="Cerrar">×</button></div>
+<label>Nombre<input name="name" autocomplete="name" required maxlength="100"></label>
+<label>Correo electrónico<input name="email" type="email" autocomplete="email" required maxlength="200"></label>
+<fieldset style="border:0;padding:0;margin:0;display:flex;gap:20px;flex-wrap:wrap"><legend style="font-size:12px;color:#465b40;margin-bottom:8px">Soy</legend><label style="display:flex;align-items:center;gap:8px"><input type="radio" name="profile" value="Comprador" required style="width:auto;accent-color:#35543a">Comprador</label><label style="display:flex;align-items:center;gap:8px"><input type="radio" name="profile" value="Vendedor" required style="width:auto;accent-color:#35543a">Vendedor</label></fieldset>
+<label>Asunto<input name="subject" required maxlength="150" value="Consulta sobre Pagès"></label>
+<label>Mensaje<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
+<p class="contact-note">Se abrirá tu aplicación de correo para enviar el mensaje a hello@odas-eu.com.</p><button type="submit" class="contact-send">Preparar mensaje</button><p id="contact-form-status" role="status"></p></form></dialog>
+<script>
+(function(){const dialog=document.getElementById('pages-contact-dialog'),open=document.getElementById('open-pages-contact'),form=document.getElementById('pages-contact-form');open.addEventListener('click',()=>dialog.showModal());document.getElementById('nav-pages-contact').addEventListener('click',()=>dialog.showModal());document.getElementById('hero-pages-contact').addEventListener('click',()=>dialog.showModal());document.getElementById('close-pages-contact').addEventListener('click',()=>dialog.close());form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const data=new FormData(form);const body='Nombre: '+data.get('name')+'\nCorreo: '+data.get('email')+'\nPerfil: '+data.get('profile')+'\n\n'+data.get('message');window.location.href='mailto:hello@odas-eu.com?subject='+encodeURIComponent(data.get('subject'))+'&body='+encodeURIComponent(body);document.getElementById('contact-form-status').textContent='Completa el envio desde tu aplicacion de correo.';});})();
+</script>
+    <!-- Script del AnimatedBeam: calcula las curvas entre nodos y anima el "haz" con SMIL -->
+    <script>
+      (function () {
+        var container = document.getElementById('beamContainer');
+        if (!container) return;
+        var svg = document.getElementById('beamSvg');
+        if (!svg) return;
+        var NS = 'http://www.w3.org/2000/svg';
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // from → hub(bn4). Lado izquierdo: normal; derecho: reverse (el haz siempre entra al núcleo).
+        var beams = [
+          { from: 'bn1', curvature: -75, endYOffset: -10, reverse: false, dur: 4.6, begin: 0.0 },
+          { from: 'bn2', curvature: 0, endYOffset: 0, reverse: false, dur: 5.2, begin: 0.6 },
+          { from: 'bn3', curvature: 75, endYOffset: 10, reverse: false, dur: 4.9, begin: 1.1 },
+          { from: 'bn5', curvature: -75, endYOffset: -10, reverse: true, dur: 5.0, begin: 0.3 },
+          { from: 'bn6', curvature: 0, endYOffset: 0, reverse: true, dur: 4.7, begin: 0.9 },
+          { from: 'bn7', curvature: 75, endYOffset: 10, reverse: true, dur: 5.3, begin: 1.4 }
+        ];
+        var toEl = document.getElementById('bn4');
+
+        // Construye las capas del SVG una sola vez; el path 'd' se recalcula en resize.
+        var defs = document.createElementNS(NS, 'defs');
+        svg.appendChild(defs);
+        var built = [];
+        beams.forEach(function (b, i) {
+          var gid = 'beamGrad' + i;
+          var grad = document.createElementNS(NS, 'linearGradient');
+          grad.setAttribute('id', gid);
+          grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+          grad.setAttribute('x1', '0%'); grad.setAttribute('x2', '0%');
+          grad.setAttribute('y1', '0%'); grad.setAttribute('y2', '0%');
+          grad.innerHTML =
+            '<stop stop-color="#10b981" stop-opacity="0"></stop>' +
+            '<stop stop-color="#10b981"></stop>' +
+            '<stop offset="32.5%" stop-color="#0ea5e9"></stop>' +
+            '<stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"></stop>';
+          if (!reduce) {
+            var x1v = b.reverse ? '90%;-10%' : '10%;110%';
+            var x2v = b.reverse ? '100%;0%' : '0%;100%';
+            grad.innerHTML +=
+              '<animate attributeName="x1" values="' + x1v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>' +
+              '<animate attributeName="x2" values="' + x2v + '" dur="' + b.dur + 's" begin="' + b.begin + 's" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1"></animate>';
+          }
+          defs.appendChild(grad);
+
+          var base = document.createElementNS(NS, 'path');
+          base.setAttribute('stroke', '#c7ccd4');
+          base.setAttribute('stroke-width', '2');
+          base.setAttribute('stroke-opacity', '0.35');
+          base.setAttribute('stroke-linecap', 'round');
+          base.setAttribute('fill', 'none');
+          svg.appendChild(base);
+
+          var glow = document.createElementNS(NS, 'path');
+          glow.setAttribute('stroke', 'url(#' + gid + ')');
+          glow.setAttribute('stroke-width', '2');
+          glow.setAttribute('stroke-linecap', 'round');
+          glow.setAttribute('fill', 'none');
+          svg.appendChild(glow);
+
+          built.push({ cfg: b, base: base, glow: glow });
+        });
+
+        function update() {
+          var cr = container.getBoundingClientRect();
+          if (!cr.width || !cr.height) return;
+          svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + cr.height);
+          var rb = toEl.getBoundingClientRect();
+          built.forEach(function (o) {
+            var fromEl = document.getElementById(o.cfg.from);
+            if (!fromEl) return;
+            var ra = fromEl.getBoundingClientRect();
+            var sx = ra.left - cr.left + ra.width / 2;
+            var sy = ra.top - cr.top + ra.height / 2;
+            var ex = rb.left - cr.left + rb.width / 2;
+            var ey = rb.top - cr.top + rb.height / 2 + o.cfg.endYOffset;
+            var cyc = sy - o.cfg.curvature;
+            var d = 'M ' + sx + ',' + sy + ' Q ' + ((sx + ex) / 2) + ',' + cyc + ' ' + ex + ',' + ey;
+            o.base.setAttribute('d', d);
+            o.glow.setAttribute('d', d);
+          });
+        }
+
+        if (window.ResizeObserver) { new ResizeObserver(update).observe(container); }
+        window.addEventListener('resize', update);
+        // Recalcula tras cargar imágenes/fuentes (los nodos cambian de posición).
+        window.addEventListener('load', update);
+        update();
+      })();
+    </script>
+<script>
+(function(){
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+ document.querySelectorAll('canvas[data-pages-motion]').forEach(canvas=>{
+  const ctx=canvas.getContext('2d');if(!ctx)return;
+  let width=1,height=1,visible=false,raf=0,time=0,last=0;
+  const kind=canvas.dataset.pagesMotion;
+  const mask=document.createElement('canvas');mask.width=320;mask.height=210;const m=mask.getContext('2d');
+  m.strokeStyle='#000';m.fillStyle='#000';m.lineWidth=2;m.lineCap='round';m.lineJoin='round';
+  function line(points){m.beginPath();points.forEach((p,i)=>i?m.lineTo(...p):m.moveTo(...p));m.stroke();}
+  function rect(x,y,w,h,r){m.beginPath();m.roundRect(x,y,w,h,r);m.stroke();}
+  function circle(x,y,r){m.beginPath();m.arc(x,y,r,0,Math.PI*2);m.stroke();}
+  if(kind==='harvest-market'){
+   rect(35,98,70,49,3);line([[35,115],[105,115]]);line([[52,98],[52,147]]);line([[87,98],[87,147]]);
+   circle(53,86,12);circle(83,84,13);line([[53,74],[56,65],[62,64]]);line([[83,71],[83,61],[91,62]]);
+   rect(219,93,66,58,3);line([[211,92],[221,65],[281,65],[292,92],[211,92]]);line([[233,151],[233,120],[254,120],[254,151]]);rect(262,110,13,17,1);
+   line([[120,115],[197,115]]);line([[186,104],[197,115],[186,126]]);
+  }else if(kind==='traceability'){
+   rect(108,40,97,130,7);line([[173,40],[173,68],[205,68]]);line([[173,40],[205,68]]);
+   line([[126,83],[166,83]]);line([[126,99],[183,99]]);line([[126,115],[169,115]]);line([[126,131],[150,131]]);
+   rect(33,89,40,33,3);line([[33,100],[73,100]]);circle(262,105,22);line([[252,105],[259,112],[273,97]]);line([[73,105],[96,105]]);line([[216,105],[240,105]]);
+  }else{
+   rect(72,30,127,151,14);line([[115,40],[153,40]]);line([[126,170],[145,170]]);
+   rect(89,60,88,34,7);line([[102,72],[160,72]]);line([[102,82],[142,82]]);
+   rect(109,107,104,39,8);line([[122,121],[182,121]]);line([[122,132],[169,132]]);
+   circle(238,71,22);line([[228,71],[235,78],[249,63]]);
+  }
+  const pixels=m.getImageData(0,0,320,210).data,points=[];
+  for(let y=0;y<210;y+=3)for(let x=0;x<320;x+=3)if(pixels[(y*320+x)*4+3]>55)points.push([x,y]);
+  function draw(){
+   ctx.clearRect(0,0,width,height);const scale=Math.min(width/340,height/230),ox=(width-320*scale)/2,oy=(height-210*scale)/2;
+   ctx.save();ctx.translate(ox,oy);ctx.scale(scale,scale);
+   const reveal=reduce.matches?1:Math.min(1,time/1.8);
+   for(let i=0;i<points.length;i++){const [x,y]=points[i];const drift=(1-reveal)*Math.sin(i*2.4+time)*12;const pulse=.55+.35*Math.sin(time*1.1+x*.018+y*.012);ctx.fillStyle='rgba(42,52,61,'+(reduce.matches?.75:pulse)+')';ctx.beginPath();ctx.arc(x+drift,y+drift*.5,1.15,0,Math.PI*2);ctx.fill();}
+   if(kind==='harvest-market'){
+    for(let i=0;i<7;i++){const p=reduce.matches?i/7:((time*.19+i/7)%1);const x=109+p*107,y=82-Math.sin(p*Math.PI)*24;ctx.fillStyle='rgba(68,115,80,'+Math.sin(p*Math.PI)*.8+')';ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fill();}
+   }else if(kind==='traceability'){
+    const p=reduce.matches?.55:(time*.22)%1;ctx.strokeStyle='rgba(90,137,98,.5)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(117,58+p*99);ctx.lineTo(195,58+p*99);ctx.stroke();ctx.fillStyle='#628d6a';ctx.beginPath();ctx.arc(262,105,2.2,0,Math.PI*2);ctx.fill();
+   }else{
+    for(let i=0;i<3;i++){ctx.fillStyle='rgba(68,115,80,'+(reduce.matches?.7:.3+.6*(.5+.5*Math.sin(time*3-i*.7)))+')';ctx.beginPath();ctx.arc(120+i*11,155,2,0,Math.PI*2);ctx.fill();}
+   }
+   ctx.restore();
+  }
+  function frame(now){raf=0;if(!visible||document.hidden)return;time+=last?Math.min(.05,(now-last)/1000):0;last=now;draw();if(!reduce.matches)raf=requestAnimationFrame(frame);}
+  function start(){last=0;if(visible&&!document.hidden&&!raf){draw();if(!reduce.matches)raf=requestAnimationFrame(frame);}}
+  function resize(){const r=canvas.getBoundingClientRect();width=r.width;height=r.height;const dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw();}
+  new ResizeObserver(resize).observe(canvas);
+  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(!visible&&raf){cancelAnimationFrame(raf);raf=0;}else start();}).observe(canvas);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&raf){cancelAnimationFrame(raf);raf=0;}else start();});
+  reduce.addEventListener('change',()=>{if(raf){cancelAnimationFrame(raf);raf=0;}start();});resize();
+ });
+})();
+</script>
+<script type="module" src="site-languages.js"></script>
+<script>
+(function(){
+ const journey=document.querySelector('.apple-scroll-journey'),branch=journey?.querySelector('.orchard-transition'),card=journey?.querySelector('.seller-origin-card'),fruit=journey?.querySelector('.apple-scroll-fruit');
+ if(!journey||!branch||!card||!fruit)return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');let raf=0,geometry=null,current=null;
+ function measure(){
+  const j=journey.getBoundingClientRect(),b=branch.getBoundingClientRect(),c=card.getBoundingClientRect(),size=fruit.offsetWidth;
+  geometry={top:j.top+scrollY,startX:b.left-j.left+b.width*.67-size*.52,startY:b.top-j.top+b.height*.34-size*.13,endX:c.left-j.left+c.width*.2-size*.5,endY:c.top-j.top+Math.min(c.height*.5,220),size};
+  current=null;update();
+ }
+ function render(){
+  raf=0;if(!geometry)return;const g=geometry;
+  const start=g.top+g.startY-innerHeight*.58,end=g.top+g.endY-innerHeight*.58;
+  const progress=reduced.matches?0:Math.max(0,Math.min(1,(scrollY-start)/Math.max(1,end-start)));
+  if(current===null)current=progress;
+  current+= (progress-current)*.16;
+  if(Math.abs(progress-current)<.0003)current=progress;
+  const t=current,ease=t*t*(3-2*t);
+  const x=g.startX+(g.endX-g.startX)*ease+Math.sin(t*Math.PI)*g.size*.35;
+  const y=g.startY+(g.endY-g.startY)*t;
+  const rotation=-55*ease+Math.sin(t*Math.PI*2)*5;
+  fruit.style.visibility='visible';fruit.style.transform='translate3d('+x+'px,'+y+'px,0) rotate('+rotation+'deg)';
+  const fadeProgress=Math.max(0,Math.min(1,(t-.68)/.32));
+  const fade=fadeProgress*fadeProgress*(3-2*fadeProgress);
+  fruit.style.opacity=String(1-fade);
+  fruit.style.filter='blur('+(fade*10).toFixed(2)+'px)';
+  if(current!==progress)raf=requestAnimationFrame(render);
+ }
+ function update(){if(!raf)raf=requestAnimationFrame(render);}
+ addEventListener('scroll',update,{passive:true});addEventListener('resize',measure);
+ new ResizeObserver(measure).observe(journey);
+ reduced.addEventListener('change',measure);
+ branch.querySelector('img')?.addEventListener('load',measure);
+ document.fonts?.ready.then(measure);measure();
+})();
+</script>
+<script>document.querySelectorAll('[data-buyer-contact]').forEach(button=>button.addEventListener('click',()=>{const dialog=document.getElementById('pages-contact-dialog');dialog.querySelector('[name="profile"][value="Comprador"]').checked=true;dialog.showModal();}));</script></body>
 </html>
