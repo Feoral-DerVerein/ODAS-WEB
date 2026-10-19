@@ -13,7 +13,7 @@ const SITE_TRANSLATIONS=[["Quiénes somos","Qui som","About us","Über uns"],["C
    let values=attrs.get(el);if(!values){values={};['placeholder','alt','aria-label','value'].forEach(attr=>{const value=el.getAttribute(attr);if(value&&dictionary.has(normal(value)))values[attr]=dictionary.get(normal(value));});attrs.set(el,values);}
    Object.entries(values).forEach(([attr,row])=>{const target=row[index];if(el.getAttribute(attr)!==target){el.setAttribute(attr,target);if(attr==='value'&&(!el.value||SITE_TRANSLATIONS.some(r=>r.includes(el.value))))el.value=target;}});
   });
-  const image=document.querySelector('#marketplace img');if(image){const src=MARKET_ASSETS[current]+"?v=new-photos-4";if(image.getAttribute('src')!==src)image.setAttribute('src',src);}
+  const image=document.querySelector('#marketplace img');if(image){const src=MARKET_ASSETS[current];if(image.src!==src)image.setAttribute('src',src);}
  }
  function apply(lang){current=languages.includes(lang)?lang:'es';document.documentElement.lang=current;window.LANG=current;try{localStorage.setItem('odas_lang',current);}catch(e){}document.querySelectorAll('.site-language-select').forEach(select=>select.value=current);document.title='ODAS · Pagès';translateTree();}
  document.querySelectorAll('.site-language-select').forEach(select=>select.addEventListener('change',()=>apply(select.value)));
