@@ -1012,6 +1012,9 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
 .buyer-market-image-frame{aspect-ratio:auto;height:auto;min-height:0;padding:0}
 #marketplace.buyer-market-image-frame{height:calc((100vw - 40px) * .5303 + 3cm);max-height:656px}
 @media(min-width:1064px){#marketplace.buyer-market-image-frame{height:656px}}
+</style><style id="continuous-orchard-edge">
+.orchard-transition.orchard-full-width{overflow:hidden}
+.orchard-transition.orchard-full-width>img{width:112%;max-width:none;height:auto;object-fit:initial;object-position:left center}
 </style></head>
 
   <body class="bg-fondo text-black antialiased selection:bg-black selection:text-white">
@@ -2616,7 +2619,7 @@ card.querySelectorAll('[data-seller]').forEach(button=>button.addEventListener('
  if(!journey||!branch||!card||!fruit)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');let raf=0,geometry=null,current=null;
  function measure(){
-  const j=journey.getBoundingClientRect(),b=branch.getBoundingClientRect(),c=card.getBoundingClientRect(),size=fruit.offsetWidth;
+  const j=journey.getBoundingClientRect(),b=branch.querySelector('img').getBoundingClientRect(),c=card.getBoundingClientRect(),size=fruit.offsetWidth;
   geometry={top:j.top+scrollY,startX:b.left-j.left+b.width*.67-size*.52,startY:b.top-j.top+b.height*.34-size*.13,endX:c.left-j.left+c.width*.2-size*.5,endY:c.top-j.top+Math.min(c.height*.5,220),size};
   current=null;update();
  }
