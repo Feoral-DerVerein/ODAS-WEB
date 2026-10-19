@@ -15,7 +15,7 @@ const SITE_TRANSLATIONS=[["Quiénes somos", "Qui som", "About us", "Über uns"],
   });
   const image=document.querySelector('#marketplace img');if(image){const src=MARKET_ASSETS[current];if(image.src!==src)image.setAttribute('src',src);}
  }
- function apply(lang){current=languages.includes(lang)?lang:'es';document.documentElement.lang=current;window.LANG=current;try{localStorage.setItem('odas_lang',current);}catch(e){}document.querySelectorAll('.site-language-select').forEach(select=>select.value=current);document.title='ODAS · Pagès';translateTree();}
+ function apply(lang){current=languages.includes(lang)?lang:'es';document.documentElement.lang=current;window.LANG=current;try{localStorage.setItem('odas_lang',current);}catch(e){}document.querySelectorAll('.site-language-select').forEach(select=>select.value=current);document.title=['ODAS · Organismo de Desarrollo Alimentario Sostenible','ODAS · Organisme de Desenvolupament Alimentari Sostenible','ODAS · Organization for Sustainable Food Development','ODAS · Organisation für nachhaltige Lebensmittelentwicklung'][languages.indexOf(current)];translateTree();}
  document.querySelectorAll('.site-language-select').forEach(select=>select.addEventListener('change',()=>apply(select.value)));
  const observer=new MutationObserver(()=>{if(!scheduled){scheduled=true;queueMicrotask(()=>{scheduled=false;translateTree();});}});
  apply(current);observer.observe(document.body,{childList:true,subtree:true,characterData:true});
