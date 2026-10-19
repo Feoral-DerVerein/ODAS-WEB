@@ -1019,6 +1019,16 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
 .chat-input-icons{display:flex;align-items:center;gap:7px;flex-shrink:0;color:#6d7a80}
 .chat-input-icons svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .pages-phone .chat-cursor{visibility:hidden}.pages-phone.is-composing .chat-cursor{visibility:visible}
+</style><style id="contact-feedback-layout">
+#pages-contact-dialog{box-sizing:border-box;max-width:500px;width:calc(100% - 32px);max-height:calc(100dvh - 32px);overscroll-behavior:contain}
+#pages-contact-form{min-width:0}#pages-contact-form>*{min-width:0}#pages-contact-form input,#pages-contact-form textarea{box-sizing:border-box;min-width:0;max-width:100%}
+#contact-form-status{padding:12px 14px;margin:0;background:#faf3ed;border:1px solid #ead7c6;border-radius:12px;color:#7b4b32;font-size:13px;line-height:1.6;white-space:normal;overflow-wrap:anywhere}
+.contact-confirmation{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:24px 4px;color:#253e2b;outline:none}
+.contact-success-icon{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:#eaf3e7;color:#35543a}.contact-success-icon svg{width:32px;height:32px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.contact-confirmation h2{font-size:30px;line-height:1.2}.contact-confirmation p{font-size:15px;line-height:1.6;color:#6d7c67;max-width:340px}.contact-confirmation .contact-send{width:100%}
+#pages-contact-form[hidden],#contact-confirmation[hidden],#contact-form-status[hidden]{display:none}
+.contact-send:disabled{opacity:.65;cursor:wait}
+@media(max-width:540px){#pages-contact-dialog{padding:22px;width:calc(100% - 24px);max-height:calc(100dvh - 24px)}#pages-contact-form input,#pages-contact-form textarea{font-size:16px}.contact-heading h2{font-size:25px}#contact-form-status{font-size:13px}.contact-send{min-height:44px}}
 </style></head>
 
   <body class="bg-fondo text-black antialiased selection:bg-black selection:text-white">
@@ -2486,32 +2496,35 @@ card.querySelectorAll('[data-seller]').forEach(button=>button.addEventListener('
 <fieldset style="border:0;padding:0;margin:0;display:flex;gap:20px;flex-wrap:wrap"><legend style="font-size:12px;color:#465b40;margin-bottom:8px">Soy</legend><label style="display:flex;align-items:center;gap:8px"><input type="radio" name="profile" value="Comprador" required style="width:auto;accent-color:#35543a">Comprador</label><label style="display:flex;align-items:center;gap:8px"><input type="radio" name="profile" value="Vendedor" required style="width:auto;accent-color:#35543a">Vendedor</label></fieldset>
 <label>Asunto<input name="subject" required maxlength="150" value="Consulta sobre Pagès"></label>
 <label>Mensaje<textarea name="message" rows="5" required maxlength="5000"></textarea></label>
-<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px"><p class="contact-note">Tu mensaje se enviará a hello@odas-eu.com sin salir de esta página.</p><button type="submit" class="contact-send">Enviar mensaje</button><p id="contact-form-status" role="status"></p></form></dialog>
+<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px"><p class="contact-note">Tu mensaje se enviará a hello@odas-eu.com sin salir de esta página.</p><button type="submit" class="contact-send">Enviar mensaje</button><p id="contact-form-status" role="status" hidden></p></form><section id="contact-confirmation" class="contact-confirmation" aria-labelledby="contact-confirmation-title" tabindex="-1" hidden><span class="contact-success-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span><h2 id="contact-confirmation-title">Mensaje enviado</h2><p>Gracias por contactar con nosotros. Te responderemos lo antes posible.</p><button type="button" class="contact-send" id="close-contact-confirmation">Cerrar</button></section></dialog>
 <script>
 (function(){
  const dialog=document.getElementById('pages-contact-dialog'),form=document.getElementById('pages-contact-form');
  const status=document.getElementById('contact-form-status'),button=form.querySelector('[type="submit"]');
  const text=value=>window.translateSiteText?window.translateSiteText(value):value;
+ const confirmation=document.getElementById('contact-confirmation');
+ function resetView(){form.hidden=false;confirmation.hidden=true;status.hidden=true;status.textContent='';}
+ document.getElementById('close-contact-confirmation').addEventListener('click',()=>{dialog.close();resetView();});
  let sending=false;
- ['open-pages-contact','nav-pages-contact','hero-pages-contact'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>dialog.showModal()));
+ ['open-pages-contact','nav-pages-contact','hero-pages-contact'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>{resetView();dialog.showModal();}));
  document.getElementById('close-pages-contact').addEventListener('click',()=>dialog.close());
  form.addEventListener('submit',async event=>{
   event.preventDefault();if(sending||!form.reportValidity())return;
   const data=new FormData(form);if(data.get('_honey'))return;
   sending=true;button.disabled=true;form.setAttribute('aria-busy','true');
-  button.textContent=text('Enviando…');status.textContent='';
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
+  button.textContent=text('Enviando…');status.textContent='';status.hidden=true;
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);
   try{
    const response=await fetch('https://formsubmit.co/ajax/hello@odas-eu.com',{
-    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},signal:controller.signal,
-    body:JSON.stringify({name:data.get('name'),email:data.get('email'),profile:data.get('profile'),message:data.get('message'),_subject:data.get('subject'),_template:'table',_honey:''})
+    method:'POST',headers:{'Accept':'application/json'},signal:controller.signal,
+    body:new URLSearchParams({name:data.get('name'),email:data.get('email'),profile:data.get('profile'),message:data.get('message'),_subject:data.get('subject'),_template:'table',_url:'https://www.odas-eu.com/',_honey:''})
    });
    const result=await response.json();
    if(!response.ok||!(result.success===true||result.success==='true'))throw new Error('Submission failed');
    form.reset();
-   status.textContent=text('Tu mensaje se ha enviado. Gracias por contactar con nosotros.');
+   form.hidden=true;confirmation.hidden=false;confirmation.focus();
   }catch(error){
-   status.textContent=text('No se pudo confirmar el envío. Conservamos tu mensaje para que puedas intentarlo de nuevo.');
+   status.hidden=false;status.textContent=text('No hemos podido enviar tu mensaje. Tus datos siguen aquí: vuelve a intentarlo en unos momentos.');
   }finally{
    clearTimeout(timer);sending=false;button.disabled=false;form.removeAttribute('aria-busy');button.textContent=text('Enviar mensaje');
   }
