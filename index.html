@@ -963,6 +963,34 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
 .buyer-profile-photo{height:205px;flex:none;margin:0 -26px -12px;background-image:linear-gradient(to bottom,rgba(255,255,255,0) 30%,rgba(255,255,255,.18) 52%,rgba(255,255,255,.8) 80%,#fff 100%),url('buyer-venues.webp');background-size:100% 100%,400% 100%;background-position:center,var(--photo-position) center;background-repeat:no-repeat}
 .buyer-profile-type,.buyer-profile-card h4{position:relative;z-index:1}
 @media(max-width:540px){.buyer-profile-photo{margin-left:-24px;margin-right:-24px;height:220px}}
+</style><style>.buyer-market-image-frame{height:auto;aspect-ratio:1122/910}@media(max-width:767px){.buyer-market-image-frame{height:auto;aspect-ratio:1122/910}}</style><style>
+.buyer-profile-photo-hotel{background-image:linear-gradient(to bottom,rgba(255,255,255,0) 30%,rgba(255,255,255,.18) 52%,rgba(255,255,255,.8) 80%,#fff 100%),url('hotel-desayuno-mediterraneo.png');background-size:100% 100%,cover;background-position:center,center 70%}
+</style><style>
+.buyer-profile-photo-hotel{height:auto;aspect-ratio:1122/1402;background-size:100% 100%,100% 100%;background-position:center;}
+@media(max-width:540px){.buyer-profile-photo-hotel{height:auto}}
+</style><style>
+.buyer-profile-card-hotel{padding-top:26px;padding-bottom:0}
+.buyer-profile-card-hotel .buyer-profile-photo-hotel{margin-top:0;margin-bottom:0;background-image:url('hotel-desayuno-mediterraneo.png');background-size:100% 100%}
+</style><style id="hotel-editorial-card">
+.buyer-profile-card-hotel{position:relative;isolation:isolate;min-height:460px;aspect-ratio:1122/1402;justify-content:flex-end;padding:28px 24px;border:0;background:#334a28;border-radius:22px;overflow:hidden}
+.buyer-profile-card-hotel .buyer-profile-photo-hotel{position:absolute;inset:0;z-index:-2;width:100%;height:100%;aspect-ratio:auto;margin:0;background-image:url('hotel-desayuno-mediterraneo.png');background-size:cover;background-position:center}
+.buyer-profile-card-hotel::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,40,21,0) 20%,rgba(18,40,21,.18) 42%,rgba(18,40,21,.72) 78%,rgba(18,40,21,.86) 100%);pointer-events:none}
+.buyer-profile-card-hotel .buyer-profile-type{color:#fff;text-transform:uppercase;letter-spacing:.13em;font-size:11px;text-decoration:underline;text-underline-offset:5px;margin-bottom:16px}
+.buyer-profile-card-hotel h4{color:#fff;font-size:28px;line-height:1.15;margin-bottom:24px}
+.buyer-profile-card-hotel>p:last-of-type{color:rgba(255,255,255,.95);font-size:14px;line-height:1.6;margin-bottom:0}
+@media(max-width:540px){.buyer-profile-card-hotel{min-height:460px;padding:30px 26px}.buyer-profile-card-hotel .buyer-profile-photo-hotel{height:100%;margin:0}}
+</style><style id="buyer-card-sizing">
+.buyer-profiles-grid{align-items:stretch;grid-template-columns:repeat(4,minmax(0,1fr))}
+.buyer-profile-card{min-width:0;min-height:460px;height:100%;box-sizing:border-box}
+.buyer-profile-card-hotel{aspect-ratio:auto;min-height:460px}
+@media(max-width:1000px){.buyer-profiles-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.buyer-profiles-grid{grid-template-columns:minmax(0,1fr);max-width:390px;margin-inline:auto;gap:22px}.buyer-profile-card{min-height:440px}.buyer-profile-card-hotel{min-height:480px}}
+</style><style>
+.buyer-profile-card-restaurant .buyer-profile-photo-restaurant{background-image:url('restaurante-plato-campestre.png');background-position:center;background-size:cover}
+</style><style>
+.buyer-profile-card-supermarket .buyer-profile-photo-supermarket{background-image:url('supermercado-mercado-local.png');background-position:center;background-size:cover;filter:saturate(.7) brightness(.94)}
+</style><style>
+.buyer-profile-card-catering .buyer-profile-photo-catering{background-image:url('catering-mercado-productos.png');background-position:center;background-size:cover;filter:saturate(.7) brightness(.94)}
 </style></head>
 
   <body class="bg-fondo text-black antialiased selection:bg-black selection:text-white">
@@ -1044,7 +1072,7 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
         <div class="relative mx-auto mt-16 w-full max-w-5xl pb-8 text-left sm:pb-0">
 
           <div id="marketplace" class="buyer-market-image-frame" role="region" aria-label="Vista del marketplace de Pagès para compradores">
-            <img src="pages-marketplace-es.svg" alt="Marketplace Pagès: catálogo de productos locales para compradores profesionales, con frutas, verduras, aceite y queso, precios y disponibilidad." width="1122" height="1402" decoding="async">
+            <img src="pages-marketplace-es.svg" alt="Marketplace Pagès: catálogo de productos locales para compradores profesionales, con frutas, verduras, aceite y queso, precios y disponibilidad." width="1122" height="910" decoding="async">
           </div>
 
           <!-- Teléfono: asistente por WhatsApp -->
@@ -1494,7 +1522,7 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
           </div>
         </article>
 
-<section class="buyer-profiles" aria-labelledby="buyer-profiles-title"><div class="buyer-profiles-heading"><p class="seller-label">Quiénes compran en Pagès</p><h3 id="buyer-profiles-title">Creamos un marketplace hecho para los compradores</h3><p>Creamos un marketplace hecho para los compradores, nuestro foco es del productor y la cooperativa a tu negocio. Un solo lugar para descubrir productos de proximidad, encontrar nuevas oportunidades de compra y simplificar tu abastecimiento.</p></div><div class="buyer-profiles-grid"><article class="buyer-profile-card"><div class="buyer-profile-photo" aria-hidden="true" style="--photo-position:0%"></div><p class="buyer-profile-type">Hoteles</p><h4>Producto local para cada estancia.</h4><p>Encuentra alimentos de proximidad para desayunos, restaurantes y eventos de tu hotel.</p></article><article class="buyer-profile-card"><div class="buyer-profile-photo" aria-hidden="true" style="--photo-position:33.3333%"></div><p class="buyer-profile-type">Restaurantes</p><h4>Del productor a tu cocina.</h4><p>Consulta productos de temporada, precios y cantidades para crear tu próxima carta.</p></article><article class="buyer-profile-card"><div class="buyer-profile-photo" aria-hidden="true" style="--photo-position:66.6667%"></div><p class="buyer-profile-type">Supermercados</p><h4>Más origen en tus estanterías.</h4><p>Amplía tu oferta con productos locales y excedentes de calidad de productores de tu región.</p></article><article class="buyer-profile-card"><div class="buyer-profile-photo" aria-hidden="true" style="--photo-position:100%"></div><p class="buyer-profile-type">Catering y distribuidores</p><h4>Nuevos contactos para tus compras.</h4><p>Descubre proveedores, consulta su disponibilidad y coordina tus pedidos directamente con ellos.</p></article></div></section>
+<section class="buyer-profiles" aria-labelledby="buyer-profiles-title"><div class="buyer-profiles-heading"><p class="seller-label">Quiénes compran en Pagès</p><h3 id="buyer-profiles-title">Creamos un marketplace hecho para los compradores</h3><p>Creamos un marketplace hecho para los compradores, nuestro foco es del productor y la cooperativa a tu negocio. Un solo lugar para descubrir productos de proximidad, encontrar nuevas oportunidades de compra y simplificar tu abastecimiento.</p></div><div class="buyer-profiles-grid"><article class="buyer-profile-card buyer-profile-card-hotel"><p class="buyer-profile-type">Hoteles</p><h4>Producto local para cada estancia.</h4><p>Encuentra alimentos de proximidad para desayunos, restaurantes y eventos de tu hotel.</p><div class="buyer-profile-photo buyer-profile-photo-hotel" aria-hidden="true" style="--photo-position:0%"></div></article><article class="buyer-profile-card buyer-profile-card-hotel buyer-profile-card-restaurant"><div class="buyer-profile-photo buyer-profile-photo-hotel buyer-profile-photo-restaurant" aria-hidden="true"></div><p class="buyer-profile-type">Restaurantes</p><h4>Del productor a tu cocina.</h4><p>Consulta productos de temporada, precios y cantidades para crear tu próxima carta.</p></article><article class="buyer-profile-card buyer-profile-card-hotel buyer-profile-card-supermarket"><div class="buyer-profile-photo buyer-profile-photo-hotel buyer-profile-photo-supermarket" aria-hidden="true"></div><p class="buyer-profile-type">Supermercados</p><h4>Más origen en tus estanterías.</h4><p>Amplía tu oferta con productos locales y excedentes de calidad de productores de tu región.</p></article><article class="buyer-profile-card buyer-profile-card-hotel buyer-profile-card-catering"><div class="buyer-profile-photo buyer-profile-photo-hotel buyer-profile-photo-catering" aria-hidden="true"></div><p class="buyer-profile-type">Catering y distribuidores</p><h4>Nuevos contactos para tus compras.</h4><p>Descubre proveedores, consulta su disponibilidad y coordina tus pedidos directamente con ellos.</p></article></div></section>
         <!-- Predicción + margen -->
         <div class="group relative flex flex-col overflow-hidden rounded-2xl bg-white/60 ring-1 ring-gray-900/5 shadow-lg shadow-gray-900/5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl hover:ring-gray-900/10 lg:col-span-2">
           
@@ -2088,7 +2116,7 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
         <div class="flex flex-col items-center gap-4 text-sm text-gray-500 sm:flex-row sm:justify-between">
           <!-- [[EDITAR: logo del pie — marca ODAS]] -->
           <div class="flex items-center">
-            <img loading="lazy" decoding="async" src="odas-solo-letras.svg" alt="ODAS" class="h-14 w-auto max-w-[165px] object-contain sm:h-16" />
+            <img loading="lazy" decoding="async" src="odas-solo-letras.svg" alt="ODAS" class="h-8 w-auto max-w-[100px] object-contain sm:h-16 sm:max-w-[165px]" />
           </div>
           <!-- [[EDITAR: empresa madre y copyright]] -->
           <p>© 2026 ODAS</p>
