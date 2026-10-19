@@ -8,7 +8,7 @@ const SITE_TRANSLATIONS=[["Quiénes somos", "Qui som", "About us", "Über uns"],
  function translateTree(){
   const index=languages.indexOf(current),walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
-  nodes.forEach(node=>{if(!node.parentElement||node.parentElement.closest('script,style,select,textarea'))return;const raw=node.nodeValue,key=normal(raw);let row=original.get(node);if(!row){row=dictionary.get(key);if(row)original.set(node,row);}if(row){const target=raw.replace(raw.trim(),row[index].trim());if(node.nodeValue!==target)node.nodeValue=target;}});
+  nodes.forEach(node=>{if(!node.parentElement||node.parentElement.closest('script,style,select,textarea,[data-chat-draft]'))return;const raw=node.nodeValue,key=normal(raw);let row=original.get(node);if(!row){row=dictionary.get(key);if(row)original.set(node,row);}if(row){const target=raw.replace(raw.trim(),row[index].trim());if(node.nodeValue!==target)node.nodeValue=target;}});
   document.querySelectorAll('input[placeholder],input[value],textarea[placeholder],img[alt],[aria-label]').forEach(el=>{
    let values=attrs.get(el);if(!values){values={};['placeholder','alt','aria-label','value'].forEach(attr=>{const value=el.getAttribute(attr);if(value&&dictionary.has(normal(value)))values[attr]=dictionary.get(normal(value));});attrs.set(el,values);}
    Object.entries(values).forEach(([attr,row])=>{const target=row[index];if(el.getAttribute(attr)!==target){el.setAttribute(attr,target);if(attr==='value'&&(!el.value||SITE_TRANSLATIONS.some(r=>r.includes(el.value))))el.value=target;}});
@@ -19,5 +19,6 @@ const SITE_TRANSLATIONS=[["Quiénes somos", "Qui som", "About us", "Über uns"],
  document.querySelectorAll('.site-language-select').forEach(select=>select.addEventListener('change',()=>apply(select.value)));
  const observer=new MutationObserver(()=>{if(!scheduled){scheduled=true;queueMicrotask(()=>{scheduled=false;translateTree();});}});
  apply(current);observer.observe(document.body,{childList:true,subtree:true,characterData:true});
+ window.translateSiteText=text=>(dictionary.get(normal(text))||[])[languages.indexOf(current)]||text;
  window.applyLang=apply;
 })();

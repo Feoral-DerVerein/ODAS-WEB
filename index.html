@@ -1015,6 +1015,10 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
 </style><style id="continuous-orchard-edge">
 .orchard-transition.orchard-full-width{overflow:hidden}
 .orchard-transition.orchard-full-width>img{width:112%;max-width:none;height:auto;object-fit:initial;object-position:left center}
+</style><style>
+.chat-input-icons{display:flex;align-items:center;gap:7px;flex-shrink:0;color:#6d7a80}
+.chat-input-icons svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.pages-phone .chat-cursor{visibility:hidden}.pages-phone.is-composing .chat-cursor{visibility:visible}
 </style></head>
 
   <body class="bg-fondo text-black antialiased selection:bg-black selection:text-white">
@@ -1112,7 +1116,7 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
             <!-- Mensajes -->
             <div id="chatHilo" class="chat-hilo space-y-2 px-2 py-2 text-[9px] leading-snug" lang="ca" role="log" aria-label="Demostració de conversa amb Pagès AI" aria-live="off"></div>
             <!-- Barra de entrada -->
-            <div class="flex items-center gap-2 bg-white px-2 py-1.5 text-[11px] text-gray-400"><span>+</span><div class="h-4 flex-1 overflow-hidden whitespace-nowrap rounded-full bg-gray-100 px-2 text-[8px] leading-4 text-gray-700"><span id="chatEntrada"></span><span class="chat-cursor"></span></div><span class="text-[9px]">◎ ⌗ ⬚</span></div>
+            <div class="flex items-center gap-2 bg-white px-2 py-1.5 text-[11px] text-gray-400"><span>+</span><div class="h-4 flex-1 overflow-hidden whitespace-nowrap rounded-full bg-gray-100 px-2 text-[8px] leading-4 text-gray-700"><span id="chatEntrada" data-chat-draft aria-hidden="true"></span><span class="chat-cursor"></span></div><span class="chat-input-icons" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 4h-5L7.8 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3.8Z"/><circle cx="12" cy="13" r="4"/></svg><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg></span></div>
           </div>
 
         </div>
@@ -2379,13 +2383,31 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
     let remaining=ms;
     while(remaining>0){await wait(Math.min(250,remaining));if(inView && !document.hidden)remaining-=250;}
   }
+  const entry=document.getElementById('chatEntrada');
+  async function compose(text){
+    if(!entry||reduce.matches)return;
+    phone.classList.add('is-composing');
+    let count=0;
+    while(true){
+      const localized=window.translateSiteText?window.translateSiteText(text):text;
+      count=Math.min(count+1,localized.length);
+      entry.textContent=localized.slice(0,count);
+      entry.parentElement.scrollLeft=entry.parentElement.scrollWidth;
+      if(count>=localized.length)break;
+      await activeWait(35);
+    }
+    await activeWait(400);
+    entry.textContent='';entry.parentElement.scrollLeft=0;
+    phone.classList.remove('is-composing');
+  }
   async function conversation(data){
+    if(entry)entry.textContent='';phone.classList.remove('is-composing');
     thread.replaceChildren();thread.scrollTop=0;thread.setAttribute('aria-live','off');
     const pause=()=>reduce.matches?Promise.resolve():activeWait(1500);
     message("Bon dia, "+data.name+"! Soc l'assistent de Pagès. En què et puc ajudar avui?",false,'09:41');await pause();
-    message(data.request,true,'09:42');await pause();await typing();
+    await compose(data.request);message(data.request,true,'09:42');await pause();await typing();
     message("Perfecte! A quin preu vols vendre'ls i fins quan estan disponibles?",false,'09:42');await pause();
-    message(data.answer,true,'09:43');await pause();await typing();
+    await compose(data.answer);message(data.answer,true,'09:43');await pause();await typing();
     const final=message('Perfecte, '+data.name+'! Ja tinc la teva oferta preparada.',false,'09:43');
     const card=document.createElement('div');card.className='chat-offer';
     const title=document.createElement('strong');title.textContent='Oferta preparada';
