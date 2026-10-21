@@ -896,8 +896,10 @@ button.seller-origin-cta{border:0;cursor:pointer;font-family:inherit}
 <style>
 .pages-intro-harvest{position:relative;max-width:520px;margin:auto;border-radius:24px;overflow:hidden;aspect-ratio:9/8;background:#ede8d6}
 .pages-intro-harvest img{display:block;width:100%;height:100%;object-fit:cover}
-.seller-origin-visual.seller-connections-visual{padding:0;display:block;overflow:hidden;background:#c9c7ac}
-.pages-connections-network{display:block;width:100%;height:auto}
+.seller-origin-visual.seller-connections-visual{padding:32px;justify-content:center;overflow:hidden;min-height:520px;background:#c9c7ac url('pages-connections-background.png') center top/115% 125% no-repeat}
+.seller-connections-visual #beamContainer{height:456px;max-width:100%}
+.seller-connections-visual #beamContainer>div{max-width:100%;max-height:280px}
+@media(max-width:767px){.seller-origin-visual.seller-connections-visual{padding:24px;min-height:400px}.seller-connections-visual #beamContainer{height:352px}.seller-connections-visual #beamContainer>div{max-height:250px}}
 </style>
 <style>
 .pages-intro-harvest{border-radius:0;background:transparent;overflow:visible}
@@ -1519,7 +1521,41 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
       <div class="modelos-grid mt-10 grid grid-cols-1 gap-4 sm:mt-14 lg:grid-cols-6">
 
         <article class="seller-origin-card lg:col-span-6" aria-labelledby="seller-origin-title">
-          <div class="seller-origin-visual seller-connections-visual"><img class="pages-connections-network" src="pages-connections-network.png" alt="Red de conexiones de Pagès: agricultores, WhatsApp y productores conectados con hoteles, supermercados y catering."></div>
+          <div class="seller-origin-visual seller-connections-visual">          <div id="beamContainer" class="relative mx-auto flex h-[380px] w-full max-w-xl items-center justify-center overflow-hidden">
+        <svg id="beamSvg" class="pointer-events-none absolute inset-0 z-0 h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+        <div class="relative z-10 flex size-full max-h-[240px] max-w-md flex-col items-stretch justify-between">
+          <!-- fila superior -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn1" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]"><svg role="img" aria-label="Campesino" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7 text-gray-800"><path d="M3 10h18M5 10l2-5h10l2 5M9 5V3h6v2M7 10v3a5 5 0 0 0 10 0v-3M4 22v-2a5 5 0 0 1 5-5m6 0a5 5 0 0 1 5 5v2M9 18v4m6-4v4M9 20h6"/></svg></div>
+            <div id="bn5" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg role="img" aria-label="Hotel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7 text-gray-800"><path d="M5 22V3h14v19M2 22h20M10 22v-4h4v4M9 7h1m4 0h1M9 11h1m4 0h1M9 15h1m4 0h1"/></svg>
+            </div>
+          </div>
+          <!-- fila media -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn2" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg role="img" aria-label="WhatsApp" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="size-7 text-gray-800">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </div>
+            <div id="bn4" class="beam-hub relative z-10 flex size-20 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_34px_-10px_rgba(0,0,0,0.4)]">
+              <img src="pages-logo-solo.svg" alt="Pagès" class="size-12 object-contain">
+            </div>
+            <div id="bn6" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg role="img" aria-label="Supermercado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7 text-gray-800"><path d="M3 10V8l2-5h14l2 5v2M3 10a3 3 0 0 0 4 2 3 3 0 0 0 5 0 3 3 0 0 0 5 0 3 3 0 0 0 4-2M4 13v8h16v-8M9 21v-6h6v6M3 8h18"/></svg>
+            </div>
+          </div>
+          <!-- fila inferior -->
+          <div class="flex flex-row items-center justify-between">
+            <div id="bn3" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg role="img" aria-label="Caja de frutas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7 text-gray-800"><path d="M3 11h18v10H3zM3 16h18M8 11v10m8-10v10"/><path d="M5 11V8a3 3 0 0 1 6 0v3m2 0V7a3 3 0 0 1 6 0v4M8 5V2m0 2 3-1M16 4V1m0 2 3 1"/></svg>
+            </div>
+            <div id="bn7" class="beam-node relative z-10 flex size-14 items-center justify-center rounded-full border border-gray-200 bg-white p-3 shadow-[0_0_24px_-14px_rgba(0,0,0,0.55)]">
+              <svg role="img" aria-label="Catering" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7 text-gray-800"><path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 10V8m-1 0h2M2 21h20M12 3v1M6 5l1 1m11-1-1 1"/></svg>
+            </div>
+          </div>
+        </div>
+          </div><!-- /#beamContainer --></div>
           <div class="seller-origin-content">
             <p class="seller-label">Tu lugar en Pagès</p>
             <div class="seller-selector" role="group" aria-label="Elige tu perfil de productor"><button type="button" data-seller="farm" aria-pressed="true">Agricultores</button><button type="button" data-seller="coop" aria-pressed="false">Cooperativas</button><button type="button" data-seller="maker" aria-pressed="false">Elaboradores</button></div>
