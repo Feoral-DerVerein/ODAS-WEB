@@ -896,7 +896,7 @@ button.seller-origin-cta{border:0;cursor:pointer;font-family:inherit}
 <style>
 .pages-intro-harvest{position:relative;max-width:520px;margin:auto;border-radius:24px;overflow:hidden;aspect-ratio:9/8;background:#ede8d6}
 .pages-intro-harvest img{display:block;width:100%;height:100%;object-fit:cover}
-.seller-origin-visual.seller-connections-visual{padding:24px;justify-content:center;background:linear-gradient(145deg,#e5f3ee,#f9fcfa)}
+.seller-origin-visual.seller-connections-visual{padding:24px;justify-content:center;background:#c9c7ac url('pages-connections-background.png') center 38%/cover no-repeat}
 .seller-connections-visual #beamContainer{height:430px;max-width:100%}
 @media(max-width:767px){.seller-connections-visual #beamContainer{height:330px}.seller-origin-visual.seller-connections-visual{padding:20px}}
 </style>
@@ -999,9 +999,12 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
 </style><style id="buyer-card-sizing">
 .buyer-profiles-grid{align-items:stretch;grid-template-columns:repeat(4,minmax(0,1fr))}
 .buyer-profile-card{min-width:0;min-height:460px;height:100%;box-sizing:border-box}
-.buyer-profile-card-hotel{aspect-ratio:auto;min-height:460px}
-@media(max-width:1000px){.buyer-profiles-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:540px){.buyer-profiles-grid{grid-template-columns:minmax(0,1fr);max-width:390px;margin-inline:auto;gap:22px}.buyer-profile-card{min-height:440px}.buyer-profile-card-hotel{min-height:480px}}
+.buyer-profile-card-hotel{display:grid;grid-template-rows:1fr auto auto auto;aspect-ratio:auto;min-height:460px;align-content:end}
+.buyer-profile-card-hotel .buyer-profile-type{grid-row:2;min-height:2.6em}
+.buyer-profile-card-hotel h4{grid-row:3;min-height:3.45em}
+.buyer-profile-card-hotel>p:last-of-type{grid-row:4;min-height:6.4em}
+@media(max-width:1000px){.buyer-profiles-grid{grid-template-columns:repeat(4,minmax(240px,1fr));overflow-x:auto;gap:18px;padding-bottom:12px;scroll-snap-type:x proximity}.buyer-profile-card{scroll-snap-align:start}}
+@media(max-width:540px){.buyer-profiles-grid{max-width:none;margin-inline:0;grid-template-columns:repeat(4,minmax(280px,1fr));gap:22px}.buyer-profile-card-hotel{min-height:480px}}
 </style><style>
 .buyer-profile-card-restaurant .buyer-profile-photo-restaurant{background-image:url('restaurante-plato-campestre.png');background-position:center;background-size:cover}
 </style><style>
