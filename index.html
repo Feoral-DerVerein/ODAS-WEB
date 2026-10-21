@@ -2568,10 +2568,10 @@ card.querySelectorAll('[data-seller]').forEach(button=>button.addEventListener('
           grad.setAttribute('x1', '0%'); grad.setAttribute('x2', '0%');
           grad.setAttribute('y1', '0%'); grad.setAttribute('y2', '0%');
           grad.innerHTML =
-            '<stop stop-color="#10b981" stop-opacity="0"></stop>' +
-            '<stop stop-color="#10b981"></stop>' +
-            '<stop offset="32.5%" stop-color="#0ea5e9"></stop>' +
-            '<stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"></stop>';
+            '<stop stop-color="#ffffff" stop-opacity="0"></stop>' +
+            '<stop stop-color="#ffffff"></stop>' +
+            '<stop offset="32.5%" stop-color="#ffffff"></stop>' +
+            '<stop offset="100%" stop-color="#ffffff" stop-opacity="0"></stop>';
           if (!reduce) {
             var x1v = b.reverse ? '90%;-10%' : '10%;110%';
             var x2v = b.reverse ? '100%;0%' : '0%;100%';
@@ -2582,18 +2582,19 @@ card.querySelectorAll('[data-seller]').forEach(button=>button.addEventListener('
           defs.appendChild(grad);
 
           var base = document.createElementNS(NS, 'path');
-          base.setAttribute('stroke', '#c7ccd4');
-          base.setAttribute('stroke-width', '2');
-          base.setAttribute('stroke-opacity', '0.35');
+          base.setAttribute('stroke', '#ffffff');
+          base.setAttribute('stroke-width', '2.4');
+          base.setAttribute('stroke-opacity', '0.65');
           base.setAttribute('stroke-linecap', 'round');
           base.setAttribute('fill', 'none');
           svg.appendChild(base);
 
           var glow = document.createElementNS(NS, 'path');
           glow.setAttribute('stroke', 'url(#' + gid + ')');
-          glow.setAttribute('stroke-width', '2');
+          glow.setAttribute('stroke-width', '4');
           glow.setAttribute('stroke-linecap', 'round');
           glow.setAttribute('fill', 'none');
+          glow.style.filter = 'drop-shadow(0 0 4px rgba(255,255,255,.9)) drop-shadow(0 0 9px rgba(255,255,255,.55))';
           svg.appendChild(glow);
 
           built.push({ cfg: b, base: base, glow: glow });
