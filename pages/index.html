@@ -1034,6 +1034,13 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
 #pages-contact-form[hidden],#contact-confirmation[hidden],#contact-form-status[hidden]{display:none}
 .contact-send:disabled{opacity:.65;cursor:wait}
 @media(max-width:540px){#pages-contact-dialog{padding:22px;width:calc(100% - 24px);max-height:calc(100dvh - 24px)}#pages-contact-form input,#pages-contact-form textarea{font-size:16px}.contact-heading h2{font-size:25px}#contact-form-status{font-size:13px}.contact-send{min-height:44px}}
+</style><style id="pages-product-launch-hero">
+.pages-hero-kicker{margin-bottom:18px;color:#59634f}
+.pages-product-intro{font-size:11px;font-weight:600;letter-spacing:.18em;color:#7c826e;margin:0}
+.pages-hero-logo{display:block;width:clamp(140px,18vw,200px);height:auto;margin:14px auto 24px}
+.pages-hero-copy h1{font-size:clamp(30px,4.2vw,54px);line-height:1.12}
+.pages-hero-description{max-width:800px}
+@media(max-width:639px){.pages-product-intro{font-size:10px;letter-spacing:.12em}.pages-hero-logo{margin:12px auto 20px}}
 </style></head>
 
   <body class="bg-fondo text-black antialiased selection:bg-black selection:text-white">
@@ -1105,9 +1112,11 @@ body h1,body h2,body h3,body h4,body h5,body h6{font-family:Georgia,'Times New R
       <!-- Contenido del hero (alineado a la izquierda, algo más centrado) -->
       <div class="relative z-10 mx-auto max-w-6xl px-5">
         <div class="pages-hero-copy">
-          <p class="pages-hero-kicker">Organismo de Desarrollo Alimentario Sostenible</p>
-          <h1>Del campo al negocio,<br>de forma más simple.</h1>
-          <p class="pages-hero-description">Conoce nuestro proyecto Pagès en donde conectamos productores, cooperativas y fabricantes con compradores profesionales para que los alimentos locales lleguen más lejos.</p>
+          <p class="pages-hero-kicker">Organismo de Desarrollo Alimentario Sostenible (ODAS)</p>
+          <p class="pages-product-intro">PRESENTAMOS NUESTRO PRIMER PRODUCTO</p>
+          <img class="pages-hero-logo" src="/pages-hero-logo.svg" alt="Pagès" width="200" height="200" fetchpriority="high">
+          <h1><span>Del campo al negocio.</span><br><span>Más fácil, más directo, más sostenible.</span></h1>
+          <p class="pages-hero-description">Pagès es nuestro marketplace B2B que conecta productores, cooperativas y fabricantes locales con hoteles, restaurantes y otros compradores profesionales, facilitando la comercialización de alimentos locales y el aprovechamiento de excedentes.</p>
           <div class="pages-hero-actions"><button type="button" class="pages-explore" id="hero-pages-contact">Compra o Vende en Pagès</button></div>
         </div>
 
