@@ -2510,8 +2510,9 @@ card.querySelectorAll('[data-seller]').forEach(button=>button.addEventListener('
  const confirmation=document.getElementById('contact-confirmation');
  function resetView(){form.hidden=false;confirmation.hidden=true;status.hidden=true;status.textContent='';}
  document.getElementById('close-contact-confirmation').addEventListener('click',()=>{dialog.close();resetView();});
+ document.getElementById('nav-pages-contact').addEventListener('click',()=>{location.href='/enquesta/';});
  let sending=false;
- ['open-pages-contact','nav-pages-contact','hero-pages-contact'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>{resetView();dialog.showModal();}));
+ ['open-pages-contact','hero-pages-contact'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>{resetView();dialog.showModal();}));
  document.getElementById('close-pages-contact').addEventListener('click',()=>dialog.close());
  form.addEventListener('submit',async event=>{
   event.preventDefault();if(sending||!form.reportValidity())return;
