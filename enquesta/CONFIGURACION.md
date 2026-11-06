@@ -29,3 +29,7 @@ Mientras no se complete la configuración, se muestra vista previa y el envío e
 La base valida las opciones, tamaños, email y consentimiento en servidor. El UUID de envío evita duplicados ante reintentos de la misma sesión; no impide que una persona empiece otra encuesta. El CSV neutraliza fórmulas de hoja de cálculo. Las políticas RLS restringen lecturas a administradores; solo el RPC permite inserción pública y no devuelve registros. No incluir datos de contacto en logs. La protección contra abuso público adicional (cuotas/CAPTCHA) debe configurarse según el tráfico de la feria; la encuesta no presupone que un UUID sea un control antibot. Revisar y ejecutar la retención de datos definida por el responsable.
 
 El panel suma límites inferiores de intervalos, no ingresos previstos ni un volumen exacto, y advierte del posible solapamiento entre compradores y vendedores.
+
+## Envío compartido con el formulario activado de ODAS
+
+La encuesta utiliza el identificador público de FormSubmit ya activado para `https://www.odas-eu.com/`, con `_url` fijo y `referrerPolicy: origin`. La ruta de la encuesta se envía por separado en `Origen_encuesta`. Este identificador es un destino público de formularios, no una clave de lectura del buzón. El transporte diferencia activación, fallo de red, rechazo y tiempo de espera; nunca trata `success: "false"` como éxito.
